@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/App.LearningManagement/.vs/App.LearningManagement
+/App.LearningManagement/obj
+/Library.LearningManagement/obj
+/App.LearningManagement/bin/Debug/net7.0
+/Library.LearningManagement/bin/Debug/net7.0
