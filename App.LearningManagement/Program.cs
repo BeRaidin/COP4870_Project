@@ -1,5 +1,4 @@
-﻿using System;
-using Library.LearningManagement;
+﻿using App.LearningManagement.Helpers;
 using Library.LearningManagement.Models;
 
 namespace MyApp // Note: actual namespace depends on the project name.
@@ -8,9 +7,24 @@ namespace MyApp // Note: actual namespace depends on the project name.
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var studentHelper = new StudentHelper();
+            Console.WriteLine("Choose an option:");
+            Console.WriteLine("1. Add a student");
+            Console.WriteLine("2. Exit");
+            var input = Console.ReadLine();
 
-            var myCourse = new Course();
+            if (int.TryParse(input, out int result)) {
+                while (result != 2)
+                {
+                    if (result == 1)
+                    {
+                        studentHelper.CreateStudentRecord();
+                    }
+
+                    input = Console.ReadLine();
+                    int.TryParse(input, out result);
+                }
+            }
         }
     }
 }
