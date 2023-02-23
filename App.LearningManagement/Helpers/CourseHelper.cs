@@ -26,5 +26,11 @@ namespace App.LearningManagement.Helpers
 
             courseService.Add(course);
         }
+
+        public void ListCourses()
+        {
+            courseService.Courses.ForEach(Console.WriteLine);
+        }
+
     }
 }
