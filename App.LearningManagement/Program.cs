@@ -19,7 +19,8 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 Console.WriteLine("3. List all enrolled students");
                 Console.WriteLine("4. Search for student");
                 Console.WriteLine("5. Add a new course");
-                Console.WriteLine("6. Exit");
+                Console.WriteLine("6. List all courses");
+                Console.WriteLine("7. Exit");
                 var input = Console.ReadLine();
                 if (int.TryParse(input, out int result)) {
                     if (result == 1)
@@ -33,6 +34,8 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     else if (result == 5)
                         courseHelper.CreateCourseRecord();
                     else if (result == 6)
+                        courseHelper.ListCourses();
+                    else if (result == 7)
                         cont = false;
                 }
             }
