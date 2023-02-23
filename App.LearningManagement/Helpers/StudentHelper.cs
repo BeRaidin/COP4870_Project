@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Library.LearningManagement.Models.Person;
+﻿using static Library.LearningManagement.Models.Person;
 using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
 
