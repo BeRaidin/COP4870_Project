@@ -11,12 +11,10 @@ namespace App.LearningManagement.Helpers
     internal class StudentHelper
     {
         private StudentService studentService = new StudentService();
-
         public void CreateStudentRecord()
         {
             Console.WriteLine("What is the ID of the student");
             var id = Console.ReadLine();
-
 
             Console.WriteLine("What is the name of the student?");
             var name = Console.ReadLine() ?? string.Empty;
@@ -39,8 +37,11 @@ namespace App.LearningManagement.Helpers
             };
 
             studentService.Add(student);
+        }
 
-            studentService.studentList.ForEach(Console.WriteLine);
+        public void ListStudents()
+        {
+            studentService.Students.ForEach(Console.WriteLine);
         }
 
     }
