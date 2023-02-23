@@ -7,22 +7,23 @@ namespace MyApp // Note: actual namespace depends on the project name.
     {
         static void Main(string[] args)
         {
+            bool cont = true;
             var studentHelper = new StudentHelper();
-            Console.WriteLine("Choose an option:");
-            Console.WriteLine("1. Add a student");
-            Console.WriteLine("2. Exit");
-            var input = Console.ReadLine();
 
-            if (int.TryParse(input, out int result)) {
-                while (result != 2)
-                {
+            while (cont)
+            {
+                Console.WriteLine("Choose an option:");
+                Console.WriteLine("1. Add a student");
+                Console.WriteLine("2. List all enrolled students");
+                Console.WriteLine("3. Exit");
+                var input = Console.ReadLine();
+                if (int.TryParse(input, out int result)) {
                     if (result == 1)
-                    {
                         studentHelper.CreateStudentRecord();
-                    }
-
-                    input = Console.ReadLine();
-                    int.TryParse(input, out result);
+                    else if (result == 2)
+                        studentHelper.ListStudents();
+                    else if (result == 3)
+                        cont = false;
                 }
             }
         }
