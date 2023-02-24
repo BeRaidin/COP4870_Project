@@ -47,6 +47,38 @@ namespace App.LearningManagement.Helpers
                 }
             }
 
+            Console.WriteLine("Would you like to add assignments? (Y/N)");
+            var assignResponse = Console.ReadLine() ?? "N";
+            var assignments = new List<Assignment>();
+            if (assignResponse.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+            {
+                contAdding = true;
+                while(contAdding)
+                {
+                    Console.WriteLine("Name:");
+                    var assignmentName = Console.ReadLine() ?? string.Empty;
+                    Console.WriteLine("Description:");
+                    var assignmentDescription = Console.ReadLine() ?? string.Empty;
+                    Console.WriteLine("Total Points:");
+                    var totalPoints = decimal.Parse(Console.ReadLine() ?? "100");
+                    Console.WriteLine("Due Date:");
+                    var dueDate = DateTime.Parse(Console.ReadLine() ?? "01/01/1990");
+
+                    assignments.Add(new Assignment
+                    {
+                        Name = assignmentName,
+                        Description = assignmentDescription,
+                        TotalAvailablePoints = totalPoints,
+                        DueDate = dueDate
+                    });
+
+                    Console.WriteLine("Add more assignments? (Y/N)");
+                    assignResponse = Console.ReadLine() ?? "N";
+                    if (assignResponse.Equals("N", StringComparison.InvariantCultureIgnoreCase))
+                        contAdding = false;
+                }
+            }
+
             bool isCreate = false;
             if (selectedCourse == null) 
             {
@@ -59,6 +91,8 @@ namespace App.LearningManagement.Helpers
             selectedCourse.Description = description;
             selectedCourse.Roster = new List<Person>();
             selectedCourse.Roster = roster;
+            selectedCourse.Assignments = new List<Assignment>();
+            selectedCourse.Assignments.AddRange(assignments);
 
             if (isCreate)
                 courseService.Add(selectedCourse);
