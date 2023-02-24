@@ -29,12 +29,16 @@ namespace App.LearningManagement.Helpers
             while(contAdding)
             {
                 studentService.Students.Where(s => !roster.Any(s2 => s2.Id == s.Id)).ToList().ForEach(Console.WriteLine);
-                var selection = "Q"; 
+                var selection = "Q";
                 if (studentService.Students.Any(s => !roster.Any(s2 => s2.Id == s.Id)))
+                {
                     selection = Console.ReadLine() ?? string.Empty;
+                }
 
                 if (selection.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
+                {
                     contAdding = false;
+                }
                 else
                 {
                     var selectedId = int.Parse(selection);
@@ -75,7 +79,9 @@ namespace App.LearningManagement.Helpers
                     Console.WriteLine("Add more assignments? (Y/N)");
                     assignResponse = Console.ReadLine() ?? "N";
                     if (assignResponse.Equals("N", StringComparison.InvariantCultureIgnoreCase))
+                    {
                         contAdding = false;
+                    }
                 }
             }
 
@@ -95,33 +101,42 @@ namespace App.LearningManagement.Helpers
             selectedCourse.Assignments.AddRange(assignments);
 
             if (isCreate)
+            {
                 courseService.Add(selectedCourse);
+            }
         }
 
         public void UpdateCourseRecord()
         {
             Console.WriteLine("Choose the code of course to update:");
-            ListCourses();
+            SearchOrListCourses();
             var selection = Console.ReadLine();
             var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
-
                 if (selectedCourse != null)
                 {
                     AddOrUpdateCourse(selectedCourse);
                 }
         }
 
-        public void ListCourses()
+        public void SearchOrListCourses(string? query = null)
         {
-            courseService.Courses.ForEach(Console.WriteLine);
-        }
+            if (query == null)
+            {
+                courseService.Courses.ForEach(Console.WriteLine);
+            }
+            else
+            {
+                courseService.Search(query).ToList().ForEach(Console.WriteLine);
+            }
 
-        public void SearchCourses()
-        {
-            Console.WriteLine("Enter a query:");
-            var query = Console.ReadLine() ?? string.Empty;
-
-            courseService.Search(query).ToList().ForEach(Console.WriteLine);
+            Console.WriteLine("Select a course:");
+            var code = Console.ReadLine() ?? string.Empty;
+            var selectedCourse = courseService.Courses
+                .FirstOrDefault(c => c.Code.Equals(code, StringComparison.InvariantCultureIgnoreCase));
+            if (selectedCourse != null)
+            {
+                Console.WriteLine(selectedCourse.DetailDisplay);
+            }
         }
 
     }

@@ -15,7 +15,8 @@ namespace Library.LearningManagement.Models
         public List<Assignment> Assignments { get; set; }
         public List<Module> Modules { get; set; }
 
-        public Course() { 
+        public Course() 
+        { 
             Code = string.Empty;
             Name = string.Empty;
             Description = string.Empty;
@@ -27,6 +28,16 @@ namespace Library.LearningManagement.Models
         public override string ToString()
         {
             return $"[{Code}] - {Name}";
+        }
+
+        public string DetailDisplay
+        {
+            get
+            {
+                return $"{ToString()}\n{Description}" +
+                    $"\n\nRoster:\n{string.Join("\n", Roster.Select(s => s.ToString()).ToArray())}\n\n" +
+                    $"Assignments:\n{string.Join("\n", Assignments.Select(a => a.ToString()).ToArray())}";
+            }
         }
     }
 }

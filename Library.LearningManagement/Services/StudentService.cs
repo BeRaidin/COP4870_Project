@@ -10,7 +10,6 @@ namespace Library.LearningManagement.Services
     public class StudentService
     {
         private List<Person> studentList;
-
         private static StudentService? instance;
         private StudentService()
         {

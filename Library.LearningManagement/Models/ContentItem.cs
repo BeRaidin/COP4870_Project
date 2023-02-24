@@ -12,7 +12,8 @@ namespace Library.LearningManagement.Models
         public string Description { get; set; }
         public string Path { get; set; }
 
-        public ContentItem() { 
+        public ContentItem() 
+        { 
             Name = string.Empty;
             Description = string.Empty;
             Path = string.Empty;

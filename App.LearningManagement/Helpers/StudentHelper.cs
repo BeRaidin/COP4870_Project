@@ -20,7 +20,6 @@ namespace App.LearningManagement.Helpers
         {
             Console.WriteLine("What is the ID of the student");
             var id = Console.ReadLine();
-
             Console.WriteLine("What is the name of the student?");
             var name = Console.ReadLine() ?? string.Empty;
 
@@ -28,11 +27,17 @@ namespace App.LearningManagement.Helpers
             var classification = Console.ReadLine() ?? string.Empty;
             Classes classEnum = Classes.Freshman;
             if (classification.Equals("O", StringComparison.InvariantCultureIgnoreCase))
+            {
                 classEnum = Classes.Sophmore;
+            }
             else if (classification.Equals("J", StringComparison.InvariantCultureIgnoreCase))
+            {
                 classEnum = Classes.Junior;
+            }
             else if (classification.Equals("S", StringComparison.InvariantCultureIgnoreCase))
+            {
                 classEnum = Classes.Senior;
+            }
 
             bool isCreate = false;
             if(selectedStudent == null)
@@ -45,8 +50,10 @@ namespace App.LearningManagement.Helpers
             selectedStudent.Name = name ?? string.Empty;
             selectedStudent.Classification = classEnum;
 
-            if(isCreate)
+            if (isCreate)
+            {
                 studentService.Add(selectedStudent);
+            }
         }
 
         public void UpdateStudentRecord()
