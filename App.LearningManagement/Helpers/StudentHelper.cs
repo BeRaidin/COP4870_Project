@@ -1,7 +1,6 @@
 ﻿using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
-using static Library.LearningManagement.Models.Person;
-
+using static Library.LearningManagement.Models.Student;
 
 namespace App.LearningManagement.Helpers
 {
@@ -16,7 +15,7 @@ namespace App.LearningManagement.Helpers
             courseService = CourseService.Current;
         }
 
-        public void AddOrUpdateStudent(Person? selectedStudent = null)
+        public void AddOrUpdateStudent(Student? selectedStudent = null)
         {
             Console.WriteLine("What is the ID of the student");
             var id = Console.ReadLine();
@@ -43,7 +42,7 @@ namespace App.LearningManagement.Helpers
             if(selectedStudent == null)
             {
                 isCreate = true;
-                selectedStudent = new Person();
+                selectedStudent = new Student();
             }
 
             selectedStudent.Id = int.Parse(id ?? "0");
