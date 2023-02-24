@@ -1,6 +1,7 @@
-﻿using static Library.LearningManagement.Models.Person;
-using Library.LearningManagement.Models;
+﻿using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
+using static Library.LearningManagement.Models.Person;
+
 
 namespace App.LearningManagement.Helpers
 {
@@ -65,7 +66,7 @@ namespace App.LearningManagement.Helpers
             Console.WriteLine("Enter a query:");
             var query = Console.ReadLine() ?? string.Empty;
 
-            studentService.search(query).ToList().ForEach(Console.WriteLine);
+            studentService.Search(query).ToList().ForEach(Console.WriteLine);
         }
 
     }
