@@ -6,6 +6,12 @@ namespace App.LearningManagement.Helpers
     internal class CourseHelper
     {
         private CourseService courseService = new CourseService();
+        private StudentService studentService;
+
+        public CourseHelper()
+        {
+            studentService = StudentService.Current;
+        }
 
         public void AddOrUpdateCourse(Course? selectedCourse = null)
         {
@@ -15,6 +21,30 @@ namespace App.LearningManagement.Helpers
             var name = Console.ReadLine() ?? string.Empty;
             Console.WriteLine("What is the description of the course?");
             var description = Console.ReadLine() ?? string.Empty;
+
+            Console.WriteLine("Which students should be enrolled in the course? ('Q' to quit)");
+            var roster = new List<Person>();
+            bool contAdding = true;
+            while(contAdding)
+            {
+                studentService.Students.Where(s => !roster.Any(s2 => s2.Id == s.Id)).ToList().ForEach(Console.WriteLine);
+                var selection = "Q"; 
+                if (studentService.Students.Any(s => !roster.Any(s2 => s2.Id == s.Id)))
+                    selection = Console.ReadLine() ?? string.Empty;
+
+                if (selection.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
+                    contAdding = false;
+                else
+                {
+                    var selectedId = int.Parse(selection);
+                    var selectedStudent = studentService.Students.FirstOrDefault(s => s.Id == selectedId);
+
+                    if (selectedStudent != null)
+                    {
+                        roster.Add(selectedStudent);
+                    }
+                }
+            }
 
             bool isCreate = false;
             if (selectedCourse == null) 
@@ -26,6 +56,8 @@ namespace App.LearningManagement.Helpers
             selectedCourse.Code = code;
             selectedCourse.Name = name;
             selectedCourse.Description = description;
+            selectedCourse.Roster = new List<Person>();
+            selectedCourse.Roster = roster;
 
             if (isCreate)
                 courseService.Add(selectedCourse);
