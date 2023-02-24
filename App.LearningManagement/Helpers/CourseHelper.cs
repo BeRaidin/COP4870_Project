@@ -1,6 +1,5 @@
 ﻿using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
-using static Library.LearningManagement.Models.Person;
 
 namespace App.LearningManagement.Helpers
 {
@@ -48,6 +47,14 @@ namespace App.LearningManagement.Helpers
         public void ListCourses()
         {
             courseService.Courses.ForEach(Console.WriteLine);
+        }
+
+        public void SearchCourses()
+        {
+            Console.WriteLine("Enter a query:");
+            var query = Console.ReadLine() ?? string.Empty;
+
+            courseService.Search(query).ToList().ForEach(Console.WriteLine);
         }
 
     }

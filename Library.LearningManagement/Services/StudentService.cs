@@ -9,7 +9,7 @@ namespace Library.LearningManagement.Services
 {
     public class StudentService
     {
-        public List<Person> studentList = new List<Person>();
+        private List<Person> studentList = new List<Person>();
            
         public void Add(Person student)
         {
@@ -24,9 +24,9 @@ namespace Library.LearningManagement.Services
             }
         }
 
-        public IEnumerable<Person> search(string query)
+        public IEnumerable<Person> Search(string query)
         {
-            return studentList.Where(s => s.Name.ToUpper().Contains(query.ToUpper()));
+            return Students.Where(s => s.Name.ToUpper().Contains(query.ToUpper()));
         }
     }
 }
