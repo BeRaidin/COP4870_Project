@@ -12,7 +12,8 @@ namespace Library.LearningManagement.Models
         public string Description { get; set; }
         public List<ContentItem> Content { get; set; }
 
-        public Module() { 
+        public Module() 
+        { 
             Name = string.Empty;
             Description = string.Empty;
             Content = new List<ContentItem>();

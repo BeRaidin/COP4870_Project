@@ -13,9 +13,15 @@ namespace Library.LearningManagement.Models
         public decimal TotalAvailablePoints { get; set; }
         public DateTime DueDate { get; set; }
 
-        public Assignment() {
+        public Assignment() 
+        {
             Name = string.Empty;
             Description = string.Empty;
+        }
+
+        public override string ToString()
+        {
+            return $"({DueDate}) {Name}";
         }
     }
 }

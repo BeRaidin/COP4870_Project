@@ -15,18 +15,19 @@ namespace MyApp // Note: actual namespace depends on the project name.
             while (cont)
             {
                 Console.WriteLine("Choose an option:");
-                Console.WriteLine("5. Add a new course");
-                Console.WriteLine("1. Add a student enrollment");
-                Console.WriteLine("7. List all courses");
-                Console.WriteLine("3. List all enrolled students");
-                Console.WriteLine("8. Search for courses");
-                Console.WriteLine("4. Search for student");
-                Console.WriteLine("6. Update a course");
-                Console.WriteLine("2. Update a student enrollment");
+                Console.WriteLine("1. Add a new course");
+                Console.WriteLine("2. Add a student enrollment");
+                Console.WriteLine("3. List all courses");
+                Console.WriteLine("4. List all enrolled students");
+                Console.WriteLine("5. Search for courses");
+                Console.WriteLine("6. Search for student");
+                Console.WriteLine("7. Update a course");
+                Console.WriteLine("8. Update a student enrollment");
                 Console.WriteLine("9. Exit");
                 var input = Console.ReadLine();
 
                 if (int.TryParse(input, out int result))
+                {
                     switch (result)
                     {
                         case 1:
@@ -36,20 +37,21 @@ namespace MyApp // Note: actual namespace depends on the project name.
                             studentHelper.AddOrUpdateStudent();
                             break;
                         case 3:
-                            courseHelper.ListCourses();
+                            courseHelper.SearchOrListCourses();
                             break;
                         case 4:
                             studentHelper.ListStudents();
                             break;
                         case 5:
-                            courseHelper.SearchCourses();
+                            Console.WriteLine("Enter a query:");
+                            var query = Console.ReadLine() ?? string.Empty;
+                            courseHelper.SearchOrListCourses(query);
                             break;
                         case 6:
                             studentHelper.SearchStudents();
                             break;
                         case 7:
                             courseHelper.UpdateCourseRecord();
-
                             break;
                         case 8:
                             studentHelper.UpdateStudentRecord();
@@ -58,7 +60,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                             cont = false;
                             break;
                     }
-                
+                }
             }
         }
     }
