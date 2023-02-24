@@ -42,7 +42,7 @@ namespace App.LearningManagement.Helpers
 
         public void UpdateStudentRecord()
         {
-            Console.WriteLine("Select a student to update:");
+            Console.WriteLine("Choose the id of student to update:");
             ListStudents();
             var selectionStr = Console.ReadLine();
             if(int.TryParse(selectionStr, out int selectionInt))
