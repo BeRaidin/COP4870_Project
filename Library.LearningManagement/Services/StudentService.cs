@@ -44,7 +44,15 @@ namespace Library.LearningManagement.Services
 
         public IEnumerable<Student> Search(string query)
         {
-            return Students.Where(s => s.Name.ToUpper().Contains(query.ToUpper()));
+
+            if(int.TryParse(query, out int queryInt)) {
+                return Students.Where(s => s.Id == queryInt);
+            }
+            else
+            {
+                return Students.Where(s => s.Name.ToUpper().Contains(query.ToUpper()));
+            }
+
         }
     }
 }

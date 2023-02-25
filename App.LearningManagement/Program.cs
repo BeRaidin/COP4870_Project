@@ -1,8 +1,6 @@
 ﻿using App.LearningManagement.Helpers;
-using Library.LearningManagement.Models;
-using Library.LearningManagement.Services;
 
-namespace MyApp // Note: actual namespace depends on the project name.
+namespace MyApp
 {
     internal class Program
     {
@@ -40,7 +38,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                             courseHelper.SearchOrListCourses();
                             break;
                         case 4:
-                            studentHelper.ListStudents();
+                            studentHelper.SearchOrListStudents();
                             break;
                         case 5:
                             Console.WriteLine("Enter a query:");
@@ -48,7 +46,9 @@ namespace MyApp // Note: actual namespace depends on the project name.
                             courseHelper.SearchOrListCourses(query);
                             break;
                         case 6:
-                            studentHelper.SearchStudents();
+                            Console.WriteLine("Enter a query:");
+                            query = Console.ReadLine() ?? string.Empty;
+                            studentHelper.SearchOrListStudents(query);
                             break;
                         case 7:
                             courseHelper.UpdateCourseRecord();

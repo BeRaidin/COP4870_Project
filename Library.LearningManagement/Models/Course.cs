@@ -39,5 +39,23 @@ namespace Library.LearningManagement.Models
                     $"Assignments:\n{string.Join("\n", Assignments.Select(a => a.ToString()).ToArray())}";
             }
         }
+
+        public void ChangeCode()
+        {
+            Console.WriteLine("What is the code of the course?");
+            Code = Console.ReadLine() ?? string.Empty;
+        }
+
+        public void ChangeName()
+        {
+            Console.WriteLine("What is the name of the course?");
+            Name = Console.ReadLine() ?? string.Empty;
+        }
+
+        public void ChangeDescription()
+        {
+            Console.WriteLine("What is the description of the course?");
+            Description = Console.ReadLine() ?? string.Empty;
+        }
     }
 }
