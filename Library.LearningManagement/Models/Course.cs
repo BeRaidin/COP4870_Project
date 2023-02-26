@@ -40,10 +40,18 @@ namespace Library.LearningManagement.Models
             }
         }
 
-        public void ChangeCode()
+        public void ChangeCode(List<Course> course)
         {
             Console.WriteLine("What is the code of the course?");
-            Code = Console.ReadLine() ?? string.Empty;
+            var code = Console.ReadLine() ?? string.Empty;
+
+            while (course.Any(p => p.Code == code))
+            {
+                Console.WriteLine("That is already anohter course code, please enter another");
+                code = Console.ReadLine() ?? string.Empty;
+            }
+
+            Code = code;
         }
 
         public void ChangeName()

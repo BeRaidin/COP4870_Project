@@ -19,7 +19,7 @@ namespace App.LearningManagement.Helpers
             if (selectedCourse == null)
             {
                 selectedCourse = new Course();
-                selectedCourse.ChangeCode();
+                selectedCourse.ChangeCode(courseService.Courses);
                 selectedCourse.ChangeName();
                 selectedCourse.ChangeDescription();
 
@@ -100,7 +100,7 @@ namespace App.LearningManagement.Helpers
                 var choice = Console.ReadLine() ?? string.Empty;
                 if(choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    selectedCourse.ChangeCode();
+                    selectedCourse.ChangeCode(courseService.Courses);
                 }
                 Console.WriteLine("Would you like to change the Name? (Y/N)");
                 choice = Console.ReadLine() ?? string.Empty;

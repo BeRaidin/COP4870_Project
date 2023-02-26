@@ -9,16 +9,8 @@ namespace Library.LearningManagement.Models
 {
     public class Person
     {
-        public int Id {
-            get
-            {
-                return Id;
-            }
-            set
-            {
-                Id = value;
-            }
-        }
+        public int Id {  get; set; }
+
         public string Name { get; set; }
  
         public Person() {
@@ -30,8 +22,12 @@ namespace Library.LearningManagement.Models
             return $"[{Id}] {Name}";
         }
 
-        public void ChangeId(int num)
+        public void ChangeId(int num, List<Person> people)
         {
+            while (people.Any(i => i.Id == num))
+            {
+                num++;
+            }
             Id = num;
         }
 

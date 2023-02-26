@@ -41,7 +41,7 @@ namespace App.LearningManagement.Helpers
 
             if (isNew)
             {
-                selectedPerson.Id = personService.Size() + 1;
+                selectedPerson.ChangeId(personService.Size()+1, personService.People);        
             }
 
             choice = "Y";
