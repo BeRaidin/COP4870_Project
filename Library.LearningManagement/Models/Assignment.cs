@@ -11,7 +11,6 @@ namespace Library.LearningManagement.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal TotalAvailablePoints { get; set; }
-
         public AssignmentGroup AssignmentGroup { get; set; } 
         public DateTime DueDate { get; set; }
 

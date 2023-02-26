@@ -38,7 +38,6 @@ namespace App.LearningManagement.Helpers
                     return;
             }
 
-
             if (isNew)
             {
                 selectedPerson.ChangeId(personService.Size()+1, personService.People);        

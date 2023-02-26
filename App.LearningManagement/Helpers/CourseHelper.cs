@@ -1,5 +1,6 @@
 ﻿using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
+using System.Net.Mime;
 
 namespace App.LearningManagement.Helpers
 {
@@ -187,6 +188,75 @@ namespace App.LearningManagement.Helpers
                     Console.WriteLine(selectedCourse.DetailDisplay);
                 }
             }            
+        }
+
+        public void AddModule()
+        {
+            Console.WriteLine("Choose the code of course you want to add a module to:");
+            SearchOrListCourses();
+            var selection = Console.ReadLine();
+            var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+            if (selectedCourse != null)
+            {
+                var module = new Module();
+                module.ChangeName();
+                module.ChangeDescription();
+                Console.WriteLine("Would you like to add content? (Y/N)");
+                var choice = Console.ReadLine() ?? string.Empty;
+                while(choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    Console.WriteLine("What type of content are you adding? ");
+                    Console.WriteLine("(A)ssignment");
+                    Console.WriteLine("(F)ile");
+                    Console.WriteLine("(P)age");
+                    var contentChoice = Console.ReadLine() ?? string.Empty;
+                    var content = new ContentItem();
+                    if(contentChoice.Equals("A", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        content = new AssignmentItem();
+                    }
+                    else if(contentChoice.Equals("F", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        content = new FileItem();
+                    }
+                    else if (contentChoice.Equals("P", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        content = new PageItem();
+                    }
+
+                    Console.WriteLine("What is the name of the content?");
+                    content.Name = Console.ReadLine() ?? string.Empty;
+                    Console.WriteLine("What is the description of the content?");
+                    content.Description = Console.ReadLine() ?? string.Empty;
+
+                    if (content is AssignmentItem)
+                    {
+                        Console.WriteLine("What assingment would you like to add?");
+                        selectedCourse.Assignments.ForEach(Console.WriteLine);
+                        var assignmentName = Console.ReadLine() ?? string.Empty;
+                        while(!selectedCourse.Assignments.Any(n => n.Name.Equals(assignmentName, StringComparison.InvariantCultureIgnoreCase)))
+                        {
+                            Console.WriteLine("Please enter a valid assignment");
+                            assignmentName = Console.ReadLine() ?? string.Empty;
+                        }
+                        var selectedAssignment = selectedCourse.Assignments.First(n => n.Name.Equals(assignmentName, StringComparison.InvariantCultureIgnoreCase));
+                        var assignment = content as AssignmentItem;
+                        if (assignment != null)
+                        {
+                            assignment.Assignment = selectedAssignment;
+                            module.Content.Add(assignment);
+                        }
+                    }
+                    else
+                    {
+                        module.Content.Add(content);
+                    }
+
+                    Console.WriteLine("Would you like to add more content? (Y/N)");
+                    choice = Console.ReadLine() ?? string.Empty;
+                }
+                selectedCourse.Modules.Add(module);
+            }
         }
     }
 }

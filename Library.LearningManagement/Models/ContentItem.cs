@@ -16,5 +16,10 @@ namespace Library.LearningManagement.Models
             Name = string.Empty;
             Description = string.Empty;
         }
+
+        public override string ToString()
+        {
+            return $"{Name} - {Description}";
+        }
     }
 }

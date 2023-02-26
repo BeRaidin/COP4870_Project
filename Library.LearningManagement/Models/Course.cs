@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Library.LearningManagement.Models
+﻿namespace Library.LearningManagement.Models
 {
     public class Course
     {
@@ -38,7 +32,8 @@ namespace Library.LearningManagement.Models
             {
                 return $"{ToString()}\n{Description}" +
                     $"\n\nRoster:\n{string.Join("\n", Roster.Select(s => s.ToString()).ToArray())}\n\n" +
-                    $"Assignments:\n{string.Join("\n", Assignments.Select(a => a.ToString()).ToArray())}";
+                    $"Assignments:\n{string.Join("\n", Assignments.Select(a => a.ToString()).ToArray())}\n\n" +
+                    $"Modules:\n{string.Join("\n", Modules.Select(a => a.ToString()).ToArray())}";
             }
         }
 
