@@ -54,5 +54,10 @@ namespace Library.LearningManagement.Services
             }
 
         }
+
+        public int Size()
+        {
+            return personList.Count;
+        }
     }
 }

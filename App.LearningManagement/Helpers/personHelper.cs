@@ -38,17 +38,13 @@ namespace App.LearningManagement.Helpers
                     return;
             }
 
-            choice = "Y";
-            if(!isNew)
+
+            if (isNew)
             {
-                Console.WriteLine("Would you like to change the Id? (Y/N)");
-                choice = Console.ReadLine() ?? string.Empty;
-            }
-            if(choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase)) 
-            {
-                selectedPerson.ChangeId();
+                selectedPerson.Id = personService.Size() + 1;
             }
 
+            choice = "Y";
             if (!isNew)
             {
                 Console.WriteLine("Would you like to change the name? (Y/N)");

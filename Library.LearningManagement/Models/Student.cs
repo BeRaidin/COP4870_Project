@@ -15,7 +15,7 @@ namespace Library.LearningManagement.Models
             Freshman, Sophmore, Junior, Senior
         }
 
-        public Student() 
+        public Student()
         {
             Grades = new Dictionary<int, double>();
         }
