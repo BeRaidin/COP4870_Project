@@ -74,6 +74,8 @@ namespace MyApp
             Console.WriteLine("2. List all courses");
             Console.WriteLine("3. Search for courses");
             Console.WriteLine("4. Update a course");
+            Console.WriteLine("5. Add a module to a course");
+
             var input = Console.ReadLine();
 
             if (int.TryParse(input, out int result))
@@ -93,6 +95,9 @@ namespace MyApp
                         break;
                     case 4:
                         courseHelper.UpdateCourseRecord();
+                        break;
+                    case 5:
+                        courseHelper.AddModule();
                         break;
                 }
 
