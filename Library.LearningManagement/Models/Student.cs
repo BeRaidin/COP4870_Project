@@ -25,17 +25,7 @@ namespace Library.LearningManagement.Models
             return $"[{Id}] {Name} - {Classification}";
         }
 
-        public void ChangeId()
-        {
-            Console.WriteLine("What is the ID of the student");
-            var id = Console.ReadLine();
-            Id = int.Parse(id ?? "0");
-        }
-        public void ChangeName()
-        {
-            Console.WriteLine("What is the name of the student?");
-            Name = Console.ReadLine() ?? string.Empty;
-        }
+       
 
         public void ChangeClassification()
         {

@@ -6,11 +6,11 @@ namespace App.LearningManagement.Helpers
     internal class CourseHelper
     {
         private CourseService courseService;
-        private StudentService studentService;
+        private PersonService personService;
 
         public CourseHelper()
         {
-            studentService = StudentService.Current;
+            personService = PersonService.Current;
             courseService= CourseService.Current;
         }
 
@@ -28,9 +28,9 @@ namespace App.LearningManagement.Helpers
                 bool contAdding = true;
                 while (contAdding)
                 {
-                    studentService.Students.Where(s => !roster.Any(s2 => s2.Id == s.Id)).ToList().ForEach(Console.WriteLine);
+                    personService.People.Where(s => !roster.Any(s2 => s2.Id == s.Id)).ToList().ForEach(Console.WriteLine);
                     var selection = "Q";
-                    if (studentService.Students.Any(s => !roster.Any(s2 => s2.Id == s.Id)))
+                    if (personService.People.Any(s => !roster.Any(s2 => s2.Id == s.Id)))
                     {
                         selection = Console.ReadLine() ?? string.Empty;
                         if(selection == string.Empty)
@@ -46,7 +46,7 @@ namespace App.LearningManagement.Helpers
                     else
                     {
                         var selectedId = int.Parse(selection);
-                        var selectedStudent = studentService.Students.FirstOrDefault(s => s.Id == selectedId);
+                        var selectedStudent = personService.People.FirstOrDefault(s => s.Id == selectedId);
 
                         if (selectedStudent != null)
                         {
@@ -93,40 +93,26 @@ namespace App.LearningManagement.Helpers
                 selectedCourse.Assignments.AddRange(assignments);
 
                 courseService.Add(selectedCourse);
-
-
-
             }
             else
             {
-                bool cont = true;
-                while (cont)
+                Console.WriteLine("Would you like to change the Code? (Y/N)");
+                var choice = Console.ReadLine() ?? string.Empty;
+                if(choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    Console.WriteLine("Choose an option:");
-                    Console.WriteLine("1. Change Code");
-                    Console.WriteLine("2. Change Name");
-                    Console.WriteLine("3. Change Description");
-                    Console.WriteLine("4. Finish");
-                    var input = Console.ReadLine();
-
-                    if (int.TryParse(input, out int result))
-                    {
-                        switch (result)
-                        {
-                            case 1:
-                                selectedCourse.ChangeCode();
-                                break;
-                            case 2:
-                                selectedCourse.ChangeName();
-                                break;
-                            case 3:
-                                selectedCourse.ChangeDescription();
-                                break;
-                            case 4:
-                                cont = false;
-                                break;
-                        }
-                    }
+                    selectedCourse.ChangeCode();
+                }
+                Console.WriteLine("Would you like to change the Name? (Y/N)");
+                choice = Console.ReadLine() ?? string.Empty;
+                if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    selectedCourse.ChangeName();
+                }
+                Console.WriteLine("Would you like to change the Description? (Y/N)");
+                choice = Console.ReadLine() ?? string.Empty;
+                if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    selectedCourse.ChangeDescription();
                 }
              }
         }
