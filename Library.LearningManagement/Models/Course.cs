@@ -14,6 +14,7 @@ namespace Library.LearningManagement.Models
         public List<Person> Roster { get; set; }
         public List<Assignment> Assignments { get; set; }
         public List<Module> Modules { get; set; }
+        public List<AssignmentGroup> AssignmentGroups { get; set; }
 
         public Course() 
         { 
@@ -23,6 +24,7 @@ namespace Library.LearningManagement.Models
             Roster = new List<Person>();
             Assignments = new List<Assignment>();
             Modules = new List<Module>();
+            AssignmentGroups = new List<AssignmentGroup>();
         }
 
         public override string ToString()
