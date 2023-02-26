@@ -34,8 +34,16 @@ namespace Library.LearningManagement.Models
 
         public override string ToString()
         {
-            return $"{Name} - {Description}" +
+            return $"{Name} - {Description}";
+        }
+
+        public string DetailDisplay
+        {
+            get
+            {
+                return $"{Name} - {Description}" +
                  $"\n\tContent:\n{string.Join("\n", Content.Select(a => a.ToString()).ToArray())}";
+            }
         }
     }
 }

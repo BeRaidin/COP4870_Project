@@ -163,10 +163,29 @@ namespace App.LearningManagement.Helpers
             SearchOrListCourses();
             var selection = Console.ReadLine();
             var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
-                if (selectedCourse != null)
+            if (selectedCourse != null)
+            {
+                AddOrUpdateCourse(selectedCourse);
+            }
+        }
+
+        public void UpdateCourseModule()
+        {
+            Console.WriteLine("Choose the code of course to update:");
+            SearchOrListCourses();
+            var selection = Console.ReadLine();
+            var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+            if (selectedCourse != null)
+            {
+                Console.WriteLine("What module would you want to update?");
+                selectedCourse.Modules.ForEach(Console.WriteLine);
+                var selectedModule = Console.ReadLine();
+                if (selectedCourse.Modules.Any(i => i.Name.Equals(selectedModule, StringComparison.InvariantCultureIgnoreCase)))
                 {
-                    AddOrUpdateCourse(selectedCourse);
+                    var module = selectedCourse.Modules.First(i => i.Name.Equals(selectedModule, StringComparison.InvariantCultureIgnoreCase));
+                    AddOrUpdateModule(selectedCourse, module);
                 }
+            }
         }
 
         public void SearchOrListCourses(string? query = null)
@@ -190,72 +209,96 @@ namespace App.LearningManagement.Helpers
             }            
         }
 
-        public void AddModule()
+        public void AddOrUpdateModule(Course? selectedCourse = null, Module? selectedModule = null)
         {
-            Console.WriteLine("Choose the code of course you want to add a module to:");
-            SearchOrListCourses();
-            var selection = Console.ReadLine();
-            var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
-            if (selectedCourse != null)
+            if (selectedCourse == null)
             {
-                var module = new Module();
-                module.ChangeName();
-                module.ChangeDescription();
-                Console.WriteLine("Would you like to add content? (Y/N)");
-                var choice = Console.ReadLine() ?? string.Empty;
-                while(choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                Console.WriteLine("Choose the code of course to update:");
+                SearchOrListCourses();
+                var selection = Console.ReadLine();
+                selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+            }
+            var isNew = false;
+            if (selectedModule == null)
+            {
+                isNew = true;
+                selectedModule = new Module();
+            }
+            var choice = "Y";
+            if(!isNew)
+            {
+                Console.WriteLine("Would you like to update the name? (Y/N)");
+                choice = Console.ReadLine() ?? string.Empty;
+            }
+            if(choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+            {
+                selectedModule.ChangeName();
+            }
+            if (!isNew)
+            {
+                Console.WriteLine("Would you like to update the description? (Y/N)");
+                choice = Console.ReadLine() ?? string.Empty;
+            }
+            if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+            {
+                selectedModule.ChangeDescription();
+            }
+            Console.WriteLine("Would you like to add content? (Y/N)");
+            choice = Console.ReadLine() ?? string.Empty;
+            while (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+            {
+                Console.WriteLine("What type of content are you adding? ");
+                Console.WriteLine("(A)ssignment");
+                Console.WriteLine("(F)ile");
+                Console.WriteLine("(P)age");
+                var contentChoice = Console.ReadLine() ?? string.Empty;
+                var content = new ContentItem();
+                if(contentChoice.Equals("A", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    Console.WriteLine("What type of content are you adding? ");
-                    Console.WriteLine("(A)ssignment");
-                    Console.WriteLine("(F)ile");
-                    Console.WriteLine("(P)age");
-                    var contentChoice = Console.ReadLine() ?? string.Empty;
-                    var content = new ContentItem();
-                    if(contentChoice.Equals("A", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        content = new AssignmentItem();
-                    }
-                    else if(contentChoice.Equals("F", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        content = new FileItem();
-                    }
-                    else if (contentChoice.Equals("P", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        content = new PageItem();
-                    }
-
-                    Console.WriteLine("What is the name of the content?");
-                    content.Name = Console.ReadLine() ?? string.Empty;
-                    Console.WriteLine("What is the description of the content?");
-                    content.Description = Console.ReadLine() ?? string.Empty;
-
-                    if (content is AssignmentItem)
-                    {
-                        Console.WriteLine("What assingment would you like to add?");
-                        selectedCourse.Assignments.ForEach(Console.WriteLine);
-                        var assignmentName = Console.ReadLine() ?? string.Empty;
-                        while(!selectedCourse.Assignments.Any(n => n.Name.Equals(assignmentName, StringComparison.InvariantCultureIgnoreCase)))
-                        {
-                            Console.WriteLine("Please enter a valid assignment");
-                            assignmentName = Console.ReadLine() ?? string.Empty;
-                        }
-                        var selectedAssignment = selectedCourse.Assignments.First(n => n.Name.Equals(assignmentName, StringComparison.InvariantCultureIgnoreCase));
-                        var assignment = content as AssignmentItem;
-                        if (assignment != null)
-                        {
-                            assignment.Assignment = selectedAssignment;
-                            module.Content.Add(assignment);
-                        }
-                    }
-                    else
-                    {
-                        module.Content.Add(content);
-                    }
-
-                    Console.WriteLine("Would you like to add more content? (Y/N)");
-                    choice = Console.ReadLine() ?? string.Empty;
+                    content = new AssignmentItem();
                 }
-                selectedCourse.Modules.Add(module);
+                else if(contentChoice.Equals("F", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    content = new FileItem();
+                }
+                else if (contentChoice.Equals("P", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    content = new PageItem();
+                }
+                content.Id = selectedModule.Content.Count + 1;
+                Console.WriteLine("What is the name of the content?");
+                content.Name = Console.ReadLine() ?? string.Empty;
+                Console.WriteLine("What is the description of the content?");
+                content.Description = Console.ReadLine() ?? string.Empty;
+
+                if (content is AssignmentItem && selectedCourse != null)
+                {
+                    Console.WriteLine("What assingment would you like to add?");
+                    selectedCourse.Assignments.ForEach(Console.WriteLine);
+                    var assignmentName = Console.ReadLine() ?? string.Empty;
+                    while(!selectedCourse.Assignments.Any(n => n.Name.Equals(assignmentName, StringComparison.InvariantCultureIgnoreCase)))
+                    {
+                        Console.WriteLine("Please enter a valid assignment");
+                        assignmentName = Console.ReadLine() ?? string.Empty;
+                    }
+                    var selectedAssignment = selectedCourse.Assignments.First(n => n.Name.Equals(assignmentName, StringComparison.InvariantCultureIgnoreCase));
+                    var assignment = content as AssignmentItem;
+                    if (assignment != null)
+                    {
+                        assignment.Assignment = selectedAssignment;
+                        selectedModule.Content.Add(assignment);
+                    }
+                }
+                else
+                {
+                    selectedModule.Content.Add(content);
+                }
+                Console.WriteLine("Would you like to add more content? (Y/N)");
+                choice = Console.ReadLine() ?? string.Empty;
+            }
+            if (selectedCourse != null && isNew) 
+            {
+                selectedCourse.Modules.Add(selectedModule);
             }
         }
     }

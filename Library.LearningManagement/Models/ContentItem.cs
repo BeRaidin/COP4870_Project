@@ -8,6 +8,7 @@ namespace Library.LearningManagement.Models
 {
     public class ContentItem
     {
+        public int Id { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
 
@@ -15,11 +16,12 @@ namespace Library.LearningManagement.Models
         { 
             Name = string.Empty;
             Description = string.Empty;
+            Id = 0;
         }
 
         public override string ToString()
         {
-            return $"{Name} - {Description}";
+            return $"\t[{Id}] - {Name}";
         }
     }
 }
