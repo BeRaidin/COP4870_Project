@@ -11,17 +11,20 @@ namespace Library.LearningManagement.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal TotalAvailablePoints { get; set; }
+
+        public AssignmentGroup AssignmentGroup { get; set; } 
         public DateTime DueDate { get; set; }
 
         public Assignment() 
         {
             Name = string.Empty;
             Description = string.Empty;
+            AssignmentGroup = new AssignmentGroup();
         }
 
         public override string ToString()
         {
-            return $"({DueDate}) {Name}";
+            return $"({DueDate}) {Name} - {AssignmentGroup.Name}";
         }
     }
 }

@@ -73,12 +73,51 @@ namespace App.LearningManagement.Helpers
                         Console.WriteLine("Due Date:");
                         var dueDate = DateTime.Parse(Console.ReadLine() ?? "01/01/1990");
 
+                        var assignmnetGroup = new AssignmentGroup();
+                        if (!selectedCourse.AssignmentGroups.Any())
+                        {
+                            Console.WriteLine("What is the name of the assignment group?");
+                            var groupName = Console.ReadLine() ?? string.Empty;
+                            Console.WriteLine("What is the weight of the assignment group?");
+                            var groupWeight = Console.ReadLine() ?? "10";
+                            while(!int.TryParse(groupWeight, out int weightInt))
+                            {
+                                Console.WriteLine("Please enter a whole number:");
+                                groupWeight = Console.ReadLine() ?? "10";
+                            }
+                            assignmnetGroup = new AssignmentGroup(groupName, int.Parse(groupWeight));
+                            selectedCourse.AssignmentGroups.Add(assignmnetGroup);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Choose an existing assignment group, or make a new one:");
+                            selectedCourse.AssignmentGroups.ForEach(Console.WriteLine);
+                            var groupName = Console.ReadLine() ?? string.Empty;
+                            if (selectedCourse.AssignmentGroups.Any(g => g.Name.Equals(groupName, StringComparison.InvariantCultureIgnoreCase)))
+                            {
+                                assignmnetGroup = selectedCourse.AssignmentGroups.First(g => g.Name.Equals(groupName, StringComparison.InvariantCultureIgnoreCase));
+                            }
+                            else
+                            {
+                                Console.WriteLine("What is the weight of the assignment group?");
+                                var groupWeight = Console.ReadLine() ?? "10";
+                                while (!int.TryParse(groupWeight, out int weightInt))
+                                {
+                                    Console.WriteLine("Please enter a whole number:");
+                                    groupWeight = Console.ReadLine() ?? "10";
+                                }
+                                assignmnetGroup = new AssignmentGroup(groupName, int.Parse(groupWeight));
+                                selectedCourse.AssignmentGroups.Add(assignmnetGroup);
+                            }
+                        }
+
                         assignments.Add(new Assignment
                         {
                             Name = assignmentName,
                             Description = assignmentDescription,
                             TotalAvailablePoints = totalPoints,
-                            DueDate = dueDate
+                            DueDate = dueDate,
+                            AssignmentGroup = assignmnetGroup
                         });
 
                         Console.WriteLine("Add more assignments? (Y/N)");
