@@ -9,7 +9,16 @@ namespace Library.LearningManagement.Models
 {
     public class Person
     {
-        public int Id { get; set; }
+        public int Id {
+            get
+            {
+                return Id;
+            }
+            set
+            {
+                Id = value;
+            }
+        }
         public string Name { get; set; }
  
         public Person() {
@@ -21,16 +30,9 @@ namespace Library.LearningManagement.Models
             return $"[{Id}] {Name}";
         }
 
-        public void ChangeId()
+        public void ChangeId(int num)
         {
-            Console.WriteLine("What is the ID of the person");
-            var id = Console.ReadLine();
-            while (!int.TryParse(id, out int result))
-            {
-                Console.WriteLine("That is not a valid Id, please try again");
-                id = Console.ReadLine();
-            }
-                Id = int.Parse(id);
+            Id = num;
         }
 
         public void ChangeName()
