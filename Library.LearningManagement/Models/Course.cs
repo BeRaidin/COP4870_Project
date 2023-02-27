@@ -10,6 +10,8 @@
         public List<Module> Modules { get; set; }
         public List<AssignmentGroup> AssignmentGroups { get; set; }
 
+        public List<Announcement> Announcements { get; set; }
+
         public Course() 
         { 
             Code = string.Empty;
@@ -19,6 +21,7 @@
             Assignments = new List<Assignment>();
             Modules = new List<Module>();
             AssignmentGroups = new List<AssignmentGroup>();
+            Announcements = new List<Announcement>();
         }
 
         public override string ToString()
