@@ -69,7 +69,9 @@ namespace App.LearningManagement.Helpers
                         if (selectedStudent != null)
                         {
                             roster.Add(selectedStudent);
+                            selectedStudent.AddCourse(selectedCourse);
                         }
+
                     }
                 }
                 selectedCourse.Roster = roster;
@@ -125,7 +127,9 @@ namespace App.LearningManagement.Helpers
                                 selectedCourse.AssignmentGroups.Add(assignmnetGroup);
                             }
                         }
+                        assignment.AddAssignmentGroup(assignmnetGroup);
                         assignments.Add(assignment);
+                        selectedCourse.AddMaxGrade((double)assignment.TotalAvailablePoints* ((double)assignmnetGroup.Weight/100));
 
                         Console.WriteLine("Add more assignments? (Y/N)");
                         assignResponse = Console.ReadLine() ?? "N";

@@ -10,8 +10,8 @@
         public List<Assignment> Assignments { get; set; }
         public List<Module> Modules { get; set; }
         public List<AssignmentGroup> AssignmentGroups { get; set; }
-
         public List<Announcement> Announcements { get; set; }
+        public double MaxGrade { get; set; }
 
         public Course() 
         { 
@@ -24,6 +24,7 @@
             Modules = new List<Module>();
             AssignmentGroups = new List<AssignmentGroup>();
             Announcements = new List<Announcement>();
+            MaxGrade = 0;
         }
 
         public override string ToString()
@@ -79,6 +80,11 @@
                 hours = Console.ReadLine() ?? string.Empty;
             }
             CreditHours = int.Parse(hours);
+        }
+
+        public void AddMaxGrade(double val)
+        {
+            MaxGrade += val;
         }
     }
 }

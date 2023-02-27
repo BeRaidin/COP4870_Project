@@ -13,6 +13,7 @@ namespace Library.LearningManagement.Models
         public int TotalAvailablePoints { get; set; }
         public AssignmentGroup AssignmentGroup { get; set; } 
         public DateTime DueDate { get; set; }
+        public Decimal Grade { get; set; }
 
         public Assignment() 
         {
@@ -59,6 +60,11 @@ namespace Library.LearningManagement.Models
                 Console.WriteLine("Please enter a vaild date: (MM/DD/YYYY)");
                 totalPoints = Console.ReadLine() ?? string.Empty;
             }
+        }
+
+        public void AddAssignmentGroup(AssignmentGroup group)
+        {
+            AssignmentGroup= group;
         }
     }
 }
