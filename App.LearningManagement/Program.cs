@@ -46,6 +46,9 @@ namespace MyApp
             Console.WriteLine("5. Assign grades to a student");
             Console.WriteLine("6. List grades for a student");
             Console.WriteLine("7. Delete student submissions");
+            Console.WriteLine("8. Get final grade for a student in a course");
+            Console.WriteLine("9. Get Grade Point Average");
+
             var input = Console.ReadLine();
 
             if (int.TryParse(input, out int result))
@@ -74,6 +77,12 @@ namespace MyApp
                         break;
                     case 7:
                         personHelper.DeleteSubmisisons();
+                        break;
+                    case 8:
+                        personHelper.GetFinalGrade();
+                        break;
+                    case 9:
+                        personHelper.GetGradePoint();
                         break;
                 }
             }
