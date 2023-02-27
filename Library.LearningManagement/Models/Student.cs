@@ -46,5 +46,11 @@ namespace Library.LearningManagement.Models
 
             Classification = classEnum;
         }
+
+        public void DeleteGrades()
+        {
+            Grades.Clear();
+            Grades = new Dictionary<string, double>();
+        }
     }
 }
