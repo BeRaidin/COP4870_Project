@@ -37,6 +37,7 @@ namespace App.LearningManagement.Helpers
                 selectedCourse = new Course();
                 selectedCourse.ChangeCode(courseService.Courses);
                 selectedCourse.ChangeName();
+                selectedCourse.ChangeHours();
                 selectedCourse.ChangeDescription();
 
                 Console.WriteLine("Which students should be enrolled in the course? ('Q' to quit)");
@@ -80,14 +81,11 @@ namespace App.LearningManagement.Helpers
                     contAdding = true;
                     while (contAdding)
                     {
-                        Console.WriteLine("Name:");
-                        var assignmentName = Console.ReadLine() ?? string.Empty;
-                        Console.WriteLine("Description:");
-                        var assignmentDescription = Console.ReadLine() ?? string.Empty;
-                        Console.WriteLine("Total Points:");
-                        var totalPoints = decimal.Parse(Console.ReadLine() ?? "100");
-                        Console.WriteLine("Due Date:");
-                        var dueDate = DateTime.Parse(Console.ReadLine() ?? "01/01/1990");
+                        var assignment = new Assignment();
+                        assignment.ChangeName();
+                        assignment.ChangeDescription();
+                        assignment.ChangeTotalPoints();
+                        assignment.ChangeDueDate();
 
                         var assignmnetGroup = new AssignmentGroup();
                         if (!selectedCourse.AssignmentGroups.Any())
@@ -126,15 +124,7 @@ namespace App.LearningManagement.Helpers
                                 selectedCourse.AssignmentGroups.Add(assignmnetGroup);
                             }
                         }
-
-                        assignments.Add(new Assignment
-                        {
-                            Name = assignmentName,
-                            Description = assignmentDescription,
-                            TotalAvailablePoints = totalPoints,
-                            DueDate = dueDate,
-                            AssignmentGroup = assignmnetGroup
-                        });
+                        assignments.Add(assignment);
 
                         Console.WriteLine("Add more assignments? (Y/N)");
                         assignResponse = Console.ReadLine() ?? "N";
@@ -162,6 +152,12 @@ namespace App.LearningManagement.Helpers
                 if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                 {
                     selectedCourse.ChangeName();
+                }
+                Console.WriteLine("Would you like to change the amount of credit hours? (Y/N)");
+                choice = Console.ReadLine() ?? string.Empty;
+                if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    selectedCourse.ChangeHours();
                 }
                 Console.WriteLine("Would you like to change the Description? (Y/N)");
                 choice = Console.ReadLine() ?? string.Empty;
