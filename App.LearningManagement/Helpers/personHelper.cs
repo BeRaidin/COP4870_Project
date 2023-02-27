@@ -157,5 +157,21 @@ namespace App.LearningManagement.Helpers
                 }
             }
         }
+
+        public void DeleteSubmisisons()
+        {
+            Console.WriteLine("Choose the id of student to update:");
+            SearchOrListStudents();
+            var selectionStr = Console.ReadLine();
+            if (int.TryParse(selectionStr, out int selectionInt))
+            {
+                var selectedPerson = personService.People.FirstOrDefault(s => s.Id == selectionInt);
+                var selectedStu = selectedPerson as Student;
+                if (selectedStu != null)
+                {
+                    selectedStu.DeleteGrades();
+                }
+            }
+        }
     }
 }

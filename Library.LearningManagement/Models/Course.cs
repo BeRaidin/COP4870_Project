@@ -38,7 +38,8 @@
                 return $"{ToString()}\n{Description}" +
                     $"\n\nRoster:\n{string.Join("\n", Roster.Select(s => s.ToString()).ToArray())}\n\n" +
                     $"Assignments:\n{string.Join("\n", Assignments.Select(a => a.ToString()).ToArray())}\n\n" +
-                    $"Modules:\n{string.Join("\n", Modules.Select(a => a.DetailDisplay).ToArray())}";
+                    $"Modules:\n{string.Join("\n", Modules.Select(a => a.DetailDisplay).ToArray())}\n\n" +
+                    $"Announcements:\n{string.Join("\n", Announcements.Select(a => a.ToString()).ToArray())}";
             }
         }
 

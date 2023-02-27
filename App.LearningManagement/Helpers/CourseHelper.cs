@@ -1,6 +1,7 @@
 ﻿using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
 using System.Net.Mime;
+using System.Runtime.InteropServices;
 
 namespace App.LearningManagement.Helpers
 {
@@ -295,6 +296,7 @@ namespace App.LearningManagement.Helpers
             if (selectedCourse != null)
             {
                 var announcement = new Announcement();
+                var delete = "N";
                 if(update == false)
                 {
                     announcement.Id = selectedCourse.Announcements.Count + 1;
@@ -310,30 +312,58 @@ namespace App.LearningManagement.Helpers
                         selection = Console.ReadLine() ?? string.Empty;
                     }
                     announcement = selectedCourse.Announcements.First(i => i.Id == int.Parse(selection));
+
+                    Console.WriteLine("Would you like to delte this announcement? (Y/N)");
+                    delete = Console.ReadLine() ?? string.Empty;
                 }
-                var choice = "Y";
-                if (update == true)
+                if (update == true && delete.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    Console.WriteLine("Would you like to update the title? (Y/N)");
-                    choice = Console.ReadLine() ?? string.Empty;
+                    selectedCourse.Announcements.Remove(announcement);
                 }
-                if(choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                else
                 {
-                    announcement.ChangeTitle();
+                    var choice = "Y";
+                    if (update == true)
+                    {
+                        Console.WriteLine("Would you like to update the title? (Y/N)");
+                        choice = Console.ReadLine() ?? string.Empty;
+                    }
+                    if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        announcement.ChangeTitle();
+                    }
+                    if (update == true)
+                    {
+                        Console.WriteLine("Would you like to update the message? (Y/N)");
+                        choice = Console.ReadLine() ?? string.Empty;
+                    }
+                    if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        announcement.ChangeMessage();
+                    }
+                    if (update == false)
+                    {
+                        selectedCourse.Announcements.Add(announcement);
+                    }
                 }
-                if (update == true)
+            }
+        }
+
+        public void DeleteModule()
+        {
+            var selectedCourse = GetCourse();
+            if (selectedCourse != null)
+            {
+                Console.WriteLine("Which module would you like to delete?");
+                selectedCourse.Modules.ForEach(Console.WriteLine);
+                var module = Console.ReadLine();
+                while(!selectedCourse.Modules.Any(m => m.Name == module))
                 {
-                    Console.WriteLine("Would you like to update the message? (Y/N)");
-                    choice = Console.ReadLine() ?? string.Empty;
+                    Console.WriteLine("Please choose a valid module:");
+                    module = Console.ReadLine();
                 }
-                if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    announcement.ChangeMessage();
-                }
-                if (update == false)
-                {
-                    selectedCourse.Announcements.Add(announcement);
-                }
+                var removeModule = selectedCourse.Modules.First(m => m.Name == module);
+                selectedCourse.Modules.Remove(removeModule);
             }
         }
     }

@@ -45,6 +45,7 @@ namespace MyApp
             Console.WriteLine("4. Update a person");
             Console.WriteLine("5. Assign grades to a student");
             Console.WriteLine("6. List grades for a student");
+            Console.WriteLine("7. Delete student submissions");
             var input = Console.ReadLine();
 
             if (int.TryParse(input, out int result))
@@ -71,6 +72,9 @@ namespace MyApp
                     case 6:
                         personHelper.DisplayGrades();
                         break;
+                    case 7:
+                        personHelper.DeleteSubmisisons();
+                        break;
                 }
             }
         }
@@ -86,8 +90,7 @@ namespace MyApp
             Console.WriteLine("6. Edit a module");
             Console.WriteLine("7. Add an announcement to a course");
             Console.WriteLine("8. Edit an announcement");
-
-
+            Console.WriteLine("9. Delete a module");
             var input = Console.ReadLine();
 
             if (int.TryParse(input, out int result))
@@ -120,6 +123,9 @@ namespace MyApp
                     case 8:
                         bool update = true;
                         courseHelper.AddOrUpdateAnnouncement(update);
+                        break;
+                    case 9:
+                        courseHelper.DeleteModule();
                         break;
                 }
             }
