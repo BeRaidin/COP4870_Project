@@ -15,6 +15,21 @@ namespace App.LearningManagement.Helpers
             courseService= CourseService.Current;
         }
 
+        public Course GetCourse()
+        {
+            Console.WriteLine("Choose the code of a course:");
+            SearchOrListCourses();
+            var selection = Console.ReadLine();
+            var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+            while (selectedCourse == null)
+            {
+                Console.WriteLine("Please choose a vaild code:");
+                selection = Console.ReadLine();
+                selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+            }
+            return selectedCourse;
+        }
+
         public void AddOrUpdateCourse(Course? selectedCourse = null)
         {
             if (selectedCourse == null)
@@ -157,24 +172,9 @@ namespace App.LearningManagement.Helpers
              }
         }
 
-        public void UpdateCourseRecord()
-        {
-            Console.WriteLine("Choose the code of course to update:");
-            SearchOrListCourses();
-            var selection = Console.ReadLine();
-            var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
-            if (selectedCourse != null)
-            {
-                AddOrUpdateCourse(selectedCourse);
-            }
-        }
-
         public void UpdateCourseModule()
         {
-            Console.WriteLine("Choose the code of course to update:");
-            SearchOrListCourses();
-            var selection = Console.ReadLine();
-            var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+            var selectedCourse = GetCourse();
             if (selectedCourse != null)
             {
                 Console.WriteLine("What module would you want to update?");
@@ -197,15 +197,9 @@ namespace App.LearningManagement.Helpers
             else
             {
                 courseService.Search(query).ToList().ForEach(Console.WriteLine);
-
-                Console.WriteLine("Select a course to see more information:");
-                var code = Console.ReadLine() ?? string.Empty;
-                var selectedCourse = courseService.Courses
-                    .FirstOrDefault(c => c.Code.Equals(code, StringComparison.InvariantCultureIgnoreCase));
-                if (selectedCourse != null)
-                {
-                    Console.WriteLine(selectedCourse.DetailDisplay);
-                }
+                var selectedCourse = GetCourse();
+                Console.WriteLine(selectedCourse.DetailDisplay);
+                
             }            
         }
 
@@ -213,10 +207,7 @@ namespace App.LearningManagement.Helpers
         {
             if (selectedCourse == null)
             {
-                Console.WriteLine("Choose the code of course to update:");
-                SearchOrListCourses();
-                var selection = Console.ReadLine();
-                selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+                selectedCourse = GetCourse();
             }
             var isNew = false;
             if (selectedModule == null)
@@ -299,6 +290,54 @@ namespace App.LearningManagement.Helpers
             if (selectedCourse != null && isNew) 
             {
                 selectedCourse.Modules.Add(selectedModule);
+            }
+        }
+
+        public void AddOrUpdateAnnouncement(bool? update = false)
+        {
+            var selectedCourse = GetCourse();
+            if (selectedCourse != null)
+            {
+                var announcement = new Announcement();
+                if(update == false)
+                {
+                    announcement.Id = selectedCourse.Announcements.Count + 1;
+                }
+                else
+                {
+                    Console.WriteLine("Which announcement do you want to update?");
+                    selectedCourse.Announcements.ForEach(Console.WriteLine);
+                    var selection = Console.ReadLine() ?? string.Empty;
+                    while(!int.TryParse(selection, out int test) || !selectedCourse.Announcements.Any(i => i.Id == int.Parse(selection)))
+                    {
+                        Console.WriteLine("Please enter a vaild integer:");
+                        selection = Console.ReadLine() ?? string.Empty;
+                    }
+                    announcement = selectedCourse.Announcements.First(i => i.Id == int.Parse(selection));
+                }
+                var choice = "Y";
+                if (update == true)
+                {
+                    Console.WriteLine("Would you like to update the title? (Y/N)");
+                    choice = Console.ReadLine() ?? string.Empty;
+                }
+                if(choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    announcement.ChangeTitle();
+                }
+                if (update == true)
+                {
+                    Console.WriteLine("Would you like to update the message? (Y/N)");
+                    choice = Console.ReadLine() ?? string.Empty;
+                }
+                if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    announcement.ChangeMessage();
+                }
+                if (update == false)
+                {
+                    selectedCourse.Announcements.Add(announcement);
+                }
             }
         }
     }
