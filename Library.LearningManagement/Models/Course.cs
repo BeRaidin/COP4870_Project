@@ -4,6 +4,7 @@
     {
         public string Code { get; set; }
         public string Name { get; set; }
+        public int CreditHours { get; set; }
         public string Description { get; set; }
         public List<Person> Roster { get; set; }
         public List<Assignment> Assignments { get; set; }
@@ -16,6 +17,7 @@
         { 
             Code = string.Empty;
             Name = string.Empty;
+            CreditHours = 3;
             Description = string.Empty;
             Roster = new List<Person>();
             Assignments = new List<Assignment>();
@@ -64,6 +66,18 @@
         {
             Console.WriteLine("What is the description of the course?");
             Description = Console.ReadLine() ?? string.Empty;
+        }
+
+        public void ChangeHours()
+        {
+            Console.WriteLine("How many credit hours is the course?");
+            var hours = Console.ReadLine() ?? string.Empty;
+            while (!int.TryParse(hours, out int result))
+            {
+                Console.WriteLine("Please enter an integer:");
+                hours = Console.ReadLine() ?? string.Empty;
+            }
+            CreditHours = int.Parse(hours);
         }
     }
 }
