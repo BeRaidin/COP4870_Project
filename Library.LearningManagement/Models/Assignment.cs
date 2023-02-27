@@ -52,7 +52,7 @@ namespace Library.LearningManagement.Models
 
         public void ChangeDueDate() 
         {
-            Console.WriteLine("How many points does the assignment have?");
+            Console.WriteLine("What is the due date?");
             var totalPoints = Console.ReadLine() ?? string.Empty;
             while(!DateTime.TryParse(totalPoints, out DateTime result))
             {

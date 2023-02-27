@@ -105,5 +105,57 @@ namespace App.LearningManagement.Helpers
                 courseService.Courses.Where(c => c.Roster.Any(s => s.Id == selectionInt)).ToList().ForEach(Console.WriteLine);
             }
         }
+
+        public void AddGrades()
+        {
+            Console.WriteLine("Choose the id of student to update:");
+            SearchOrListStudents();
+            var selectionStr = Console.ReadLine();
+            if (int.TryParse(selectionStr, out int selectionInt))
+            {
+                var selectedPerson = personService.People.FirstOrDefault(s => s.Id == selectionInt);
+                var selectedStu = selectedPerson as Student;
+                if (selectedStu != null)
+                {
+                    var studentCourses = courseService.Courses.Where(c => c.Roster.Any(s => s.Id == selectionInt)).ToList();
+                    foreach(var course in studentCourses)
+                    {
+                        Console.WriteLine(course);
+                        foreach(var assingment in course.Assignments)
+                        {
+                            Console.WriteLine("\t" + assingment.Name);
+                            Console.WriteLine($"Please enter a grade for the assignment out of {assingment.TotalAvailablePoints}:");
+                            var grade = Console.ReadLine();
+                            while(!int.TryParse(grade, out int result) || int.Parse(grade) > assingment.TotalAvailablePoints || int.Parse(grade) < 0)
+                            {
+                                Console.WriteLine($"Please enter a valid grade out of {assingment.TotalAvailablePoints}:");
+                                grade = Console.ReadLine();
+                            }
+                            selectedStu.Grades.Add(assingment.Name, Double.Parse(grade));
+                        }
+                    }   
+                }
+            }
+        }
+
+        public void DisplayGrades()
+        {
+            Console.WriteLine("Choose the id of student to update:");
+            SearchOrListStudents();
+            var selectionStr = Console.ReadLine();
+            if (int.TryParse(selectionStr, out int selectionInt))
+            {
+                var selectedPerson = personService.People.FirstOrDefault(s => s.Id == selectionInt);
+                var selectedStu = selectedPerson as Student;
+                if (selectedStu != null)
+                {
+                    foreach (KeyValuePair<string, double> grade in selectedStu.Grades)
+                    {
+                        Console.WriteLine("{0}, Vaue: {1}",
+                            grade.Key, grade.Value);
+                    }
+                }
+            }
+        }
     }
 }

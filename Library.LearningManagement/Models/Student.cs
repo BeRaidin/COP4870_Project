@@ -8,7 +8,7 @@ namespace Library.LearningManagement.Models
 {
     public class Student : Person
     {
-        public Dictionary<int, double> Grades { get; set; }
+        public Dictionary<string, double> Grades { get; set; }
         public Classes Classification { get; set; }
         public enum Classes
         {
@@ -17,7 +17,7 @@ namespace Library.LearningManagement.Models
 
         public Student()
         {
-            Grades = new Dictionary<int, double>();
+            Grades = new Dictionary<string, double>();
         }
 
         public override string ToString()
@@ -25,7 +25,6 @@ namespace Library.LearningManagement.Models
             return $"[{Id}] {Name} - {Classification}";
         }
 
-       
 
         public void ChangeClassification()
         {
