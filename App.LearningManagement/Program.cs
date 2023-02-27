@@ -43,6 +43,8 @@ namespace MyApp
             Console.WriteLine("2. List all people");
             Console.WriteLine("3. Search for people");
             Console.WriteLine("4. Update a person");
+            Console.WriteLine("5. Assign grades to a student");
+            Console.WriteLine("6. List grades for a student");
             var input = Console.ReadLine();
 
             if (int.TryParse(input, out int result))
@@ -62,6 +64,12 @@ namespace MyApp
                         break;
                     case 4:
                         personHelper.UpdateStudentRecord();
+                        break;
+                    case 5:
+                        personHelper.AddGrades();
+                        break;
+                    case 6:
+                        personHelper.DisplayGrades();
                         break;
                 }
             }
