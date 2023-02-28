@@ -1,5 +1,6 @@
 ﻿using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
+using System.Security.Cryptography;
 
 namespace App.LearningManagement.Helpers
 {
@@ -30,7 +31,41 @@ namespace App.LearningManagement.Helpers
 
         public void ListPeople() 
         {
-            personService.People.ForEach(Console.WriteLine);
+            if (personService.People.Count > 5)
+            {
+                var navigator = new ListNavigator<Person>(personService.People);
+                Console.WriteLine("Use \"<\" and \">\" to navigate. ('Q' to Quit)");
+                navigator.PrintPage(navigator.GoToFirstPage());
+                var cont = true;
+                while (cont)
+                {
+                    var choice = Console.ReadLine() ?? string.Empty;
+                    if (choice.Equals("<", StringComparison.InvariantCultureIgnoreCase) && navigator.HasPreviousPage)
+                    {
+                        navigator.PrintPage(navigator.GoBackward());
+                    }
+                    else if(choice.Equals("<", StringComparison.InvariantCultureIgnoreCase) && !navigator.HasPreviousPage)
+                    {
+                        Console.WriteLine("Cannot move further that direction.");
+                    }
+                    else if (choice.Equals(">", StringComparison.InvariantCultureIgnoreCase) && navigator.HasNextPage)
+                    {
+                        navigator.PrintPage(navigator.GoForward());
+                    }
+                    else if(choice.Equals(">", StringComparison.InvariantCultureIgnoreCase) && !navigator.HasNextPage)
+                    {
+                        Console.WriteLine("Cannot move further that direction.");
+                    }
+                    else if(choice.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        cont = false;
+                    }
+                }
+            }
+            else
+            {
+                personService.People.ForEach(Console.WriteLine);
+            }
         }
 
         public void AddOrUpdateStudent(Person? selectedPerson = null)
