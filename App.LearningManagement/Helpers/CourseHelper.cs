@@ -35,7 +35,34 @@ namespace App.LearningManagement.Helpers
 
         public void ListCourses()
         {
-            courseService.Courses.ForEach(Console.WriteLine);
+            var navigator = new ListNavigator<Course>(courseService.Courses);
+            Console.WriteLine("Use \"<\" and \">\" to navigate. ('Q' to Quit)");
+            navigator.PrintPage(navigator.GoToFirstPage());
+            var cont = true;
+            while (cont)
+            {
+                var choice = Console.ReadLine() ?? string.Empty;
+                if (choice.Equals("<", StringComparison.InvariantCultureIgnoreCase) && navigator.HasPreviousPage)
+                {
+                    navigator.PrintPage(navigator.GoBackward());
+                }
+                else if (choice.Equals("<", StringComparison.InvariantCultureIgnoreCase) && !navigator.HasPreviousPage)
+                {
+                    Console.WriteLine("Cannot move further that direction.");
+                }
+                else if (choice.Equals(">", StringComparison.InvariantCultureIgnoreCase) && navigator.HasNextPage)
+                {
+                    navigator.PrintPage(navigator.GoForward());
+                }
+                else if (choice.Equals(">", StringComparison.InvariantCultureIgnoreCase) && !navigator.HasNextPage)
+                {
+                    Console.WriteLine("Cannot move further that direction.");
+                }
+                else if (choice.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    cont = false;
+                }
+            }
         }
 
         public void AddOrUpdateCourse(Course? selectedCourse = null)

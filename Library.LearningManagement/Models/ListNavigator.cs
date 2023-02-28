@@ -92,6 +92,14 @@ namespace Library.LearningManagement.Models
             }
             return window;
         }
+
+        public void PrintPage(Dictionary<int, T> values)
+        {
+            foreach(KeyValuePair<int, T> value in values)
+            {
+                Console.WriteLine(value.Value);
+            }
+        }
     }
     public class PageFaultException : Exception
     {
