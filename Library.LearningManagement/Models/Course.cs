@@ -36,11 +36,26 @@
         {
             get
             {
-                return $"{ToString()}\n{Description}" +
-                    $"\n\nRoster:\n{string.Join("\n", Roster.Select(s => s.ToString()).ToArray())}\n\n" +
-                    $"Assignments:\n{string.Join("\n", Assignments.Select(a => a.ToString()).ToArray())}\n\n" +
-                    $"Modules:\n{string.Join("\n", Modules.Select(a => a.DetailDisplay).ToArray())}\n\n" +
-                    $"Announcements:\n{string.Join("\n", Announcements.Select(a => a.ToString()).ToArray())}";
+                var display = $"{ToString()}\n{Description}";
+                if(Roster.Count > 0)
+                {
+                    display += $"\n\nRoster:\n{string.Join("\n", Roster.Select(s => s.ToString()).ToArray())}\n\n";
+
+                }
+                if(Assignments.Count > 0)
+                {
+                    display += $"Assignments:\n{string.Join("\n", Assignments.Select(a => a.ToString()).ToArray())}\n\n";
+
+                }
+                if(Modules.Count > 0)
+                {
+                    display += $"Modules:\n{string.Join("\n", Modules.Select(a => a.DetailDisplay).ToArray())}\n\n";
+                }
+                if(Announcements.Count > 0)
+                {
+                    display += $"Announcements:\n{string.Join("\n", Announcements.Select(a => a.ToString()).ToArray())}";
+                }
+                return display;
             }
         }
 
@@ -51,7 +66,7 @@
 
             while (course.Any(p => p.Code == code))
             {
-                Console.WriteLine("That is already anohter course code, please enter another");
+                Console.WriteLine("That is already another course code, please enter another");
                 code = Console.ReadLine() ?? string.Empty;
             }
 
