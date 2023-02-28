@@ -59,15 +59,15 @@ namespace MyApp
                         personHelper.AddOrUpdateStudent();
                         break;
                     case 2:
-                        personHelper.SearchOrListStudents();
+                        personHelper.ListPeople();
                         break;
                     case 3:
                         Console.WriteLine("Enter a query:");
                         var query = Console.ReadLine() ?? string.Empty;
-                        personHelper.SearchOrListStudents(query);
+                        personHelper.SearchPerson(query);
                         break;
                     case 4:
-                        personHelper.UpdateStudentRecord();
+                        personHelper.AddOrUpdateStudent(personHelper.GetPerson());
                         break;
                     case 5:
                         personHelper.AddGrades();
@@ -110,12 +110,12 @@ namespace MyApp
                         courseHelper.AddOrUpdateCourse();
                         break;
                     case 2:
-                        courseHelper.SearchOrListCourses();
+                        courseHelper.ListCourses();
                         break;
                     case 3:
                         Console.WriteLine("Enter a query:");
                         var query = Console.ReadLine() ?? string.Empty;
-                        courseHelper.SearchOrListCourses(query);
+                        courseHelper.SearchCourses(query);
                         break;
                     case 4:
                         courseHelper.AddOrUpdateCourse(courseHelper.GetCourse());

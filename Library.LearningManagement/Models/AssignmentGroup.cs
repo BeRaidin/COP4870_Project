@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Library.LearningManagement.Models
+﻿namespace Library.LearningManagement.Models
 {
     public class AssignmentGroup
     {
@@ -26,6 +20,26 @@ namespace Library.LearningManagement.Models
         public override string ToString()
         {
             return $"[{Name}] - {Weight}%";
+        }
+
+        public AssignmentGroup MakeAssignmentGroup(string? name = null)
+        {
+            if (name == null)
+            {
+                Console.WriteLine("What is the name of the assignment group?");
+                name = Console.ReadLine() ?? string.Empty;
+            }
+            
+            Console.WriteLine("What is the weight of the assignment group?");
+            var groupWeight = Console.ReadLine() ?? string.Empty;
+            while (!int.TryParse(groupWeight, out int weightInt) || int.Parse(groupWeight) > 100)
+            {
+                Console.WriteLine("Please enter a whole number less than 100:");
+                groupWeight = Console.ReadLine() ?? "10";
+            }
+
+            var assignmentGroup = new AssignmentGroup(name, int.Parse(groupWeight));
+            return assignmentGroup;
         }
     }
 }

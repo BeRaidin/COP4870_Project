@@ -18,17 +18,24 @@ namespace App.LearningManagement.Helpers
 
         public Course GetCourse()
         {
-            Console.WriteLine("Choose the code of a course:");
-            SearchOrListCourses();
+            Console.WriteLine("Enter the code of a course:");
+            ListCourses();
             var selection = Console.ReadLine();
-            var selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+            var selectedCourse = courseService.Courses
+                .FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
             while (selectedCourse == null)
             {
-                Console.WriteLine("Please choose a vaild code:");
+                Console.WriteLine("Please enter a vaild code:");
                 selection = Console.ReadLine();
-                selectedCourse = courseService.Courses.FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
+                selectedCourse = courseService.Courses
+                    .FirstOrDefault(s => s.Code.Equals(selection, StringComparison.InvariantCultureIgnoreCase));
             }
             return selectedCourse;
+        }
+
+        public void ListCourses()
+        {
+            courseService.Courses.ForEach(Console.WriteLine);
         }
 
         public void AddOrUpdateCourse(Course? selectedCourse = null)
@@ -41,47 +48,51 @@ namespace App.LearningManagement.Helpers
                 selectedCourse.ChangeHours();
                 selectedCourse.ChangeDescription();
 
-                Console.WriteLine("Which students should be enrolled in the course? ('Q' to quit)");
-                var roster = new List<Person>();
-                bool contAdding = true;
-                while (contAdding)
+
+                if (personService.People.Count > 0)
                 {
-                    personService.People.Where(s => !roster.Any(s2 => s2.Id == s.Id)).ToList().ForEach(Console.WriteLine);
-                    var selection = "Q";
-                    if (personService.People.Any(s => !roster.Any(s2 => s2.Id == s.Id)))
+                    Console.WriteLine("Which students should be enrolled in the course? ('Q' to quit)");
+                    var roster = new List<Person>();
+                    bool contAdding = true;
+                    while (contAdding)
                     {
-                        selection = Console.ReadLine() ?? string.Empty;
-                        if(selection == string.Empty)
+                        personService.People.Where(s => !roster.Any(s2 => s2.Id == s.Id)).ToList().ForEach(Console.WriteLine);
+                        var selection = "Q";
+                        if (personService.People.Any(s => !roster.Any(s2 => s2.Id == s.Id)))
                         {
-                            selection = "Q";
-                        }
-                    }
-
-                    if (selection.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        contAdding = false;
-                    }
-                    else
-                    {
-                        var selectedId = int.Parse(selection);
-                        var selectedStudent = personService.People.FirstOrDefault(s => s.Id == selectedId);
-
-                        if (selectedStudent != null)
-                        {
-                            roster.Add(selectedStudent);
-                            selectedStudent.AddCourse(selectedCourse);
+                            selection = Console.ReadLine() ?? string.Empty;
+                            if (selection == string.Empty)
+                            {
+                                selection = "Q";
+                            }
                         }
 
+                        if (selection.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            contAdding = false;
+                        }
+                        else if(int.TryParse(selection, out var id))
+                        {
+                            var selectedId = int.Parse(selection);
+                            var selectedStudent = personService.People.FirstOrDefault(s => s.Id == selectedId);
+
+                            if (selectedStudent != null)
+                            {
+                                roster.Add(selectedStudent);
+                                selectedStudent.AddCourse(selectedCourse);
+                            }
+
+                        }
                     }
+                    selectedCourse.Roster = roster;
                 }
-                selectedCourse.Roster = roster;
 
                 Console.WriteLine("Would you like to add assignments? (Y/N)");
-                var assignResponse = Console.ReadLine() ?? "N";
+                var assignResponse = Console.ReadLine() ?? string.Empty;
                 var assignments = new List<Assignment>();
                 if (assignResponse.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    contAdding = true;
+                    var contAdding = true;
                     while (contAdding)
                     {
                         var assignment = new Assignment();
@@ -90,46 +101,35 @@ namespace App.LearningManagement.Helpers
                         assignment.ChangeTotalPoints();
                         assignment.ChangeDueDate();
 
-                        var assignmnetGroup = new AssignmentGroup();
+                        var assignmentGroup = new AssignmentGroup();
                         if (!selectedCourse.AssignmentGroups.Any())
                         {
-                            Console.WriteLine("What is the name of the assignment group?");
-                            var groupName = Console.ReadLine() ?? string.Empty;
-                            Console.WriteLine("What is the weight of the assignment group?");
-                            var groupWeight = Console.ReadLine() ?? "10";
-                            while(!int.TryParse(groupWeight, out int weightInt))
-                            {
-                                Console.WriteLine("Please enter a whole number:");
-                                groupWeight = Console.ReadLine() ?? "10";
-                            }
-                            assignmnetGroup = new AssignmentGroup(groupName, int.Parse(groupWeight));
-                            selectedCourse.AssignmentGroups.Add(assignmnetGroup);
+                            assignmentGroup = assignmentGroup.MakeAssignmentGroup();
+                            selectedCourse.AssignmentGroups.Add(assignmentGroup);
                         }
                         else
                         {
                             Console.WriteLine("Choose an existing assignment group, or make a new one:");
                             selectedCourse.AssignmentGroups.ForEach(Console.WriteLine);
                             var groupName = Console.ReadLine() ?? string.Empty;
+                            while(groupName == null)
+                            {
+                                Console.WriteLine("Please enter a name:");
+                                groupName = Console.ReadLine() ?? string.Empty;
+                            }
                             if (selectedCourse.AssignmentGroups.Any(g => g.Name.Equals(groupName, StringComparison.InvariantCultureIgnoreCase)))
                             {
-                                assignmnetGroup = selectedCourse.AssignmentGroups.First(g => g.Name.Equals(groupName, StringComparison.InvariantCultureIgnoreCase));
+                                assignmentGroup = selectedCourse.AssignmentGroups.First(g => g.Name.Equals(groupName, StringComparison.InvariantCultureIgnoreCase));
                             }
                             else
                             {
-                                Console.WriteLine("What is the weight of the assignment group?");
-                                var groupWeight = Console.ReadLine() ?? "10";
-                                while (!int.TryParse(groupWeight, out int weightInt))
-                                {
-                                    Console.WriteLine("Please enter a whole number:");
-                                    groupWeight = Console.ReadLine() ?? "10";
-                                }
-                                assignmnetGroup = new AssignmentGroup(groupName, int.Parse(groupWeight));
-                                selectedCourse.AssignmentGroups.Add(assignmnetGroup);
+                                assignmentGroup = assignmentGroup.MakeAssignmentGroup(groupName);
+                                selectedCourse.AssignmentGroups.Add(assignmentGroup);
                             }
                         }
-                        assignment.AddAssignmentGroup(assignmnetGroup);
+                        assignment.AddAssignmentGroup(assignmentGroup);
                         assignments.Add(assignment);
-                        selectedCourse.AddMaxGrade((double)assignment.TotalAvailablePoints* ((double)assignmnetGroup.Weight/100));
+                        selectedCourse.AddMaxGrade((double)assignment.TotalAvailablePoints* ((double)assignmentGroup.Weight/100));
 
                         Console.WriteLine("Add more assignments? (Y/N)");
                         assignResponse = Console.ReadLine() ?? "N";
@@ -139,9 +139,7 @@ namespace App.LearningManagement.Helpers
                         }
                     }
                 }
-
                 selectedCourse.Assignments.AddRange(assignments);
-
                 courseService.Add(selectedCourse);
             }
             else
@@ -189,20 +187,32 @@ namespace App.LearningManagement.Helpers
             }
         }
 
-        public void SearchOrListCourses(string? query = null)
+        public void SearchCourses(string? query = null)
         {
+            var courseList = new List<Course>();
             if (query == null)
             {
-                courseService.Courses.ForEach(Console.WriteLine);
+                courseList = courseService.Courses;
             }
             else
             {
-                courseService.Search(query).ToList().ForEach(Console.WriteLine);
-                var selectedCourse = GetCourse();
-                Console.WriteLine(selectedCourse.DetailDisplay);
-                
-            }            
+                courseList = courseService.Search(query).ToList();
+            }
+            courseList.ForEach(Console.WriteLine);
+            Console.WriteLine("Which Course would you like to see the details of?");
+            var selectedCourse = Console.ReadLine();
+            if (courseList.Any(c => c.Code.Equals(selectedCourse, StringComparison.InvariantCultureIgnoreCase))) 
+            {
+                var displayCourse = courseList.First(c => c.Code.Equals(selectedCourse, StringComparison.InvariantCultureIgnoreCase));
+                Console.WriteLine(displayCourse.DetailDisplay);
+            }
         }
+
+
+
+
+
+
 
         public void AddOrUpdateModule(Course? selectedCourse = null, Module? selectedModule = null)
         {
