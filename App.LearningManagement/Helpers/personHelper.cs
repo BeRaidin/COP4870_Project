@@ -231,13 +231,13 @@ namespace App.LearningManagement.Helpers
                 {
                     if (selectedStudent.Grades.Any(n => n.Key.Name.Equals(assignment.Name, StringComparison.InvariantCultureIgnoreCase)))
                     {
-                        double rawPoints = (double)selectedStudent.Grades
+                        double rawScore = (double)selectedStudent.Grades
                             .First(n => n.Key.Name.Equals(assignment.Name, StringComparison.InvariantCultureIgnoreCase)).Value;
-                        points += rawPoints* ((double)assignment.AssignmentGroup.Weight);
+                        points += (rawScore* ((double)assignment.TotalAvailablePoints)* assignment.AssignmentGroup.Weight/100);
                     }
                 }
                 
-                var finalGrade = (double)points / course.MaxGrade;
+                var finalGrade = ((double)points / course.MaxGrade);
                 selectedStudent.FinalGrades.Add(course, finalGrade);
                 Console.WriteLine($"Final grade is {finalGrade}");
             }
