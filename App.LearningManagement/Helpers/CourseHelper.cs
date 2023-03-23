@@ -11,7 +11,7 @@ namespace App.LearningManagement.Helpers
         public CourseHelper()
         {
             personService = PersonService.Current;
-            courseService= CourseService.Current;
+            courseService = CourseService.Current;
         }
 
         public Course GetCourse()
@@ -46,14 +46,19 @@ namespace App.LearningManagement.Helpers
 
         public void AddCourse()
         {
-                var course = new Course();
-                course.ChangeCode(courseService.Courses);
-                course.ChangeName();
-                course.ChangeHours();
-                course.ChangeDescription();
-                AddStudent(course);
+            var course = new Course();
+            course.ChangeCode(courseService.Courses);
+            course.ChangeName();
+            course.ChangeHours();
+            course.ChangeDescription();
+            AddStudents(course);
+            Console.WriteLine("Would you like to add assignments? (Y/N)");
+            var selection = Console.ReadLine() ?? string.Empty;
+            if (selection.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+            {
                 AddAssignments(course);
-                courseService.Add(course);
+            }
+            courseService.Add(course);
         }
 
         public void UpdateCourse(Course course)
@@ -105,9 +110,12 @@ namespace App.LearningManagement.Helpers
             }
         }
 
-        public void SearchCourses(string? query = null)
+        public void SearchCourses()
         {
             var courseList = new List<Course>();
+            Console.WriteLine("Enter a query:");
+            var query = Console.ReadLine() ?? string.Empty;
+
             if (query == null)
             {
                 courseList = courseService.Courses;
@@ -119,13 +127,13 @@ namespace App.LearningManagement.Helpers
             courseList.ForEach(Console.WriteLine);
             Console.WriteLine("Which Course would you like to see the details of?");
             var selectedCourse = Console.ReadLine();
-            if (courseList.Any(c => c.Code.Equals(selectedCourse, StringComparison.InvariantCultureIgnoreCase))) 
+            if (courseList.Any(c => c.Code.Equals(selectedCourse, StringComparison.InvariantCultureIgnoreCase)))
             {
                 var displayCourse = courseList.First(c => c.Code.Equals(selectedCourse, StringComparison.InvariantCultureIgnoreCase));
                 Console.WriteLine(displayCourse.DetailDisplay);
             }
         }
-        
+
         public void AddOrUpdateModule(Course? selectedCourse = null, Module? selectedModule = null)
         {
             if (selectedCourse == null)
@@ -139,12 +147,12 @@ namespace App.LearningManagement.Helpers
                 selectedModule = new Module();
             }
             var choice = "Y";
-            if(!isNew)
+            if (!isNew)
             {
                 Console.WriteLine("Would you like to update the name? (Y/N)");
                 choice = Console.ReadLine() ?? string.Empty;
             }
-            if(choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+            if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
             {
                 selectedModule.ChangeName();
             }
@@ -167,11 +175,11 @@ namespace App.LearningManagement.Helpers
                 Console.WriteLine("(P)age");
                 var contentChoice = Console.ReadLine() ?? string.Empty;
                 var content = new ContentItem();
-                if(contentChoice.Equals("A", StringComparison.InvariantCultureIgnoreCase))
+                if (contentChoice.Equals("A", StringComparison.InvariantCultureIgnoreCase))
                 {
                     content = new AssignmentItem();
                 }
-                else if(contentChoice.Equals("F", StringComparison.InvariantCultureIgnoreCase))
+                else if (contentChoice.Equals("F", StringComparison.InvariantCultureIgnoreCase))
                 {
                     content = new FileItem();
                 }
@@ -190,7 +198,7 @@ namespace App.LearningManagement.Helpers
                     Console.WriteLine("What assingment would you like to add?");
                     selectedCourse.Assignments.ForEach(Console.WriteLine);
                     var assignmentName = Console.ReadLine() ?? string.Empty;
-                    while(!selectedCourse.Assignments.Any(n => n.Name.Equals(assignmentName, StringComparison.InvariantCultureIgnoreCase)))
+                    while (!selectedCourse.Assignments.Any(n => n.Name.Equals(assignmentName, StringComparison.InvariantCultureIgnoreCase)))
                     {
                         Console.WriteLine("Please enter a valid assignment");
                         assignmentName = Console.ReadLine() ?? string.Empty;
@@ -210,7 +218,7 @@ namespace App.LearningManagement.Helpers
                 Console.WriteLine("Would you like to add more content? (Y/N)");
                 choice = Console.ReadLine() ?? string.Empty;
             }
-            if (selectedCourse != null && isNew) 
+            if (selectedCourse != null && isNew)
             {
                 selectedCourse.Modules.Add(selectedModule);
             }
@@ -223,7 +231,7 @@ namespace App.LearningManagement.Helpers
             {
                 var announcement = new Announcement();
                 var delete = "N";
-                if(update == false)
+                if (update == false)
                 {
                     announcement.Id = course.Announcements.Count + 1;
                 }
@@ -232,7 +240,7 @@ namespace App.LearningManagement.Helpers
                     Console.WriteLine("Which announcement do you want to update?");
                     course.Announcements.ForEach(Console.WriteLine);
                     var selection = Console.ReadLine() ?? string.Empty;
-                    while(!int.TryParse(selection, out int test) || !course.Announcements.Any(i => i.Id == int.Parse(selection)))
+                    while (!int.TryParse(selection, out int test) || !course.Announcements.Any(i => i.Id == int.Parse(selection)))
                     {
                         Console.WriteLine("Please enter a vaild integer:");
                         selection = Console.ReadLine() ?? string.Empty;
@@ -283,7 +291,7 @@ namespace App.LearningManagement.Helpers
                 Console.WriteLine("Which module would you like to delete?");
                 course.Modules.ForEach(Console.WriteLine);
                 var module = Console.ReadLine();
-                while(!course.Modules.Any(m => m.Name == module))
+                while (!course.Modules.Any(m => m.Name == module))
                 {
                     Console.WriteLine("Please choose a valid module:");
                     module = Console.ReadLine();
@@ -293,7 +301,7 @@ namespace App.LearningManagement.Helpers
             }
         }
 
-        public void AddStudent(Course course)
+        public void AddStudents(Course course)
         {
             if (personService.People.Count > 0)
             {
@@ -326,9 +334,9 @@ namespace App.LearningManagement.Helpers
                             Console.WriteLine("Enter a valid student id");
                         }
                     }
-                    else 
-                    { 
-                        Console.WriteLine("Enter a valid student id"); 
+                    else
+                    {
+                        Console.WriteLine("Enter a valid student id");
                     }
                 }
             }
@@ -363,61 +371,57 @@ namespace App.LearningManagement.Helpers
                     }
                 }
             }
-            else 
-            { 
-                Console.WriteLine("There are no students enrolled in this course"); 
+            else
+            {
+                Console.WriteLine("There are no students enrolled in this course");
             }
         }
 
         public void AddAssignments(Course course)
         {
-            Console.WriteLine("Would you like to add assignments? (Y/N)");
-            var selection = Console.ReadLine() ?? string.Empty;
-            var assignments = new List<Assignment>();
-            if (selection.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
-            {
-                var cont = true;
-                while (cont)
-                {
-                    var assignment = new Assignment();
-                    assignment.UpdateAssignment();
 
-                    var assignmentGroup = new AssignmentGroup();
-                    if (!course.AssignmentGroups.Any())
+            var assignments = new List<Assignment>();
+            var cont = true;
+            while (cont)
+            {
+                var assignment = new Assignment();
+                assignment.UpdateAssignment();
+
+                var assignmentGroup = new AssignmentGroup();
+                if (!course.AssignmentGroups.Any())
+                {
+                    assignmentGroup = assignmentGroup.MakeAssignmentGroup();
+                    course.AssignmentGroups.Add(assignmentGroup);
+                }
+                else
+                {
+                    Console.WriteLine("Choose an existing assignment group, or make a new one:");
+                    course.AssignmentGroups.ForEach(Console.WriteLine);
+                    var groupName = Console.ReadLine() ?? string.Empty;
+                    while (groupName == null)
                     {
-                        assignmentGroup = assignmentGroup.MakeAssignmentGroup();
-                        course.AssignmentGroups.Add(assignmentGroup);
+                        Console.WriteLine("Please enter a name:");
+                        groupName = Console.ReadLine() ?? string.Empty;
+                    }
+                    if (course.AssignmentGroups.Any(g => g.Name.Equals(groupName, StringComparison.InvariantCultureIgnoreCase)))
+                    {
+                        assignmentGroup = course.AssignmentGroups.First(g => g.Name.Equals(groupName, StringComparison.InvariantCultureIgnoreCase));
                     }
                     else
                     {
-                        Console.WriteLine("Choose an existing assignment group, or make a new one:");
-                        course.AssignmentGroups.ForEach(Console.WriteLine);
-                        var groupName = Console.ReadLine() ?? string.Empty;
-                        while (groupName == null)
-                        {
-                            Console.WriteLine("Please enter a name:");
-                            groupName = Console.ReadLine() ?? string.Empty;
-                        }
-                        if (course.AssignmentGroups.Any(g => g.Name.Equals(groupName, StringComparison.InvariantCultureIgnoreCase)))
-                        {
-                            assignmentGroup = course.AssignmentGroups.First(g => g.Name.Equals(groupName, StringComparison.InvariantCultureIgnoreCase));
-                        }
-                        else
-                        {
-                            assignmentGroup = assignmentGroup.MakeAssignmentGroup(groupName);
-                            course.AssignmentGroups.Add(assignmentGroup);
-                        }
+                        assignmentGroup = assignmentGroup.MakeAssignmentGroup(groupName);
+                        course.AssignmentGroups.Add(assignmentGroup);
                     }
-                    assignment.AddAssignmentGroup(assignmentGroup);
-                    assignments.Add(assignment);
-                    course.AddMaxGrade((double)assignment.TotalAvailablePoints * ((double)assignmentGroup.Weight / 100));
+                }
+                assignment.AddAssignmentGroup(assignmentGroup);
+                assignments.Add(assignment);
+                course.AddMaxGrade((double)assignment.TotalAvailablePoints * ((double)assignmentGroup.Weight / 100));
 
-                    Console.WriteLine("Add more assignments? (Y/N)");
-                    selection = Console.ReadLine() ?? "N";
-                    if (selection.Equals("N", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        cont = false;
-                    }
+                Console.WriteLine("Add more assignments? (Y/N)");
+                var selection = Console.ReadLine() ?? "N";
+                if (selection.Equals("N", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    cont = false;
                 }
             }
             course.Assignments.AddRange(assignments);
