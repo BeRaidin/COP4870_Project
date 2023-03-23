@@ -1,6 +1,5 @@
 ﻿using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
-using System.Security.Cryptography;
 
 namespace App.LearningManagement.Helpers
 {
@@ -19,13 +18,13 @@ namespace App.LearningManagement.Helpers
         {
             Console.WriteLine("Enter the id of a person:");
             ListPeople();
-            var selectionStr = Console.ReadLine();
-            while (!int.TryParse(selectionStr, out int selectionInt) || !personService.People.Any(i => i.Id == int.Parse(selectionStr)))
+            var selection = Console.ReadLine();
+            while (!int.TryParse(selection, out int selectionInt) || !personService.People.Any(i => i.Id == int.Parse(selection)))
             {
                 Console.WriteLine("Please enter a vaild id:");
-                selectionStr = Console.ReadLine();
+                selection = Console.ReadLine();
             }
-            var selectedPerson = personService.People.First(s => s.Id == int.Parse(selectionStr));
+            var selectedPerson = personService.People.First(s => s.Id == int.Parse(selection));
             return selectedPerson;
         }
 
@@ -34,33 +33,7 @@ namespace App.LearningManagement.Helpers
             if (personService.People.Count > 5)
             {
                 var navigator = new ListNavigator<Person>(personService.People);
-                Console.WriteLine("Use \"<\" and \">\" to navigate. ('Q' to Quit)");
-                navigator.PrintPage(navigator.GoToFirstPage());
-                var cont = true;
-                while (cont)
-                {
-                    var choice = Console.ReadLine() ?? string.Empty;
-                    if (choice.Equals("<", StringComparison.InvariantCultureIgnoreCase) && navigator.HasPreviousPage)
-                    {
-                        navigator.PrintPage(navigator.GoBackward());
-                    }
-                    else if(choice.Equals("<", StringComparison.InvariantCultureIgnoreCase) && !navigator.HasPreviousPage)
-                    {
-                        Console.WriteLine("Cannot move further that direction.");
-                    }
-                    else if (choice.Equals(">", StringComparison.InvariantCultureIgnoreCase) && navigator.HasNextPage)
-                    {
-                        navigator.PrintPage(navigator.GoForward());
-                    }
-                    else if(choice.Equals(">", StringComparison.InvariantCultureIgnoreCase) && !navigator.HasNextPage)
-                    {
-                        Console.WriteLine("Cannot move further that direction.");
-                    }
-                    else if(choice.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        cont = false;
-                    }
-                }
+                navigator.ChangePage();
             }
             else
             {
@@ -68,62 +41,55 @@ namespace App.LearningManagement.Helpers
             }
         }
 
-        public void AddOrUpdateStudent(Person? selectedPerson = null)
+        public void AddPerson()
         {
-            var isNew = false;
-            var choice = string.Empty;
-            if (selectedPerson == null)
+            Person person;
+            Console.WriteLine("What type of person do you want to add?");
+            Console.WriteLine("\t(S)tudent");
+            Console.WriteLine("\t(T)eaching Assistant");
+            Console.WriteLine("\t(I)nstructor");
+            var choice = Console.ReadLine() ?? string.Empty;
+            if (string.IsNullOrEmpty(choice))
             {
-                isNew = true;
-                Console.WriteLine("What type of person do you want to add?");
-                Console.WriteLine("\t(S)tudent");
-                Console.WriteLine("\t(T)eaching Assistant");
-                Console.WriteLine("\t(I)nstructor");
-                choice = Console.ReadLine() ?? string.Empty;
-                if (string.IsNullOrEmpty(choice))
-                    return;
-                if (choice.Equals("S", StringComparison.InvariantCultureIgnoreCase))
-                    selectedPerson = new Student();
-                else if (choice.Equals("T", StringComparison.InvariantCultureIgnoreCase))
-                    selectedPerson = new TeachingAssistant();
-                else if (choice.Equals("I", StringComparison.InvariantCultureIgnoreCase))
-                    selectedPerson = new Instructor();
-                else
-                    return;
+                return;
             }
+            if (choice.Equals("S", StringComparison.InvariantCultureIgnoreCase))
+            {
+                person = new Student();
+            }
+            else if (choice.Equals("T", StringComparison.InvariantCultureIgnoreCase))
+            {
+                person = new TeachingAssistant();
+            }
+            else if (choice.Equals("I", StringComparison.InvariantCultureIgnoreCase))
+            {
+                person = new Instructor();
+            }
+            else return;
+            
+            person.UpdateId(personService.Size() + 1, personService.People);
+            personService.Add(person);
+        }
 
-            if (isNew)
-            {
-                selectedPerson.ChangeId(personService.Size() + 1, personService.People);
-            }
-
-            choice = "Y";
-            if (!isNew)
-            {
-                Console.WriteLine("Would you like to change the name? (Y/N)");
-                choice = Console.ReadLine() ?? string.Empty;
-            }
+        public void UpdatePerson(Person person)
+        {
+            Console.WriteLine("Would you like to change the name? (Y/N)");
+            var choice = Console.ReadLine() ?? string.Empty;
             if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
             {
-                selectedPerson.ChangeName();
+                person.UpdateName();
             }
 
-            if (!isNew && selectedPerson is Student)
+            var student = person as Student;
+            if (student != null)
             {
                 Console.WriteLine("Would you like to change the classification? (Y/N)");
                 choice = Console.ReadLine() ?? string.Empty;
-            }
-            if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase) && selectedPerson is Student)
-            {
-                var student = selectedPerson as Student;
-                if (student != null)
+                if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    student.ChangeClassification();
+                        student.UpdateClassification();
                 }
             }
-
-            if (isNew)
-                personService.Add(selectedPerson);
         }
 
         public void SearchPerson(string? query = null)
@@ -280,5 +246,13 @@ namespace App.LearningManagement.Helpers
                 selectedStudent.GradePointAverage = GPA;
             }            
         }
+
+
+
+
+
+
+
+
     }
 }

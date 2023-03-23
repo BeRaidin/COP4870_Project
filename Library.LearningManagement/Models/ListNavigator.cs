@@ -16,7 +16,6 @@ namespace Library.LearningManagement.Models
                 var val = state.Count / pageSize;
                 if (state.Count % pageSize > 0)
                 {
-                    //if there is a partial page at the end, that is the actual last page.
                     val++;
                 }
                 return val;
@@ -84,7 +83,7 @@ namespace Library.LearningManagement.Models
             return GetWindow();
         }
         private Dictionary<int, T> GetWindow()
-        {//(currentPage*pageSize) + pageSize
+        {
             var window = new Dictionary<int, T>();
             for (int i = (currentPage - 1) * pageSize; i < (currentPage - 1) *pageSize + pageSize && i < state.Count; i++)
             {
@@ -100,6 +99,45 @@ namespace Library.LearningManagement.Models
                 Console.WriteLine(value.Value);
             }
         }
+
+        public void ChangePage()
+        {
+            var cont = true;
+
+            Console.WriteLine("Use \"<\" and \">\" to navigate. ('Q' to Quit)");
+            PrintPage(GoToFirstPage());
+            while (cont)
+            {
+                var choice = Console.ReadLine() ?? string.Empty;
+                if (choice.Equals("<", StringComparison.InvariantCultureIgnoreCase) && HasPreviousPage)
+                {
+                    PrintPage(GoBackward());
+                }
+                else if (choice.Equals("<", StringComparison.InvariantCultureIgnoreCase) && !HasPreviousPage)
+                {
+                    Console.WriteLine("Cannot move further that direction.");
+                }
+                else if (choice.Equals(">", StringComparison.InvariantCultureIgnoreCase) && HasNextPage)
+                {
+                    PrintPage(GoForward());
+                }
+                else if (choice.Equals(">", StringComparison.InvariantCultureIgnoreCase) && !HasNextPage)
+                {
+                    Console.WriteLine("Cannot move further that direction.");
+                }
+                else if (choice.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    cont = false;
+                }
+                else
+                {
+                    PrintPage(GetCurrentPage());
+                }
+            }
+        }
+
+
+
     }
     public class PageFaultException : Exception
     {

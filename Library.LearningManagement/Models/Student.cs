@@ -32,7 +32,7 @@ namespace Library.LearningManagement.Models
         }
 
 
-        public void ChangeClassification()
+        public void UpdateClassification()
         {
             Console.WriteLine("What is the classification of the student? (F)reshman s(O)phmore (J)unior (S)enior");
             var classification = Console.ReadLine() ?? string.Empty;
