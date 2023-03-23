@@ -51,7 +51,7 @@ namespace App.LearningManagement.Helpers
                 course.ChangeName();
                 course.ChangeHours();
                 course.ChangeDescription();
-                AddStuToCourse(course);
+                AddStudent(course);
                 AddAssignments(course);
                 courseService.Add(course);
         }
@@ -218,33 +218,33 @@ namespace App.LearningManagement.Helpers
 
         public void AddOrUpdateAnnouncement(bool? update = false)
         {
-            var selectedCourse = GetCourse();
-            if (selectedCourse != null)
+            var course = GetCourse();
+            if (course != null)
             {
                 var announcement = new Announcement();
                 var delete = "N";
                 if(update == false)
                 {
-                    announcement.Id = selectedCourse.Announcements.Count + 1;
+                    announcement.Id = course.Announcements.Count + 1;
                 }
                 else
                 {
                     Console.WriteLine("Which announcement do you want to update?");
-                    selectedCourse.Announcements.ForEach(Console.WriteLine);
+                    course.Announcements.ForEach(Console.WriteLine);
                     var selection = Console.ReadLine() ?? string.Empty;
-                    while(!int.TryParse(selection, out int test) || !selectedCourse.Announcements.Any(i => i.Id == int.Parse(selection)))
+                    while(!int.TryParse(selection, out int test) || !course.Announcements.Any(i => i.Id == int.Parse(selection)))
                     {
                         Console.WriteLine("Please enter a vaild integer:");
                         selection = Console.ReadLine() ?? string.Empty;
                     }
-                    announcement = selectedCourse.Announcements.First(i => i.Id == int.Parse(selection));
+                    announcement = course.Announcements.First(i => i.Id == int.Parse(selection));
 
                     Console.WriteLine("Would you like to delte this announcement? (Y/N)");
                     delete = Console.ReadLine() ?? string.Empty;
                 }
                 if (update == true && delete.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    selectedCourse.Announcements.Remove(announcement);
+                    course.Announcements.Remove(announcement);
                 }
                 else
                 {
@@ -269,7 +269,7 @@ namespace App.LearningManagement.Helpers
                     }
                     if (update == false)
                     {
-                        selectedCourse.Announcements.Add(announcement);
+                        course.Announcements.Add(announcement);
                     }
                 }
             }
@@ -277,27 +277,23 @@ namespace App.LearningManagement.Helpers
 
         public void DeleteModule()
         {
-            var selectedCourse = GetCourse();
-            if (selectedCourse != null)
+            var course = GetCourse();
+            if (course != null)
             {
                 Console.WriteLine("Which module would you like to delete?");
-                selectedCourse.Modules.ForEach(Console.WriteLine);
+                course.Modules.ForEach(Console.WriteLine);
                 var module = Console.ReadLine();
-                while(!selectedCourse.Modules.Any(m => m.Name == module))
+                while(!course.Modules.Any(m => m.Name == module))
                 {
                     Console.WriteLine("Please choose a valid module:");
                     module = Console.ReadLine();
                 }
-                var removeModule = selectedCourse.Modules.First(m => m.Name == module);
-                selectedCourse.Modules.Remove(removeModule);
+                var removeModule = course.Modules.First(m => m.Name == module);
+                course.Modules.Remove(removeModule);
             }
         }
 
-
-
-
-
-        public void AddStuToCourse(Course course)
+        public void AddStudent(Course course)
         {
             if (personService.People.Count > 0)
             {
@@ -309,11 +305,7 @@ namespace App.LearningManagement.Helpers
                     if (personService.People.Any(s => !course.Roster.Any(s2 => s2.Id == s.Id)))
                     {
                         personService.People.Where(s => !course.Roster.Any(s2 => s2.Id == s.Id)).ToList().ForEach(Console.WriteLine);
-                        selection = Console.ReadLine() ?? string.Empty;
-                        if (selection == string.Empty)
-                        {
-                            selection = "Q";
-                        }
+                        selection = Console.ReadLine() ?? "Q";
                     }
 
                     if (selection.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
@@ -329,10 +321,51 @@ namespace App.LearningManagement.Helpers
                             course.Roster.Add(selectedStudent);
                             selectedStudent.AddCourse(course);
                         }
-                        else Console.WriteLine("Enter a valid student id");
+                        else
+                        {
+                            Console.WriteLine("Enter a valid student id");
+                        }
                     }
-                    else Console.WriteLine("Enter a valid student id");
+                    else 
+                    { 
+                        Console.WriteLine("Enter a valid student id"); 
+                    }
                 }
+            }
+        }
+
+        public void RemoveStudent(Course course)
+        {
+            if (course.Roster.Count > 0)
+            {
+                Console.WriteLine("Which students should be removed from the course?");
+                Console.WriteLine($"{string.Join("\n", course.Roster.Select(s => s.ToString()).ToArray())}");
+                var cont = true;
+                while (cont)
+                {
+                    var selection = Console.ReadLine() ?? string.Empty;
+                    if (int.TryParse(selection, out var id))
+                    {
+                        var selectedStudent = personService.People.FirstOrDefault(s => s.Id == id);
+                        if (selectedStudent != null)
+                        {
+                            course.Roster.Remove(selectedStudent);
+                            cont = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Enter a valid student id");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Enter a valid student id");
+                    }
+                }
+            }
+            else 
+            { 
+                Console.WriteLine("There are no students enrolled in this course"); 
             }
         }
 
@@ -389,10 +422,5 @@ namespace App.LearningManagement.Helpers
             }
             course.Assignments.AddRange(assignments);
         }
-
-
-
-
-
     }
 }

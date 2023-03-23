@@ -91,15 +91,17 @@ namespace MyApp
         static void RunCourses(CourseHelper courseHelper)
         {
             Console.WriteLine("Choose an option:");
-            Console.WriteLine("1. Add a new course");
-            Console.WriteLine("2. List all courses");
-            Console.WriteLine("3. Search for courses");
-            Console.WriteLine("4. Update a course");
-            Console.WriteLine("5. Add a module to a course");
-            Console.WriteLine("6. Edit a module");
-            Console.WriteLine("7. Add an announcement to a course");
-            Console.WriteLine("8. Edit an announcement");
-            Console.WriteLine("9. Delete a module");
+            Console.WriteLine("1.  Add a new course");
+            Console.WriteLine("2.  List all courses");
+            Console.WriteLine("3.  Search for courses");
+            Console.WriteLine("4.  Update a course");
+            Console.WriteLine("5.  Add students to a course");
+            Console.WriteLine("6.  Remove a student from a course");
+            Console.WriteLine("7.  Add a module to a course");
+            Console.WriteLine("8.  Edit a module");
+            Console.WriteLine("9.  Add an announcement to a course");
+            Console.WriteLine("10.  Edit an announcement");
+            Console.WriteLine("11. Delete a module");
             var input = Console.ReadLine();
 
             if (int.TryParse(input, out int result))
@@ -121,19 +123,25 @@ namespace MyApp
                         courseHelper.UpdateCourse(courseHelper.GetCourse());
                         break;
                     case 5:
-                        courseHelper.AddOrUpdateModule();
+                        courseHelper.AddStudent(courseHelper.GetCourse());
                         break;
                     case 6:
-                        courseHelper.UpdateCourseModule();
+                        courseHelper.RemoveStudent(courseHelper.GetCourse());
                         break;
                     case 7:
-                        courseHelper.AddOrUpdateAnnouncement();
+                        courseHelper.AddOrUpdateModule();
                         break;
                     case 8:
+                        courseHelper.UpdateCourseModule();
+                        break;
+                    case 9:
+                        courseHelper.AddOrUpdateAnnouncement();
+                        break;
+                    case 10:
                         bool update = true;
                         courseHelper.AddOrUpdateAnnouncement(update);
                         break;
-                    case 9:
+                    case 11:
                         courseHelper.DeleteModule();
                         break;
                 }
