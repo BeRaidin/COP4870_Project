@@ -56,7 +56,7 @@ namespace MyApp
                 switch (result)
                 {
                     case 1:
-                        personHelper.AddOrUpdateStudent();
+                        personHelper.AddPerson();
                         break;
                     case 2:
                         personHelper.ListPeople();
@@ -67,7 +67,7 @@ namespace MyApp
                         personHelper.SearchPerson(query);
                         break;
                     case 4:
-                        personHelper.AddOrUpdateStudent(personHelper.GetPerson());
+                        personHelper.UpdatePerson(personHelper.GetPerson());
                         break;
                     case 5:
                         personHelper.AddGrades();
@@ -107,7 +107,7 @@ namespace MyApp
                 switch (result)
                 {
                     case 1:
-                        courseHelper.AddOrUpdateCourse();
+                        courseHelper.AddCourse();
                         break;
                     case 2:
                         courseHelper.ListCourses();
@@ -118,7 +118,7 @@ namespace MyApp
                         courseHelper.SearchCourses(query);
                         break;
                     case 4:
-                        courseHelper.AddOrUpdateCourse(courseHelper.GetCourse());
+                        courseHelper.UpdateCourse(courseHelper.GetCourse());
                         break;
                     case 5:
                         courseHelper.AddOrUpdateModule();

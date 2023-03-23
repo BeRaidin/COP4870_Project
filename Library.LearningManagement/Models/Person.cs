@@ -24,7 +24,7 @@ namespace Library.LearningManagement.Models
             return $"[{Id}] {Name}";
         }
 
-        public void ChangeId(int num, List<Person> people)
+        public void UpdateId(int num, List<Person> people)
         {
             while (people.Any(i => i.Id == num))
             {
@@ -33,7 +33,7 @@ namespace Library.LearningManagement.Models
             Id = num;
         }
 
-        public void ChangeName()
+        public void UpdateName()
         {
             Console.WriteLine("What is the name of the person?");
             Name = Console.ReadLine() ?? string.Empty;

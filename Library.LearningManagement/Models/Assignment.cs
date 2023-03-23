@@ -27,19 +27,19 @@ namespace Library.LearningManagement.Models
             return $"({DueDate}) {Name} - {AssignmentGroup.Name}";
         }
 
-        public void ChangeName()
+        public void UpdateName()
         {
             Console.WriteLine("What is the assignment name?");
             Name = Console.ReadLine() ?? string.Empty;
         }
 
-        public void ChangeDescription()
+        public void UpdateDescription()
         {
             Console.WriteLine("What is the assignment description?");
             Description = Console.ReadLine() ?? string.Empty;
         }
 
-        public void ChangeTotalPoints()
+        public void UpdateTotalPoints()
         {
             Console.WriteLine("How many points does the assignment have?");
             var totalPoints = Console.ReadLine() ?? string.Empty;
@@ -51,7 +51,7 @@ namespace Library.LearningManagement.Models
             TotalAvailablePoints = int.Parse(totalPoints);
         }
 
-        public void ChangeDueDate() 
+        public void UpdateDueDate() 
         {
             Console.WriteLine("What is the due date?");
             var totalPoints = Console.ReadLine() ?? string.Empty;
@@ -64,7 +64,15 @@ namespace Library.LearningManagement.Models
 
         public void AddAssignmentGroup(AssignmentGroup group)
         {
-            AssignmentGroup= group;
+            AssignmentGroup = group;
+        }
+
+        public void UpdateAssignment()
+        {
+            UpdateName();
+            UpdateDescription();
+            UpdateTotalPoints();
+            UpdateDueDate();
         }
     }
 }

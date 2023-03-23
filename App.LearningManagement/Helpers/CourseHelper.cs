@@ -1,7 +1,5 @@
 ﻿using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
-using System.Net.Mime;
-using System.Runtime.InteropServices;
 
 namespace App.LearningManagement.Helpers
 {
@@ -35,168 +33,61 @@ namespace App.LearningManagement.Helpers
 
         public void ListCourses()
         {
-            var navigator = new ListNavigator<Course>(courseService.Courses);
-            Console.WriteLine("Use \"<\" and \">\" to navigate. ('Q' to Quit)");
-            navigator.PrintPage(navigator.GoToFirstPage());
-            var cont = true;
-            while (cont)
+            if (personService.People.Count > 5)
             {
-                var choice = Console.ReadLine() ?? string.Empty;
-                if (choice.Equals("<", StringComparison.InvariantCultureIgnoreCase) && navigator.HasPreviousPage)
-                {
-                    navigator.PrintPage(navigator.GoBackward());
-                }
-                else if (choice.Equals("<", StringComparison.InvariantCultureIgnoreCase) && !navigator.HasPreviousPage)
-                {
-                    Console.WriteLine("Cannot move further that direction.");
-                }
-                else if (choice.Equals(">", StringComparison.InvariantCultureIgnoreCase) && navigator.HasNextPage)
-                {
-                    navigator.PrintPage(navigator.GoForward());
-                }
-                else if (choice.Equals(">", StringComparison.InvariantCultureIgnoreCase) && !navigator.HasNextPage)
-                {
-                    Console.WriteLine("Cannot move further that direction.");
-                }
-                else if (choice.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    cont = false;
-                }
-            }
-        }
-
-        public void AddOrUpdateCourse(Course? selectedCourse = null)
-        {
-            if (selectedCourse == null)
-            {
-                selectedCourse = new Course();
-                selectedCourse.ChangeCode(courseService.Courses);
-                selectedCourse.ChangeName();
-                selectedCourse.ChangeHours();
-                selectedCourse.ChangeDescription();
-
-
-                if (personService.People.Count > 0)
-                {
-                    Console.WriteLine("Which students should be enrolled in the course? ('Q' to quit)");
-                    var roster = new List<Person>();
-                    bool contAdding = true;
-                    while (contAdding)
-                    {
-                        personService.People.Where(s => !roster.Any(s2 => s2.Id == s.Id)).ToList().ForEach(Console.WriteLine);
-                        var selection = "Q";
-                        if (personService.People.Any(s => !roster.Any(s2 => s2.Id == s.Id)))
-                        {
-                            selection = Console.ReadLine() ?? string.Empty;
-                            if (selection == string.Empty)
-                            {
-                                selection = "Q";
-                            }
-                        }
-
-                        if (selection.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            contAdding = false;
-                        }
-                        else if(int.TryParse(selection, out var id))
-                        {
-                            var selectedId = int.Parse(selection);
-                            var selectedStudent = personService.People.FirstOrDefault(s => s.Id == selectedId);
-
-                            if (selectedStudent != null)
-                            {
-                                roster.Add(selectedStudent);
-                                selectedStudent.AddCourse(selectedCourse);
-                            }
-
-                        }
-                    }
-                    selectedCourse.Roster = roster;
-                }
-
-                Console.WriteLine("Would you like to add assignments? (Y/N)");
-                var assignResponse = Console.ReadLine() ?? string.Empty;
-                var assignments = new List<Assignment>();
-                if (assignResponse.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    var contAdding = true;
-                    while (contAdding)
-                    {
-                        var assignment = new Assignment();
-                        assignment.ChangeName();
-                        assignment.ChangeDescription();
-                        assignment.ChangeTotalPoints();
-                        assignment.ChangeDueDate();
-
-                        var assignmentGroup = new AssignmentGroup();
-                        if (!selectedCourse.AssignmentGroups.Any())
-                        {
-                            assignmentGroup = assignmentGroup.MakeAssignmentGroup();
-                            selectedCourse.AssignmentGroups.Add(assignmentGroup);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Choose an existing assignment group, or make a new one:");
-                            selectedCourse.AssignmentGroups.ForEach(Console.WriteLine);
-                            var groupName = Console.ReadLine() ?? string.Empty;
-                            while(groupName == null)
-                            {
-                                Console.WriteLine("Please enter a name:");
-                                groupName = Console.ReadLine() ?? string.Empty;
-                            }
-                            if (selectedCourse.AssignmentGroups.Any(g => g.Name.Equals(groupName, StringComparison.InvariantCultureIgnoreCase)))
-                            {
-                                assignmentGroup = selectedCourse.AssignmentGroups.First(g => g.Name.Equals(groupName, StringComparison.InvariantCultureIgnoreCase));
-                            }
-                            else
-                            {
-                                assignmentGroup = assignmentGroup.MakeAssignmentGroup(groupName);
-                                selectedCourse.AssignmentGroups.Add(assignmentGroup);
-                            }
-                        }
-                        assignment.AddAssignmentGroup(assignmentGroup);
-                        assignments.Add(assignment);
-                        selectedCourse.AddMaxGrade((double)assignment.TotalAvailablePoints* ((double)assignmentGroup.Weight/100));
-
-                        Console.WriteLine("Add more assignments? (Y/N)");
-                        assignResponse = Console.ReadLine() ?? "N";
-                        if (assignResponse.Equals("N", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            contAdding = false;
-                        }
-                    }
-                }
-                selectedCourse.Assignments.AddRange(assignments);
-                courseService.Add(selectedCourse);
+                var navigator = new ListNavigator<Course>(courseService.Courses);
+                navigator.ChangePage();
             }
             else
             {
-                Console.WriteLine("Would you like to change the Code? (Y/N)");
-                var choice = Console.ReadLine() ?? string.Empty;
-                if(choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    selectedCourse.ChangeCode(courseService.Courses);
-                }
-                Console.WriteLine("Would you like to change the Name? (Y/N)");
-                choice = Console.ReadLine() ?? string.Empty;
-                if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    selectedCourse.ChangeName();
-                }
-                Console.WriteLine("Would you like to change the amount of credit hours? (Y/N)");
-                choice = Console.ReadLine() ?? string.Empty;
-                if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    selectedCourse.ChangeHours();
-                }
-                Console.WriteLine("Would you like to change the Description? (Y/N)");
-                choice = Console.ReadLine() ?? string.Empty;
-                if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    selectedCourse.ChangeDescription();
-                }
-             }
+                courseService.Courses.ForEach(Console.WriteLine);
+            }
         }
+
+        public void AddCourse()
+        {
+                var course = new Course();
+                course.ChangeCode(courseService.Courses);
+                course.ChangeName();
+                course.ChangeHours();
+                course.ChangeDescription();
+                AddStuToCourse(course);
+                AddAssignments(course);
+                courseService.Add(course);
+        }
+
+        public void UpdateCourse(Course course)
+        {
+            Console.WriteLine("Would you like to change the Code? (Y/N)");
+            var choice = Console.ReadLine() ?? string.Empty;
+            if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+            {
+                course.ChangeCode(courseService.Courses);
+            }
+            Console.WriteLine("Would you like to change the Name? (Y/N)");
+            choice = Console.ReadLine() ?? string.Empty;
+            if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+            {
+                course.ChangeName();
+            }
+            Console.WriteLine("Would you like to change the amount of credit hours? (Y/N)");
+            choice = Console.ReadLine() ?? string.Empty;
+            if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+            {
+                course.ChangeHours();
+            }
+            Console.WriteLine("Would you like to change the Description? (Y/N)");
+            choice = Console.ReadLine() ?? string.Empty;
+            if (choice.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+            {
+                course.ChangeDescription();
+            }
+        }
+
+
+
+
+
 
         public void UpdateCourseModule()
         {
@@ -234,13 +125,7 @@ namespace App.LearningManagement.Helpers
                 Console.WriteLine(displayCourse.DetailDisplay);
             }
         }
-
-
-
-
-
-
-
+        
         public void AddOrUpdateModule(Course? selectedCourse = null, Module? selectedModule = null)
         {
             if (selectedCourse == null)
@@ -407,5 +292,107 @@ namespace App.LearningManagement.Helpers
                 selectedCourse.Modules.Remove(removeModule);
             }
         }
+
+
+
+
+
+        public void AddStuToCourse(Course course)
+        {
+            if (personService.People.Count > 0)
+            {
+                Console.WriteLine("Which students should be enrolled in the course? ('Q' to quit)");
+                var cont = true;
+                while (cont)
+                {
+                    var selection = "Q";
+                    if (personService.People.Any(s => !course.Roster.Any(s2 => s2.Id == s.Id)))
+                    {
+                        personService.People.Where(s => !course.Roster.Any(s2 => s2.Id == s.Id)).ToList().ForEach(Console.WriteLine);
+                        selection = Console.ReadLine() ?? string.Empty;
+                        if (selection == string.Empty)
+                        {
+                            selection = "Q";
+                        }
+                    }
+
+                    if (selection.Equals("Q", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        cont = false;
+                    }
+                    else if (int.TryParse(selection, out var id))
+                    {
+                        var selectedStudent = personService.People.FirstOrDefault(s => s.Id == id);
+
+                        if (selectedStudent != null)
+                        {
+                            course.Roster.Add(selectedStudent);
+                            selectedStudent.AddCourse(course);
+                        }
+                        else Console.WriteLine("Enter a valid student id");
+                    }
+                    else Console.WriteLine("Enter a valid student id");
+                }
+            }
+        }
+
+        public void AddAssignments(Course course)
+        {
+            Console.WriteLine("Would you like to add assignments? (Y/N)");
+            var selection = Console.ReadLine() ?? string.Empty;
+            var assignments = new List<Assignment>();
+            if (selection.Equals("Y", StringComparison.InvariantCultureIgnoreCase))
+            {
+                var cont = true;
+                while (cont)
+                {
+                    var assignment = new Assignment();
+                    assignment.UpdateAssignment();
+
+                    var assignmentGroup = new AssignmentGroup();
+                    if (!course.AssignmentGroups.Any())
+                    {
+                        assignmentGroup = assignmentGroup.MakeAssignmentGroup();
+                        course.AssignmentGroups.Add(assignmentGroup);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Choose an existing assignment group, or make a new one:");
+                        course.AssignmentGroups.ForEach(Console.WriteLine);
+                        var groupName = Console.ReadLine() ?? string.Empty;
+                        while (groupName == null)
+                        {
+                            Console.WriteLine("Please enter a name:");
+                            groupName = Console.ReadLine() ?? string.Empty;
+                        }
+                        if (course.AssignmentGroups.Any(g => g.Name.Equals(groupName, StringComparison.InvariantCultureIgnoreCase)))
+                        {
+                            assignmentGroup = course.AssignmentGroups.First(g => g.Name.Equals(groupName, StringComparison.InvariantCultureIgnoreCase));
+                        }
+                        else
+                        {
+                            assignmentGroup = assignmentGroup.MakeAssignmentGroup(groupName);
+                            course.AssignmentGroups.Add(assignmentGroup);
+                        }
+                    }
+                    assignment.AddAssignmentGroup(assignmentGroup);
+                    assignments.Add(assignment);
+                    course.AddMaxGrade((double)assignment.TotalAvailablePoints * ((double)assignmentGroup.Weight / 100));
+
+                    Console.WriteLine("Add more assignments? (Y/N)");
+                    selection = Console.ReadLine() ?? "N";
+                    if (selection.Equals("N", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        cont = false;
+                    }
+                }
+            }
+            course.Assignments.AddRange(assignments);
+        }
+
+
+
+
+
     }
 }
