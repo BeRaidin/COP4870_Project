@@ -65,8 +65,17 @@ namespace App.LearningManagement.Helpers
             {
                 person = new Instructor();
             }
-            else return;
-            
+            else
+            {
+                return;
+            }
+            person.UpdateName();
+            var student = person as Student;
+            if (student != null)
+            {
+                student.UpdateClassification();
+            }
+
             person.UpdateId(personService.Size() + 1, personService.People);
             personService.Add(person);
         }
