@@ -11,8 +11,8 @@
     <Grid>
         <StackPanel>
             <Button x:ConnectionId='2' Content="Back"                     />
-            <Button x:ConnectionId='3' Content="Navigate to People"                     />
-            <Button x:ConnectionId='4' Content="Navigate to Courses"                     />
+            <Button x:ConnectionId='3' Margin="10,10,10,10" Content="Navigate to People" FontSize="48"                      HorizontalAlignment="Stretch"/>
+            <Button x:ConnectionId='4' Margin="10,10,10,10" Content="Navigate to Courses" FontSize="48"                      HorizontalAlignment="Stretch"/>
 
         </StackPanel>
     </Grid>

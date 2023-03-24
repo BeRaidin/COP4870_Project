@@ -11,6 +11,9 @@
     <Grid>
         <StackPanel>
             <Button Content="Back" Click="GoBack_Click"/>
+            <Button Margin="10,10,10,10" Content="List all People" FontSize="48" Click="List_Click" HorizontalAlignment="Stretch"/>
+            <Button Margin="10,10,10,10" Content="Create a Person" FontSize="48" Click="CreatePerson_Click" HorizontalAlignment="Stretch"/>
+            <Button Margin="10,10,10,10" Content="Edit a Person" FontSize="48" Click="EditPerson_Click" HorizontalAlignment="Stretch"/>
         </StackPanel>
     </Grid>
 </Page>

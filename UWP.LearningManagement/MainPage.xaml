@@ -11,8 +11,8 @@
     <Grid>
         <StackPanel>
             <Button Content="Back" Click="GoBack_Click"/>
-            <Button Content="Navigate to People" Click="Person_Click"/>
-            <Button Content="Navigate to Courses" Click="Course_Click"/>
+            <Button Margin="10,10,10,10" Content="Navigate to People" FontSize="48" Click="Person_Click" HorizontalAlignment="Stretch"/>
+            <Button Margin="10,10,10,10" Content="Navigate to Courses" FontSize="48" Click="Course_Click" HorizontalAlignment="Stretch"/>
 
         </StackPanel>
     </Grid>
