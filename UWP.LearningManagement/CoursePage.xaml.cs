@@ -31,5 +31,17 @@ namespace UWP.LearningManagement
         {
             Frame.GoBack();
         }
+
+        private void List_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void CreateCourse_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void EditCourse_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

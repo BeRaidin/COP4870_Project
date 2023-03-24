@@ -11,6 +11,9 @@
     <Grid>
         <StackPanel>
             <Button x:ConnectionId='2' Content="Back"                     />
+            <Button x:ConnectionId='3' Margin="10,10,10,10" Content="List all Courses" FontSize="48"                    HorizontalAlignment="Stretch"/>
+            <Button x:ConnectionId='4' Margin="10,10,10,10" Content="Create a Course" FontSize="48"                            HorizontalAlignment="Stretch"/>
+            <Button x:ConnectionId='5' Margin="10,10,10,10" Content="Edit a Course" FontSize="48"                          HorizontalAlignment="Stretch"/>
         </StackPanel>
     </Grid>
 </Page>
