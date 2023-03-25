@@ -5,6 +5,7 @@
     <RootPropertyPathName Name="SelectedCourse" />
     <RootPropertyPathName Name="Description" />
     <RootPropertyPathName Name="Name" />
+    <RootPropertyPathName Name="Code" />
     <RootPropertyPathName Name="People" />
     <RootPropertyPathName Name="SelectedPerson" />
   </Roots.PropertyPathNames>
