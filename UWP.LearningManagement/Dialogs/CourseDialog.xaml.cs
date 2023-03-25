@@ -1,4 +1,5 @@
-﻿using UWP.LearningManagement.Models;
+﻿using Library.LearningManagement.Services;
+using Library.LearningManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,7 +29,10 @@ namespace UWP.LearningManagement.Dialogs
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            courses.Add(DataContext as Course);
+            if ((DataContext as Course).CheckCode(courses))
+            {
+                courses.Add(DataContext as Course);
+            }
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
