@@ -36,7 +36,6 @@ namespace UWP.LearningManagement.ViewModels
                 course.Code = value;
             }
         }
-
         public Course Course
         {
             get
@@ -48,10 +47,19 @@ namespace UWP.LearningManagement.ViewModels
                 course = value;
             }
         }
+
+        public Course SelectedCourse { get; set; }
         public CourseViewModel(List<Course> courses)
         {
             course = new Course();
             this.courses = courses;
+        }
+
+        public CourseViewModel(List<Course> courses, Course selectedCourse)
+        {
+            course = new Course();
+            this.courses = courses;
+            this.SelectedCourse = selectedCourse;
         }
 
         public void Add()
@@ -59,9 +67,13 @@ namespace UWP.LearningManagement.ViewModels
             courses.Add(course);
         }
 
-        public void RemovePerson()
+        public void Remove()
         {
-            courses.Remove(course);
+            courses.Remove(SelectedCourse);
+        }
+        public void Edit()
+        {
+            SelectedCourse = course;
         }
     }
 }

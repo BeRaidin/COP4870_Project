@@ -22,20 +22,15 @@ namespace UWP.LearningManagement.Dialogs
     {
         private Course course { get; set; }
 
-        public EditCourseDialog(List<Course> courses)
+        public EditCourseDialog(List<Course> courses, Course selectedCourse)
         {
             this.InitializeComponent();
-            this.DataContext = new CourseViewModel(courses);
-        }
-
-        public Course Apply()
-        {
-            return course;
+            this.DataContext = new CourseViewModel(courses, selectedCourse);
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            course = (DataContext as CourseViewModel).Course;
+            (DataContext as CourseViewModel).Edit();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

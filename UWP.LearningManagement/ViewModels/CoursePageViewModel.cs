@@ -38,7 +38,7 @@ namespace UWP.LearningManagement.ViewModels
         { 
             courseService = new CourseService();
             allCourses = courseService.Courses;
-            Courses = new ObservableCollection<Course>(courseService.Courses);
+            courses = new ObservableCollection<Course>(courseService.Courses);
         }
 
         public async void Add()
@@ -56,16 +56,33 @@ namespace UWP.LearningManagement.ViewModels
             {
                 var searchResults = allCourses.Where(i => i.Code.Contains(Query) || i.Name.Contains(Query));
                 Courses.Clear();
-                foreach (var item in searchResults)
+                foreach (var course in searchResults)
                 {
-                    Courses.Add(item);
+                    Courses.Add(course);
+                }
+            }
+            else
+            {
+                Courses.Clear();
+                foreach(var course in allCourses)
+                {
+                    Courses.Add(course);
                 }
             }
         }
 
         public void Remove()
         {
-            Courses.Remove(SelectedCourse);
+            allCourses.Remove(SelectedCourse);
+        }
+
+        public async void Edit()
+        {
+            var dialog = new EditCourseDialog(allCourses, SelectedCourse);
+            if (dialog != null)
+            {
+                await dialog.ShowAsync();
+            }
         }
     }
 }

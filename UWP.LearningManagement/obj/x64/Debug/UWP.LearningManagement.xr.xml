@@ -2,11 +2,13 @@
 <Roots >
   <Roots.PropertyPathNames>
     <RootPropertyPathName Name="Courses" />
+    <RootPropertyPathName Name="SelectedCourse" />
     <RootPropertyPathName Name="Display" />
     <RootPropertyPathName Name="Query" />
     <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="Code" />
     <RootPropertyPathName Name="People" />
+    <RootPropertyPathName Name="SelectedPerson" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application" />
@@ -29,6 +31,7 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListBox">
       <RootProperty Name="ItemsSource" />
+      <RootProperty Name="SelectedItem" />
       <RootProperty Name="ItemTemplate" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
@@ -44,8 +47,8 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="Mode" />
-      <RootProperty Name="UpdateSourceTrigger" />
       <RootProperty Name="Path" />
+      <RootProperty Name="UpdateSourceTrigger" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
