@@ -36,7 +36,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public CoursePageViewModel() 
         { 
-            courseService = new CourseService();
+            courseService = CourseService.Current;
             allCourses = courseService.Courses;
             courses = new ObservableCollection<Course>(courseService.Courses);
         }

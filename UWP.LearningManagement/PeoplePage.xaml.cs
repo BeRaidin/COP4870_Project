@@ -46,5 +46,10 @@ namespace UWP.LearningManagement
         {
             (DataContext as PersonPageViewModel).Search();
         }
+        private void GoBack_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.GoBack();
+        }
+
     }
 }
