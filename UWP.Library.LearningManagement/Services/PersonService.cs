@@ -60,5 +60,10 @@ namespace Library.LearningManagement.Services
         {
             return personList.Count;
         }
+
+        public void Remove(Person person)
+        {
+            personList.Remove(person);
+        }
     }
 }

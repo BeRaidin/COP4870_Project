@@ -1,4 +1,5 @@
 ﻿using Library.LearningManagement.Models;
+using Library.LearningManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,8 +13,9 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class CourseViewModel
     {
+        private CourseService courseService;
+        private PersonService personService;
         private Course course { get; set; }
-        private List<Course> courses;
         public string Name
         {
             get
@@ -47,29 +49,34 @@ namespace UWP.LearningManagement.ViewModels
                 course = value;
             }
         }
-
         public Course SelectedCourse { get; set; }
-        public CourseViewModel(List<Course> courses)
+        public List<Person>  People { get; set; }
+        
+
+        public CourseViewModel()
         {
+            courseService = CourseService.Current;
+            personService = PersonService.Current;
+            People = personService.People;
             course = new Course();
-            this.courses = courses;
         }
 
-        public CourseViewModel(List<Course> courses, Course selectedCourse)
+        public CourseViewModel(Course selectedCourse)
         {
+            courseService = CourseService.Current;
+            personService = PersonService.Current;
             course = new Course();
-            this.courses = courses;
             this.SelectedCourse = selectedCourse;
         }
 
         public void Add()
         {
-            courses.Add(course);
+            courseService.Add(course);
         }
 
         public void Remove()
         {
-            courses.Remove(SelectedCourse);
+            courseService.Remove(SelectedCourse);
         }
         public void Edit()
         {

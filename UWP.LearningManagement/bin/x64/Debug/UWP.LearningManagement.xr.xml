@@ -5,10 +5,10 @@
     <RootPropertyPathName Name="SelectedCourse" />
     <RootPropertyPathName Name="Display" />
     <RootPropertyPathName Name="Query" />
-    <RootPropertyPathName Name="Name" />
-    <RootPropertyPathName Name="Code" />
     <RootPropertyPathName Name="People" />
     <RootPropertyPathName Name="SelectedPerson" />
+    <RootPropertyPathName Name="Name" />
+    <RootPropertyPathName Name="Code" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application" />
