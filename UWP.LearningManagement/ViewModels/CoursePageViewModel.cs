@@ -78,10 +78,13 @@ namespace UWP.LearningManagement.ViewModels
 
         public async void Edit()
         {
-            var dialog = new EditCourseDialog(allCourses, SelectedCourse);
-            if (dialog != null)
+            if (SelectedCourse != null)
             {
-                await dialog.ShowAsync();
+                var dialog = new EditCourseDialog(allCourses, SelectedCourse);
+                if (dialog != null)
+                {
+                    await dialog.ShowAsync();
+                }
             }
         }
     }

@@ -12,6 +12,7 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class PersonViewModel
     {
+        public Person selectedPerson { get; set; }
         private Person person { get; set; }
         private List<Person> people;
         public string Name
@@ -31,11 +32,19 @@ namespace UWP.LearningManagement.ViewModels
             set { person = value; }
         }
 
-        public PersonViewModel(List<Person> people) 
+        public PersonViewModel(List<Person> people)
+        {
+            person = new Person();
+            person.Id = people.Count();
+            this.people = people;
+        }
+
+        public PersonViewModel(List<Person> people, Person selectedPerson) 
         { 
             person = new Person();
             person.Id = people.Count();
             this.people = people;
+            this.selectedPerson = selectedPerson;
         }
 
         public void Add()
@@ -46,6 +55,11 @@ namespace UWP.LearningManagement.ViewModels
         public void RemovePerson()
         {
             people.Remove(person);
+        }
+
+        public void Edit()
+        {
+            selectedPerson.Name = person.Name;
         }
     }
 }

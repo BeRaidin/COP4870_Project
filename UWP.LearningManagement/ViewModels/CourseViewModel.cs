@@ -73,7 +73,8 @@ namespace UWP.LearningManagement.ViewModels
         }
         public void Edit()
         {
-            SelectedCourse = course;
+            SelectedCourse.Name = course.Name;
+            SelectedCourse.Code = course.Code;
         }
     }
 }

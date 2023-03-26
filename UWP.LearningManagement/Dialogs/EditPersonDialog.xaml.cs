@@ -21,16 +21,16 @@ namespace UWP.LearningManagement.Dialogs
     public sealed partial class EditPersonDialog : ContentDialog
     {
         private Person person { get; set; }
-        public EditPersonDialog(List<Person> people)
+        public EditPersonDialog(List<Person> people, Person selectedPerson)
         {
             this.InitializeComponent();
-            this.DataContext = new PersonViewModel(people);
+            this.DataContext = new PersonViewModel(people, selectedPerson);
             this.person = person;
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            person = (DataContext as PersonViewModel).Person;
+            (DataContext as PersonViewModel).Edit();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
