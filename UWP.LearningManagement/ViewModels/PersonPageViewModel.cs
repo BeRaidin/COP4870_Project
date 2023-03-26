@@ -36,7 +36,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public PersonPageViewModel()
         {
-            personService = new PersonService();
+            personService = PersonService.Current;
             allPeople = personService.People;
             People = new ObservableCollection<Person>(allPeople);
         }
