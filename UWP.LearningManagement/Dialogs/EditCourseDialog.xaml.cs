@@ -1,4 +1,5 @@
 ﻿using Library.LearningManagement.Models;
+using Library.LearningManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,12 +21,10 @@ namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class EditCourseDialog : ContentDialog
     {
-        private Course course { get; set; }
-
-        public EditCourseDialog(List<Course> courses, Course selectedCourse)
+        public EditCourseDialog(Course selectedCourse)
         {
             this.InitializeComponent();
-            this.DataContext = new CourseViewModel(courses, selectedCourse);
+            this.DataContext = new CourseViewModel(selectedCourse);
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

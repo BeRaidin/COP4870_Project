@@ -18,32 +18,35 @@ namespace UWP.LearningManagement.ViewModels
     public class CoursePageViewModel
     {
         private CourseService courseService;
+        private PersonService personService;
         private List<Course> allCourses;
         private ObservableCollection<Course> courses;
-        public string Query { get; set; }
-        public Course SelectedCourse { get; set; }
-        public ObservableCollection<Course> Courses 
+        public ObservableCollection<Course> Courses
         {
             get
             {
                 return courses;
-            } 
+            }
             private set
             {
                 courses = value;
             }
         }
+        public Course SelectedCourse { get; set; }
+
+        public string Query { get; set; }
 
         public CoursePageViewModel() 
         { 
             courseService = CourseService.Current;
+            personService = PersonService.Current;
             allCourses = courseService.Courses;
             courses = new ObservableCollection<Course>(courseService.Courses);
         }
 
         public async void Add()
         {
-            var dialog = new CourseDialog(allCourses);
+            var dialog = new CourseDialog();
             if (dialog != null)
             {
                 await dialog.ShowAsync();
@@ -80,7 +83,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (SelectedCourse != null)
             {
-                var dialog = new EditCourseDialog(allCourses, SelectedCourse);
+                var dialog = new EditCourseDialog(SelectedCourse);
                 if (dialog != null)
                 {
                     await dialog.ShowAsync();

@@ -47,6 +47,11 @@ namespace Library.LearningManagement.Services
             courseList.Add(course);
         }
 
+        public void Remove(Course course)
+        {
+            courseList.Remove(course);
+        }
+
         public IEnumerable<Course> Search(string query)
         {
             return courseList.Where(s => s.Code.ToUpper().Contains(query.ToUpper())

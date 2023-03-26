@@ -1,4 +1,5 @@
 ﻿using Library.LearningManagement.Models;
+using Library.LearningManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,9 +13,9 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class PersonViewModel
     {
-        public Person selectedPerson { get; set; }
+        private CourseService courseService;
+        private PersonService personService;
         private Person person { get; set; }
-        private List<Person> people;
         public string Name
         {
             get
@@ -31,35 +32,38 @@ namespace UWP.LearningManagement.ViewModels
             get { return person; }
             set { person = value; }
         }
+        public Person SelectedPerson { get; set; }
 
-        public PersonViewModel(List<Person> people)
+        public PersonViewModel()
         {
+            courseService = CourseService.Current;
+            personService = PersonService.Current;
             person = new Person();
-            person.Id = people.Count();
-            this.people = people;
+            person.Id = personService.Size();
         }
 
-        public PersonViewModel(List<Person> people, Person selectedPerson) 
-        { 
+        public PersonViewModel(Person selectedPerson) 
+        {
+            courseService = CourseService.Current;
+            personService = PersonService.Current;
             person = new Person();
-            person.Id = people.Count();
-            this.people = people;
-            this.selectedPerson = selectedPerson;
+            person.Id = personService.Size();
+            this.SelectedPerson = selectedPerson;
         }
 
         public void Add()
         {
-            people.Add(person);
+            personService.Add(person);
         }
 
         public void RemovePerson()
         {
-            people.Remove(person);
+            personService.Remove(person);
         }
 
         public void Edit()
         {
-            selectedPerson.Name = person.Name;
+            SelectedPerson.Name = person.Name;
         }
     }
 }

@@ -18,10 +18,9 @@ namespace UWP.LearningManagement.ViewModels
     public class PersonPageViewModel
     {
         private PersonService personService;
+        private CourseService courseService;
         private List<Person> allPeople;
         private ObservableCollection<Person> people;
-        public string Query { get; set; }
-        public Person SelectedPerson { get; set; }
         public ObservableCollection<Person> People
         {
             get
@@ -33,17 +32,21 @@ namespace UWP.LearningManagement.ViewModels
                 people = value;
             }
         }
+        public Person SelectedPerson { get; set; }
+
+        public string Query { get; set; }
 
         public PersonPageViewModel()
         {
             personService = PersonService.Current;
+            courseService = CourseService.Current;
             allPeople = personService.People;
             People = new ObservableCollection<Person>(allPeople);
         }
 
         public async void Add()
         {
-            var dialog = new PersonDialog(allPeople);
+            var dialog = new PersonDialog();
             if (dialog != null)
             {
                 await dialog.ShowAsync();
@@ -55,7 +58,6 @@ namespace UWP.LearningManagement.ViewModels
             if (Query != null)
             {
                 var searchResults = allPeople.Where(i => i.Name.Contains(Query));
-
                 People.Clear();
                 foreach (var item in searchResults)
                 {
@@ -81,7 +83,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (SelectedPerson != null)
             {
-                var dialog = new EditPersonDialog(allPeople, SelectedPerson);
+                var dialog = new EditPersonDialog(SelectedPerson);
                 if (dialog != null)
                 {
                     await dialog.ShowAsync();

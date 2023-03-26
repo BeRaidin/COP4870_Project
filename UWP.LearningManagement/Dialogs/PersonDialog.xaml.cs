@@ -22,10 +22,10 @@ namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class PersonDialog : ContentDialog
     {
-        public PersonDialog(List<Person> people)
+        public PersonDialog()
         {
             this.InitializeComponent();
-            this.DataContext = new PersonViewModel(people);
+            this.DataContext = new PersonViewModel();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
