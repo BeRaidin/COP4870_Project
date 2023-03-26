@@ -1,20 +1,24 @@
-﻿using System;
+﻿using Library.LearningManagement.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Library.LearningManagement.Models;
 
 namespace Library.LearningManagement.Services
 {
     public class CourseService
     {
-        private IList<Course> courseList;
+        private List<Course> courseList;
         private static CourseService instance;
 
-        public CourseService() 
+        public CourseService()
         {
-            courseList = new List<Course>();
+            courseList = new List<Course> {
+                new Course{Code = "test1", Name= "name1"},
+                new Course{Code = "test2", Name= "name2"} 
+            };
+                
         }
 
         public static CourseService Current
@@ -30,25 +34,22 @@ namespace Library.LearningManagement.Services
             }
         }
 
+        public List<Course> Courses
+        {
+            get 
+            { 
+                return courseList; 
+            }
+        }
+
         public void Add(Course course)
         {
             courseList.Add(course);
         }
 
-        public IList<Course> Courses
-        {
-            get
-            {
-                return courseList;
-            }
-        }
-
-        
-
-
         public IEnumerable<Course> Search(string query)
         {
-            return Courses.Where(s => s.Code.ToUpper().Contains(query.ToUpper())
+            return courseList.Where(s => s.Code.ToUpper().Contains(query.ToUpper())
                 || s.Name.ToUpper().Contains(query.ToUpper())
                 || s.Description.ToUpper().Contains(query.ToUpper()));
         }

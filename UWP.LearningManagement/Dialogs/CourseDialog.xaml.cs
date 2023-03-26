@@ -1,10 +1,13 @@
-﻿using Library.LearningManagement.Services;
-using Library.LearningManagement.Models;
+﻿using Library.LearningManagement.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UWP.LearningManagement.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -19,24 +22,21 @@ namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class CourseDialog : ContentDialog
     {
-        private IList<Course> courses;
-        public CourseDialog(IList<Course> courses)
+        public CourseDialog(List<Course> courses)
         {
             this.InitializeComponent();
-            DataContext = new Course();
-            this.courses = courses;
+            this.DataContext = new CourseViewModel(courses);
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            if ((DataContext as Course).CheckCode(courses))
-            {
-                courses.Add(DataContext as Course);
-            }
+            (DataContext as CourseViewModel).Add();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
         }
+
+      
     }
 }

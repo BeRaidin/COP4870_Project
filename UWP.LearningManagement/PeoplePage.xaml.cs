@@ -24,18 +24,26 @@ namespace UWP.LearningManagement
         public PeoplePage()
         {
             this.InitializeComponent();
-            DataContext = new PersonViewModel();
+            DataContext = new PersonPageViewModel();
         }
 
-        private async void AddNew_Click(object sender, RoutedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
-            var diag = new PersonDialog((DataContext as PersonViewModel).People);
-            await diag.ShowAsync();
+            (DataContext as PersonPageViewModel).Add();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as PersonViewModel).Remove();
+            (DataContext as PersonPageViewModel).Remove();
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as PersonPageViewModel).Search();
         }
     }
 }

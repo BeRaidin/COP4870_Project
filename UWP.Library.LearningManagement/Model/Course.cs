@@ -33,10 +33,7 @@ namespace Library.LearningManagement.Models
             MaxGrade = 0;
         }
 
-        public override string ToString()
-        {
-            return $"[{Code}] - {Name}";
-        }
+        public virtual string Display => $"[{Code}] - {Name}";
 
         public string DetailDisplay
         {

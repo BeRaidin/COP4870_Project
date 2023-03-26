@@ -2,12 +2,11 @@
 <Roots >
   <Roots.PropertyPathNames>
     <RootPropertyPathName Name="Courses" />
-    <RootPropertyPathName Name="SelectedCourse" />
-    <RootPropertyPathName Name="Description" />
+    <RootPropertyPathName Name="Display" />
+    <RootPropertyPathName Name="Query" />
     <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="Code" />
     <RootPropertyPathName Name="People" />
-    <RootPropertyPathName Name="SelectedPerson" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application" />
@@ -30,9 +29,11 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ListBox">
       <RootProperty Name="ItemsSource" />
-      <RootProperty Name="SelectedItem" />
+      <RootProperty Name="ItemTemplate" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
+      <RootProperty Name="Width" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
       <RootProperty Name="Margin" />
       <RootProperty Name="HorizontalAlignment" />
@@ -42,9 +43,19 @@
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
-      <RootProperty Name="Path" />
       <RootProperty Name="Mode" />
       <RootProperty Name="UpdateSourceTrigger" />
+      <RootProperty Name="Path" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.DataTemplate">
+      <RootProperty Name="Template" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
+      <RootProperty Name="Text" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
+      <RootProperty Name="Text" />
+      <RootProperty Name="Header" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.CoursePage" />
     <RootType FullName="Windows.UI.Xaml.Controls.ContentDialog">
@@ -55,13 +66,9 @@
       <RootEvent Name="PrimaryButtonClick" />
       <RootEvent Name="SecondaryButtonClick" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
-      <RootProperty Name="Header" />
-      <RootProperty Name="Text" />
-      <RootProperty Name="TextWrapping" />
-      <RootProperty Name="AcceptsReturn" />
-    </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.CourseDialog" />
+    <RootType FullName="UWP.LearningManagement.Dialogs.EditCourseDialog" />
+    <RootType FullName="UWP.LearningManagement.Dialogs.EditPersonDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.PersonDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Children" />

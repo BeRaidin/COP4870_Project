@@ -1,10 +1,13 @@
-﻿using Library.LearningManagement.Services;
-using Library.LearningManagement.Models;
+﻿using Library.LearningManagement.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UWP.LearningManagement.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -19,17 +22,15 @@ namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class PersonDialog : ContentDialog
     {
-        private IList<Person> people;
-        public PersonDialog(IList<Person> people)
+        public PersonDialog(List<Person> people)
         {
             this.InitializeComponent();
-            DataContext = new Person();
-            this.people = people;
+            this.DataContext = new PersonViewModel(people);
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            people.Add(DataContext as Person);
+            (DataContext as PersonViewModel).Add();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

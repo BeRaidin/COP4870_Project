@@ -65,3 +65,13 @@ C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Deb
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\ProjectArchitectures.txt
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\.winmd_cache\$Microsoft.UI.Xaml.Markup.winmd_638018009300000000.json
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\EditCourseDialog.g.i.cs
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\EditCourseDialog.g.cs
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\EditPersonDialog.g.i.cs
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\EditPersonDialog.g.cs
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\EditCourseDialog.xaml
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\EditPersonDialog.xaml
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\EditCourseDialog.xbf
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\EditPersonDialog.xbf
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\EditCourseDialog.xbf
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\EditPersonDialog.xbf

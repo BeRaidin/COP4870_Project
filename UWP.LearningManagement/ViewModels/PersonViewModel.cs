@@ -1,5 +1,4 @@
-﻿using Library.LearningManagement.Services;
-using Library.LearningManagement.Models;
+﻿using Library.LearningManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,26 +10,42 @@ using System.Threading.Tasks;
 
 namespace UWP.LearningManagement.ViewModels
 {
-    public class PersonViewModel : INotifyPropertyChanged
+    public class PersonViewModel
     {
-        public Person SelectedPerson { get; set; }
-        public ObservableCollection<Person> People { get; set; }
-
-        public PersonViewModel()
+        private Person person { get; set; }
+        private List<Person> people;
+        public string Name
         {
-            People = new ObservableCollection<Person>();
+            get
+            {
+                return person.Name;
+            }
+            set
+            {
+                person.Name = value;
+            }
+        }
+        public Person Person
+        {
+            get { return person; }
+            set { person = value; }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        public PersonViewModel(List<Person> people) 
+        { 
+            person = new Person();
+            person.Id = people.Count();
+            this.people = people;
         }
 
-        public void Remove()
+        public void Add()
         {
-            People.Remove(SelectedPerson);
+            people.Add(person);
+        }
+
+        public void RemovePerson()
+        {
+            people.Remove(person);
         }
     }
 }

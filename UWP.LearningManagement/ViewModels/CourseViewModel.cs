@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Library.LearningManagement.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -6,33 +7,61 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Library.LearningManagement.Services;
-using Library.LearningManagement.Models;
 
 namespace UWP.LearningManagement.ViewModels
 {
-    public class CourseViewModel : INotifyPropertyChanged
+    public class CourseViewModel
     {
-        private CourseService courseService;
-        public Course SelectedCourse { get; set; }
-        public ObservableCollection<Course> Courses { get; set; }
-
-        public CourseViewModel() 
-        { 
-            courseService = new CourseService();
-            Courses = new ObservableCollection<Course>();
+        private Course course { get; set; }
+        private List<Course> courses;
+        public string Name
+        {
+            get
+            {
+                return course.Name;
+            }
+            set
+            {
+                course.Name = value;
+            }
+        }
+        public string Code
+        {
+            get
+            {
+                return course.Code;
+            }
+            set
+            {
+                course.Code = value;
+            }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        public Course Course
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get
+            {
+                return course;
+            }
+            set
+            {
+                course = value;
+            }
+        }
+        public CourseViewModel(List<Course> courses)
+        {
+            course = new Course();
+            this.courses = courses;
         }
 
-        public void Remove()
+        public void Add()
         {
-            Courses.Remove(SelectedCourse);
+            courses.Add(course);
+        }
+
+        public void RemovePerson()
+        {
+            courses.Remove(course);
         }
     }
 }

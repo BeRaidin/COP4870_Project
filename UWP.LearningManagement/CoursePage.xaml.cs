@@ -16,8 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Library.LearningManagement.Services;
-using Library.LearningManagement.Models;
+using System.Xml.Linq;
 
 namespace UWP.LearningManagement
 {
@@ -26,18 +25,28 @@ namespace UWP.LearningManagement
         public CoursePage()
         {
             this.InitializeComponent();
-            DataContext = new CourseViewModel();
+            DataContext = new CoursePageViewModel();
         }
 
-        private async void AddNew_Click(object sender, RoutedEventArgs e)
-        {       
-            var diag = new CourseDialog((DataContext as CourseViewModel).Courses);
-            await diag.ShowAsync();           
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as CoursePageViewModel).Add();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as CourseViewModel).Remove();
+            (DataContext as CoursePageViewModel).Remove();
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as CoursePageViewModel).Search();
         }
     }
 }

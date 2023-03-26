@@ -19,10 +19,7 @@ namespace Library.LearningManagement.Models
             Courses = new List<Course>();
         }
 
-        public override string ToString()
-        {
-            return $"[{Id}] {Name}";
-        }
+        public virtual string Display => $"[{Id}] {Name}";
 
         public void UpdateId(int num, List<Person> people)
         {

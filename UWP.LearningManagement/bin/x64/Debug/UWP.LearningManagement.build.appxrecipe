@@ -79,6 +79,12 @@
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\CourseDialog.xbf">
       <PackagePath>Dialogs\CourseDialog.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\EditCourseDialog.xbf">
+      <PackagePath>Dialogs\EditCourseDialog.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\EditPersonDialog.xbf">
+      <PackagePath>Dialogs\EditPersonDialog.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\PersonDialog.xbf">
       <PackagePath>Dialogs\PersonDialog.xbf</PackagePath>
     </AppxPackagedFile>
