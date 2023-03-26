@@ -28,11 +28,16 @@
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=Name, Mode=TwoWay}"></TextBox>
         <TextBlock Grid.Row="2" Text="Add"></TextBlock>
         <ListBox Grid.Row="2" Grid.Column="1"
-            ItemsSource="{Binding Path=People, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}">
+            ItemsSource="{Binding People, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <TextBlock Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Grid.Column="0" IsChecked="{Binding Mode=TwoWay}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

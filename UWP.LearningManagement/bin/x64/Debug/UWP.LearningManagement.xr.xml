@@ -6,9 +6,9 @@
     <RootPropertyPathName Name="Display" />
     <RootPropertyPathName Name="Query" />
     <RootPropertyPathName Name="People" />
-    <RootPropertyPathName Name="SelectedPerson" />
     <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="Code" />
+    <RootPropertyPathName Name="SelectedPerson" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application" />
@@ -68,6 +68,9 @@
       <RootProperty Name="Content" />
       <RootEvent Name="PrimaryButtonClick" />
       <RootEvent Name="SecondaryButtonClick" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.CheckBox">
+      <RootProperty Name="IsChecked" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.CourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditCourseDialog" />

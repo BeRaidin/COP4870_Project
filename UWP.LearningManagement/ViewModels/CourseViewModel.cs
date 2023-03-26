@@ -38,6 +38,17 @@ namespace UWP.LearningManagement.ViewModels
                 course.Code = value;
             }
         }
+        public List<Person> Roster 
+        {
+            get
+            {
+                return course.Roster;
+            }
+            set
+            { 
+                course.Roster = value; 
+            }
+        }
         public Course Course
         {
             get

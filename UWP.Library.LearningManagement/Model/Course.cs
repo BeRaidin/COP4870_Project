@@ -71,44 +71,6 @@ namespace Library.LearningManagement.Models
             else return true;
         }
 
-        public void ChangeCode(List<Course> course)
-        {
-            Console.WriteLine("What is the code of the course?");
-            var code = Console.ReadLine() ?? string.Empty;
-
-            while (course.Any(p => p.Code == code))
-            {
-                Console.WriteLine("That is already another course code, please enter another");
-                code = Console.ReadLine() ?? string.Empty;
-            }
-
-            Code = code;
-        }
-
-        public void ChangeName()
-        {
-            Console.WriteLine("What is the name of the course?");
-            Name = Console.ReadLine() ?? string.Empty;
-        }
-
-        public void ChangeDescription()
-        {
-            Console.WriteLine("What is the description of the course?");
-            Description = Console.ReadLine() ?? string.Empty;
-        }
-
-        public void ChangeHours()
-        {
-            Console.WriteLine("How many credit hours is the course?");
-            var hours = Console.ReadLine() ?? string.Empty;
-            while (!int.TryParse(hours, out int result))
-            {
-                Console.WriteLine("Please enter an integer:");
-                hours = Console.ReadLine() ?? string.Empty;
-            }
-            CreditHours = int.Parse(hours);
-        }
-
         public void AddMaxGrade(double val)
         {
             MaxGrade += val;
