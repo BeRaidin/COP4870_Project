@@ -40,9 +40,8 @@ namespace UWP.LearningManagement
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
+            (DataContext as CoursePageViewModel).Edit();
         }
-
-
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {

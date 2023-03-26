@@ -21,13 +21,7 @@ namespace UWP.LearningManagement.Dialogs
     public sealed partial class EditPersonDialog : ContentDialog
     {
         private Person person { get; set; }
-        public Person Person { 
-            get
-            {
-                return person;
-            }
-        }
-        public EditPersonDialog(List<Person> people, Person person)
+        public EditPersonDialog(List<Person> people)
         {
             this.InitializeComponent();
             this.DataContext = new PersonViewModel(people);
