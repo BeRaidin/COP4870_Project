@@ -79,10 +79,13 @@ namespace UWP.LearningManagement.ViewModels
 
         public async void Edit()
         {
-            var dialog = new EditPersonDialog(allPeople);
-            if (dialog != null)
+            if (SelectedPerson != null)
             {
-                await dialog.ShowAsync();
+                var dialog = new EditPersonDialog(allPeople, SelectedPerson);
+                if (dialog != null)
+                {
+                    await dialog.ShowAsync();
+                }
             }
         }
     }
