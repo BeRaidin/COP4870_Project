@@ -3,6 +3,8 @@
   <Roots.PropertyPathNames>
     <RootPropertyPathName Name="Description" />
     <RootPropertyPathName Name="Name" />
+    <RootPropertyPathName Name="ContentTypes" />
+    <RootPropertyPathName Name="SelectedType" />
     <RootPropertyPathName Name="Courses" />
     <RootPropertyPathName Name="SelectedCourse" />
     <RootPropertyPathName Name="Display" />
@@ -14,7 +16,6 @@
     <RootPropertyPathName Name="StudentLevels" />
     <RootPropertyPathName Name="SelectedLevel" />
     <RootPropertyPathName Name="PersonTypes" />
-    <RootPropertyPathName Name="SelectedType" />
     <RootPropertyPathName Name="Modules" />
     <RootPropertyPathName Name="SelectedModule" />
     <RootPropertyPathName Name="Roster" />
@@ -38,10 +39,10 @@
       <RootProperty Name="RowDefinitions" />
       <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="Children" />
-      <RootMethod Name="GetColumn" />
-      <RootMethod Name="SetColumn" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
+      <RootMethod Name="GetColumn" />
+      <RootMethod Name="SetColumn" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
       <RootProperty Name="Height" />
@@ -53,6 +54,10 @@
       <RootProperty Name="Text" />
       <RootProperty Name="Margin" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="SelectedItem" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Text" />
       <RootProperty Name="Margin" />
@@ -63,7 +68,9 @@
       <RootProperty Name="Mode" />
       <RootProperty Name="UpdateSourceTrigger" />
     </RootType>
-    <RootType FullName="UWP.LearningManagement.Dialogs.AddModuleDialog" />
+    <RootType FullName="UWP.LearningManagement.Dialogs.EditContentItemDialog" />
+    <RootType FullName="UWP.LearningManagement.Dialogs.ModuleDialog" />
+    <RootType FullName="UWP.LearningManagement.Dialogs.ContentItemDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
       <RootProperty Name="Background" />
       <RootProperty Name="Content" />
@@ -94,10 +101,6 @@
     <RootType FullName="UWP.LearningManagement.Dialogs.CourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditCourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditPersonDialog" />
-    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
-      <RootProperty Name="ItemsSource" />
-      <RootProperty Name="SelectedItem" />
-    </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.PersonDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Children" />
@@ -111,7 +114,7 @@
     <RootType FullName="UWP.LearningManagement.MainPage" />
     <RootType FullName="UWP.LearningManagement.DetailedCourse" />
     <RootType FullName="UWP.LearningManagement.DetailedPerson" />
-    <RootType FullName="UWP.LearningManagement.ModulesPage" />
+    <RootType FullName="UWP.LearningManagement.ItemsPage" />
     <RootType FullName="UWP.LearningManagement.PeoplePage" />
   </Roots.RootTypes>
 </Roots>

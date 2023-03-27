@@ -43,16 +43,16 @@ namespace UWP.LearningManagement.ViewModels
             courseService = CourseService.Current;
             personService = PersonService.Current;
             moduleService = ModuleService.Current;
-            var content = new ContentItem();
-            content.Name = "Test";
-            content.Id = 1;
-            moduleService.CurrentModule.Content.Add(content);
             ContentItems = new ObservableCollection<ContentItem>(moduleService.CurrentModule.Content);
         }
 
-        public void Add()
+        public async void Add()
         {
-
+            var dialog = new ContentItemDialog();
+            if (dialog != null)
+            {
+                await dialog.ShowAsync();
+            }
         }
 
         public void Remove()
@@ -61,9 +61,16 @@ namespace UWP.LearningManagement.ViewModels
             ContentItems.Remove(SelectedItem);
         }
 
-        public void Edit()
+        public async void Edit()
         {
-
+            if (SelectedItem != null)
+            {
+                var dialog = new EditContentItemDialog();
+                if (dialog != null)
+                {
+                    await dialog.ShowAsync();
+                }
+            }
         }
 
         public void Search()

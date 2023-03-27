@@ -1,13 +1,13 @@
 ﻿<ContentDialog x:ConnectionId='1'
-    x:Class="UWP.LearningManagement.Dialogs.AddModuleDialog"
+    x:Class="UWP.LearningManagement.Dialogs.EditContentItemDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:UWP.LearningManagement.Dialogs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="Add a Module"
-    PrimaryButtonText="Add"
+    Title="Edit Content Item"
+    PrimaryButtonText="Ok"
     SecondaryButtonText="Cancel"
                                                          
                                                              >
@@ -18,15 +18,19 @@
             <RowDefinition Height="8*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="8*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Text="Name"></TextBlock>
-        <TextBox Grid.Column="1" Text="{Binding Path=Name, Mode=TwoWay}"></TextBox>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Description"></TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=Description, Mode=TwoWay}"></TextBox>
+        <TextBlock Text="Content Type"></TextBlock>
+        <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding ContentTypes}" SelectedItem="{Binding SelectedType, Mode=TwoWay}" />
+        <TextBlock Grid.Row="2" Text="Name"></TextBlock>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=Name, Mode=TwoWay}"></TextBox>
+        <TextBlock Grid.Row="4" Text="Description"></TextBlock>
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=Description, Mode=TwoWay}"></TextBox>
     </Grid>
 </ContentDialog>
 

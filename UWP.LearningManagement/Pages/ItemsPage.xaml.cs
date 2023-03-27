@@ -10,9 +10,9 @@ using Windows.UI.Xaml.Input;
 
 namespace UWP.LearningManagement
 {
-    public sealed partial class ModulesPage : Page
+    public sealed partial class ItemsPage : Page
     {
-        public ModulesPage()
+        public ItemsPage()
         {
             this.InitializeComponent();
             DataContext = new ItemsPageViewModel();
@@ -36,12 +36,6 @@ namespace UWP.LearningManagement
         private void Search_Click(object sender, RoutedEventArgs e)
         {
             (DataContext as ItemsPageViewModel).Search();
-        }
-
-        private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-        {
-            (DataContext as ItemsPageViewModel).UpdateCurrentModule();
-            //Frame.Navigate(typeof(DetailedCourse));
         }
     }
 }

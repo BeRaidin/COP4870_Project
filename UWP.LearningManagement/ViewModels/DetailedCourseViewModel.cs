@@ -56,7 +56,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public async void Add_Module()
         {
-            var dialog = new AddModuleDialog();
+            var dialog = new ModuleDialog();
             if (dialog != null)
             {
                 await dialog.ShowAsync();
