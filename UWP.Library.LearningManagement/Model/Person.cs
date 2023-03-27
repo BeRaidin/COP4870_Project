@@ -12,11 +12,12 @@ namespace Library.LearningManagement.Models
         public int Id {  get; set; }
         public string Name { get; set; }
         public List<Course> Courses { get; set; }
-
+        public bool IsSelected { get; set; }
 
         public Person() {
             Name = string.Empty;
             Courses = new List<Course>();
+            IsSelected = false;
         }
 
         public virtual string Display => $"[{Id}] {Name}";

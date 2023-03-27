@@ -16,41 +16,35 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using System.Xml.Linq;
 
 namespace UWP.LearningManagement
 {
-    public sealed partial class CoursePage : Page
+    public sealed partial class PeoplePage : Page
     {
-        public CoursePage()
+        public PeoplePage()
         {
             this.InitializeComponent();
-            DataContext = new CoursePageViewModel();
+            DataContext = new PersonPageViewModel();
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as CoursePageViewModel).Add();
+            (DataContext as PersonPageViewModel).Add();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as CoursePageViewModel).Remove();
+            (DataContext as PersonPageViewModel).Remove();
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as CoursePageViewModel).Edit();
+            (DataContext as PersonPageViewModel).Edit();
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as CoursePageViewModel).Search();
+            (DataContext as PersonPageViewModel).Search();
         }
-        private void GoBack_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.GoBack();
-        }
-
     }
 }

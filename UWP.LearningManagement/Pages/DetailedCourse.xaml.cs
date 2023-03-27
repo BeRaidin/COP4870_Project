@@ -1,7 +1,11 @@
-﻿using System;
+﻿using UWP.LearningManagement.Dialogs;
+using UWP.LearningManagement.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -12,25 +16,20 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
+using System.Xml.Linq;
+using Library.LearningManagement.Models;
 
 namespace UWP.LearningManagement
 {
-    public sealed partial class MainPage : Page
+    public sealed partial class DetailedCourse : Page
     {
-        public MainPage()
+        public DetailedCourse() 
         {
             this.InitializeComponent();
+            DataContext = new DetailedCourseViewModel();
         }
 
-        private void Person_Click(object sender, RoutedEventArgs e)
-        {
-            frame.Navigate(typeof(PeoplePage));
-        }
 
-        private void Course_Click(object sender, RoutedEventArgs e)
-        {
-            frame.Navigate(typeof(CoursePage));
-        }
+
     }
 }

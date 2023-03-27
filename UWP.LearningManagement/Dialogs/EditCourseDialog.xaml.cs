@@ -21,10 +21,10 @@ namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class EditCourseDialog : ContentDialog
     {
-        public EditCourseDialog(Course selectedCourse)
+        public EditCourseDialog()
         {
             this.InitializeComponent();
-            this.DataContext = new CourseViewModel(selectedCourse);
+            this.DataContext = new CourseViewModel();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

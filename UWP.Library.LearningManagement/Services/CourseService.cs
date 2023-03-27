@@ -11,6 +11,12 @@ namespace Library.LearningManagement.Services
     {
         private List<Course> courseList;
         private static CourseService instance;
+        private Course currentCourse;
+        public Course CurrentCourse
+        {
+            get { return currentCourse; }
+            set { currentCourse = value; }
+        }
 
         public CourseService()
         {
@@ -47,9 +53,9 @@ namespace Library.LearningManagement.Services
             courseList.Add(course);
         }
 
-        public void Remove(Course course)
+        public void Remove()
         {
-            courseList.Remove(course);
+            courseList.Remove(currentCourse);
         }
 
         public IEnumerable<Course> Search(string query)

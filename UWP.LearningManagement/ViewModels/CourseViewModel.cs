@@ -60,7 +60,6 @@ namespace UWP.LearningManagement.ViewModels
                 course = value;
             }
         }
-        public Course SelectedCourse { get; set; }
         public List<Person>  People { get; set; }
         
 
@@ -72,27 +71,27 @@ namespace UWP.LearningManagement.ViewModels
             course = new Course();
         }
 
-        public CourseViewModel(Course selectedCourse)
+        public void SetRoster()
         {
-            courseService = CourseService.Current;
-            personService = PersonService.Current;
-            course = new Course();
-            this.SelectedCourse = selectedCourse;
+            foreach (Person person in People)
+            {
+                if(person.IsSelected)
+                {
+                    Roster.Add(person);
+                }
+            }
         }
 
         public void Add()
         {
+            SetRoster();
             courseService.Add(course);
         }
 
-        public void Remove()
-        {
-            courseService.Remove(SelectedCourse);
-        }
         public void Edit()
         {
-            SelectedCourse.Name = course.Name;
-            SelectedCourse.Code = course.Code;
+            courseService.CurrentCourse.Name = course.Name;
+            courseService.CurrentCourse.Code = course.Code;
         }
     }
 }

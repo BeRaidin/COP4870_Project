@@ -7,12 +7,13 @@ Assets\Square44x44Logo.targetsize-24_altform-unplated.png
 Assets\StoreLogo.png
 Assets\Wide310x150Logo.scale-200.png
 App.xbf
-CoursePage.xbf
 Dialogs\CourseDialog.xbf
 Dialogs\EditCourseDialog.xbf
 Dialogs\EditPersonDialog.xbf
 Dialogs\PersonDialog.xbf
 MainPage.xbf
-PeoplePage.xbf
+Pages\CoursePage.xbf
+Pages\DetailedCourse.xbf
+Pages\PeoplePage.xbf
 UWP.LearningManagement.xr.xml
 Properties\Default.rd.xml

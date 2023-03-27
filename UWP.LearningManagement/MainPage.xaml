@@ -9,11 +9,14 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <StackPanel>
-            <Button Content="Back" Click="GoBack_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
             <Button Margin="10,10,10,10" Content="Navigate to People" FontSize="48" Click="Person_Click" HorizontalAlignment="Stretch"/>
             <Button Margin="10,10,10,10" Content="Navigate to Courses" FontSize="48" Click="Course_Click" HorizontalAlignment="Stretch"/>
-
         </StackPanel>
+        <Frame Name="frame" Grid.Column="1" Margin="10,10,10,10" Content=""></Frame>
     </Grid>
 </Page>
