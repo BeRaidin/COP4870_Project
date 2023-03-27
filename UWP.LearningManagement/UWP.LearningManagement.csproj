@@ -119,8 +119,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\AddModuleDialog.xaml.cs">
-      <DependentUpon>AddModuleDialog.xaml</DependentUpon>
+    <Compile Include="Dialogs\EditContentItemDialog.xaml.cs">
+      <DependentUpon>EditContentItemDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ModuleDialog.xaml.cs">
+      <DependentUpon>ModuleDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ContentItemDialog.xaml.cs">
+      <DependentUpon>ContentItemDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\CoursePage.xaml.cs">
       <DependentUpon>CoursePage.xaml</DependentUpon>
@@ -153,6 +159,7 @@
       <DependentUpon>PeoplePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ContentItemViewModel.cs" />
     <Compile Include="ViewModels\CoursePageViewModel.cs" />
     <Compile Include="ViewModels\CourseViewModel.cs" />
     <Compile Include="ViewModels\DetailedCourseViewModel.cs" />
@@ -182,7 +189,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Dialogs\AddModuleDialog.xaml">
+    <Page Include="Dialogs\EditContentItemDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ModuleDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ContentItemDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

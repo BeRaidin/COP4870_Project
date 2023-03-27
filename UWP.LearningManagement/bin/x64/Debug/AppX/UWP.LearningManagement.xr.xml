@@ -3,6 +3,8 @@
   <Roots.PropertyPathNames>
     <RootPropertyPathName Name="Description" />
     <RootPropertyPathName Name="Name" />
+    <RootPropertyPathName Name="ContentTypes" />
+    <RootPropertyPathName Name="SelectedType" />
     <RootPropertyPathName Name="Courses" />
     <RootPropertyPathName Name="SelectedCourse" />
     <RootPropertyPathName Name="Display" />
@@ -14,7 +16,6 @@
     <RootPropertyPathName Name="StudentLevels" />
     <RootPropertyPathName Name="SelectedLevel" />
     <RootPropertyPathName Name="PersonTypes" />
-    <RootPropertyPathName Name="SelectedType" />
     <RootPropertyPathName Name="Modules" />
     <RootPropertyPathName Name="SelectedModule" />
     <RootPropertyPathName Name="Roster" />
@@ -63,7 +64,12 @@
       <RootProperty Name="Mode" />
       <RootProperty Name="UpdateSourceTrigger" />
     </RootType>
-    <RootType FullName="UWP.LearningManagement.Dialogs.AddModuleDialog" />
+    <RootType FullName="UWP.LearningManagement.Dialogs.ModuleDialog" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="SelectedItem" />
+    </RootType>
+    <RootType FullName="UWP.LearningManagement.Dialogs.ContentItemDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
       <RootProperty Name="Background" />
       <RootProperty Name="Content" />
@@ -94,10 +100,6 @@
     <RootType FullName="UWP.LearningManagement.Dialogs.CourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditCourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditPersonDialog" />
-    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
-      <RootProperty Name="ItemsSource" />
-      <RootProperty Name="SelectedItem" />
-    </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.PersonDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Children" />
@@ -111,7 +113,7 @@
     <RootType FullName="UWP.LearningManagement.MainPage" />
     <RootType FullName="UWP.LearningManagement.DetailedCourse" />
     <RootType FullName="UWP.LearningManagement.DetailedPerson" />
-    <RootType FullName="UWP.LearningManagement.ModulesPage" />
+    <RootType FullName="UWP.LearningManagement.ItemsPage" />
     <RootType FullName="UWP.LearningManagement.PeoplePage" />
   </Roots.RootTypes>
 </Roots>

@@ -16,17 +16,17 @@ using Windows.UI.Xaml.Navigation;
 
 namespace UWP.LearningManagement.Dialogs
 {
-    public sealed partial class AddModuleDialog : ContentDialog
+    public sealed partial class ContentItemDialog : ContentDialog
     {
-        public AddModuleDialog()
+        public ContentItemDialog()
         {
             this.InitializeComponent();
-            this.DataContext = new ModuleViewModel();
+            DataContext = new ContentItemViewModel();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as ModuleViewModel).Add();
+            (DataContext as ContentItemViewModel).Add();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
