@@ -16,17 +16,7 @@ namespace UWP.LearningManagement.ViewModels
         private CourseService courseService;
         private PersonService personService;
         private Person person { get; set; }
-        public string Name
-        {
-            get
-            {
-                return person.Name;
-            }
-            set
-            {
-                person.Name = value;
-            }
-        }
+        public string Name { get; set; }
         public Person Person
         {
             get { return person; }
@@ -34,20 +24,66 @@ namespace UWP.LearningManagement.ViewModels
         }
         public List<string> PersonTypes { get; set; }
         public string SelectedType { get; set; }
+        public List<string> StudentLevels { get; set; }
+        public string SlectedLevel { get; set; }
 
         public PersonViewModel()
         {
             courseService = CourseService.Current;
             personService = PersonService.Current;
-            person = new Person();
-            person.Id = personService.Size();
             PersonTypes = new List<string>
             { "Student", "Instructor", "Teaching Assistant" };
+            StudentLevels = new List<string>
+            { "Freshman", "Sophmore", "Junior", "Senior" };
         }
+
+        public void Set()
+            {
+            if (SelectedType == "Student")
+            {
+                Person = new Student();
+            }
+            else if (SelectedType == "Instructor")
+            {
+                Person = new Instructor();
+            }
+            else if (SelectedType == "Teaching Assistant")
+            {
+                Person = new TeachingAssistant();
+            }
+            else Person = new Person();
+            Person.Name = Name;
+            Person.Id = personService.Size();
+
+        }
+
 
         public void Add()
         {
-            personService.Add(person);
+            Set();
+            var Student = Person as Student;
+            if (Student != null) 
+            {
+                if(SlectedLevel == "Freshman")
+                {
+                    Student.Classification = Student.Classes.Freshman;
+                }
+                else if(SlectedLevel == "Sophmore")
+                {
+                    Student.Classification = Student.Classes.Sophmore;
+                }
+                else if (SlectedLevel == "Junior")
+                {
+                    Student.Classification = Student.Classes.Junior;
+                }
+                else if (SlectedLevel == "Senior")
+                {
+                    Student.Classification = Student.Classes.Senior;
+                }
+                else Student.Classification = Student.Classes.Freshman;
+                personService.Add(Student);
+            }
+            else personService.Add(Person);
         }
 
 

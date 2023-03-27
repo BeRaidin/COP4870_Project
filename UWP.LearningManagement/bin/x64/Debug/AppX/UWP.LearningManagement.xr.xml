@@ -9,9 +9,13 @@
     <RootPropertyPathName Name="IsSelected" />
     <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="Code" />
+    <RootPropertyPathName Name="StudentLevels" />
+    <RootPropertyPathName Name="SelectedLevel" />
     <RootPropertyPathName Name="PersonTypes" />
     <RootPropertyPathName Name="SelectedType" />
     <RootPropertyPathName Name="Roster" />
+    <RootPropertyPathName Name="GradeLevel" />
+    <RootPropertyPathName Name="Type" />
     <RootPropertyPathName Name="SelectedPerson" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>

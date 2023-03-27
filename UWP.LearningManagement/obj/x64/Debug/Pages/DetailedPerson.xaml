@@ -19,6 +19,10 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Name}"></TextBlock>
+        <StackPanel Grid.Column="1" Grid.Row="0">
+            <TextBlock Text="{Binding Type}"></TextBlock>
+            <TextBlock Text="{Binding GradeLevel}"></TextBlock>
+        </StackPanel>
         <TextBlock Grid.Column="0" Grid.Row="1" Text="Enrolled Courses"></TextBlock>
 
         <ListBox Grid.Row="1" Grid.Column="1"
