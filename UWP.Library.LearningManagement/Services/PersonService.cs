@@ -11,6 +11,13 @@ namespace Library.LearningManagement.Services
     {
         private List<Person> personList;
         private static PersonService instance;
+        private Person currentPerson;
+        public Person CurrentPerson
+        {
+            get { return currentPerson; }
+            set { currentPerson = value; }
+        }
+
 
         public PersonService()
         {

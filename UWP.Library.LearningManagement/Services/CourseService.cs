@@ -20,10 +20,7 @@ namespace Library.LearningManagement.Services
 
         public CourseService()
         {
-            courseList = new List<Course> {
-                new Course{Code = "test1", Name= "name1"},
-                new Course{Code = "test2", Name= "name2"} 
-            };
+            courseList = new List<Course>();
                 
         }
 

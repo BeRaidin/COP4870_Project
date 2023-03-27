@@ -32,7 +32,8 @@ namespace UWP.LearningManagement.ViewModels
             get { return person; }
             set { person = value; }
         }
-        public Person SelectedPerson { get; set; }
+        public List<string> PersonTypes { get; set; }
+        public string SelectedType { get; set; }
 
         public PersonViewModel()
         {
@@ -40,15 +41,8 @@ namespace UWP.LearningManagement.ViewModels
             personService = PersonService.Current;
             person = new Person();
             person.Id = personService.Size();
-        }
-
-        public PersonViewModel(Person selectedPerson) 
-        {
-            courseService = CourseService.Current;
-            personService = PersonService.Current;
-            person = new Person();
-            person.Id = personService.Size();
-            this.SelectedPerson = selectedPerson;
+            PersonTypes = new List<string>
+            { "Student", "Instructor", "Teaching Assistant" };
         }
 
         public void Add()
@@ -56,14 +50,10 @@ namespace UWP.LearningManagement.ViewModels
             personService.Add(person);
         }
 
-        public void RemovePerson()
-        {
-            personService.Remove(person);
-        }
 
         public void Edit()
         {
-            SelectedPerson.Name = person.Name;
+            personService.CurrentPerson.Name = person.Name;
         }
     }
 }

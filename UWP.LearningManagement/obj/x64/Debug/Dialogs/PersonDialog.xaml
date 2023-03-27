@@ -16,6 +16,8 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="10*"/>
+            <RowDefinition/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -23,6 +25,8 @@
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" Text="Name"></TextBlock>
         <TextBox Grid.Column="1" Text="{Binding Path=Name, Mode=TwoWay}"></TextBox>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Type"></TextBlock>
+        <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding PersonTypes}" SelectedItem="{Binding SelectedType}" />
     </Grid>
 </ContentDialog>
 

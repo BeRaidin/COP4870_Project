@@ -76,19 +76,26 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Remove()
         {
+            UpdateCurrentPerson();
             allPeople.Remove(SelectedPerson);
         }
 
         public async void Edit()
         {
+            UpdateCurrentPerson();
             if (SelectedPerson != null)
             {
-                var dialog = new EditPersonDialog(SelectedPerson);
+                var dialog = new EditPersonDialog();
                 if (dialog != null)
                 {
                     await dialog.ShowAsync();
                 }
             }
+        }
+
+        public void UpdateCurrentPerson()
+        {
+            personService.CurrentPerson = SelectedPerson;
         }
     }
 }
