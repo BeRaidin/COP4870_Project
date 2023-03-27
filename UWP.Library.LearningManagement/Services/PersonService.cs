@@ -50,19 +50,6 @@ namespace Library.LearningManagement.Services
             }
         }
 
-        public IEnumerable<Person> Search(string query)
-        {
-
-            if(int.TryParse(query, out int queryInt)) {
-                return People.Where(s => s.Id == queryInt);
-            }
-            else
-            {
-                return People.Where(s => s.Name.ToUpper().Contains(query.ToUpper()));
-            }
-
-        }
-
         public int Size()
         {
             return personList.Count;
