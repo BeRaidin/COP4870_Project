@@ -28,5 +28,10 @@ namespace UWP.LearningManagement
             this.InitializeComponent();
             DataContext = new DetailedCourseViewModel();
         }
+
+        private void Module_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as DetailedCourseViewModel).Add_Module();
+        }
     }
 }

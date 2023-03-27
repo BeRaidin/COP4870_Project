@@ -21,7 +21,6 @@
         <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Code}"></TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Name}"></TextBlock>
         <TextBlock Grid.Column="0" Grid.Row="1" Text="Roster"></TextBlock>
-
         <ListBox Grid.Row="1" Grid.Column="1"
             ItemsSource="{Binding Roster, Mode=OneWay}">
             <ListBox.ItemTemplate>
@@ -32,5 +31,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Button Grid.Column="0" Grid.Row="2" Content="ADD A MODULE" Click="Module_Click"></Button>
+        <ListBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Modules, Mode=OneWay}"></ListBox>
     </Grid>
 </Page>
