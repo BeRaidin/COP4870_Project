@@ -46,5 +46,11 @@ namespace UWP.LearningManagement
         {
             (DataContext as PersonPageViewModel).Search();
         }
+
+        private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            (DataContext as PersonPageViewModel).UpdateCurrentPerson();
+            Frame.Navigate(typeof(DetailedPerson));
+        }
     }
 }

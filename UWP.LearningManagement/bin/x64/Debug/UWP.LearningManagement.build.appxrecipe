@@ -94,6 +94,9 @@
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\DetailedCourse.xbf">
       <PackagePath>Pages\DetailedCourse.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\DetailedPerson.xbf">
+      <PackagePath>Pages\DetailedPerson.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\PeoplePage.xbf">
       <PackagePath>Pages\PeoplePage.xbf</PackagePath>
     </AppxPackagedFile>

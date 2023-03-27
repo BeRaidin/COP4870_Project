@@ -21,12 +21,13 @@ using Library.LearningManagement.Models;
 
 namespace UWP.LearningManagement
 {
-    public sealed partial class DetailedCourse : Page
+    public sealed partial class DetailedPerson : Page
     {
-        public DetailedCourse() 
+        public DetailedPerson() 
         {
             this.InitializeComponent();
-            DataContext = new DetailedCourseViewModel();
+            DataContext = new DetailedPersonViewModel();
         }
+
     }
 }

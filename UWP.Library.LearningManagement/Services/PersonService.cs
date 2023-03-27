@@ -68,9 +68,13 @@ namespace Library.LearningManagement.Services
             return personList.Count;
         }
 
-        public void Remove(Person person)
+        public void Remove()
         {
-            personList.Remove(person);
+            foreach (var course in CurrentPerson.Courses)
+            {
+                course.Roster.Remove(CurrentPerson);
+            }
+            personList.Remove(CurrentPerson);
         }
     }
 }

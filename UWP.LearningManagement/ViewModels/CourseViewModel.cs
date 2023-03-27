@@ -78,6 +78,7 @@ namespace UWP.LearningManagement.ViewModels
                 if(person.IsSelected)
                 {
                     Roster.Add(person);
+                    person.AddCourse(course);
                 }
             }
         }

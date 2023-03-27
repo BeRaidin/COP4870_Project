@@ -140,6 +140,9 @@
     <Compile Include="Pages\DetailedCourse.xaml.cs">
       <DependentUpon>DetailedCourse.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DetailedPerson.xaml.cs">
+      <DependentUpon>DetailedPerson.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PeoplePage.xaml.cs">
       <DependentUpon>PeoplePage.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,7 @@
     <Compile Include="ViewModels\CoursePageViewModel.cs" />
     <Compile Include="ViewModels\CourseViewModel.cs" />
     <Compile Include="ViewModels\DetailedCourseViewModel.cs" />
+    <Compile Include="ViewModels\DetailedPersonViewModel.cs" />
     <Compile Include="ViewModels\PersonPageViewModel.cs" />
     <Compile Include="ViewModels\PersonViewModel.cs" />
   </ItemGroup>
@@ -195,6 +199,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\DetailedCourse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DetailedPerson.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
