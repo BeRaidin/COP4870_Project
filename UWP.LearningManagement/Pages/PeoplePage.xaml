@@ -23,7 +23,7 @@
         </Grid>
 
         <ListBox Grid.Row="1"
-            ItemsSource="{Binding People, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}">
+            ItemsSource="{Binding People, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}" DoubleTapped="ListBox_DoubleTapped">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

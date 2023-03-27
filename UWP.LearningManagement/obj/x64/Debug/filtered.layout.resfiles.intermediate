@@ -14,6 +14,7 @@ Dialogs\PersonDialog.xbf
 MainPage.xbf
 Pages\CoursePage.xbf
 Pages\DetailedCourse.xbf
+Pages\DetailedPerson.xbf
 Pages\PeoplePage.xbf
 UWP.LearningManagement.xr.xml
 Properties\Default.rd.xml

@@ -95,6 +95,7 @@
     </RootType>
     <RootType FullName="UWP.LearningManagement.MainPage" />
     <RootType FullName="UWP.LearningManagement.DetailedCourse" />
+    <RootType FullName="UWP.LearningManagement.DetailedPerson" />
     <RootType FullName="UWP.LearningManagement.PeoplePage" />
   </Roots.RootTypes>
 </Roots>

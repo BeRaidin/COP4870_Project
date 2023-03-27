@@ -31,12 +31,6 @@ namespace Library.LearningManagement.Models
             Id = num;
         }
 
-        public void UpdateName()
-        {
-            Console.WriteLine("What is the name of the person?");
-            Name = Console.ReadLine() ?? string.Empty;
-        }
-
         public void AddCourse(Course course)
         {
             Courses.Add(course);

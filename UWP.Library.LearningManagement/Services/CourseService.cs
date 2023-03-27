@@ -52,6 +52,10 @@ namespace Library.LearningManagement.Services
 
         public void Remove()
         {
+            foreach( var person in currentCourse.Roster)
+            {
+                person.Courses.Remove(currentCourse);
+            }
             courseList.Remove(currentCourse);
         }
 
