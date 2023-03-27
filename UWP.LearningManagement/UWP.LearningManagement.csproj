@@ -119,7 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CoursePage.xaml.cs">
+    <Compile Include="Pages\CoursePage.xaml.cs">
       <DependentUpon>CoursePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\CourseDialog.xaml.cs">
@@ -137,12 +137,16 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PeoplePage.xaml.cs">
+    <Compile Include="Pages\DetailedCourse.xaml.cs">
+      <DependentUpon>DetailedCourse.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PeoplePage.xaml.cs">
       <DependentUpon>PeoplePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CoursePageViewModel.cs" />
     <Compile Include="ViewModels\CourseViewModel.cs" />
+    <Compile Include="ViewModels\DetailedCourseViewModel.cs" />
     <Compile Include="ViewModels\PersonPageViewModel.cs" />
     <Compile Include="ViewModels\PersonViewModel.cs" />
   </ItemGroup>
@@ -166,7 +170,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="CoursePage.xaml">
+    <Page Include="Pages\CoursePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -190,7 +194,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PeoplePage.xaml">
+    <Page Include="Pages\DetailedCourse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PeoplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

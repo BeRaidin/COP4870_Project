@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation.Collections;
+using System.Reflection.Metadata;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -36,8 +37,8 @@ namespace UWP.LearningManagement.ViewModels
 
         public string Query { get; set; }
 
-        public CoursePageViewModel() 
-        { 
+        public CoursePageViewModel()
+        {
             courseService = CourseService.Current;
             personService = PersonService.Current;
             allCourses = courseService.Courses;
@@ -67,7 +68,7 @@ namespace UWP.LearningManagement.ViewModels
             else
             {
                 Courses.Clear();
-                foreach(var course in allCourses)
+                foreach (var course in allCourses)
                 {
                     Courses.Add(course);
                 }
@@ -76,19 +77,26 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Remove()
         {
-            allCourses.Remove(SelectedCourse);
+            UpdateCurrentCourse();
+            courseService.Remove();
         }
 
         public async void Edit()
         {
+            UpdateCurrentCourse();
             if (SelectedCourse != null)
             {
-                var dialog = new EditCourseDialog(SelectedCourse);
+                var dialog = new EditCourseDialog();
                 if (dialog != null)
                 {
                     await dialog.ShowAsync();
                 }
             }
+        }
+
+        public void UpdateCurrentCourse()
+        {
+            courseService.CurrentCourse = SelectedCourse;
         }
     }
 }
