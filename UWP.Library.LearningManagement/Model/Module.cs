@@ -32,10 +32,8 @@ namespace Library.LearningManagement.Models
             Description = Console.ReadLine() ?? string.Empty;
         }
 
-        public override string ToString()
-        {
-            return $"{Name} - {Description}";
-        }
+        public virtual string Display => $"{Name} - {Description}";
+
 
         public string DetailDisplay
         {

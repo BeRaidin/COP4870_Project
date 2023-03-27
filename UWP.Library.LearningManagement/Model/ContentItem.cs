@@ -19,9 +19,6 @@ namespace Library.LearningManagement.Models
             Id = 0;
         }
 
-        public override string ToString()
-        {
-            return $"\t[{Id}] - {Name}";
-        }
+        public virtual string Display => $"\t[{Id}] - {Name}";
     }
 }

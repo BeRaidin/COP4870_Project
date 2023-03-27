@@ -78,6 +78,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             UpdateCurrentPerson();
             personService.Remove();
+            people.Remove(SelectedPerson);
         }
 
         public async void Edit()

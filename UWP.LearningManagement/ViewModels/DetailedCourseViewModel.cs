@@ -20,10 +20,17 @@ namespace UWP.LearningManagement.ViewModels
     {
         private CourseService courseService;
         private PersonService personService;
-
+        private ModuleService moduleService;
+   
+        public Module SelectedModule { get; set; }
         public string Code
         {
             get { return courseService.CurrentCourse.Code; }
+        }
+
+        public int Hours
+        {
+            get { return courseService.CurrentCourse.CreditHours; }
         }
 
         public string Name
@@ -44,6 +51,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             courseService = CourseService.Current;
             personService = PersonService.Current;
+            moduleService = ModuleService.Current;
         }
 
         public async void Add_Module()
@@ -53,6 +61,11 @@ namespace UWP.LearningManagement.ViewModels
             {
                 await dialog.ShowAsync();
             }
+        }
+
+        public void UpdateCurrentModule()
+        {
+            moduleService.CurrentModule = SelectedModule;
         }
     }
 }

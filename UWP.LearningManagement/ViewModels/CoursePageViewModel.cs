@@ -79,6 +79,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             UpdateCurrentCourse();
             courseService.Remove();
+            courses.Remove(SelectedCourse);
         }
 
         public async void Edit()

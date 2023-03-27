@@ -58,12 +58,5 @@ namespace Library.LearningManagement.Services
             }
             courseList.Remove(currentCourse);
         }
-
-        public IEnumerable<Course> Search(string query)
-        {
-            return courseList.Where(s => s.Code.ToUpper().Contains(query.ToUpper())
-                || s.Name.ToUpper().Contains(query.ToUpper())
-                || s.Description.ToUpper().Contains(query.ToUpper()));
-        }
     }
 }

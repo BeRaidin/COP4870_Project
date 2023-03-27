@@ -61,6 +61,7 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
         public List<Person>  People { get; set; }
+        public string Hours { get; set; }
 
         public CourseViewModel()
         {
@@ -68,6 +69,10 @@ namespace UWP.LearningManagement.ViewModels
             personService = PersonService.Current;
             People = personService.People;
             course = new Course();
+            foreach(var person in People)
+            {
+                person.IsSelected = false; 
+            }
         }
 
         public void SetRoster()
@@ -79,6 +84,11 @@ namespace UWP.LearningManagement.ViewModels
                     Roster.Add(person);
                     person.AddCourse(course);
                 }
+            }
+
+            if(int.TryParse(Hours, out int hours))
+            {
+                course.CreditHours = hours;
             }
         }
 
