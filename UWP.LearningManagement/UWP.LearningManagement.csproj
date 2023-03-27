@@ -119,6 +119,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\AddModuleDialog.xaml.cs">
+      <DependentUpon>AddModuleDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CoursePage.xaml.cs">
       <DependentUpon>CoursePage.xaml</DependentUpon>
     </Compile>
@@ -151,6 +154,7 @@
     <Compile Include="ViewModels\CourseViewModel.cs" />
     <Compile Include="ViewModels\DetailedCourseViewModel.cs" />
     <Compile Include="ViewModels\DetailedPersonViewModel.cs" />
+    <Compile Include="ViewModels\ModuleViewModel.cs" />
     <Compile Include="ViewModels\PersonPageViewModel.cs" />
     <Compile Include="ViewModels\PersonViewModel.cs" />
   </ItemGroup>
@@ -174,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Dialogs\AddModuleDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\CoursePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -36,10 +36,23 @@ namespace UWP.LearningManagement.ViewModels
             get { return courseService.CurrentCourse.Roster; }
         }
 
+        public List<Module> Modules
+        {
+            get { return courseService.CurrentCourse.Modules; }
+        }
         public DetailedCourseViewModel()
         {
             courseService = CourseService.Current;
             personService = PersonService.Current;
+        }
+
+        public async void Add_Module()
+        {
+            var dialog = new AddModuleDialog();
+            if (dialog != null)
+            {
+                await dialog.ShowAsync();
+            }
         }
     }
 }

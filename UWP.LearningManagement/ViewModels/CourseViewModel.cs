@@ -61,7 +61,6 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
         public List<Person>  People { get; set; }
-        
 
         public CourseViewModel()
         {
