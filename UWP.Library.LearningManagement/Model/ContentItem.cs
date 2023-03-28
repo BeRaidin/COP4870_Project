@@ -19,6 +19,6 @@ namespace Library.LearningManagement.Models
             Id = 0;
         }
 
-        public virtual string Display => $"\t[{Id}] - {Name}";
+        public virtual string Display => $"[{Id}] - {Name}";
     }
 }

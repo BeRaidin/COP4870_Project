@@ -34,6 +34,13 @@ namespace UWP.LearningManagement.ViewModels
                 _modules = value;
             }
         }
+        private readonly List<Assignment> allAssignments;
+        private ObservableCollection<Assignment> _assignments;
+        public ObservableCollection<Assignment> Assignments
+        {
+            get { return _assignments; }
+            set { _assignments = value; }
+        }
         public Module SelectedModule { get; set; }
         public string Query { get; set; }
         public string Code
@@ -59,7 +66,9 @@ namespace UWP.LearningManagement.ViewModels
             personService = PersonService.Current;
             moduleService = ModuleService.Current;
             allmodules = courseService.CurrentCourse.Modules;
+            allAssignments = courseService.CurrentCourse.Assignments;
             Modules = new ObservableCollection<Module>(allmodules);
+            Assignments = new ObservableCollection<Assignment>(allAssignments);
         }
 
         public async void Add_Module()
@@ -83,6 +92,11 @@ namespace UWP.LearningManagement.ViewModels
             foreach (var module in allmodules)
             {
                 Modules.Add(module);
+            }
+            Assignments.Clear();
+            foreach(var assignment in allAssignments)
+            {
+                Assignments.Add(assignment);
             }
         }
 

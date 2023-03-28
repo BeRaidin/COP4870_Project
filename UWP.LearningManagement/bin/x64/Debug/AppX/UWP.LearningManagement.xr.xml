@@ -5,6 +5,9 @@
     <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="ContentTypes" />
     <RootPropertyPathName Name="SelectedType" />
+    <RootPropertyPathName Name="DueDate" />
+    <RootPropertyPathName Name="Group" />
+    <RootPropertyPathName Name="TotalPoints" />
     <RootPropertyPathName Name="Courses" />
     <RootPropertyPathName Name="SelectedCourse" />
     <RootPropertyPathName Name="Display" />
@@ -16,6 +19,7 @@
     <RootPropertyPathName Name="StudentLevels" />
     <RootPropertyPathName Name="SelectedLevel" />
     <RootPropertyPathName Name="PersonTypes" />
+    <RootPropertyPathName Name="Assignments" />
     <RootPropertyPathName Name="Modules" />
     <RootPropertyPathName Name="SelectedModule" />
     <RootPropertyPathName Name="Roster" />
@@ -71,6 +75,11 @@
       <RootProperty Name="SelectedItem" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.ContentItemDialog" />
+    <RootType FullName="Windows.UI.Xaml.Controls.DatePicker">
+      <RootProperty Name="Margin" />
+      <RootProperty Name="SelectedDate" />
+    </RootType>
+    <RootType FullName="UWP.LearningManagement.Dialogs.AssignmentDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
       <RootProperty Name="Background" />
       <RootProperty Name="Content" />

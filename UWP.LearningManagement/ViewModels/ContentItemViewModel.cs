@@ -41,6 +41,7 @@ namespace UWP.LearningManagement.ViewModels
             if (SelectedType == "Assignment")
             {
                 ContentItem = new AssignmentItem();
+                moduleService.CurrentItem = ContentItem;
             }
             else if(SelectedType == "Page")
             {

@@ -42,6 +42,15 @@ namespace UWP.LearningManagement.ViewModels
             {
                 await dialog.ShowAsync();
             }
+
+            if(moduleService.CurrentItem as AssignmentItem !=null)
+            {
+                var assignDialog = new AssignmentDialog();
+                if (assignDialog != null)
+                {
+                    await assignDialog.ShowAsync();
+                }
+            }
             Refresh();
         }
 
