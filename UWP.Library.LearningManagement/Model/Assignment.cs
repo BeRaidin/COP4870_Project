@@ -12,7 +12,7 @@ namespace Library.LearningManagement.Models
         public string Description { get; set; }
         public int TotalAvailablePoints { get; set; }
         public AssignmentGroup AssignmentGroup { get; set; } 
-        public DateTime DueDate { get; set; }
+        public DateTimeOffset DueDate { get; set; }
         public Decimal Grade { get; set; }
 
         public Assignment() 
@@ -22,10 +22,8 @@ namespace Library.LearningManagement.Models
             AssignmentGroup = new AssignmentGroup();
         }
 
-        public override string ToString()
-        {
-            return $"({DueDate}) {Name} - {AssignmentGroup.Name}";
-        }
+        public virtual string Display => $"({DueDate}) {Name} - {AssignmentGroup.Name}";
+
 
         public void UpdateName()
         {

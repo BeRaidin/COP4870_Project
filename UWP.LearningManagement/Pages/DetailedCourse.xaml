@@ -13,6 +13,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -40,6 +41,16 @@
         <Button Grid.Column="0" Grid.Row="2" Content="ADD A MODULE" Click="Module_Click"></Button>
         <ListBox Grid.Row="2" Grid.Column="1"
             ItemsSource="{Binding Modules, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedModule, Mode=TwoWay}" DoubleTapped="ListBox_DoubleTapped">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox Grid.Row="3" Grid.Column="1"
+            ItemsSource="{Binding Assignments, Mode=OneWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

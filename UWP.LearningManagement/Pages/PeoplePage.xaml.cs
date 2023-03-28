@@ -49,8 +49,11 @@ namespace UWP.LearningManagement
 
         private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            (DataContext as PersonPageViewModel).UpdateCurrentPerson();
-            Frame.Navigate(typeof(DetailedPerson));
+            if ((DataContext as PersonPageViewModel).SelectedPerson != null)
+            {
+                (DataContext as PersonPageViewModel).UpdateCurrentPerson();
+                Frame.Navigate(typeof(DetailedPerson));
+            }
         }
     }
 }

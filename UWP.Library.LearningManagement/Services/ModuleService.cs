@@ -51,6 +51,8 @@ namespace Library.LearningManagement.Services
         public ModuleService()
         {
             ModuleList = new List<Module>();
+            CurrentModule = new Module();
+            CurrentItem = new ContentItem();
         }
 
         public void Add(Module module)

@@ -50,8 +50,11 @@ namespace UWP.LearningManagement
 
         private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            (DataContext as CoursePageViewModel).UpdateCurrentCourse();
-            Frame.Navigate(typeof(DetailedCourse));
+            if ((DataContext as CoursePageViewModel).SelectedCourse != null)
+            {
+                (DataContext as CoursePageViewModel).UpdateCurrentCourse();
+                Frame.Navigate(typeof(DetailedCourse));
+            }
         }
     }
 }
