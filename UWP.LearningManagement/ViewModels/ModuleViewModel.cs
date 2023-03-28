@@ -14,14 +14,12 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class ModuleViewModel
     {
-        private CourseService courseService;
-        private PersonService personService;
-
-        private Module module { get; set; }
+        private readonly CourseService courseService;
+        private Module _module;
         public Module Module
         {
-            get { return module; }
-            set { value = module; }
+            get { return _module; }
+            set { _module = value; }
         }
 
         public List<Module> Modules
@@ -31,25 +29,24 @@ namespace UWP.LearningManagement.ViewModels
 
         public string Name
         {
-            get { return module.Name; }
-            set { module.Name = value; }
+            get { return Module.Name; }
+            set { Module.Name = value; }
         }
         public string Description
         {
-            get { return module.Description; }
-            set { module.Description = value; }
+            get { return Module.Description; }
+            set { Module.Description = value; }
         }
 
         public ModuleViewModel()
         {
             courseService = CourseService.Current;
-            personService = PersonService.Current;
-            module = new Module();
+            Module = new Module();
         }
 
         public void Add()
         {
-            courseService.CurrentCourse.Modules.Add(module);
+            courseService.CurrentCourse.Modules.Add(Module);
         }
     }
 }

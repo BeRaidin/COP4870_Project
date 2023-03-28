@@ -15,7 +15,6 @@ namespace Library.LearningManagement.Models
         {
             Freshman, Sophmore, Junior, Senior
         }
-
         public Dictionary<Course, double> FinalGrades { get; set; }
 
         public double GradePointAverage { get; set; }
@@ -26,32 +25,6 @@ namespace Library.LearningManagement.Models
             FinalGrades = new Dictionary<Course, double>();
         }
 
-        public override string ToString()
-        {
-            return $"[{Id}] {Name} - {Classification}";
-        }
-
-
-        public void UpdateClassification()
-        {
-            Console.WriteLine("What is the classification of the student? (F)reshman s(O)phmore (J)unior (S)enior");
-            var classification = Console.ReadLine() ?? string.Empty;
-            Classes classEnum = Classes.Freshman;
-            if (classification.Equals("O", StringComparison.InvariantCultureIgnoreCase))
-            {
-                classEnum = Classes.Sophmore;
-            }
-            else if (classification.Equals("J", StringComparison.InvariantCultureIgnoreCase))
-            {
-                classEnum = Classes.Junior;
-            }
-            else if (classification.Equals("S", StringComparison.InvariantCultureIgnoreCase))
-            {
-                classEnum = Classes.Senior;
-            }
-
-            Classification = classEnum;
-        }
 
         public void DeleteGrades()
         {

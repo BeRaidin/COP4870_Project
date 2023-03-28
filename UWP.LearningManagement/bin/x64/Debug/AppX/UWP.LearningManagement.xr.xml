@@ -39,10 +39,10 @@
       <RootProperty Name="RowDefinitions" />
       <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="Children" />
-      <RootMethod Name="GetColumn" />
-      <RootMethod Name="SetColumn" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
+      <RootMethod Name="GetColumn" />
+      <RootMethod Name="SetColumn" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
       <RootProperty Name="Height" />
@@ -54,6 +54,10 @@
       <RootProperty Name="Text" />
       <RootProperty Name="Margin" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="SelectedItem" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Text" />
       <RootProperty Name="Margin" />
@@ -64,11 +68,8 @@
       <RootProperty Name="Mode" />
       <RootProperty Name="UpdateSourceTrigger" />
     </RootType>
+    <RootType FullName="UWP.LearningManagement.Dialogs.EditContentItemDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.ModuleDialog" />
-    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
-      <RootProperty Name="ItemsSource" />
-      <RootProperty Name="SelectedItem" />
-    </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.ContentItemDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
       <RootProperty Name="Background" />

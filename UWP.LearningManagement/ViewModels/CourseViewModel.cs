@@ -67,7 +67,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             courseService = CourseService.Current;
             personService = PersonService.Current;
-            People = personService.People;
+            People = personService.PersonList;
             course = new Course();
             foreach(var person in People)
             {

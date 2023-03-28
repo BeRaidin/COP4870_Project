@@ -10,20 +10,23 @@ namespace Library.LearningManagement.Services
     public class ModuleService
     {
         private List<Module> moduleList;
-        private static ModuleService instance;
-        private Module currentModule;
+        public List<Module> ModuleList
+        {
+            get
+            {
+                return moduleList;
+            }
+            set
+            { 
+                moduleList = value; 
+            }
+        }
+        private Module _currentModule;
         public Module CurrentModule
         {
-            get { return currentModule; }
-            set { currentModule = value; }
+            get { return _currentModule; }
+            set { _currentModule = value; }
         }
-
-        public ModuleService()
-        {
-            moduleList = new List<Module>();
-
-        }
-
         public static ModuleService Current
         {
             get
@@ -36,23 +39,21 @@ namespace Library.LearningManagement.Services
                 return instance;
             }
         }
+        private static ModuleService instance;
 
-        public List<Module> Modules
+        public ModuleService()
         {
-            get
-            {
-                return moduleList;
-            }
+            ModuleList = new List<Module>();
         }
 
         public void Add(Module module)
         {
-            moduleList.Add(module);
+            ModuleList.Add(module);
         }
 
         public void Remove()
         {
-            moduleList.Remove(currentModule);
+            ModuleList.Remove(CurrentModule);
         }
     }
 }

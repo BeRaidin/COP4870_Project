@@ -12,35 +12,33 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation.Collections;
+using System.Reflection.Metadata;
 
 namespace UWP.LearningManagement.ViewModels
 {
     public class PersonPageViewModel
     {
-        private PersonService personService;
-        private CourseService courseService;
-        private List<Person> allPeople;
-        private ObservableCollection<Person> people;
+        private readonly PersonService personService;
+        private readonly List<Person> allPeople;
+        private ObservableCollection<Person> _people;
         public ObservableCollection<Person> People
         {
             get
             {
-                return people;
+                return _people;
             }
             private set
             {
-                people = value;
+                _people = value;
             }
         }
         public Person SelectedPerson { get; set; }
-
         public string Query { get; set; }
 
         public PersonPageViewModel()
         {
             personService = PersonService.Current;
-            courseService = CourseService.Current;
-            allPeople = personService.People;
+            allPeople = personService.PersonList;
             People = new ObservableCollection<Person>(allPeople);
         }
 
@@ -51,6 +49,31 @@ namespace UWP.LearningManagement.ViewModels
             {
                 await dialog.ShowAsync();
             }
+            Refresh();
+        }
+
+        public void Remove()
+        {
+            if (SelectedPerson != null)
+            {
+                UpdateCurrentPerson();
+                personService.Remove();
+                Refresh();
+            }
+        }
+
+        public async void Edit()
+        {
+            if (SelectedPerson != null)
+            {
+                UpdateCurrentPerson();
+                var dialog = new EditPersonDialog();
+                if (dialog != null)
+                {
+                    await dialog.ShowAsync();
+                }
+            }
+            Refresh();
         }
 
         public void Search()
@@ -66,37 +89,22 @@ namespace UWP.LearningManagement.ViewModels
             }
             else
             {
-                People.Clear();
-                foreach (var person in allPeople)
-                {
-                    People.Add(person);
-                }
-            }
-        }
-
-        public void Remove()
-        {
-            UpdateCurrentPerson();
-            personService.Remove();
-            people.Remove(SelectedPerson);
-        }
-
-        public async void Edit()
-        {
-            UpdateCurrentPerson();
-            if (SelectedPerson != null)
-            {
-                var dialog = new EditPersonDialog();
-                if (dialog != null)
-                {
-                    await dialog.ShowAsync();
-                }
+                Refresh();
             }
         }
 
         public void UpdateCurrentPerson()
         {
             personService.CurrentPerson = SelectedPerson;
+        }
+
+        public void Refresh()
+        {
+            People.Clear();
+            foreach (var person in allPeople)
+            {
+                People.Add(person);
+            }
         }
     }
 }

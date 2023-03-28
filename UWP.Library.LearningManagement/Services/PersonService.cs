@@ -10,23 +10,26 @@ namespace Library.LearningManagement.Services
     public class PersonService
     {
         private List<Person> personList;
-        private static PersonService instance;
-        private Person currentPerson;
+        public List<Person> PersonList
+        {
+            get
+            {
+                return personList;
+            }
+            set
+            {
+                personList = value;
+            }
+        }
+        private Person _currentPerson;
         public Person CurrentPerson
         {
-            get { return currentPerson; }
-            set { currentPerson = value; }
+            get { return _currentPerson; }
+            set { _currentPerson = value; }
         }
-
-
-        public PersonService()
-        {
-            personList = new List<Person>();
-        }
-
         public static PersonService Current
         {
-            get 
+            get
             {
                 if (instance == null)
                 {
@@ -36,23 +39,16 @@ namespace Library.LearningManagement.Services
                 return instance;
             }
         }
+        private static PersonService instance;
+
+        public PersonService()
+        {
+            PersonList = new List<Person>();
+        }
            
         public void Add(Person person)
         {
-            personList.Add(person);
-        }
-
-        public List<Person> People
-        {
-            get
-            {
-                return personList;
-            }
-        }
-
-        public int Size()
-        {
-            return personList.Count;
+            PersonList.Add(person);
         }
 
         public void Remove()
@@ -61,7 +57,13 @@ namespace Library.LearningManagement.Services
             {
                 course.Roster.Remove(CurrentPerson);
             }
-            personList.Remove(CurrentPerson);
+            PersonList.Remove(CurrentPerson);
         }
+
+        public int Size()
+        {
+            return PersonList.Count;
+        }
+
     }
 }
