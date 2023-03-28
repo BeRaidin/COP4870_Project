@@ -10,22 +10,22 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Name}"></TextBlock>
-        <StackPanel Grid.Column="1" Grid.Row="0">
-            <TextBlock Text="{Binding Type}"></TextBlock>
-            <TextBlock Text="{Binding GradeLevel}"></TextBlock>
+        <TextBlock FontSize="60*" Text="{Binding Name}"></TextBlock>
+        <StackPanel Grid.Column="1" Margin="10,10,10,10">
+            <TextBlock FontSize="40*" Text="{Binding Type}"></TextBlock>
+            <TextBlock FontSize="20*" Text="{Binding GradeLevel}"></TextBlock>
         </StackPanel>
-        <TextBlock Grid.Column="0" Grid.Row="1" Text="Enrolled Courses"></TextBlock>
 
-        <ListBox Grid.Row="1" Grid.Column="1"
+        <ListBox Margin="10,10,10,10" Grid.Row="1"
             ItemsSource="{Binding Courses, Mode=OneWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -35,5 +35,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <TextBlock Margin="10,10,10,10" VerticalAlignment="Bottom" Grid.Row="1" FontSize="20" Text="Enrolled Courses"></TextBlock>
     </Grid>
 </Page>
