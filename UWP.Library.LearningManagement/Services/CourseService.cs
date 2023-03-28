@@ -10,20 +10,23 @@ namespace Library.LearningManagement.Services
     public class CourseService
     {
         private List<Course> courseList;
-        private static CourseService instance;
-        private Course currentCourse;
+        public List<Course> CourseList
+        {
+            get
+            {
+                return courseList;
+            }
+            set
+            {
+                courseList = value;
+            }
+        }
+        private Course _currentCourse;
         public Course CurrentCourse
         {
-            get { return currentCourse; }
-            set { currentCourse = value; }
+            get { return _currentCourse; }
+            set { _currentCourse = value; }
         }
-
-        public CourseService()
-        {
-            courseList = new List<Course>();
-                
-        }
-
         public static CourseService Current
         {
             get
@@ -36,27 +39,25 @@ namespace Library.LearningManagement.Services
                 return instance;
             }
         }
+        private static CourseService instance;
 
-        public List<Course> Courses
+        public CourseService()
         {
-            get 
-            { 
-                return courseList; 
-            }
-        }
+            CourseList = new List<Course>();   
+        }        
 
         public void Add(Course course)
         {
-            courseList.Add(course);
+            CourseList.Add(course);
         }
 
         public void Remove()
         {
-            foreach( var person in currentCourse.Roster)
+            foreach( var person in CurrentCourse.Roster)
             {
-                person.Courses.Remove(currentCourse);
+                person.Courses.Remove(CurrentCourse);
             }
-            courseList.Remove(currentCourse);
+            CourseList.Remove(CurrentCourse);
         }
     }
 }

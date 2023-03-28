@@ -1,49 +1,37 @@
-﻿using Library.LearningManagement.Services;
-using Library.LearningManagement.Models;
-using UWP.LearningManagement.Dialogs;
+﻿using Library.LearningManagement.Models;
+using Library.LearningManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
-using Windows.UI.Xaml.Controls;
-using Windows.Foundation.Collections;
-using System.Reflection.Metadata;
+using UWP.LearningManagement.Dialogs;
 
 namespace UWP.LearningManagement.ViewModels
 {
     public class ItemsPageViewModel
     {
-        private CourseService courseService;
-        private PersonService personService;
-        private ModuleService moduleService;
-
-        private ObservableCollection<ContentItem> contentItems;
+        private readonly ContentItemService contentService;
+        private readonly List<ContentItem> allItems;
+        private ObservableCollection<ContentItem> _contentItems;
         public ObservableCollection<ContentItem> ContentItems
         {
             get
             {
-                return contentItems;
+                return _contentItems;
             }
             private set
             {
-                contentItems = value;
+                _contentItems = value;
             }
         }
         public ContentItem SelectedItem { get; set; }
-
         public string Query { get; set; }
 
         public ItemsPageViewModel() 
         {
-            courseService = CourseService.Current;
-            personService = PersonService.Current;
-            moduleService = ModuleService.Current;
-            ContentItems = new ObservableCollection<ContentItem>(moduleService.CurrentModule.Content);
+            contentService = ContentItemService.Current;
+            allItems = contentService.ContentList;
+            ContentItems = new ObservableCollection<ContentItem>(allItems);
         }
 
         public async void Add()
@@ -53,24 +41,31 @@ namespace UWP.LearningManagement.ViewModels
             {
                 await dialog.ShowAsync();
             }
+            Refresh();
         }
 
         public void Remove()
         {
-            moduleService.CurrentModule.Content.Remove(SelectedItem);
-            ContentItems.Remove(SelectedItem);
+            if (SelectedItem != null)
+            {
+                UpdateCurrentItem();
+                contentService.Remove();
+                Refresh();
+            }
         }
 
         public async void Edit()
         {
             if (SelectedItem != null)
             {
+                UpdateCurrentItem();
                 var dialog = new EditContentItemDialog();
                 if (dialog != null)
                 {
                     await dialog.ShowAsync();
                 }
             }
+            Refresh();
         }
 
         public void Search()
@@ -78,9 +73,18 @@ namespace UWP.LearningManagement.ViewModels
 
         }
 
-        public void UpdateCurrentModule()
+        public void UpdateCurrentItem()
         {
+            contentService.CurrentContent = SelectedItem;
+        }
 
+        public void Refresh()
+        {
+            ContentItems.Clear();
+            foreach (var item in allItems)
+            {
+                ContentItems.Add(item);
+            }
         }
     }
 }

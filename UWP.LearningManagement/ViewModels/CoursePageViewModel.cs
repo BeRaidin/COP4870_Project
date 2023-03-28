@@ -18,31 +18,28 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class CoursePageViewModel
     {
-        private CourseService courseService;
-        private PersonService personService;
-        private List<Course> allCourses;
-        private ObservableCollection<Course> courses;
+        private readonly CourseService courseService;
+        private readonly List<Course> allCourses;
+        private ObservableCollection<Course> _courses;
         public ObservableCollection<Course> Courses
         {
             get
             {
-                return courses;
+                return _courses;
             }
             private set
             {
-                courses = value;
+                _courses = value;
             }
         }
         public Course SelectedCourse { get; set; }
-
         public string Query { get; set; }
 
         public CoursePageViewModel()
         {
             courseService = CourseService.Current;
-            personService = PersonService.Current;
-            allCourses = courseService.Courses;
-            courses = new ObservableCollection<Course>(courseService.Courses);
+            allCourses = courseService.CourseList;
+            Courses = new ObservableCollection<Course>(allCourses);
         }
 
         public async void Add()
@@ -52,6 +49,31 @@ namespace UWP.LearningManagement.ViewModels
             {
                 await dialog.ShowAsync();
             }
+            Refresh();
+        }
+
+        public void Remove()
+        {
+            if (SelectedCourse != null)
+            {
+                UpdateCurrentCourse();
+                courseService.Remove();
+                Refresh();
+            }
+        }
+
+        public async void Edit()
+        {
+            if (SelectedCourse != null)
+            {
+                UpdateCurrentCourse();
+                var dialog = new EditCourseDialog();
+                if (dialog != null)
+                {
+                    await dialog.ShowAsync();
+                }
+            }
+            Refresh();
         }
 
         public void Search()
@@ -67,37 +89,22 @@ namespace UWP.LearningManagement.ViewModels
             }
             else
             {
-                Courses.Clear();
-                foreach (var course in allCourses)
-                {
-                    Courses.Add(course);
-                }
-            }
-        }
-
-        public void Remove()
-        {
-            UpdateCurrentCourse();
-            courseService.Remove();
-            courses.Remove(SelectedCourse);
-        }
-
-        public async void Edit()
-        {
-            UpdateCurrentCourse();
-            if (SelectedCourse != null)
-            {
-                var dialog = new EditCourseDialog();
-                if (dialog != null)
-                {
-                    await dialog.ShowAsync();
-                }
+                Refresh();
             }
         }
 
         public void UpdateCurrentCourse()
         {
             courseService.CurrentCourse = SelectedCourse;
+        }
+
+        public void Refresh()
+        {
+            Courses.Clear();
+            foreach (var course in allCourses)
+            {
+                Courses.Add(course);
+            }
         }
     }
 }
