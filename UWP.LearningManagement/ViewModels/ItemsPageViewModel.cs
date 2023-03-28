@@ -3,6 +3,7 @@ using Library.LearningManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Xml.Linq;
 using UWP.LearningManagement.Dialogs;
 
@@ -10,7 +11,7 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class ItemsPageViewModel
     {
-        private readonly ContentItemService contentService;
+        private readonly ModuleService moduleService;
         private readonly List<ContentItem> allItems;
         private ObservableCollection<ContentItem> _contentItems;
         public ObservableCollection<ContentItem> ContentItems
@@ -29,8 +30,8 @@ namespace UWP.LearningManagement.ViewModels
 
         public ItemsPageViewModel() 
         {
-            contentService = ContentItemService.Current;
-            allItems = contentService.ContentList;
+            moduleService = ModuleService.Current;
+            allItems = moduleService.CurrentModule.Content;
             ContentItems = new ObservableCollection<ContentItem>(allItems);
         }
 
@@ -49,7 +50,7 @@ namespace UWP.LearningManagement.ViewModels
             if (SelectedItem != null)
             {
                 UpdateCurrentItem();
-                contentService.Remove();
+                moduleService.CurrentModule.Content.Remove(SelectedItem);
                 Refresh();
             }
         }
@@ -70,12 +71,24 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Search()
         {
-
+            if (Query != null)
+            {
+                var searchResults = allItems.Where(i => i.Name.Contains(Query));
+                ContentItems.Clear();
+                foreach (var item in searchResults)
+                {
+                    ContentItems.Add(item);
+                }
+            }
+            else
+            {
+                Refresh();
+            }
         }
 
         public void UpdateCurrentItem()
         {
-            contentService.CurrentContent = SelectedItem;
+            moduleService.CurrentItem = SelectedItem;
         }
 
         public void Refresh()

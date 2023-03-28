@@ -21,37 +21,45 @@ namespace UWP.LearningManagement.ViewModels
         private CourseService courseService;
         private PersonService personService;
         private ModuleService moduleService;
-   
+        private readonly List<Module> allmodules;
+        private ObservableCollection<Module> _modules;
+        public ObservableCollection<Module> Modules
+        {
+            get
+            {
+                return _modules;
+            }
+            set
+            {
+                _modules = value;
+            }
+        }
         public Module SelectedModule { get; set; }
+        public string Query { get; set; }
         public string Code
         {
             get { return courseService.CurrentCourse.Code; }
         }
-
         public int Hours
         {
             get { return courseService.CurrentCourse.CreditHours; }
         }
-
         public string Name
         {
             get { return courseService.CurrentCourse.Name; }
         }
-
         public List<Person> Roster
         {
             get { return courseService.CurrentCourse.Roster; }
         }
 
-        public List<Module> Modules
-        {
-            get { return courseService.CurrentCourse.Modules; }
-        }
         public DetailedCourseViewModel()
         {
             courseService = CourseService.Current;
             personService = PersonService.Current;
             moduleService = ModuleService.Current;
+            allmodules = courseService.CurrentCourse.Modules;
+            Modules = new ObservableCollection<Module>(allmodules);
         }
 
         public async void Add_Module()
@@ -61,11 +69,22 @@ namespace UWP.LearningManagement.ViewModels
             {
                 await dialog.ShowAsync();
             }
+            Refresh();
         }
 
         public void UpdateCurrentModule()
         {
             moduleService.CurrentModule = SelectedModule;
         }
+
+        public void Refresh()
+        {
+            Modules.Clear();
+            foreach (var module in allmodules)
+            {
+                Modules.Add(module);
+            }
+        }
+
     }
 }

@@ -18,8 +18,6 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class ContentItemViewModel
     {
-        private CourseService courseService;
-        private PersonService personService;
         private ModuleService moduleService;
         public List<string> ContentTypes { get; set; }
         public string Name { get; set; }
@@ -33,8 +31,6 @@ namespace UWP.LearningManagement.ViewModels
         }
         public ContentItemViewModel()
         {
-            courseService = CourseService.Current;
-            personService = PersonService.Current;
             moduleService = ModuleService.Current;
             ContentTypes = new List<string>
             { "Assignment", "Page", "File" };
@@ -67,7 +63,8 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Edit()
         {
-
+            moduleService.CurrentItem.Name = Name;
+            moduleService.CurrentItem.Description = Description;
         }
     }
 }
