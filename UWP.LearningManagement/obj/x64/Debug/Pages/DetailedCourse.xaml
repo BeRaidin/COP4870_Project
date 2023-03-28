@@ -7,39 +7,37 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Code}"></TextBlock>
-        <StackPanel Grid.Column="2" Grid.Row="0">
-            <TextBlock Text="{Binding Name}"></TextBlock>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Credit Hours: "></TextBlock>
+        <TextBlock FontSize="60*" Text="{Binding Code}"></TextBlock>
+        <StackPanel Grid.Column="1" Margin="10,10,10,10">
+            <TextBlock FontSize="40*" Text="{Binding Name}"></TextBlock>
+            <StackPanel Margin="10,10,10,10" Orientation="Horizontal">
+                <TextBlock Margin="0,0,5,0" Text="Credit Hours:"></TextBlock>
                 <TextBlock Text="{Binding Hours}"></TextBlock>
             </StackPanel>
         </StackPanel>
-        <TextBlock Grid.Column="0" Grid.Row="1" Text="Roster"></TextBlock>
-        <ListBox Grid.Row="1" Grid.Column="1"
-            ItemsSource="{Binding Roster, Mode=OneWay}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <TextBlock Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <Button x:ConnectionId='2' Grid.Column="0" Grid.Row="2" Content="ADD A MODULE"                     ></Button>
-        <ListBox x:ConnectionId='3' Grid.Row="2" Grid.Column="1"
+        <ListBox Margin="10,10,10,10" Grid.Row="1" ItemsSource="{Binding Roster, Mode=OneWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        <TextBlock Margin="10,10,10,10" VerticalAlignment="Bottom" Grid.Row="1" FontSize="20" Text="Roster"></TextBlock>
+        <ListBox x:ConnectionId='2' Margin="10,10,10,10" Grid.Row="2" Grid.Column="0"
             ItemsSource="{Binding Modules, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedModule, Mode=TwoWay}"                                    >
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -49,7 +47,9 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox Grid.Row="3" Grid.Column="1"
+        <Button x:ConnectionId='3' VerticalAlignment="Bottom" Margin="10,10,10,10" Grid.Row="2" Content="ADD A MODULE"                     ></Button>
+        
+        <ListBox Margin="10,10,10,10" Grid.Row="3" Grid.Column="0"
             ItemsSource="{Binding Assignments, Mode=OneWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -59,6 +59,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <TextBlock Margin="10,10,10,10" VerticalAlignment="Bottom" Grid.Row="3" FontSize="20" Text="Assignments"></TextBlock>
     </Grid>
 </Page>
 
