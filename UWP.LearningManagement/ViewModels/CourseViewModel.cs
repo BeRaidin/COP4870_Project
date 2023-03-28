@@ -15,49 +15,48 @@ namespace UWP.LearningManagement.ViewModels
     {
         private CourseService courseService;
         private PersonService personService;
-        private Course course { get; set; }
         public string Name
         {
             get
             {
-                return course.Name;
+                return courseService.CurrentCourse.Name;
             }
             set
             {
-                course.Name = value;
+                courseService.CurrentCourse.Name = value;
             }
         }
         public string Code
         {
             get
             {
-                return course.Code;
+                return Course.Code;
             }
             set
             {
-                course.Code = value;
+                Course.Code = value;
             }
         }
         public List<Person> Roster 
         {
             get
             {
-                return course.Roster;
+                return Course.Roster;
             }
             set
-            { 
-                course.Roster = value; 
+            {
+                Course.Roster = value; 
             }
         }
         public Course Course
         {
             get
             {
-                return course;
+                return courseService.CurrentCourse;
             }
             set
             {
-                course = value;
+                courseService.CurrentCourse = value;
             }
         }
         public List<Person>  People { get; set; }
@@ -68,40 +67,39 @@ namespace UWP.LearningManagement.ViewModels
             courseService = CourseService.Current;
             personService = PersonService.Current;
             People = personService.PersonList;
-            course = new Course();
             foreach(var person in People)
             {
                 person.IsSelected = false; 
             }
         }
 
-        public void SetRoster()
+        public void Set()
         {
             foreach (Person person in People)
             {
                 if(person.IsSelected)
                 {
                     Roster.Add(person);
-                    person.AddCourse(course);
+                    person.AddCourse(Course);
                 }
             }
 
             if(int.TryParse(Hours, out int hours))
             {
-                course.CreditHours = hours;
+                Course.CreditHours = hours;
             }
         }
 
         public void Add()
         {
-            SetRoster();
-            courseService.Add(course);
+            Set();
+            courseService.Add(Course);
         }
 
         public void Edit()
         {
-            courseService.CurrentCourse.Name = course.Name;
-            courseService.CurrentCourse.Code = course.Code;
+            courseService.CurrentCourse.Name = Name;
+            courseService.CurrentCourse.Code = Code;
         }
     }
 }
