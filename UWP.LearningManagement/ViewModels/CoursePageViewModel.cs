@@ -44,6 +44,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public async void Add()
         {
+            courseService.CurrentCourse = new Course();
             var dialog = new CourseDialog();
             if (dialog != null)
             {

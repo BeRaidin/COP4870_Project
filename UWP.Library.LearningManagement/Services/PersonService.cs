@@ -44,6 +44,7 @@ namespace Library.LearningManagement.Services
         public PersonService()
         {
             PersonList = new List<Person>();
+            CurrentPerson = new Person();
         }
            
         public void Add(Person person)

@@ -44,6 +44,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public async void Add()
         {
+            personService.CurrentPerson = new Person();
             var dialog = new PersonDialog();
             if (dialog != null)
             {
