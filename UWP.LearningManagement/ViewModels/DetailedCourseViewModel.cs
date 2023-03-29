@@ -70,6 +70,10 @@ namespace UWP.LearningManagement.ViewModels
         {
             get { return courseService.CurrentCourse.Name; }
         }
+        public string Room
+        {
+            get { return courseService.CurrentCourse.Room; }
+        }
 
         public DetailedCourseViewModel()
         {

@@ -19,7 +19,14 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock FontSize="60*" Text="{Binding Code}"></TextBlock>
+        <StackPanel>
+            <TextBlock FontSize="60*" Text="{Binding Code}"></TextBlock>
+            <StackPanel Margin="10,10,10,10" Orientation="Horizontal">
+                <TextBlock Margin="0,0,5,0" Text="Room Number:"></TextBlock>
+                <TextBlock Text="{Binding Room}"></TextBlock>
+            </StackPanel>
+        </StackPanel>
+        
         <StackPanel Grid.Column="1" Margin="10,10,10,10">
             <TextBlock FontSize="40*" Text="{Binding Name}"></TextBlock>
             <StackPanel Margin="10,10,10,10" Orientation="Horizontal">

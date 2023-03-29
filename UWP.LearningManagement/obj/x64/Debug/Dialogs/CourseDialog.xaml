@@ -18,6 +18,8 @@
             <RowDefinition Height="10*"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -29,8 +31,10 @@
         <TextBox Margin="10,10,10,10" Grid.Row="1" Grid.Column="1" Text="{Binding Path=Name, Mode=TwoWay}"></TextBox>
         <TextBlock Margin="10,10,10,10" Grid.Row="2" Text="Credit Hours"></TextBlock>
         <TextBox Margin="10,10,10,10" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Hours, Mode=TwoWay}"></TextBox>
-        <TextBlock Margin="10,10,10,10" Grid.Row="3" Text="Add Students"></TextBlock>
-        <ListBox Margin="10,10,10,10" Grid.Row="3" Grid.Column="1"
+        <TextBlock Margin="10,10,10,10" Grid.Row="3" Text="Room Number"></TextBlock>
+        <TextBox Margin="10,10,10,10" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Room, Mode=TwoWay}"></TextBox>
+        <TextBlock Margin="10,10,10,10" Grid.Row="4" Text="Add Students"></TextBlock>
+        <ListBox Margin="10,10,10,10" Grid.Row="4" Grid.Column="1"
             ItemsSource="{Binding People, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
