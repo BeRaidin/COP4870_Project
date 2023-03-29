@@ -16,30 +16,77 @@ using System.Reflection.Metadata;
 
 namespace UWP.LearningManagement.ViewModels
 {
-    internal class DetailedPersonViewModel
+    internal class DetailedPersonViewModel : INotifyPropertyChanged
     {
-        private CourseService courseService;
-        private PersonService personService;
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void RaisePropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
+        private PersonService personService;
+        public Student Student { get; set; }
         public string Name
         {
             get { return personService.CurrentPerson.Name; }
         }
-
         public List<Course> Courses 
         {
             get { return personService.CurrentPerson.Courses; }
         }
-
         public string Type { get; set; }
         public string GradeLevel { get; set; }
+        private Dictionary<Assignment, double> _grades;
+        public Dictionary<Assignment, double> Grades
+        {
+            get { return _grades; }
+            set {
+                _grades = value;
+                RaisePropertyChanged(nameof(Grades));
+            }
+        }
+        private Assignment _assignmentKey;
+        public Assignment AssignmentKey
+        {
+            get { return _assignmentKey; }
+            set { 
+                _assignmentKey = value;
+                RaisePropertyChanged(nameof(AssignmentKey));}
+        }
+        public string Score { get; set; }
+
+
+
+        public int Total
+        {
+            get { return AssignmentKey.TotalAvailablePoints; }
+        }
 
         public DetailedPersonViewModel()
         {
-            courseService = CourseService.Current;
             personService = PersonService.Current;
+            Student = personService.CurrentPerson as Student;
+            if (Student != null)
+            {
+                _grades = Student.Grades;
+            }
+            else _grades = new Dictionary<Assignment, double>();
             SetType();
             SetGradeLevel();
+        }
+
+        public DetailedPersonViewModel(Assignment assignment)
+        {
+            personService = PersonService.Current;
+            Student = personService.CurrentPerson as Student;
+            if (Student != null)
+            {
+                _grades = Student.Grades;
+            }
+            else _grades = new Dictionary<Assignment, double>();
+            SetType();
+            SetGradeLevel();
+            AssignmentKey = assignment;
         }
 
         public void SetType()
@@ -83,8 +130,34 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
 
+        public async void SetGrade()
+        {
+            var dialog = new GradeDialog(AssignmentKey);
+            if (dialog != null)
+            {
+                await dialog.ShowAsync();
+            }
+        }
 
-
-
+        public void AddGrade()
+        {
+            if (double.TryParse(Score, out var value))
+            {
+                if (value > Total)
+                {
+                    Student.Grades[AssignmentKey] = value;
+                }
+                else if (value < 0)
+                {
+                    Student.Grades[AssignmentKey] = 0;
+                }
+                else Student.Grades[AssignmentKey] = value;
+            }
+        }
+        
+        public void ChangedSelectedAssignment(Assignment assignment)
+        {
+            AssignmentKey = assignment;
+        }
     }
 }

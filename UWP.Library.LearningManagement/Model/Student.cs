@@ -25,7 +25,6 @@ namespace Library.LearningManagement.Models
             FinalGrades = new Dictionary<Course, double>();
         }
 
-
         public void DeleteGrades()
         {
             Grades.Clear();

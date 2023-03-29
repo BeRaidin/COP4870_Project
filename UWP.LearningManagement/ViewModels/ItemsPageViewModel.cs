@@ -82,7 +82,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (Query != null)
             {
-                var searchResults = allItems.Where(i => i.Name.Contains(Query));
+                var searchResults = allItems.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 ContentItems.Clear();
                 foreach (var item in searchResults)
                 {

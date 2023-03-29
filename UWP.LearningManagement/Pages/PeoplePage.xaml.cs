@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Library.LearningManagement.Models;
 
 namespace UWP.LearningManagement
 {
@@ -52,7 +53,14 @@ namespace UWP.LearningManagement
             if ((DataContext as PersonPageViewModel).SelectedPerson != null)
             {
                 (DataContext as PersonPageViewModel).UpdateCurrentPerson();
-                Frame.Navigate(typeof(DetailedPerson));
+                if ((DataContext as PersonPageViewModel).SelectedPerson as Student != null)
+                {
+                    Frame.Navigate(typeof(DetailedStudent));
+                }
+                else
+                {
+                    Frame.Navigate(typeof(DetailedPerson));
+                }
             }
         }
     }

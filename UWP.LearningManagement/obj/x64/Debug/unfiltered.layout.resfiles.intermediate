@@ -14,12 +14,14 @@ Dialogs\CourseDialog.xbf
 Dialogs\EditContentItemDialog.xbf
 Dialogs\EditCourseDialog.xbf
 Dialogs\EditPersonDialog.xbf
+Dialogs\GradeDialog.xbf
 Dialogs\ModuleDialog.xbf
 Dialogs\PersonDialog.xbf
 MainPage.xbf
 Pages\CoursePage.xbf
 Pages\DetailedCourse.xbf
 Pages\DetailedPerson.xbf
+Pages\DetailedStudent.xbf
 Pages\ItemsPage.xbf
 Pages\PeoplePage.xbf
 UWP.LearningManagement.xr.xml

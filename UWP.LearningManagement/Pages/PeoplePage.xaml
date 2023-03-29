@@ -19,7 +19,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0" Text="{Binding Query, Mode=TwoWay}"></TextBox>
-            <Button Click="Search_Click" Grid.Column="1" Content="Search/Refresh" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+            <Button Click="Search_Click" Grid.Column="1" Content="Search" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
         </Grid>
 
         <ListBox Grid.Row="1"

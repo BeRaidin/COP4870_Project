@@ -81,7 +81,9 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (Query != null)
             {
-                var searchResults = allCourses.Where(i => i.Code.Contains(Query) || i.Name.Contains(Query));
+                var searchResults = 
+                    allCourses.Where(i => i.Code.Contains(Query, StringComparison.InvariantCultureIgnoreCase) 
+                    || i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 Courses.Clear();
                 foreach (var course in searchResults)
                 {
