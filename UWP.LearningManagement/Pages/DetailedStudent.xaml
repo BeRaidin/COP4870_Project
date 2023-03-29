@@ -28,9 +28,9 @@
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Enrolled Courses"></TextBlock>
             <ListBox x:Name="CoursesListBox"
                 ItemsSource="{Binding FinalGrades}" Margin="10,0,10,0">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="2*"/>
@@ -41,12 +41,12 @@
                             <TextBlock Margin="15,0,0,0" Grid.Column="2" Text="{Binding Path=Value, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBlock Grid.Column="3" Text="%"/>
                         </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
-        
-        
+
+
         <StackPanel Grid.Row="2">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Grades"></TextBlock>
             <ListBox x:Name="AssignmentListBox" 
@@ -72,8 +72,11 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            
-            
+        </StackPanel>
+        <StackPanel Grid.Row="3">
+            <TextBlock Margin="10,0,10,0" FontSize="20" Text="GPA:"></TextBlock>
+            <TextBlock Margin="10,0,10,0" FontSize="20" Text="{Binding GradePoint}"></TextBlock>
+
         </StackPanel>
     </Grid>
 </Page>
