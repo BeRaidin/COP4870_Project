@@ -35,45 +35,13 @@ namespace Library.LearningManagement.Models
 
         public virtual string Display => $"[{Code}] - {Name}";
 
-        public string DetailDisplay
+        public void GetMaxGrade()
         {
-            get
+            MaxGrade = 0;
+            foreach(var assignment in Assignments)
             {
-                var display = $"{ToString()}\n{Description}";
-                if(Roster.Count > 0)
-                {
-                    display += $"\n\nRoster:\n{string.Join("\n", Roster.Select(s => s.ToString()).ToArray())}\n\n";
-
-                }
-                if(Assignments.Count > 0)
-                {
-                    display += $"Assignments:\n{string.Join("\n", Assignments.Select(a => a.ToString()).ToArray())}\n\n";
-
-                }
-                if(Modules.Count > 0)
-                {
-                    display += $"Modules:\n{string.Join("\n", Modules.Select(a => a.DetailDisplay).ToArray())}\n\n";
-                }
-                if(Announcements.Count > 0)
-                {
-                    display += $"Announcements:\n{string.Join("\n", Announcements.Select(a => a.ToString()).ToArray())}";
-                }
-                return display;
+                MaxGrade += ((double)assignment.TotalAvailablePoints * (assignment.AssignmentGroup.Weight / (double)100));
             }
-        }
-
-        public bool CheckCode(IList<Course> courses)
-        {
-            if (courses.Any(p => p.Code == Code))
-            {
-                return false;
-            }
-            else return true;
-        }
-
-        public void AddMaxGrade(double val)
-        {
-            MaxGrade += val;
         }
     }
 }

@@ -81,6 +81,10 @@ namespace UWP.LearningManagement.ViewModels
                 {
                     Roster.Add(person);
                     person.AddCourse(Course);
+                    if(person as Student != null)
+                    {
+                        (person as Student).FinalGrades.Add(Course, 0);
+                    }
                 }
             }
 

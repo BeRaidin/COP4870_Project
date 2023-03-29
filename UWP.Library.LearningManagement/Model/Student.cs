@@ -24,11 +24,5 @@ namespace Library.LearningManagement.Models
             Grades = new Dictionary<Assignment, double>();
             FinalGrades = new Dictionary<Course, double>();
         }
-
-        public void DeleteGrades()
-        {
-            Grades.Clear();
-            Grades = new Dictionary<Assignment, double>();
-        }
     }
 }

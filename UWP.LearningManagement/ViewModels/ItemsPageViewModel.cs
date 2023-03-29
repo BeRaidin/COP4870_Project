@@ -51,8 +51,8 @@ namespace UWP.LearningManagement.ViewModels
                 {
                     await assignDialog.ShowAsync();
                 }
-                var assignment = (moduleService.CurrentItem as AssignmentItem).Assignment;
 
+                var assignment = (moduleService.CurrentItem as AssignmentItem).Assignment;
                 if (assignment.AssignmentGroup == null)
                 {
                     var Groupdialog = new AssignGroupDialog(assignment);

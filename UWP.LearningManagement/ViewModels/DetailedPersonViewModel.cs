@@ -55,7 +55,11 @@ namespace UWP.LearningManagement.ViewModels
         }
         public string Score { get; set; }
 
-
+        public Dictionary<Course, double> FinalGrades
+        {
+            get { return Student.FinalGrades; }
+            set { Student.FinalGrades = value; }
+        }
 
         public int Total
         {
@@ -152,12 +156,35 @@ namespace UWP.LearningManagement.ViewModels
                     Student.Grades[AssignmentKey] = 0;
                 }
                 else Student.Grades[AssignmentKey] = value;
+                GetFinalGrade();
             }
         }
         
         public void ChangedSelectedAssignment(Assignment assignment)
         {
             AssignmentKey = assignment;
+        }
+
+        public void GetFinalGrade()
+        {
+            Course selectedCourse = new Course();
+            foreach( var course in Student.Courses )
+            {
+                if(course.Assignments.Any(i => i == AssignmentKey))
+                {
+                    selectedCourse = course;
+                }
+            }
+
+            double rawGrade = 0;
+            selectedCourse.GetMaxGrade();
+            foreach (KeyValuePair<Assignment, double> pair in Student.Grades )
+            {
+                rawGrade += ((double)pair.Value * (pair.Key.AssignmentGroup.Weight / (double)100));
+            }
+
+            double totalGrade = (double)(rawGrade / selectedCourse.MaxGrade) * 100;
+            Student.FinalGrades[selectedCourse] = totalGrade;
         }
     }
 }
