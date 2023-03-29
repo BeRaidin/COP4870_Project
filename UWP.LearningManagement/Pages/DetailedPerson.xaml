@@ -24,7 +24,7 @@
             <TextBlock FontSize="40*" Text="{Binding Type}"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row="1">
-            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Enrolled Courses"></TextBlock>
+            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Courses"></TextBlock>
             <ListBox Margin="10,0,10,0"
             ItemsSource="{Binding Courses, Mode=OneWay}">
                 <ListBox.ItemTemplate>

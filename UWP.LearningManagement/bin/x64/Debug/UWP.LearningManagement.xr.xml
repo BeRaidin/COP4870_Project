@@ -41,9 +41,9 @@
     <RootPropertyPathName Name="Value" />
     <RootPropertyPathName Name="FinalGrades" />
     <RootPropertyPathName Name="GradeLevel" />
+    <RootPropertyPathName Name="SelectedPerson" />
     <RootPropertyPathName Name="ContentItems" />
     <RootPropertyPathName Name="SelectedItem" />
-    <RootPropertyPathName Name="SelectedPerson" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application" />
@@ -148,7 +148,11 @@
     <RootType FullName="UWP.LearningManagement.DetailedCourse" />
     <RootType FullName="UWP.LearningManagement.DetailedPerson" />
     <RootType FullName="UWP.LearningManagement.DetailedStudent" />
+    <RootType FullName="UWP.LearningManagement.InstructorDetailsPage" />
+    <RootType FullName="UWP.LearningManagement.InstructorViewPage" />
     <RootType FullName="UWP.LearningManagement.ItemsPage" />
     <RootType FullName="UWP.LearningManagement.PeoplePage" />
+    <RootType FullName="UWP.LearningManagement.StudentDetailsPage" />
+    <RootType FullName="UWP.LearningManagement.StudentViewPage" />
   </Roots.RootTypes>
 </Roots>

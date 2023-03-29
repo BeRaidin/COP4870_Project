@@ -23,14 +23,24 @@ namespace UWP.LearningManagement
             this.InitializeComponent();
         }
 
-        private void Person_Click(object sender, RoutedEventArgs e)
+        private void EditPerson_Click(object sender, RoutedEventArgs e)
         {
             frame.Navigate(typeof(PeoplePage));
         }
 
-        private void Course_Click(object sender, RoutedEventArgs e)
+        private void EditCourse_Click(object sender, RoutedEventArgs e)
         {
             frame.Navigate(typeof(CoursePage));
+        }
+
+        private void StudentView_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(typeof(StudentViewPage));
+        }
+
+        private void InstructorView_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(typeof(InstructorViewPage));
         }
     }
 }
