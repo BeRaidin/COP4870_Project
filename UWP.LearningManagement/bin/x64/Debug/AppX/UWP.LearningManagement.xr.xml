@@ -32,6 +32,7 @@
     <RootPropertyPathName Name="Announcements" />
     <RootPropertyPathName Name="Roster" />
     <RootPropertyPathName Name="Type" />
+    <RootPropertyPathName Name="GradePoint" />
     <RootPropertyPathName Name="Grades" />
     <RootPropertyPathName Name="AssignmentKey" />
     <RootPropertyPathName Name="Key" />

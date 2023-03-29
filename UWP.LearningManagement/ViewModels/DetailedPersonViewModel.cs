@@ -54,7 +54,10 @@ namespace UWP.LearningManagement.ViewModels
                 RaisePropertyChanged(nameof(AssignmentKey));}
         }
         public string Score { get; set; }
-
+        public double GradePoint
+        {
+            get { return Student.GradePointAverage; }
+        }
         public Dictionary<Course, double> FinalGrades
         {
             get { return Student.FinalGrades; }
@@ -157,6 +160,7 @@ namespace UWP.LearningManagement.ViewModels
                 }
                 else Student.Grades[AssignmentKey] = value;
                 GetFinalGrade();
+                UpdateGPA();
             }
         }
         
@@ -180,11 +184,45 @@ namespace UWP.LearningManagement.ViewModels
             selectedCourse.GetMaxGrade();
             foreach (KeyValuePair<Assignment, double> pair in Student.Grades )
             {
-                rawGrade += ((double)pair.Value * (pair.Key.AssignmentGroup.Weight / (double)100));
+                if (selectedCourse.Assignments.Contains(pair.Key))
+                {
+                    rawGrade += ((double)pair.Value * (pair.Key.AssignmentGroup.Weight / (double)100));
+                }
             }
 
             double totalGrade = (double)(rawGrade / selectedCourse.MaxGrade) * 100;
             Student.FinalGrades[selectedCourse] = totalGrade;
         }
+
+        public void UpdateGPA()
+        {
+            double GPA = 0;
+            var totalHours = 0;
+            double totalHonorPoints = 0;
+            foreach (KeyValuePair<Course, double> grade in Student.FinalGrades)
+            {
+                var courseHonorPoints = (double)0.0;
+                totalHours += grade.Key.CreditHours;
+                if (grade.Value < 70)
+                {
+                    courseHonorPoints = 0.0;
+                }
+                else if (grade.Value < 80)
+                {
+                    courseHonorPoints = 2.0;
+                }
+                else if (grade.Value < 90)
+                {
+                    courseHonorPoints = 3.0;
+                }
+                else
+                {
+                    courseHonorPoints = 4.0;
+                }
+                totalHonorPoints += (double)courseHonorPoints * grade.Key.CreditHours;
+            }   
+            GPA = (double)totalHonorPoints / totalHours;
+            Student.GradePointAverage = GPA;
+            }
     }
 }
