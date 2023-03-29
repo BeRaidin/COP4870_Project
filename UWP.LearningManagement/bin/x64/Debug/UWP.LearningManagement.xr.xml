@@ -5,6 +5,8 @@
     <RootPropertyPathName Name="Title" />
     <RootPropertyPathName Name="Description" />
     <RootPropertyPathName Name="Name" />
+    <RootPropertyPathName Name="Total" />
+    <RootPropertyPathName Name="Score" />
     <RootPropertyPathName Name="ContentTypes" />
     <RootPropertyPathName Name="SelectedType" />
     <RootPropertyPathName Name="DueDate" />
@@ -26,8 +28,13 @@
     <RootPropertyPathName Name="SelectedModule" />
     <RootPropertyPathName Name="Announcements" />
     <RootPropertyPathName Name="Roster" />
-    <RootPropertyPathName Name="GradeLevel" />
     <RootPropertyPathName Name="Type" />
+    <RootPropertyPathName Name="Grades" />
+    <RootPropertyPathName Name="AssignmentKey" />
+    <RootPropertyPathName Name="Key" />
+    <RootPropertyPathName Name="TotalAvailablePoints" />
+    <RootPropertyPathName Name="Value" />
+    <RootPropertyPathName Name="GradeLevel" />
     <RootPropertyPathName Name="ContentItems" />
     <RootPropertyPathName Name="SelectedItem" />
     <RootPropertyPathName Name="SelectedPerson" />
@@ -75,6 +82,12 @@
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.AnnouncementDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditContentItemDialog" />
+    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
+      <RootProperty Name="Orientation" />
+      <RootProperty Name="Children" />
+      <RootProperty Name="Margin" />
+    </RootType>
+    <RootType FullName="UWP.LearningManagement.Dialogs.GradeDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.ModuleDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
       <RootProperty Name="ItemsSource" />
@@ -97,6 +110,7 @@
       <RootProperty Name="ItemTemplate" />
       <RootProperty Name="Margin" />
       <RootEvent Name="DoubleTapped" />
+      <RootEvent Name="SelectionChanged" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
       <RootProperty Name="Margin" />
@@ -117,11 +131,6 @@
     <RootType FullName="UWP.LearningManagement.Dialogs.EditCourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditPersonDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.PersonDialog" />
-    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
-      <RootProperty Name="Children" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Orientation" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Frame">
       <RootProperty Name="Name" />
       <RootProperty Name="Margin" />
@@ -130,6 +139,7 @@
     <RootType FullName="UWP.LearningManagement.MainPage" />
     <RootType FullName="UWP.LearningManagement.DetailedCourse" />
     <RootType FullName="UWP.LearningManagement.DetailedPerson" />
+    <RootType FullName="UWP.LearningManagement.DetailedStudent" />
     <RootType FullName="UWP.LearningManagement.ItemsPage" />
     <RootType FullName="UWP.LearningManagement.PeoplePage" />
   </Roots.RootTypes>

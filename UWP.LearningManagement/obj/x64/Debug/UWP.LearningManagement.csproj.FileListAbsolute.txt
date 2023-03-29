@@ -115,3 +115,13 @@ C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Deb
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\AnnouncementDialog.g.cs
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\AnnouncementDialog.xaml
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\AnnouncementDialog.xbf
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\DetailedStudent.xbf
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\DetailedStudent.g.i.cs
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\DetailedStudent.g.cs
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\DetailedStudent.xaml
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\DetailedStudent.xbf
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\GradeDialog.xbf
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\GradeDialog.g.i.cs
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\GradeDialog.g.cs
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\GradeDialog.xaml
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\GradeDialog.xbf

@@ -125,6 +125,9 @@
     <Compile Include="Dialogs\EditContentItemDialog.xaml.cs">
       <DependentUpon>EditContentItemDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\GradeDialog.xaml.cs">
+      <DependentUpon>GradeDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ModuleDialog.xaml.cs">
       <DependentUpon>ModuleDialog.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,9 @@
     </Compile>
     <Compile Include="Pages\DetailedPerson.xaml.cs">
       <DependentUpon>DetailedPerson.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DetailedStudent.xaml.cs">
+      <DependentUpon>DetailedStudent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ItemsPage.xaml.cs">
       <DependentUpon>ItemsPage.xaml</DependentUpon>
@@ -205,6 +211,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dialogs\GradeDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\ModuleDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -246,6 +256,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\DetailedPerson.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DetailedStudent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

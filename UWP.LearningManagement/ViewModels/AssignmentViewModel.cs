@@ -67,12 +67,15 @@ namespace UWP.LearningManagement.ViewModels
             {
                 Item.Assignment = Assignment;
             }
+            foreach (Person person in courseService.CurrentCourse.Roster)
+            {
+                var student = person as Student;
+                if (student != null)
+                {
+                    student.Grades.Add(Assignment, 0);
+                }
+            }
             courseService.CurrentCourse.Assignments.Add(Assignment);
-        }
-
-        public void UpdateDate()
-        {
-           
         }
     }
 }
