@@ -167,11 +167,23 @@
     <Compile Include="Pages\DetailedStudent.xaml.cs">
       <DependentUpon>DetailedStudent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\InstructorDetailsPage.xaml.cs">
+      <DependentUpon>InstructorDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\InstructorViewPage.xaml.cs">
+      <DependentUpon>InstructorViewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ItemsPage.xaml.cs">
       <DependentUpon>ItemsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PeoplePage.xaml.cs">
       <DependentUpon>PeoplePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\StudentDetailsPage.xaml.cs">
+      <DependentUpon>StudentDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\StudentViewPage.xaml.cs">
+      <DependentUpon>StudentViewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AnnouncementViewModel.cs" />
@@ -185,6 +197,7 @@
     <Compile Include="ViewModels\ModuleViewModel.cs" />
     <Compile Include="ViewModels\PersonPageViewModel.cs" />
     <Compile Include="ViewModels\PersonViewModel.cs" />
+    <Compile Include="ViewModels\SelectPersonViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -270,11 +283,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\InstructorDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\InstructorViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ItemsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\PeoplePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\StudentDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\StudentViewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
