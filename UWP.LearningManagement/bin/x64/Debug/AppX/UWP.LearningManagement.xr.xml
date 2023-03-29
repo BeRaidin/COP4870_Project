@@ -3,6 +3,8 @@
   <Roots.PropertyPathNames>
     <RootPropertyPathName Name="Message" />
     <RootPropertyPathName Name="Title" />
+    <RootPropertyPathName Name="Weight" />
+    <RootPropertyPathName Name="GroupName" />
     <RootPropertyPathName Name="Description" />
     <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="Total" />
@@ -10,7 +12,8 @@
     <RootPropertyPathName Name="ContentTypes" />
     <RootPropertyPathName Name="SelectedType" />
     <RootPropertyPathName Name="DueDate" />
-    <RootPropertyPathName Name="Group" />
+    <RootPropertyPathName Name="AssignmentGroups" />
+    <RootPropertyPathName Name="SelectedGroup" />
     <RootPropertyPathName Name="TotalPoints" />
     <RootPropertyPathName Name="Courses" />
     <RootPropertyPathName Name="SelectedCourse" />
@@ -32,6 +35,7 @@
     <RootPropertyPathName Name="Grades" />
     <RootPropertyPathName Name="AssignmentKey" />
     <RootPropertyPathName Name="Key" />
+    <RootPropertyPathName Name="AssignmentGroup" />
     <RootPropertyPathName Name="TotalAvailablePoints" />
     <RootPropertyPathName Name="Value" />
     <RootPropertyPathName Name="GradeLevel" />
@@ -81,6 +85,7 @@
       <RootProperty Name="UpdateSourceTrigger" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.AnnouncementDialog" />
+    <RootType FullName="UWP.LearningManagement.Dialogs.AssignGroupDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditContentItemDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Orientation" />
@@ -92,6 +97,7 @@
     <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
       <RootProperty Name="ItemsSource" />
       <RootProperty Name="SelectedItem" />
+      <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.ContentItemDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.DatePicker">

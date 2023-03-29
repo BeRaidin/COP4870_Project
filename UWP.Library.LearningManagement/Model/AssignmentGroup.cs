@@ -22,11 +22,7 @@ namespace Library.LearningManagement.Models
             Name = name;
             Weight = weight;
         }
-
-        public override string ToString()
-        {
-            return $"[{Name}] - {Weight}%";
-        }
+        public virtual string Display => $"[{Name}] - {Weight}%";
 
         public AssignmentGroup MakeAssignmentGroup(string name = null)
         {

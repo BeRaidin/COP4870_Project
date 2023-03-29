@@ -122,6 +122,9 @@
     <Compile Include="Dialogs\AnnouncementDialog.xaml.cs">
       <DependentUpon>AnnouncementDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\AssignGroupDialog.xaml.cs">
+      <DependentUpon>AssignGroupDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\EditContentItemDialog.xaml.cs">
       <DependentUpon>EditContentItemDialog.xaml</DependentUpon>
     </Compile>
@@ -204,6 +207,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Dialogs\AnnouncementDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\AssignGroupDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
