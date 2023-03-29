@@ -28,17 +28,6 @@
             </StackPanel>
         </StackPanel>
         <ListBox Margin="10,10,10,10" Grid.Row="1" ItemsSource="{Binding Roster, Mode=OneWay}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <TextBlock Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        <TextBlock Margin="10,10,10,10" VerticalAlignment="Bottom" Grid.Row="1" FontSize="20" Text="Roster"></TextBlock>
-        <ListBox x:ConnectionId='2' Margin="10,10,10,10" Grid.Row="2" Grid.Column="0"
-            ItemsSource="{Binding Modules, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedModule, Mode=TwoWay}"                                    >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -47,8 +36,28 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button x:ConnectionId='3' VerticalAlignment="Bottom" Margin="10,10,10,10" Grid.Row="2" Content="ADD A MODULE"                     ></Button>
-        
+        <TextBlock Margin="10,10,10,10" VerticalAlignment="Bottom" Grid.Row="1" FontSize="20" Text="Roster"></TextBlock>
+        <ListBox Margin="10,10,10,10" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Announcements, Mode=OneWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button x:ConnectionId='2' VerticalAlignment="Bottom" Margin="10,10,10,10" Grid.Row="1" Grid.Column="1" Content="ADD AN ANNOUNCEMENT"                           ></Button>
+        <ListBox x:ConnectionId='3' Margin="10,10,10,10" Grid.Row="2" Grid.Column="0"
+            ItemsSource="{Binding Modules, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedModule, Mode=TwoWay}"                                   >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button x:ConnectionId='4' VerticalAlignment="Bottom" Margin="10,10,10,10" Grid.Row="2" Content="ADD A MODULE"                     ></Button>
         <ListBox Margin="10,10,10,10" Grid.Row="3" Grid.Column="0"
             ItemsSource="{Binding Assignments, Mode=OneWay}">
             <ListBox.ItemTemplate>

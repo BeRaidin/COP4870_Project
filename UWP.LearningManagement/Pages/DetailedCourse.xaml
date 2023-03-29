@@ -28,17 +28,27 @@
             </StackPanel>
         </StackPanel>
         <ListBox Margin="10,10,10,10" Grid.Row="1" ItemsSource="{Binding Roster, Mode=OneWay}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <TextBlock Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <TextBlock Margin="10,10,10,10" VerticalAlignment="Bottom" Grid.Row="1" FontSize="20" Text="Roster"></TextBlock>
+        <ListBox Margin="10,10,10,10" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Announcements, Mode=OneWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button VerticalAlignment="Bottom" Margin="10,10,10,10" Grid.Row="1" Grid.Column="1" Content="ADD AN ANNOUNCEMENT" Click="Announcement_Click"></Button>
         <ListBox Margin="10,10,10,10" Grid.Row="2" Grid.Column="0"
-            ItemsSource="{Binding Modules, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedModule, Mode=TwoWay}" DoubleTapped="ListBox_DoubleTapped">
+            ItemsSource="{Binding Modules, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedModule, Mode=TwoWay}" DoubleTapped="Module_DoubleTapped">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -48,7 +58,6 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Button VerticalAlignment="Bottom" Margin="10,10,10,10" Grid.Row="2" Content="ADD A MODULE" Click="Module_Click"></Button>
-        
         <ListBox Margin="10,10,10,10" Grid.Row="3" Grid.Column="0"
             ItemsSource="{Binding Assignments, Mode=OneWay}">
             <ListBox.ItemTemplate>

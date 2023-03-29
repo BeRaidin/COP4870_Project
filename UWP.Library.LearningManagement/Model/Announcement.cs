@@ -19,21 +19,6 @@ namespace Library.LearningManagement.Models
             Message = string.Empty;
         }
 
-        public void ChangeTitle()
-        {
-            Console.WriteLine("What is the title of the announcement?");
-            Title = Console.ReadLine() ?? string.Empty;
-        }
-
-        public void ChangeMessage()
-        {
-            Console.WriteLine("What is the message?");
-            Message = Console.ReadLine() ?? string.Empty;
-        }
-
-        public override string ToString()
-        {
-            return $"[{Id}] - {Title}";
-        }
+        public virtual string Display => $"[{Id}] - {Title}";
     }
 }
