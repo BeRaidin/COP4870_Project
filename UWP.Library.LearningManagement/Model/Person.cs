@@ -22,15 +22,6 @@ namespace Library.LearningManagement.Models
 
         public virtual string Display => $"[{Id}] {Name}";
 
-        public void UpdateId(int num, List<Person> people)
-        {
-            while (people.Any(i => i.Id == num))
-            {
-                num++;
-            }
-            Id = num;
-        }
-
         public void AddCourse(Course course)
         {
             Courses.Add(course);

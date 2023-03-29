@@ -37,6 +37,7 @@
     <RootPropertyPathName Name="Key" />
     <RootPropertyPathName Name="TotalAvailablePoints" />
     <RootPropertyPathName Name="Value" />
+    <RootPropertyPathName Name="FinalGrades" />
     <RootPropertyPathName Name="GradeLevel" />
     <RootPropertyPathName Name="ContentItems" />
     <RootPropertyPathName Name="SelectedItem" />

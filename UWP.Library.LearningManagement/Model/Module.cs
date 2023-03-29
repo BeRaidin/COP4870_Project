@@ -20,28 +20,6 @@ namespace Library.LearningManagement.Models
             Content = new List<ContentItem>();
         }
 
-        public void ChangeName()
-        {
-            Console.WriteLine("What is the name of the module");
-            Name = Console.ReadLine() ?? string.Empty;
-        }
-
-        public void ChangeDescription()
-        {
-            Console.WriteLine("What is the description of the module");
-            Description = Console.ReadLine() ?? string.Empty;
-        }
-
         public virtual string Display => $"{Name} - {Description}";
-
-
-        public string DetailDisplay
-        {
-            get
-            {
-                return $"{Name} - {Description}" +
-                 $"\n\tContent:\n{string.Join("\n", Content.Select(a => a.ToString()).ToArray())}";
-            }
-        }
     }
 }
