@@ -34,13 +34,18 @@ namespace UWP.LearningManagement
             (DataContext as DetailedCourseViewModel).Add_Module();
         }
 
-        private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        private void Module_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             if ((DataContext as DetailedCourseViewModel).SelectedModule != null)
             {
                 (DataContext as DetailedCourseViewModel).UpdateCurrentModule();
                 Frame.Navigate(typeof(ItemsPage));
             }
+        }
+
+        private void Announcement_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as DetailedCourseViewModel).Add_Announcement();
         }
     }
 }

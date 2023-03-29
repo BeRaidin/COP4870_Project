@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Roots >
   <Roots.PropertyPathNames>
+    <RootPropertyPathName Name="Message" />
+    <RootPropertyPathName Name="Title" />
     <RootPropertyPathName Name="Description" />
     <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="ContentTypes" />
@@ -22,6 +24,7 @@
     <RootPropertyPathName Name="Assignments" />
     <RootPropertyPathName Name="Modules" />
     <RootPropertyPathName Name="SelectedModule" />
+    <RootPropertyPathName Name="Announcements" />
     <RootPropertyPathName Name="Roster" />
     <RootPropertyPathName Name="GradeLevel" />
     <RootPropertyPathName Name="Type" />
@@ -43,10 +46,10 @@
       <RootProperty Name="RowDefinitions" />
       <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="Children" />
-      <RootMethod Name="GetRow" />
-      <RootMethod Name="SetRow" />
       <RootMethod Name="GetColumn" />
       <RootMethod Name="SetColumn" />
+      <RootMethod Name="GetRow" />
+      <RootMethod Name="SetRow" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
       <RootProperty Name="Height" />
@@ -70,6 +73,7 @@
       <RootProperty Name="Mode" />
       <RootProperty Name="UpdateSourceTrigger" />
     </RootType>
+    <RootType FullName="UWP.LearningManagement.Dialogs.AnnouncementDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditContentItemDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.ModuleDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">

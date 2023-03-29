@@ -119,6 +119,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\AnnouncementDialog.xaml.cs">
+      <DependentUpon>AnnouncementDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\EditContentItemDialog.xaml.cs">
       <DependentUpon>EditContentItemDialog.xaml</DependentUpon>
     </Compile>
@@ -162,6 +165,7 @@
       <DependentUpon>PeoplePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AnnouncementViewModel.cs" />
     <Compile Include="ViewModels\AssignmentViewModel.cs" />
     <Compile Include="ViewModels\ContentItemViewModel.cs" />
     <Compile Include="ViewModels\CoursePageViewModel.cs" />
@@ -193,6 +197,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Dialogs\AnnouncementDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\EditContentItemDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
