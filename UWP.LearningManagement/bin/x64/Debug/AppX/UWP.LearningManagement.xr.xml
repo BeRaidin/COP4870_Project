@@ -21,6 +21,7 @@
     <RootPropertyPathName Name="Query" />
     <RootPropertyPathName Name="People" />
     <RootPropertyPathName Name="IsSelected" />
+    <RootPropertyPathName Name="Room" />
     <RootPropertyPathName Name="Hours" />
     <RootPropertyPathName Name="Code" />
     <RootPropertyPathName Name="StudentLevels" />
@@ -72,8 +73,8 @@
     <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
       <RootProperty Name="Text" />
       <RootProperty Name="Margin" />
-      <RootProperty Name="FontSize" />
       <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="FontSize" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Text" />

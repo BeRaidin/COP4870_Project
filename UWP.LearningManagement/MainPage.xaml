@@ -16,6 +16,8 @@
         <StackPanel Grid.Column="0">
             <Button Margin="10,10,10,10" Content="People" FontSize="12" Click="Person_Click" HorizontalAlignment="Stretch"/>
             <Button Margin="10,10,10,10" Content="Courses" FontSize="12" Click="Course_Click" HorizontalAlignment="Stretch"/>
+            <Button Margin="10,10,10,10" Content="People" FontSize="12" Click="Person_Click" HorizontalAlignment="Stretch"/>
+            <Button Margin="10,10,10,10" Content="Courses" FontSize="12" Click="Course_Click" HorizontalAlignment="Stretch"/>
         </StackPanel>
         <Frame Name="frame" Grid.Column="1" Margin="10,10,10,10" Content=""></Frame>
     </Grid>

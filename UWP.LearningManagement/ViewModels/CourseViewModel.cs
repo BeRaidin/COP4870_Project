@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation.Collections;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -36,6 +37,11 @@ namespace UWP.LearningManagement.ViewModels
             {
                 Course.Code = value;
             }
+        }
+        public string Room
+        {
+            get { return Course.Room; }
+            set { Course.Room = value; }
         }
         public List<Person> Roster 
         {
