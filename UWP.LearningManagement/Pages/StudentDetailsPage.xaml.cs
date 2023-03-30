@@ -28,15 +28,5 @@ namespace UWP.LearningManagement
             this.InitializeComponent();
             DataContext = new DetailedPersonViewModel();
         }
-        private void Assign_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-        {
-            (DataContext as DetailedPersonViewModel).SetGrade();
-        }
-
-        private void Assign_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var tmp = (KeyValuePair<Assignment, Double>)AssignmentListBox.SelectedItem;
-            (DataContext as DetailedPersonViewModel).ChangedSelectedAssignment(tmp.Key);
-        }
     }
 }

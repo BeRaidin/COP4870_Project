@@ -50,10 +50,7 @@
         <StackPanel Grid.Row="2">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Grades"></TextBlock>
             <ListBox x:ConnectionId='2' x:Name="AssignmentListBox" 
-                     ItemsSource="{Binding Grades}" Margin="10,0,10,0"  
-                     SelectedItem="{Binding AssignmentKey, Mode=TwoWay}"
-                                                       
-                                                               >
+                     ItemsSource="{Binding Grades}" Margin="10,0,10,0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

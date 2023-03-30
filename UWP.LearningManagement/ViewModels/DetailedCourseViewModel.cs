@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation.Collections;
 using System.Reflection.Metadata;
+using Windows.Graphics.Printing;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -90,7 +91,7 @@ namespace UWP.LearningManagement.ViewModels
             Announcements = new ObservableCollection<Announcement>(allAnnouncements);
         }
 
-        public async void Add_Module()
+        public async void AddModule()
         {
             var dialog = new ModuleDialog();
             if (dialog != null)
@@ -100,7 +101,7 @@ namespace UWP.LearningManagement.ViewModels
             Refresh();
         }
 
-        public async void Add_Announcement()
+        public async void AddAnnouncement()
         {
             var dialog = new AnnouncementDialog();
             if (dialog != null)
@@ -137,6 +138,16 @@ namespace UWP.LearningManagement.ViewModels
             {
                 Announcements.Add(announcement);
             }
+        }
+
+        public async void EditRoster()
+        {
+            var dialog = new RosterDialog();
+            if (dialog != null)
+            {
+                await dialog.ShowAsync();
+            }
+            Refresh();
         }
 
     }

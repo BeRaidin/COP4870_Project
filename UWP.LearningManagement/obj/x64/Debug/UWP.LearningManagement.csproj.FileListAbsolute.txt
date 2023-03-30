@@ -150,3 +150,8 @@ C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Deb
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\StudentDetailsPage.xaml
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\InstructorDetailsPage.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\StudentDetailsPage.xbf
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\RosterDialog.xbf
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\RosterDialog.g.i.cs
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\RosterDialog.g.cs
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\RosterDialog.xaml
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\RosterDialog.xbf

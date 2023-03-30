@@ -18,6 +18,7 @@ Dialogs\EditPersonDialog.xbf
 Dialogs\GradeDialog.xbf
 Dialogs\ModuleDialog.xbf
 Dialogs\PersonDialog.xbf
+Dialogs\RosterDialog.xbf
 MainPage.xbf
 Pages\CoursePage.xbf
 Pages\DetailedCourse.xbf

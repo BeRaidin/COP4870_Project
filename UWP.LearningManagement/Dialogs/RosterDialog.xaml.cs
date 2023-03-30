@@ -1,8 +1,5 @@
-﻿using Library.LearningManagement.Models;
-using Library.LearningManagement.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -17,20 +14,21 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+// The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+
 namespace UWP.LearningManagement.Dialogs
 {
-    public sealed partial class EditCourseDialog : ContentDialog
+    public sealed partial class RosterDialog : ContentDialog
     {
-        public EditCourseDialog()
+        public RosterDialog()
         {
             this.InitializeComponent();
-            this.DataContext = new CourseViewModel();
-            (DataContext as CourseViewModel).FillChecks();
+            DataContext = new RosterViewModel();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as CourseViewModel).Edit();
+            (DataContext as RosterViewModel).AddRoster();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
