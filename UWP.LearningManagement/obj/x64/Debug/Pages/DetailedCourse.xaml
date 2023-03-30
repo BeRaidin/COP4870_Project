@@ -36,7 +36,8 @@
         </StackPanel>
         <StackPanel Grid.Row="1">
             <Button x:ConnectionId='8' Margin="10,0,10,0" FontSize="20" Content="EDIT ROSTER"                     ></Button>
-            <ListBox ItemsSource="{Binding Roster}" Margin="10,0,10,0">
+            <ListBox x:ConnectionId='9' ItemsSource="{Binding Roster}" Margin="10,0,10,0"
+                     SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}"                                    >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

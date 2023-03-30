@@ -33,6 +33,7 @@
     <RootPropertyPathName Name="SelectedModule" />
     <RootPropertyPathName Name="Announcements" />
     <RootPropertyPathName Name="Roster" />
+    <RootPropertyPathName Name="SelectedPerson" />
     <RootPropertyPathName Name="Type" />
     <RootPropertyPathName Name="GradePoint" />
     <RootPropertyPathName Name="Grades" />
@@ -43,7 +44,6 @@
     <RootPropertyPathName Name="FinalGrades" />
     <RootPropertyPathName Name="GradeLevel" />
     <RootPropertyPathName Name="People" />
-    <RootPropertyPathName Name="SelectedPerson" />
     <RootPropertyPathName Name="ContentItems" />
     <RootPropertyPathName Name="SelectedItem" />
   </Roots.PropertyPathNames>
