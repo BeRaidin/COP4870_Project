@@ -156,5 +156,25 @@ namespace UWP.LearningManagement.ViewModels
             personService.CurrentPerson = SelectedPerson;
         }
 
+        public async void AddAssignment()
+        {
+            var dialog = new NewAssignmentDialog();
+            if (dialog != null)
+            {
+                await dialog.ShowAsync();
+            }
+
+            var assignment = (moduleService.CurrentItem as AssignmentItem).Assignment;
+            if (assignment.AssignmentGroup == null)
+            {
+                var Groupdialog = new AssignGroupDialog(assignment);
+                if (Groupdialog != null)
+                {
+                    await Groupdialog.ShowAsync();
+                }
+            }
+            Refresh();
+        }
+
     }
 }

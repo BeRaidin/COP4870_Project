@@ -45,7 +45,6 @@ namespace UWP.LearningManagement.ViewModels
 
             if(moduleService.CurrentItem as AssignmentItem != null)
             {
-
                 var assignDialog = new AssignmentDialog();
                 if (assignDialog != null)
                 {

@@ -15,6 +15,8 @@
     <RootPropertyPathName Name="AssignmentGroups" />
     <RootPropertyPathName Name="SelectedGroup" />
     <RootPropertyPathName Name="TotalPoints" />
+    <RootPropertyPathName Name="Modules" />
+    <RootPropertyPathName Name="SelectedModule" />
     <RootPropertyPathName Name="Students" />
     <RootPropertyPathName Name="Display" />
     <RootPropertyPathName Name="IsSelected" />
@@ -29,8 +31,6 @@
     <RootPropertyPathName Name="SelectedLevel" />
     <RootPropertyPathName Name="PersonTypes" />
     <RootPropertyPathName Name="Assignments" />
-    <RootPropertyPathName Name="Modules" />
-    <RootPropertyPathName Name="SelectedModule" />
     <RootPropertyPathName Name="Announcements" />
     <RootPropertyPathName Name="Roster" />
     <RootPropertyPathName Name="SelectedPerson" />
@@ -108,6 +108,7 @@
       <RootProperty Name="SelectedDate" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.AssignmentDialog" />
+    <RootType FullName="UWP.LearningManagement.Dialogs.NewAssignmentDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.ListBox">
       <RootProperty Name="Margin" />
       <RootProperty Name="ItemsSource" />
