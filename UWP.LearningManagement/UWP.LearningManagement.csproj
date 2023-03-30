@@ -140,6 +140,9 @@
     <Compile Include="Dialogs\AssignmentDialog.xaml.cs">
       <DependentUpon>AssignmentDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\RosterDialog.xaml.cs">
+      <DependentUpon>RosterDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CoursePage.xaml.cs">
       <DependentUpon>CoursePage.xaml</DependentUpon>
     </Compile>
@@ -197,6 +200,7 @@
     <Compile Include="ViewModels\ModuleViewModel.cs" />
     <Compile Include="ViewModels\PersonPageViewModel.cs" />
     <Compile Include="ViewModels\PersonViewModel.cs" />
+    <Compile Include="ViewModels\RosterViewModel.cs" />
     <Compile Include="ViewModels\SelectPersonViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\AssignmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\RosterDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

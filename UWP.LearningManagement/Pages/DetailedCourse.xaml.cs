@@ -31,7 +31,7 @@ namespace UWP.LearningManagement
 
         private void Module_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as DetailedCourseViewModel).Add_Module();
+            (DataContext as DetailedCourseViewModel).AddModule();
         }
 
         private void Module_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
@@ -45,7 +45,12 @@ namespace UWP.LearningManagement
 
         private void Announcement_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as DetailedCourseViewModel).Add_Announcement();
+            (DataContext as DetailedCourseViewModel).AddAnnouncement();
+        }
+
+        private void Roster_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as DetailedCourseViewModel).EditRoster();
         }
     }
 }

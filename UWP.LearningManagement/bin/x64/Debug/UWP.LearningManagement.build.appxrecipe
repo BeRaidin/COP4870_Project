@@ -94,6 +94,9 @@
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\AssignmentDialog.xbf">
       <PackagePath>Dialogs\AssignmentDialog.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\RosterDialog.xbf">
+      <PackagePath>Dialogs\RosterDialog.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\CoursePage.xbf">
       <PackagePath>Pages\CoursePage.xbf</PackagePath>
     </AppxPackagedFile>

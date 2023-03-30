@@ -28,5 +28,14 @@ namespace UWP.LearningManagement
             this.InitializeComponent();
             DataContext = new DetailedPersonViewModel();
         }
+
+        public void Course_DoubleTapped(object sender, RoutedEventArgs e)
+        {
+            if ((DataContext as DetailedPersonViewModel).SelectedCourse != null)
+            {
+                (DataContext as DetailedPersonViewModel).UpdateCurrentAssignment();
+                Frame.Navigate(typeof(DetailedCourse));
+            }
+        }
     }
 }

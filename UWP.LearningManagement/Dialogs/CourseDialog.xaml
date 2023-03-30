@@ -33,9 +33,9 @@
         <TextBox Margin="10,10,10,10" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Hours, Mode=TwoWay}"></TextBox>
         <TextBlock Margin="10,10,10,10" Grid.Row="3" Text="Room Number"></TextBlock>
         <TextBox Margin="10,10,10,10" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Room, Mode=TwoWay}"></TextBox>
-        <TextBlock Margin="10,10,10,10" Grid.Row="4" Text="Add Students"></TextBlock>
+        <TextBlock Margin="10,10,10,10" Grid.Row="4" Text="Add Instructors"></TextBlock>
         <ListBox Margin="10,10,10,10" Grid.Row="4" Grid.Column="1"
-            ItemsSource="{Binding People, Mode=TwoWay}">
+            ItemsSource="{Binding Instructors, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

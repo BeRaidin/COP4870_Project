@@ -25,6 +25,7 @@ namespace UWP.LearningManagement.ViewModels
         }
 
         private PersonService personService;
+        private CourseService courseService;
         public Student Student { get; set; }
         public string Name
         {
@@ -58,6 +59,8 @@ namespace UWP.LearningManagement.ViewModels
         {
             get { return Student.GradePointAverage; }
         }
+        public Course SelectedCourse { get; set; }
+
         public Dictionary<Course, double> FinalGrades
         {
             get { return Student.FinalGrades; }
@@ -72,6 +75,7 @@ namespace UWP.LearningManagement.ViewModels
         public DetailedPersonViewModel()
         {
             personService = PersonService.Current;
+            courseService = CourseService.Current;
             Student = personService.CurrentPerson as Student;
             if (Student != null)
             {
@@ -223,6 +227,11 @@ namespace UWP.LearningManagement.ViewModels
             }   
             GPA = (double)totalHonorPoints / totalHours;
             Student.GradePointAverage = GPA;
-            }
+        }
+
+        public void UpdateCurrentAssignment()
+        {
+            courseService.CurrentCourse = SelectedCourse;
+        }
     }
 }

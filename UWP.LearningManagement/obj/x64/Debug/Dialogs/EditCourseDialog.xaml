@@ -14,11 +14,41 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Header="Code" Text="{Binding Path=Code, Mode=TwoWay}"></TextBox>
-        <TextBox Grid.Row="1" Header="Name" Text="{Binding Path=Name, Mode=TwoWay}"></TextBox>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Margin="10,10,10,10" Grid.Column="0" Text="Code"></TextBlock>
+        <TextBox Margin="10,10,10,10" Grid.Column="1" Text="{Binding Path=Code, Mode=TwoWay}"></TextBox>
+        <TextBlock Margin="10,10,10,10"  Grid.Row="1" Text="Name"></TextBlock>
+        <TextBox Margin="10,10,10,10" Grid.Row="1" Grid.Column="1" Text="{Binding Path=Name, Mode=TwoWay}"></TextBox>
+        <TextBlock Margin="10,10,10,10" Grid.Row="2" Text="Credit Hours"></TextBlock>
+        <TextBox Margin="10,10,10,10" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Hours, Mode=TwoWay}"></TextBox>
+        <TextBlock Margin="10,10,10,10" Grid.Row="3" Text="Room Number"></TextBlock>
+        <TextBox Margin="10,10,10,10" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Room, Mode=TwoWay}"></TextBox>
+        <TextBlock Margin="10,10,10,10" Grid.Row="4" Text="Add Instructors"></TextBlock>
+        <ListBox Margin="10,10,10,10" Grid.Row="4" Grid.Column="1"
+            ItemsSource="{Binding Instructors, Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </ContentDialog>
 

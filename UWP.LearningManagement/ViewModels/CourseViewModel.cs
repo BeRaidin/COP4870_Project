@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.VoiceCommands;
 using Windows.Foundation.Collections;
 
 namespace UWP.LearningManagement.ViewModels
@@ -43,6 +44,9 @@ namespace UWP.LearningManagement.ViewModels
             get { return Course.Room; }
             set { Course.Room = value; }
         }
+        private List<Person> allInstructors;
+        private ObservableCollection<Person> _instructors;
+        public ObservableCollection<Person> Instructors { get; set; }
         public List<Person> Roster 
         {
             get
@@ -65,15 +69,22 @@ namespace UWP.LearningManagement.ViewModels
                 courseService.CurrentCourse = value;
             }
         }
-        public List<Person>  People { get; set; }
         public string Hours { get; set; }
 
         public CourseViewModel()
         {
             courseService = CourseService.Current;
             personService = PersonService.Current;
-            People = personService.PersonList;
-            foreach(var person in People)
+            allInstructors = new List<Person>();
+            foreach (var person in personService.PersonList)
+            {
+                if (person as Student == null)
+                {
+                    allInstructors.Add(person);
+                }
+            }
+            Instructors = new ObservableCollection<Person>(allInstructors);
+            foreach(var person in Instructors)
             {
                 person.IsSelected = false; 
             }
@@ -81,7 +92,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Set()
         {
-            foreach (Person person in People)
+            foreach (Person person in Instructors)
             {
                 if(person.IsSelected)
                 {
@@ -110,6 +121,30 @@ namespace UWP.LearningManagement.ViewModels
         {
             courseService.CurrentCourse.Name = Name;
             courseService.CurrentCourse.Code = Code;
+            foreach (var instructor in Instructors) 
+            { 
+                if(instructor.IsSelected && !courseService.CurrentCourse.Roster.Contains(instructor)) 
+                {
+                    courseService.CurrentCourse.Roster.Add(instructor);
+                    instructor.Courses.Add(Course);
+                }
+                else if (!instructor.IsSelected && courseService.CurrentCourse.Roster.Contains(instructor))
+                {
+                    courseService.CurrentCourse.Roster.Remove(instructor);
+                    instructor.Courses.Remove(Course);
+                }
+            }
+        }
+
+        public void FillChecks()
+        {
+            foreach(var instructor in Instructors)
+            {
+                if(courseService.CurrentCourse.Roster.Contains(instructor))
+                {
+                    instructor.IsSelected = true;
+                }
+            }
         }
     }
 }
