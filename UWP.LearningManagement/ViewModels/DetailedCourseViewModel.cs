@@ -57,6 +57,7 @@ namespace UWP.LearningManagement.ViewModels
             set { _announcements = value; }
         }
 
+
         public Module SelectedModule { get; set; }
         public string Query { get; set; }
         public string Code
@@ -75,7 +76,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             get { return courseService.CurrentCourse.Room; }
         }
-
+        public Person SelectedPerson { get; set; }
         public DetailedCourseViewModel()
         {
             courseService = CourseService.Current;
@@ -148,6 +149,11 @@ namespace UWP.LearningManagement.ViewModels
                 await dialog.ShowAsync();
             }
             Refresh();
+        }
+
+        public void UpdateCurrentPerson()
+        {
+            personService.CurrentPerson = SelectedPerson;
         }
 
     }

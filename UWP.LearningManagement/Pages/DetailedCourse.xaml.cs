@@ -52,5 +52,11 @@ namespace UWP.LearningManagement
         {
             (DataContext as DetailedCourseViewModel).EditRoster();
         }
+
+        private void Student_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            (DataContext as DetailedCourseViewModel).UpdateCurrentPerson();
+            Frame.Navigate(typeof(DetailedStudent));
+        }
     }
 }

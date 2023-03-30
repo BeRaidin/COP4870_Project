@@ -36,7 +36,8 @@
         </StackPanel>
         <StackPanel Grid.Row="1">
             <Button Margin="10,0,10,0" FontSize="20" Content="EDIT ROSTER" Click="Roster_Click"></Button>
-            <ListBox ItemsSource="{Binding Roster}" Margin="10,0,10,0">
+            <ListBox ItemsSource="{Binding Roster}" Margin="10,0,10,0"
+                     SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}" DoubleTapped="Student_DoubleTapped">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
