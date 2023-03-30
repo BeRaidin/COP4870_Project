@@ -58,5 +58,10 @@ namespace UWP.LearningManagement
             (DataContext as DetailedCourseViewModel).UpdateCurrentPerson();
             Frame.Navigate(typeof(DetailedStudent));
         }
+
+        private void Assignment_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as DetailedCourseViewModel).AddAssignment();
+        }
     }
 }

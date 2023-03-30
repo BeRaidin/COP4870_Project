@@ -76,7 +76,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="3">
-            <Button Margin="10,10,10,10" FontSize="20" Content="ADD AN ASSIGNMENT"></Button>
+            <Button Margin="10,10,10,10" FontSize="20" Content="ADD AN ASSIGNMENT" Click="Assignment_Click"></Button>
             <ListBox ItemsSource="{Binding Assignments, Mode=OneWay}" Margin="10,0,10,0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

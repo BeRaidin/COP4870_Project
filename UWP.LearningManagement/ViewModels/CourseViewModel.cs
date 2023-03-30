@@ -46,7 +46,11 @@ namespace UWP.LearningManagement.ViewModels
         }
         private List<Person> allInstructors;
         private ObservableCollection<Person> _instructors;
-        public ObservableCollection<Person> Instructors { get; set; }
+        public ObservableCollection<Person> Instructors 
+        { 
+            get { return _instructors; }
+            set {_instructors = value; } 
+        }
         public List<Person> Roster 
         {
             get
