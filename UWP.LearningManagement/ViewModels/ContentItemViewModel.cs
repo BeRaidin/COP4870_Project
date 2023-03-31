@@ -63,14 +63,22 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Add()
         {
-            Set();
-            SelectedModule.Add(SelectedContentItem);
+            if (Name != null && Name != ""
+                && Description != null && Description != null)
+            {
+                Set();
+                SelectedModule.Add(SelectedContentItem);
+            }
         }
 
         public void Edit()
         {
-            SelectedContentItem.Name = Name;
-            SelectedContentItem.Description = Description;
+            if (Name != null && Name != ""
+                && Description != null && Description != null)
+            {
+                SelectedContentItem.Name = Name;
+                SelectedContentItem.Description = Description;
+            }
         }
     }
 }

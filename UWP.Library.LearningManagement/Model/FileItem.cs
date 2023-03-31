@@ -14,5 +14,8 @@ namespace Library.LearningManagement.Models
         {
             FilePath = string.Empty;
         }
+
+        public override string Display => $"[{Id}] - {Name} - File";
+
     }
 }

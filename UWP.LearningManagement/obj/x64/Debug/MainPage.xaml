@@ -15,10 +15,11 @@
         </Grid.RowDefinitions>
         <Frame x:ConnectionId='2' Name="frame" Grid.Column="1" Margin="10,10,10,10" Content=""></Frame>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button x:ConnectionId='3' Margin="10,10,0,10" Content="Edit People" FontSize="12"                          HorizontalAlignment="Stretch"/>
-            <Button x:ConnectionId='4' Margin="10,10,0,10" Content="Edit Courses" FontSize="12"                          HorizontalAlignment="Stretch"/>
-            <Button x:ConnectionId='5' Margin="10,10,0,10" Content="Student View" FontSize="12"                           HorizontalAlignment="Stretch"/>
-            <Button x:ConnectionId='6' Margin="10,10,0,10" Content="Instructor View" FontSize="12"                              HorizontalAlignment="Stretch"/>
+            <Button x:ConnectionId='3' Margin="10,10,0,10" Content="Back" FontSize="12"                          HorizontalAlignment="Stretch"/>
+            <Button x:ConnectionId='4' Margin="10,10,0,10" Content="Edit People" FontSize="12"                          HorizontalAlignment="Stretch"/>
+            <Button x:ConnectionId='5' Margin="10,10,0,10" Content="Edit Courses" FontSize="12"                          HorizontalAlignment="Stretch"/>
+            <Button x:ConnectionId='6' Margin="10,10,0,10" Content="Student View" FontSize="12"                           HorizontalAlignment="Stretch"/>
+            <Button x:ConnectionId='7' Margin="10,10,0,10" Content="Instructor View" FontSize="12"                              HorizontalAlignment="Stretch"/>
         </StackPanel>
     </Grid>
 </Page>

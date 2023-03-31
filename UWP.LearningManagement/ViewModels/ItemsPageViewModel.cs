@@ -100,9 +100,11 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Search()
         {
-            if (Query != null)
+            if (Query != null && Query != "")
             {
-                var searchResults = allItems.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                var searchResults = allItems.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase) 
+                                                    || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+
                 ContentItems.Clear();
                 foreach (var item in searchResults)
                 {

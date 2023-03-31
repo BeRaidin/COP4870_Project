@@ -12,12 +12,13 @@ namespace Library.LearningManagement.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public List<ContentItem> Content { get; set; }
-
+        public int TotalItems;
         public Module() 
         { 
             Name = string.Empty;
             Description = string.Empty;
             Content = new List<ContentItem>();
+            TotalItems = 0;
         }
 
         public virtual string Display => $"{Name} - {Description}";
@@ -25,6 +26,8 @@ namespace Library.LearningManagement.Models
         public void Add(ContentItem item)
         {
             Content.Add(item);
+            item.Id = TotalItems.ToString();
+            TotalItems++;
         }
 
         public void Remove(ContentItem item)

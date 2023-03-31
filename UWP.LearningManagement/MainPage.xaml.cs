@@ -42,5 +42,13 @@ namespace UWP.LearningManagement
         {
             frame.Navigate(typeof(InstructorViewPage));
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(frame.CanGoBack)
+            {
+                frame.GoBack();
+            }
+        }
     }
 }
