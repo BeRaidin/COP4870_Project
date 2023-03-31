@@ -28,5 +28,10 @@ namespace UWP.LearningManagement
             this.InitializeComponent();
             DataContext = new DetailedPersonViewModel();
         }
+
+        private void DropClasses_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as DetailedPersonViewModel).DropClasses();
+        }
     }
 }

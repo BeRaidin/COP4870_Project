@@ -31,7 +31,7 @@ namespace Library.LearningManagement.Models
 
         public void Remove(Assignment assignment)
         {
-            foreach (var grade in Grades)
+            foreach (var grade in Grades.ToList())
             {
                 if (grade.Assignment.Equals(assignment))
                 {

@@ -125,6 +125,9 @@
     <Compile Include="Dialogs\AssignGroupDialog.xaml.cs">
       <DependentUpon>AssignGroupDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\DropCoursesDialog.xaml.cs">
+      <DependentUpon>DropCoursesDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\EditContentItemDialog.xaml.cs">
       <DependentUpon>EditContentItemDialog.xaml</DependentUpon>
     </Compile>
@@ -199,6 +202,7 @@
     <Compile Include="ViewModels\CourseViewModel.cs" />
     <Compile Include="ViewModels\DetailedCourseViewModel.cs" />
     <Compile Include="ViewModels\DetailedPersonViewModel.cs" />
+    <Compile Include="ViewModels\DropClassViewModel.cs" />
     <Compile Include="ViewModels\GradesDialogViewModel.cs" />
     <Compile Include="ViewModels\ItemsPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
@@ -233,6 +237,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\AssignGroupDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\DropCoursesDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

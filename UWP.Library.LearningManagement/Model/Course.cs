@@ -19,6 +19,7 @@ namespace Library.LearningManagement.Models
         public List<AssignmentGroup> AssignmentGroups { get; set; }
         public List<Announcement> Announcements { get; set; }
         public double MaxGrade { get; set; }
+        public bool IsSelected { get; set; }
 
         public Course() 
         { 
@@ -32,6 +33,7 @@ namespace Library.LearningManagement.Models
             AssignmentGroups = new List<AssignmentGroup>();
             Announcements = new List<Announcement>();
             MaxGrade = 0;
+            IsSelected = false;
         }
 
         public virtual string Display => $"[{Code}] - {Name}";
