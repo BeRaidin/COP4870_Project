@@ -58,6 +58,9 @@ namespace UWP.LearningManagement.ViewModels
             get { return SelectedCourse.Room; }
             set { SelectedCourse.Room = value; }
         }
+        public string TempName { get; set; }
+        public string TempCode { get; set; }
+        public string TempRoom { get; set; }
         
         public List<Person> Roster 
         {
@@ -115,27 +118,51 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Add()
         {
-            Set();
-            courseService.Add(SelectedCourse);
+            if (Code != null && Code != "" && Name != null && Name != "" && Room != null && Room != "")
+            {
+                Set();
+                courseService.Add(SelectedCourse);
+            }
+            SelectedCourse = null;
         }
 
         public void Edit()
         {
-            SelectedCourse.Name = Name;
-            SelectedCourse.Code = Code;
-            foreach (var instructor in Instructors) 
-            { 
-                if(instructor.IsSelected && !SelectedCourse.Roster.Contains(instructor)) 
+            if (Code != null && Code != "" && Name != null && Name != "" && Room != null && Room != "")
+            {
+                SelectedCourse.Name = Name;
+                SelectedCourse.Code = Code;
+                foreach (var instructor in Instructors)
                 {
-                    SelectedCourse.Add(instructor);
-                    instructor.Add(SelectedCourse);
-                }
-                else if (!instructor.IsSelected && SelectedCourse.Roster.Contains(instructor))
-                {
-                    SelectedCourse.Remove(instructor);
-                    instructor.Remove(SelectedCourse);
+                    if (instructor.IsSelected && !SelectedCourse.Roster.Contains(instructor))
+                    {
+                        SelectedCourse.Add(instructor);
+                        instructor.Add(SelectedCourse);
+                    }
+                    else if (!instructor.IsSelected && SelectedCourse.Roster.Contains(instructor))
+                    {
+                        SelectedCourse.Remove(instructor);
+                        instructor.Remove(SelectedCourse);
+                    }
                 }
             }
+            else
+            {
+                GetTemp();
+            }
+            SelectedCourse = null;
+        }
+        public void SetTemp()
+        {
+            TempName = Name.ToString();
+            TempCode = Code.ToString();
+            TempRoom = Room.ToString();
+        }
+        public void GetTemp()
+        {
+            Name = TempName;
+            Code = TempCode;
+            Room = TempRoom;
         }
 
         public void FillChecks()

@@ -20,6 +20,10 @@
             <Button Margin="10,10,0,10" Content="Edit Courses" FontSize="12" Click="EditCourse_Click" HorizontalAlignment="Stretch"/>
             <Button Margin="10,10,0,10" Content="Student View" FontSize="12" Click="StudentView_Click" HorizontalAlignment="Stretch"/>
             <Button Margin="10,10,0,10" Content="Instructor View" FontSize="12" Click="InstructorView_Click" HorizontalAlignment="Stretch"/>
+            <Button Margin="10,10,0,10" Content="&lt;" FontSize="12" HorizontalAlignment="Stretch"/>
+            <Button Margin="10,10,0,10" Content="Semester Selection" FontSize="12" HorizontalAlignment="Stretch"/>
+            <Button Margin="10,10,0,10" Content=">" FontSize="12" HorizontalAlignment="Stretch"/>
+
         </StackPanel>
     </Grid>
 </Page>

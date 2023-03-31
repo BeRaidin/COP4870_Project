@@ -34,6 +34,7 @@ namespace UWP.LearningManagement.ViewModels
             get { return SelectedPerson.Name; }
             set { SelectedPerson.Name = value; } 
         }
+        public string TempName { get; set; }
 
         public PersonViewModel()
         {
@@ -46,52 +47,73 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Add()
         {
-            if (SelectedType == "Student")
+            if (Name != null && Name != "")
             {
-                Person = new Student();
-            }
-            else if (SelectedType == "Instructor")
-            {
-                Person = new Instructor();
-            }
-            else if (SelectedType == "Teaching Assistant")
-            {
-                Person = new TeachingAssistant();
-            }
-            else Person = new Student();
-            Person.Name = Name;
+                if (SelectedType == "Student")
+                {
+                    Person = new Student();
+                }
+                else if (SelectedType == "Instructor")
+                {
+                    Person = new Instructor();
+                }
+                else if (SelectedType == "Teaching Assistant")
+                {
+                    Person = new TeachingAssistant();
+                }
+                else Person = new Student();
+                Person.Name = Name;
 
-            var student = Person as Student;
-            if (student != null)
-            {
-                if (SelectedClass == "Freshman")
+                var student = Person as Student;
+                if (student != null)
                 {
-                    student.Classification = Student.Classes.Freshman;
+                    if (SelectedClass == "Freshman")
+                    {
+                        student.Classification = Student.Classes.Freshman;
+                    }
+                    else if (SelectedClass == "Sophmore")
+                    {
+                        student.Classification = Student.Classes.Sophmore;
+                    }
+                    else if (SelectedClass == "Junior")
+                    {
+                        student.Classification = Student.Classes.Junior;
+                    }
+                    else if (SelectedClass == "Senior")
+                    {
+                        student.Classification = Student.Classes.Senior;
+                    }
+                    else student.Classification = Student.Classes.Freshman;
+                    personService.Add(student);
                 }
-                else if (SelectedClass == "Sophmore")
+                else
                 {
-                    student.Classification = Student.Classes.Sophmore;
+                    personService.Add(Person);
                 }
-                else if (SelectedClass == "Junior")
-                {
-                    student.Classification = Student.Classes.Junior;
-                }
-                else if (SelectedClass == "Senior")
-                {
-                    student.Classification = Student.Classes.Senior;
-                }
-                else student.Classification = Student.Classes.Freshman;
-                personService.Add(student);
             }
             else
-            {
-                personService.Add(Person);
-            }
+            { GetTemp(); }
+            SelectedPerson = null;
         }
 
         public void Edit()
         {
-            SelectedPerson.Name = Name;
+            if (Name != null && Name != "")
+            {
+                SelectedPerson.Name = Name;
+            }
+            else Name = TempName;
+            SelectedPerson = null;
+        }
+
+        public void SetTemp()
+        {
+            TempName = Name.ToString();
+        }
+
+        public void GetTemp()
+        {
+            Name = TempName;
         }
     }
 }
