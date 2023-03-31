@@ -49,8 +49,19 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Add()
         {
-            Modules.Add(Module);
-            moduleService.CurrentModule = Module;
+            bool test = true;
+            foreach(var module in Modules)
+            {
+                if (module.Name == Name)
+                {
+                    test = false;
+                }
+            }
+            if (test && Module.Name != null && Module.Name != "")
+            {
+                Modules.Add(Module);
+                moduleService.CurrentModule = Module;
+            }
         }
     }
 }

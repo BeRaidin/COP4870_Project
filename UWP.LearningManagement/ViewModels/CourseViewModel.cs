@@ -118,7 +118,18 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Add()
         {
-            if (Code != null && Code != "" && Name != null && Name != "" && Room != null && Room != "")
+            bool test = true;
+            foreach (var course in courseService.CourseList)
+            {
+                if (course.Code.Equals(Code, StringComparison.InvariantCultureIgnoreCase)
+                    || course.Name.Equals(Name, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    test = false;
+                }
+            }
+
+
+            if (Code != null && Code != "" && Name != null && Name != "" && Room != null && Room != "" && test)
             {
                 Set();
                 courseService.Add(SelectedCourse);
