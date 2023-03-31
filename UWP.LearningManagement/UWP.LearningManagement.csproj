@@ -201,6 +201,7 @@
     <Compile Include="ViewModels\DetailedPersonViewModel.cs" />
     <Compile Include="ViewModels\GradesDialogViewModel.cs" />
     <Compile Include="ViewModels\ItemsPageViewModel.cs" />
+    <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\ModuleViewModel.cs" />
     <Compile Include="ViewModels\PersonPageViewModel.cs" />
     <Compile Include="ViewModels\PersonViewModel.cs" />

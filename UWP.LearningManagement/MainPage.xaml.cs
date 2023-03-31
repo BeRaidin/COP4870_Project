@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LearningManagement.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,31 +22,36 @@ namespace UWP.LearningManagement
         public MainPage()
         {
             this.InitializeComponent();
+            DataContext = new MainPageViewModel();
         }
 
         private void EditPerson_Click(object sender, RoutedEventArgs e)
         {
+            (DataContext as MainPageViewModel).Clear();
             frame.Navigate(typeof(PeoplePage));
         }
 
         private void EditCourse_Click(object sender, RoutedEventArgs e)
         {
+            (DataContext as MainPageViewModel).Clear();
             frame.Navigate(typeof(CoursePage));
         }
 
         private void StudentView_Click(object sender, RoutedEventArgs e)
         {
+            (DataContext as MainPageViewModel).Clear();
             frame.Navigate(typeof(StudentViewPage));
         }
 
         private void InstructorView_Click(object sender, RoutedEventArgs e)
         {
+            (DataContext as MainPageViewModel).Clear();
             frame.Navigate(typeof(InstructorViewPage));
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            if(frame.CanGoBack)
+            if (frame.CanGoBack)
             {
                 frame.GoBack();
             }

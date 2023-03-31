@@ -81,8 +81,20 @@ namespace UWP.LearningManagement.ViewModels
             if (Student != null)
             {
                 Grades = new ObservableCollection<GradesDictionary>(Student.Grades);
+                if (SelectedCourse != null)
+                {
+                    foreach (var grade in Student.Grades)
+                    {
+                        if (!SelectedCourse.Assignments.Contains(grade.Assignment))
+                        {
+                            Grades.Remove(grade);
+                        }
+                    }
+                }
             }
             else Grades = new ObservableCollection<GradesDictionary>();
+            
+
             SetType();
             SetGradeLevel();
         }
