@@ -24,6 +24,7 @@ namespace UWP.LearningManagement.Dialogs
         {
             this.InitializeComponent();
             this.DataContext = new PersonViewModel();
+            (DataContext as PersonViewModel).SetTemp();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -33,6 +34,8 @@ namespace UWP.LearningManagement.Dialogs
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            (DataContext as PersonViewModel).GetTemp();
+
         }
     }
 }
