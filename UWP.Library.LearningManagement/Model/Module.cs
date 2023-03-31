@@ -21,5 +21,15 @@ namespace Library.LearningManagement.Models
         }
 
         public virtual string Display => $"{Name} - {Description}";
+
+        public void Add(ContentItem item)
+        {
+            Content.Add(item);
+        }
+
+        public void Remove(ContentItem item)
+        {
+            Content.Remove(item);
+        }
     }
 }

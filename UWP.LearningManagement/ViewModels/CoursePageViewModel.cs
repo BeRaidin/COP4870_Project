@@ -20,6 +20,13 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly CourseService courseService;
         private readonly List<Course> allCourses;
+
+        public Course SelectedCourse
+        {
+            get { return courseService.CurrentCourse; }
+            set { courseService.CurrentCourse = value; }
+        }
+
         private ObservableCollection<Course> _courses;
         public ObservableCollection<Course> Courses
         {
@@ -32,7 +39,6 @@ namespace UWP.LearningManagement.ViewModels
                 _courses = value;
             }
         }
-        public Course SelectedCourse { get; set; }
         public string Query { get; set; }
 
         public CoursePageViewModel()
@@ -44,7 +50,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public async void Add()
         {
-            courseService.CurrentCourse = new Course();
+            SelectedCourse = new Course();
             var dialog = new CourseDialog();
             if (dialog != null)
             {
@@ -57,7 +63,6 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (SelectedCourse != null)
             {
-                UpdateCurrentCourse();
                 courseService.Remove();
                 Refresh();
             }
@@ -67,7 +72,6 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (SelectedCourse != null)
             {
-                UpdateCurrentCourse();
                 var dialog = new EditCourseDialog();
                 if (dialog != null)
                 {
@@ -94,11 +98,6 @@ namespace UWP.LearningManagement.ViewModels
             {
                 Refresh();
             }
-        }
-
-        public void UpdateCurrentCourse()
-        {
-            courseService.CurrentCourse = SelectedCourse;
         }
 
         public void Refresh()

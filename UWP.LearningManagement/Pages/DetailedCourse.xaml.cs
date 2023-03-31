@@ -38,7 +38,6 @@ namespace UWP.LearningManagement
         {
             if ((DataContext as DetailedCourseViewModel).SelectedModule != null)
             {
-                (DataContext as DetailedCourseViewModel).UpdateCurrentModule();
                 Frame.Navigate(typeof(ItemsPage));
             }
         }
@@ -55,7 +54,6 @@ namespace UWP.LearningManagement
 
         private void Student_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            (DataContext as DetailedCourseViewModel).UpdateCurrentPerson();
             Frame.Navigate(typeof(DetailedStudent));
         }
 

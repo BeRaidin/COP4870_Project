@@ -36,10 +36,30 @@ namespace Library.LearningManagement.Models
 
         public virtual string Display => $"[{Code}] - {Name}";
 
+        public void Add(Announcement announcement)
+        {
+            Announcements.Add(announcement);
+        }
+
+        public void Add(Person person)
+        {
+            Roster.Add(person);
+        }
+
+        public void Add(Assignment assignment)
+        {
+            Assignments.Add(assignment);
+        }
+
+        public void Remove(Person person) 
+        { 
+            Roster.Remove(person);
+        }
+
         public void GetMaxGrade()
         {
             MaxGrade = 0;
-            foreach(var assignment in Assignments)
+            foreach (var assignment in Assignments)
             {
                 MaxGrade += ((double)assignment.TotalAvailablePoints * (assignment.AssignmentGroup.Weight / (double)100));
             }

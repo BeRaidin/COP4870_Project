@@ -9,7 +9,7 @@ namespace Library.LearningManagement.Models
 {
     public class Person
     {
-        public int Id {  get; set; }
+        public string Id {  get; set; }
         public string Name { get; set; }
         public List<Course> Courses { get; set; }
         public bool IsSelected { get; set; }
@@ -22,9 +22,14 @@ namespace Library.LearningManagement.Models
 
         public virtual string Display => $"[{Id}] {Name}";
 
-        public void AddCourse(Course course)
+        public void Add(Course course)
         {
             Courses.Add(course);
+        }
+
+        public void Remove(Course course)
+        {
+            Courses.Remove(course);
         }
     }
 }

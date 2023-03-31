@@ -18,21 +18,27 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class ContentItemViewModel
     {
-        private ModuleService moduleService;
-        public List<string> ContentTypes { get; set; }
+        private readonly ModuleService moduleService;
+
+        public Module SelectedModule
+        {
+            get { return moduleService.CurrentModule; }
+            set { moduleService.CurrentModule = value; }
+        }
+        public ContentItem SelectedContentItem
+        {
+            get { return moduleService.CurrentItem; }
+            set { moduleService.CurrentItem = value; }
+        }
+        public ObservableCollection<string> ContentTypes { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string SelectedType { get; set; }
-        private ContentItem contentItem { get; set; }
-        public ContentItem ContentItem
-        {
-            get { return contentItem; }
-            set { contentItem = value; }
-        }
+
         public ContentItemViewModel()
         {
             moduleService = ModuleService.Current;
-            ContentTypes = new List<string>
+            ContentTypes = new ObservableCollection<string>
             { "Assignment", "Page", "File" };
         }
 
@@ -40,32 +46,31 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (SelectedType == "Assignment")
             {
-                ContentItem = new AssignmentItem();
-                moduleService.CurrentItem = ContentItem;
+                SelectedContentItem = new AssignmentItem();
             }
             else if(SelectedType == "Page")
             {
-                ContentItem = new PageItem();
+                SelectedContentItem = new PageItem();
             }
             else if (SelectedType == "File")
             {
-                ContentItem = new FileItem();
+                SelectedContentItem = new FileItem();
             }
-            else ContentItem = new ContentItem();
-            ContentItem.Name = Name;
-            ContentItem.Description = Description;
+            else SelectedContentItem = new PageItem();
+            SelectedContentItem.Name = Name;
+            SelectedContentItem.Description = Description;
         }
 
         public void Add()
         {
             Set();
-            moduleService.CurrentModule.Content.Add(ContentItem);
+            SelectedModule.Add(SelectedContentItem);
         }
 
         public void Edit()
         {
-            moduleService.CurrentItem.Name = Name;
-            moduleService.CurrentItem.Description = Description;
+            SelectedContentItem.Name = Name;
+            SelectedContentItem.Description = Description;
         }
     }
 }

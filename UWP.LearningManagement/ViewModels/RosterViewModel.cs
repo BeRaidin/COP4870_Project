@@ -15,38 +15,41 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly CourseService courseService;
         private readonly PersonService personService;
-        private List<Person> allStudents;
+        private readonly List<Person> allStudents;
+
         private ObservableCollection<Person> _students;
         public ObservableCollection<Person> Students
         {
             get { return _students; }
             set { _students = value; }
         }
-        public Course Course { get; set; }
+        public Course Course 
+        {
+            get { return courseService.CurrentCourse; }
+        }
 
         public RosterViewModel()
         {
             courseService = CourseService.Current;
             personService = PersonService.Current;
-            Course = courseService.CurrentCourse;
             allStudents = new List<Person>();
-            foreach(var student in personService.PersonList)
+            foreach(var person in personService.PersonList)
             {
-                if(student as Student != null)
+                if(person as Student != null)
                 {
-                    allStudents.Add(student);
+                    allStudents.Add(person);
                 }
             }
             Students = new ObservableCollection<Person>(allStudents);
-            foreach (var person in Course.Roster)
+            foreach (var student in Students)
             {
-                if(Course.Roster.Contains(person))
+                if(Course.Roster.Contains(student))
                 {
-                    person.IsSelected = true;
+                    student.IsSelected = true;
                 }
                 else
                 {
-                    person.IsSelected = false;
+                    student.IsSelected = false;
                 }
             }
         }

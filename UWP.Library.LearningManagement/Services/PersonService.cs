@@ -27,6 +27,12 @@ namespace Library.LearningManagement.Services
             get { return _currentPerson; }
             set { _currentPerson = value; }
         }
+        private Assignment _currentAssigment;
+        public Assignment CurrentAssignment
+        {
+            get { return _currentAssigment; }
+            set { _currentAssigment = value; }
+        }
         public static PersonService Current
         {
             get
@@ -41,14 +47,19 @@ namespace Library.LearningManagement.Services
         }
         private static PersonService instance;
 
+        private int totalCount;
+
         public PersonService()
         {
             PersonList = new List<Person>();
             CurrentPerson = new Person();
+            totalCount = 0;
         }
            
         public void Add(Person person)
         {
+            person.Id = totalCount.ToString();
+            totalCount++;
             PersonList.Add(person);
         }
 
@@ -60,11 +71,5 @@ namespace Library.LearningManagement.Services
             }
             PersonList.Remove(CurrentPerson);
         }
-
-        public int Size()
-        {
-            return PersonList.Count;
-        }
-
     }
 }

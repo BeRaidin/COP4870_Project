@@ -15,62 +15,59 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class CourseViewModel
     {
-        private CourseService courseService;
-        private PersonService personService;
+        private readonly CourseService courseService;
+        private readonly PersonService personService;
+
+        public Course SelectedCourse
+        {
+            get { return courseService.CurrentCourse; }
+            set { courseService.CurrentCourse = value; }
+        }
+
+        private List<Person> allInstructors;
+        private ObservableCollection<Person> _instructors;
+        public ObservableCollection<Person> Instructors
+        {
+            get { return _instructors; }
+            set { _instructors = value; }
+        }
         public string Name
         {
             get
             {
-                return courseService.CurrentCourse.Name;
+                return SelectedCourse.Name;
             }
             set
             {
-                courseService.CurrentCourse.Name = value;
+                SelectedCourse.Name = value;
             }
         }
         public string Code
         {
             get
             {
-                return Course.Code;
+                return SelectedCourse.Code;
             }
             set
             {
-                Course.Code = value;
+                SelectedCourse.Code = value;
             }
         }
         public string Room
         {
-            get { return Course.Room; }
-            set { Course.Room = value; }
+            get { return SelectedCourse.Room; }
+            set { SelectedCourse.Room = value; }
         }
-        private List<Person> allInstructors;
-        private ObservableCollection<Person> _instructors;
-        public ObservableCollection<Person> Instructors 
-        { 
-            get { return _instructors; }
-            set {_instructors = value; } 
-        }
+        
         public List<Person> Roster 
         {
             get
             {
-                return Course.Roster;
+                return SelectedCourse.Roster;
             }
             set
             {
-                Course.Roster = value; 
-            }
-        }
-        public Course Course
-        {
-            get
-            {
-                return courseService.CurrentCourse;
-            }
-            set
-            {
-                courseService.CurrentCourse = value;
+                SelectedCourse.Roster = value; 
             }
         }
         public string Hours { get; set; }
@@ -88,10 +85,7 @@ namespace UWP.LearningManagement.ViewModels
                 }
             }
             Instructors = new ObservableCollection<Person>(allInstructors);
-            foreach(var person in Instructors)
-            {
-                person.IsSelected = false; 
-            }
+            FillChecks();
         }
 
         public void Set()
@@ -101,41 +95,45 @@ namespace UWP.LearningManagement.ViewModels
                 if(person.IsSelected)
                 {
                     Roster.Add(person);
-                    person.AddCourse(Course);
+                    person.Add(SelectedCourse);
                     if(person as Student != null)
                     {
-                        (person as Student).FinalGrades.Add(Course, 0);
+                        (person as Student).FinalGrades.Add(SelectedCourse, 0);
                     }
                 }
             }
 
             if(int.TryParse(Hours, out int hours))
             {
-                Course.CreditHours = hours;
+                SelectedCourse.CreditHours = hours;
+            }
+            else
+            {
+                SelectedCourse.CreditHours = 3;
             }
         }
 
         public void Add()
         {
             Set();
-            courseService.Add(Course);
+            courseService.Add(SelectedCourse);
         }
 
         public void Edit()
         {
-            courseService.CurrentCourse.Name = Name;
-            courseService.CurrentCourse.Code = Code;
+            SelectedCourse.Name = Name;
+            SelectedCourse.Code = Code;
             foreach (var instructor in Instructors) 
             { 
-                if(instructor.IsSelected && !courseService.CurrentCourse.Roster.Contains(instructor)) 
+                if(instructor.IsSelected && !SelectedCourse.Roster.Contains(instructor)) 
                 {
-                    courseService.CurrentCourse.Roster.Add(instructor);
-                    instructor.Courses.Add(Course);
+                    SelectedCourse.Add(instructor);
+                    instructor.Add(SelectedCourse);
                 }
-                else if (!instructor.IsSelected && courseService.CurrentCourse.Roster.Contains(instructor))
+                else if (!instructor.IsSelected && SelectedCourse.Roster.Contains(instructor))
                 {
-                    courseService.CurrentCourse.Roster.Remove(instructor);
-                    instructor.Courses.Remove(Course);
+                    SelectedCourse.Remove(instructor);
+                    instructor.Remove(SelectedCourse);
                 }
             }
         }
@@ -144,9 +142,13 @@ namespace UWP.LearningManagement.ViewModels
         {
             foreach(var instructor in Instructors)
             {
-                if(courseService.CurrentCourse.Roster.Contains(instructor))
+                if(SelectedCourse.Roster.Contains(instructor))
                 {
                     instructor.IsSelected = true;
+                }
+                else
+                {
+                    instructor.IsSelected = false;
                 }
             }
         }

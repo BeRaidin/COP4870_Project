@@ -20,7 +20,8 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly PersonService personService;
         private readonly List<Person> allPeople;
-        private int PersonType;
+        private readonly int personType;
+
         private ObservableCollection<Person> _people;
         public ObservableCollection<Person> People
         {
@@ -45,14 +46,17 @@ namespace UWP.LearningManagement.ViewModels
             get { return _students; }
             private set { _students = value; }
         }
-
-        public Person SelectedPerson { get; set; }
+        public Person SelectedPerson
+        {
+            get { return personService.CurrentPerson; }
+            set { personService.CurrentPerson = value; }
+        }
         public string Query { get; set; }
 
         public SelectPersonViewModel(int personType) 
         {
-            PersonType = personType;
             personService = PersonService.Current;
+            this.personType = personType;
             allPeople = personService.PersonList;
             People = new ObservableCollection<Person>();
             Instructors = new ObservableCollection<Person>();
@@ -75,7 +79,8 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (Query != null)
             {
-                var searchResults = People.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                var searchResults = People.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+                                                || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 People.Clear();
                 foreach (var item in searchResults)
                 {
@@ -91,19 +96,14 @@ namespace UWP.LearningManagement.ViewModels
         public void Refresh()
         {
             People.Clear();
-            if(PersonType == 0)
+            if(personType == 0)
             {
                 People = Instructors;
             }
-            else if (PersonType == 1)
+            else if (personType == 1)
             {
                 People = Students;
             }
-        }
-
-        public void UpdateSelectedPerson()
-        {
-            personService.CurrentPerson = SelectedPerson;
         }
     }
 }

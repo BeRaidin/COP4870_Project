@@ -16,6 +16,19 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly ModuleService moduleService;
         private readonly CourseService courseService;
+
+        public Course SelectedCourse
+        {
+            get { return courseService.CurrentCourse; }
+            set { courseService.CurrentCourse = value;}
+        }
+        public ContentItem SelectedItem
+        {
+            get { return moduleService.CurrentItem; }
+            set { moduleService.CurrentItem = value; }
+        }
+
+
         private Assignment _assignment;
         public Assignment Assignment
         {
@@ -25,13 +38,13 @@ namespace UWP.LearningManagement.ViewModels
         public AssignmentItem AssignmentItem { get; set; }
         public string Name
         {
-            get { return moduleService.CurrentItem.Name; }
-            set { moduleService.CurrentItem.Name = value; }
+            get { return SelectedItem.Name; }
+            set { SelectedItem.Name = value; }
         }
         public string Description
         {
-            get { return moduleService.CurrentItem.Description; }
-            set { moduleService.CurrentItem.Description = value; }
+            get { return SelectedItem.Description; }
+            set { SelectedItem.Description = value; }
         }
         public string TotalPoints { get; set; }
         public string Group { get; set; }
@@ -53,21 +66,21 @@ namespace UWP.LearningManagement.ViewModels
         {
             moduleService = ModuleService.Current;
             courseService = CourseService.Current;
-            AssignmentItem = moduleService.CurrentItem as AssignmentItem;
+            AssignmentItem = SelectedItem as AssignmentItem;
             Assignment = new Assignment();
-            if(moduleService.CurrentItem == null)
+            if(SelectedItem == null)
             {
-                moduleService.CurrentItem = new ContentItem();
+                SelectedItem = new ContentItem();
             }
             DueDate = DateTimeOffset.Now;
-            _modules = courseService.CurrentCourse.Modules;
+            _modules = SelectedCourse.Modules;
             Modules = new ObservableCollection<string>();
             foreach (var module in _modules)
             {
                 Modules.Add(module.Name);
             }
             Modules.Add("Make new Module");
-            _assignmentGroups = courseService.CurrentCourse.AssignmentGroups;
+            _assignmentGroups = SelectedCourse.AssignmentGroups;
             AssignmentGroups = new ObservableCollection<string>();
             foreach(var group in _assignmentGroups)
             {
@@ -80,21 +93,21 @@ namespace UWP.LearningManagement.ViewModels
         {
             moduleService = ModuleService.Current;
             courseService = CourseService.Current;
-            AssignmentItem = moduleService.CurrentItem as AssignmentItem;
+            AssignmentItem = SelectedItem as AssignmentItem;
             Assignment = assignment;
-            if (moduleService.CurrentItem == null)
+            if (SelectedItem == null)
             {
-                moduleService.CurrentItem = new ContentItem();
+                SelectedItem = new ContentItem();
             }
             DueDate = DateTimeOffset.Now;
-            _assignmentGroups = courseService.CurrentCourse.AssignmentGroups;
+            _assignmentGroups = SelectedCourse.AssignmentGroups;
             AssignmentGroups = new ObservableCollection<string>();
             foreach (var group in _assignmentGroups)
             {
                 AssignmentGroups.Add(group.Name);
             }
             AssignmentGroups.Add("Make new Assignment Group");
-            _modules = courseService.CurrentCourse.Modules;
+            _modules = SelectedCourse.Modules;
             Modules = new ObservableCollection<string>();
             foreach (var module in _modules)
             {
@@ -124,7 +137,7 @@ namespace UWP.LearningManagement.ViewModels
 
             if (SelectedModule != null)
             {
-                foreach(var module in courseService.CurrentCourse.Modules)
+                foreach(var module in SelectedCourse.Modules)
                 {
                     if (module.Name.Equals(SelectedModule))
                     {
@@ -142,7 +155,7 @@ namespace UWP.LearningManagement.ViewModels
                 AssignmentItem.Assignment = Assignment;
             }
             
-            foreach (Person person in courseService.CurrentCourse.Roster)
+            foreach (Person person in SelectedCourse.Roster)
             {
                 var student = person as Student;
                 if (student != null)
@@ -150,26 +163,25 @@ namespace UWP.LearningManagement.ViewModels
                     student.Grades.Add(Assignment, 0);
                 }
             }
-            courseService.CurrentCourse.Assignments.Add(Assignment);
-            moduleService.CurrentItem = AssignmentItem;
+            SelectedCourse.Add(Assignment);
+            SelectedItem = AssignmentItem;
         }
 
         public void MakeNewAssignGroup()
         {
-            var assignmentGroup = new AssignmentGroup();
-            assignmentGroup.Name = GroupName;
+            var assignmentGroup = new AssignmentGroup { Name = GroupName };
             if (int.TryParse(Weight, out var weight))
             {
                 assignmentGroup.Weight = weight;
             }
             else { assignmentGroup.Weight = 20; }
-           Assignment.AssignmentGroup = assignmentGroup;
-            courseService.CurrentCourse.AssignmentGroups.Add(assignmentGroup);
+            Assignment.AssignmentGroup = assignmentGroup;
+            SelectedCourse.AssignmentGroups.Add(assignmentGroup);
         }
 
         public void ClearCurrent()
         {
-            moduleService.CurrentItem = null;
+            SelectedItem = null;
             moduleService.CurrentModule = null;
         }
     }
