@@ -108,7 +108,9 @@
       <RootProperty Name="IsChecked" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.DropCoursesDialog" />
+    <RootType FullName="UWP.LearningManagement.Dialogs.EditAssignmentDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditContentItemDialog" />
+    <RootType FullName="UWP.LearningManagement.Dialogs.EditModuleDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Orientation" />
       <RootProperty Name="Children" />

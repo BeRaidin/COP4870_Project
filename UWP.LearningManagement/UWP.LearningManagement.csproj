@@ -128,8 +128,14 @@
     <Compile Include="Dialogs\DropCoursesDialog.xaml.cs">
       <DependentUpon>DropCoursesDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\EditAssignmentDialog.xaml.cs">
+      <DependentUpon>EditAssignmentDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\EditContentItemDialog.xaml.cs">
       <DependentUpon>EditContentItemDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\EditModuleDialog.xaml.cs">
+      <DependentUpon>EditModuleDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\GradeDialog.xaml.cs">
       <DependentUpon>GradeDialog.xaml</DependentUpon>
@@ -244,7 +250,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dialogs\EditAssignmentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\EditContentItemDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\EditModuleDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

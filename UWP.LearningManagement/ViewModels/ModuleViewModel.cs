@@ -63,5 +63,11 @@ namespace UWP.LearningManagement.ViewModels
                 moduleService.CurrentModule = Module;
             }
         }
+
+        public void Edit()
+        {
+            moduleService.CurrentModule.Name = Name;
+            moduleService.CurrentModule.Description = Description;
+        }
     }
 }
