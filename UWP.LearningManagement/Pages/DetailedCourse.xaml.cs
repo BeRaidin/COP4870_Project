@@ -64,5 +64,41 @@ namespace UWP.LearningManagement
         {
             (DataContext as DetailedCourseViewModel).AddAssignment();
         }
+
+        private void EditModule_Click(object sender, RoutedEventArgs e)
+        {
+            if ((DataContext as DetailedCourseViewModel).SelectedModule != null)
+            {
+                (DataContext as DetailedCourseViewModel).EditModule();
+
+            }
+
+        }
+
+        private void DeleteModule_Click(object sender, RoutedEventArgs e)
+        {
+            if ((DataContext as DetailedCourseViewModel).SelectedModule != null)
+            {
+                (DataContext as DetailedCourseViewModel).DeleteModule();
+
+            }
+
+        }
+
+        private void EditAssignment_Click(object sender, RoutedEventArgs e)
+        {
+            if ((DataContext as DetailedCourseViewModel).SelectedAssignment != null)
+            {
+                (DataContext as DetailedCourseViewModel).EditAssignment();
+            }
+        }
+
+        private void DeleteAssignment_Click(object sender, RoutedEventArgs e)
+        {
+            if ((DataContext as DetailedCourseViewModel).SelectedAssignment != null)
+            {
+                (DataContext as DetailedCourseViewModel).DeleteAssignment();
+            }
+        }
     }
 }

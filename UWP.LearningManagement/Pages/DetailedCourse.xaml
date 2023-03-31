@@ -62,7 +62,11 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2">
-            <Button Margin="10,10,10,10" FontSize="20" Content="ADD A MODULE" Click="Module_Click"></Button>
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="10,10,10,10" FontSize="20" Content="ADD A MODULE" Click="Module_Click"></Button>
+                <Button Margin="10,10,10,10" FontSize="20" Content="EDIT" Click="EditModule_Click"></Button>
+                <Button Margin="10,10,10,10" FontSize="20" Content="DELETE" Click="DeleteModule_Click"></Button>
+            </StackPanel>
             <ListBox ItemsSource="{Binding Modules, Mode=TwoWay}" Margin="10,0,10,0"
                     SelectedItem="{Binding Path=SelectedModule, Mode=TwoWay}" DoubleTapped="Module_DoubleTapped">
                 <ListBox.ItemTemplate>
@@ -76,8 +80,13 @@
         </StackPanel>
 
         <StackPanel Grid.Row="3">
-            <Button Margin="10,10,10,10" FontSize="20" Content="ADD AN ASSIGNMENT" Click="Assignment_Click"></Button>
-            <ListBox ItemsSource="{Binding Assignments, Mode=OneWay}" Margin="10,0,10,0">
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="10,10,10,10" FontSize="20" Content="ADD AN ASSIGNMENT" Click="Assignment_Click"></Button>
+                <Button Margin="10,10,10,10" FontSize="20" Content="EDIT" Click="EditAssignment_Click"></Button>
+                <Button Margin="10,10,10,10" FontSize="20" Content="DELETE" Click="DeleteAssignment_Click"></Button>
+            </StackPanel>
+            <ListBox ItemsSource="{Binding Assignments, Mode=TwoWay}" Margin="10,0,10,0"
+                     SelectedItem="{Binding Path=SelectedAssignment, Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

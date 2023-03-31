@@ -58,6 +58,13 @@ namespace Library.LearningManagement.Models
             Roster.Remove(person);
         }
 
+        public void Remove(Assignment assignment)
+        {
+            Assignments.Remove(assignment);
+        }
+
+
+
         public void GetMaxGrade()
         {
             MaxGrade = 0;
