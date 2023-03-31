@@ -23,6 +23,7 @@ namespace UWP.LearningManagement
         {
             this.InitializeComponent();
             DataContext = new MainPageViewModel();
+            frame.Navigate(typeof(PeoplePage));
         }
 
         private void EditPerson_Click(object sender, RoutedEventArgs e)
