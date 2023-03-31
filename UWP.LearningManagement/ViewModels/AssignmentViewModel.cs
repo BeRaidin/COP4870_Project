@@ -28,7 +28,11 @@ namespace UWP.LearningManagement.ViewModels
             get { return moduleService.CurrentItem; }
             set { moduleService.CurrentItem = value; }
         }
-
+        public Module SelectedModule
+        {
+            get { return moduleService.CurrentModule; }
+            set { moduleService.CurrentModule = value; }
+        }
 
         private Assignment _assignment;
         public Assignment Assignment
@@ -57,7 +61,7 @@ namespace UWP.LearningManagement.ViewModels
         public ObservableCollection<string> AssignmentGroups
         { get; set; }
         public string SelectedGroup { get; set; }
-        public string SelectedModule { get; set; }
+        public string SelectedModuleName { get; set; }
         public string GroupName { get; set; }
         public string Weight { get; set; }
         private List<Module> _modules;
@@ -67,12 +71,13 @@ namespace UWP.LearningManagement.ViewModels
         {
             moduleService = ModuleService.Current;
             courseService = CourseService.Current;
+
+            if (SelectedItem == null)
+            {
+                SelectedItem = new AssignmentItem();
+            }
             AssignmentItem = SelectedItem as AssignmentItem;
             Assignment = new Assignment();
-            if(SelectedItem == null)
-            {
-                SelectedItem = new ContentItem();
-            }
             DueDate = DateTimeOffset.Now;
             _modules = SelectedCourse.Modules;
             Modules = new ObservableCollection<string>();
@@ -94,12 +99,13 @@ namespace UWP.LearningManagement.ViewModels
         {
             moduleService = ModuleService.Current;
             courseService = CourseService.Current;
-            AssignmentItem = SelectedItem as AssignmentItem;
-            Assignment = assignment;
+
             if (SelectedItem == null)
             {
-                SelectedItem = new ContentItem();
+                SelectedItem = new AssignmentItem();
             }
+            AssignmentItem = SelectedItem as AssignmentItem;
+            Assignment = assignment;
             DueDate = DateTimeOffset.Now;
             _assignmentGroups = SelectedCourse.AssignmentGroups;
             AssignmentGroups = new ObservableCollection<string>();
@@ -136,27 +142,36 @@ namespace UWP.LearningManagement.ViewModels
             Set();
             Assignment.AssignmentGroup = _assignmentGroups.FirstOrDefault(i => i.Name.Equals(SelectedGroup));
 
-            if (SelectedModule != null)
+            if (SelectedModuleName != null && SelectedModuleName != "Make new Module")
             {
-                foreach(var module in SelectedCourse.Modules)
+                foreach (var module in SelectedCourse.Modules)
                 {
-                    if (module.Name.Equals(SelectedModule))
+                    if (module.Name.Equals(SelectedModuleName))
                     {
                         AssignmentItem = new AssignmentItem();
                         AssignmentItem.Name = Assignment.Name;
                         AssignmentItem.Description = Assignment.Description;
                         AssignmentItem.Assignment = Assignment;
                         module.Content.Add(AssignmentItem);
+                        SelectedModule = module;
                     }
                 }
 
             }
-            else if (SelectedModule == null && AssignmentItem != null)            
+            else if ((SelectedModuleName == null || SelectedModuleName == "Make new Module") && AssignmentItem != null)            
             {
                 AssignmentItem.Assignment = Assignment;
             }
-            
-            foreach (Person person in SelectedCourse.Roster)
+
+            if (SelectedModuleName == null || SelectedModuleName == "Make new Module")
+            {
+                var tempModule = new Module { Name= "Make new Module" };
+                SelectedModule = tempModule;
+                SelectedModule.Content.Add(AssignmentItem);
+            }
+
+
+                foreach (Person person in SelectedCourse.Roster)
             {
                 var student = person as Student;
                 if (student != null)
@@ -167,6 +182,7 @@ namespace UWP.LearningManagement.ViewModels
             }
             SelectedCourse.Add(Assignment);
             SelectedItem = AssignmentItem;
+
         }
 
         public void MakeNewAssignGroup()
@@ -184,7 +200,7 @@ namespace UWP.LearningManagement.ViewModels
         public void ClearCurrent()
         {
             SelectedItem = null;
-            moduleService.CurrentModule = null;
+            SelectedModule = null;
         }
     }
 }

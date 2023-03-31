@@ -69,5 +69,10 @@ namespace Library.LearningManagement.Services
         {
             CurrentModule.Remove(CurrentItem);
         }
+
+        public void Add()
+        {
+            CurrentModule.Add(CurrentItem);
+        }
     }
 }

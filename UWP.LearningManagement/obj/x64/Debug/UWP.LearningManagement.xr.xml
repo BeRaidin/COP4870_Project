@@ -16,7 +16,7 @@
     <RootPropertyPathName Name="SelectedGroup" />
     <RootPropertyPathName Name="TotalPoints" />
     <RootPropertyPathName Name="Modules" />
-    <RootPropertyPathName Name="SelectedModule" />
+    <RootPropertyPathName Name="SelectedModuleName" />
     <RootPropertyPathName Name="Students" />
     <RootPropertyPathName Name="Display" />
     <RootPropertyPathName Name="IsSelected" />
@@ -31,6 +31,7 @@
     <RootPropertyPathName Name="SelectedClass" />
     <RootPropertyPathName Name="PersonTypes" />
     <RootPropertyPathName Name="Assignments" />
+    <RootPropertyPathName Name="SelectedModule" />
     <RootPropertyPathName Name="Announcements" />
     <RootPropertyPathName Name="Roster" />
     <RootPropertyPathName Name="SelectedPerson" />

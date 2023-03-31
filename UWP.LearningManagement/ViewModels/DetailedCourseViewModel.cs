@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.Foundation.Collections;
 using System.Reflection.Metadata;
 using Windows.Graphics.Printing;
+using Windows.Media.Playback;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -155,7 +156,18 @@ namespace UWP.LearningManagement.ViewModels
                     await Groupdialog.ShowAsync();
                 }
             }
+
+            if (SelectedModule.Name.Equals("Make new Module"))
+            {
+                var Moduledialog = new ModuleDialog();
+                if (Moduledialog != null)
+                {
+                    await Moduledialog.ShowAsync();
+                }
+                moduleService.Add();
+            }
             Refresh();
+            moduleService.CurrentItem = null;
         }
 
         public void Refresh()
