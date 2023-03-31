@@ -26,7 +26,8 @@
         </StackPanel>
         <StackPanel Grid.Row="1">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Enrolled Courses"></TextBlock>
-            <ListBox x:ConnectionId='4' x:Name="CoursesListBox"
+            <Button x:ConnectionId='4' Margin="10,0,10,0" Content="Drop Courses"                          ></Button>
+            <ListBox x:ConnectionId='5' x:Name="CoursesListBox"
                 ItemsSource="{Binding FinalGrades}" Margin="10,0,10,0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

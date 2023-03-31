@@ -12,6 +12,7 @@ Dialogs\AssignGroupDialog.xbf
 Dialogs\AssignmentDialog.xbf
 Dialogs\ContentItemDialog.xbf
 Dialogs\CourseDialog.xbf
+Dialogs\DropCoursesDialog.xbf
 Dialogs\EditContentItemDialog.xbf
 Dialogs\EditCourseDialog.xbf
 Dialogs\EditPersonDialog.xbf

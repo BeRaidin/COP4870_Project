@@ -78,23 +78,7 @@ namespace UWP.LearningManagement.ViewModels
             personService = PersonService.Current;
             courseService = CourseService.Current;
             Student = SelectedPerson as Student;
-            if (Student != null)
-            {
-                Grades = new ObservableCollection<GradesDictionary>(Student.Grades);
-                if (SelectedCourse != null)
-                {
-                    foreach (var grade in Student.Grades)
-                    {
-                        if (!SelectedCourse.Assignments.Contains(grade.Assignment))
-                        {
-                            Grades.Remove(grade);
-                        }
-                    }
-                }
-            }
-            else Grades = new ObservableCollection<GradesDictionary>();
-            
-
+            Refresh();
             SetType();
             SetGradeLevel();
         }
@@ -156,6 +140,39 @@ namespace UWP.LearningManagement.ViewModels
         public void ChangedSelectedAssignment(Assignment assignment)
         {
             SelectedAssignment = assignment;
+        }
+
+        public async void DropClasses()
+        {
+            foreach(var course in SelectedPerson.Courses)
+            {
+                course.IsSelected = false;
+            }
+            var dialog = new DropCoursesDialog();
+            if (dialog != null)
+            {
+                await dialog.ShowAsync();
+            }
+            Refresh();
+        }
+
+        public void Refresh()
+        {
+            if (Student != null)
+            {
+                Grades = new ObservableCollection<GradesDictionary>(Student.Grades);
+                if (SelectedCourse != null)
+                {
+                    foreach (var grade in Student.Grades)
+                    {
+                        if (!SelectedCourse.Assignments.Contains(grade.Assignment))
+                        {
+                            Grades.Remove(grade);
+                        }
+                    }
+                }
+            }
+            else Grades = new ObservableCollection<GradesDictionary>();
         }
     }
 }
