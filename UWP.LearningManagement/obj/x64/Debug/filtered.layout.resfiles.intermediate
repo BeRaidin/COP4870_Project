@@ -13,8 +13,10 @@ Dialogs\AssignmentDialog.xbf
 Dialogs\ContentItemDialog.xbf
 Dialogs\CourseDialog.xbf
 Dialogs\DropCoursesDialog.xbf
+Dialogs\EditAssignmentDialog.xbf
 Dialogs\EditContentItemDialog.xbf
 Dialogs\EditCourseDialog.xbf
+Dialogs\EditModuleDialog.xbf
 Dialogs\EditPersonDialog.xbf
 Dialogs\GradeDialog.xbf
 Dialogs\ModuleDialog.xbf

@@ -116,6 +116,7 @@ namespace UWP.LearningManagement.ViewModels
                 await dialog.ShowAsync();
             }
             Refresh();
+            SelectedModule = null;
         }
 
         public async void AddAnnouncement()
@@ -237,14 +238,24 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
 
-        public void EditModule()
+        public async void EditModule()
         {
-
+            var dialog = new EditModuleDialog();
+            if (dialog != null)
+            {
+                await dialog.ShowAsync();
+            }
+            Refresh();
         }
 
-        public void EditAssignment()
+        public async void EditAssignment()
         {
-
+            var dialog = new EditAssignmentDialog();
+            if (dialog != null)
+            {
+                await dialog.ShowAsync();
+            }
+            Refresh();
         }
     }
 }
