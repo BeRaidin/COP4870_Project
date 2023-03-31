@@ -9,5 +9,12 @@ namespace Library.LearningManagement.Models
     public class AssignmentItem : ContentItem
     {
         public Assignment Assignment { get; set; }
+
+        public AssignmentItem()
+        {
+            Assignment = new Assignment();
+        }
+
+        public override string Display => $"[{Id}] - {Name} - Assignment";
     }
 }

@@ -8,7 +8,7 @@ namespace Library.LearningManagement.Models
 {
     public class ContentItem
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 
@@ -16,7 +16,7 @@ namespace Library.LearningManagement.Models
         { 
             Name = string.Empty;
             Description = string.Empty;
-            Id = 0;
+            Id = "0";
         }
 
         public virtual string Display => $"[{Id}] - {Name}";

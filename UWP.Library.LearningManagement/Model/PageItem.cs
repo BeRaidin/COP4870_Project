@@ -9,5 +9,7 @@ namespace Library.LearningManagement.Models
     public class PageItem : ContentItem
     {
         public string HTMLBody { get; set; }
+
+        public override string Display => $"[{Id}] - {Name} - Page";
     }
 }
