@@ -38,10 +38,9 @@
     <RootPropertyPathName Name="GradePoint" />
     <RootPropertyPathName Name="Grades" />
     <RootPropertyPathName Name="AssignmentKey" />
-    <RootPropertyPathName Name="Key" />
-    <RootPropertyPathName Name="TotalAvailablePoints" />
-    <RootPropertyPathName Name="Value" />
     <RootPropertyPathName Name="FinalGrades" />
+    <RootPropertyPathName Name="Value" />
+    <RootPropertyPathName Name="Key" />
     <RootPropertyPathName Name="GradeLevel" />
     <RootPropertyPathName Name="People" />
     <RootPropertyPathName Name="ContentItems" />

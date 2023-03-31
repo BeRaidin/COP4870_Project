@@ -1,4 +1,5 @@
-﻿using Library.LearningManagement.Models;
+﻿using Library.LearningManagement.Model;
+using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
 using System;
 using System.Collections.Generic;
@@ -160,7 +161,8 @@ namespace UWP.LearningManagement.ViewModels
                 var student = person as Student;
                 if (student != null)
                 {
-                    student.Grades.Add(Assignment, 0);
+                    var grade = new GradesDictionary { Assignment = Assignment, Grade = 0 };
+                    student.Grades.Add(grade);
                 }
             }
             SelectedCourse.Add(Assignment);
