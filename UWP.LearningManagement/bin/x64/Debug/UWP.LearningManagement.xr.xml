@@ -31,6 +31,7 @@
     <RootPropertyPathName Name="SelectedClass" />
     <RootPropertyPathName Name="PersonTypes" />
     <RootPropertyPathName Name="Assignments" />
+    <RootPropertyPathName Name="SelectedAssignment" />
     <RootPropertyPathName Name="SelectedModule" />
     <RootPropertyPathName Name="Announcements" />
     <RootPropertyPathName Name="Roster" />

@@ -43,7 +43,7 @@ namespace UWP.LearningManagement.ViewModels
             get { return courseService.CurrentCourse; }
             set { courseService.CurrentCourse = value; }
         }
-
+        public Assignment SelectedAssignment { get; set; }
         private ObservableCollection<Module> _modules;
         public ObservableCollection<Module> Modules
         {
@@ -194,6 +194,57 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
 
+        public void DeleteAssignment()
+        {
+            foreach(var module in Modules)
+            {
+                foreach(var item in module.Content.ToList())
+                {
+                    if(item as AssignmentItem != null)
+                    {
+                        if((item as AssignmentItem).Assignment.Equals(SelectedAssignment))
+                        {
+                            module.Remove(item);
+                        }    
+                    }
+                }
+            }
+            Remove(SelectedAssignment);
+        }
 
+        public void DeleteModule()
+        {
+            foreach(var item in SelectedModule.Content.ToList())
+            {
+                if(item as AssignmentItem != null)
+                {
+                    Remove((item as AssignmentItem).Assignment);
+                }
+                SelectedModule.Remove(item);
+            }
+            SelectedCourse.Modules.Remove(SelectedModule);
+        }
+
+        public void Remove(Assignment assignment)
+        {
+            SelectedCourse.Remove(assignment);
+            foreach (var student in SelectedCourse.Roster.ToList())
+            {
+                if (student as Student != null)
+                {
+                    (student as Student).Remove(assignment);
+                }
+            }
+        }
+
+        public void EditModule()
+        {
+
+        }
+
+        public void EditAssignment()
+        {
+
+        }
     }
 }

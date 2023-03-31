@@ -35,8 +35,8 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="1">
-            <Button x:ConnectionId='9' Margin="10,0,10,0" FontSize="20" Content="EDIT ROSTER"                     ></Button>
-            <ListBox x:ConnectionId='10' ItemsSource="{Binding Roster}" Margin="10,0,10,0"
+            <Button x:ConnectionId='13' Margin="10,0,10,0" FontSize="20" Content="EDIT ROSTER"                     ></Button>
+            <ListBox x:ConnectionId='14' ItemsSource="{Binding Roster}" Margin="10,0,10,0"
                      SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}"                                    >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -49,7 +49,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <Button x:ConnectionId='7' Margin="10,0,10,0" FontSize="20" Content="ADD AN ANNOUNCEMENT"                           ></Button>
+            <Button x:ConnectionId='11' Margin="10,0,10,0" FontSize="20" Content="ADD AN ANNOUNCEMENT"                           ></Button>
             <ListBox ItemsSource="{Binding Announcements, Mode=OneWay}" Margin="10,0,10,0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -62,8 +62,12 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2">
-            <Button x:ConnectionId='4' Margin="10,10,10,10" FontSize="20" Content="ADD A MODULE"                     ></Button>
-            <ListBox x:ConnectionId='5' ItemsSource="{Binding Modules, Mode=TwoWay}" Margin="10,0,10,0"
+            <StackPanel Orientation="Horizontal">
+                <Button x:ConnectionId='8' Margin="10,10,10,10" FontSize="20" Content="ADD A MODULE"                     ></Button>
+                <Button x:ConnectionId='9' Margin="10,10,10,10" FontSize="20" Content="EDIT"                         ></Button>
+                <Button x:ConnectionId='10' Margin="10,10,10,10" FontSize="20" Content="DELETE"                           ></Button>
+            </StackPanel>
+            <ListBox x:ConnectionId='6' ItemsSource="{Binding Modules, Mode=TwoWay}" Margin="10,0,10,0"
                     SelectedItem="{Binding Path=SelectedModule, Mode=TwoWay}"                                   >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -76,8 +80,13 @@
         </StackPanel>
 
         <StackPanel Grid.Row="3">
-            <Button x:ConnectionId='2' Margin="10,10,10,10" FontSize="20" Content="ADD AN ASSIGNMENT"                         ></Button>
-            <ListBox ItemsSource="{Binding Assignments, Mode=OneWay}" Margin="10,0,10,0">
+            <StackPanel Orientation="Horizontal">
+                <Button x:ConnectionId='3' Margin="10,10,10,10" FontSize="20" Content="ADD AN ASSIGNMENT"                         ></Button>
+                <Button x:ConnectionId='4' Margin="10,10,10,10" FontSize="20" Content="EDIT"                             ></Button>
+                <Button x:ConnectionId='5' Margin="10,10,10,10" FontSize="20" Content="DELETE"                               ></Button>
+            </StackPanel>
+            <ListBox ItemsSource="{Binding Assignments, Mode=TwoWay}" Margin="10,0,10,0"
+                     SelectedItem="{Binding Path=SelectedAssignment, Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
