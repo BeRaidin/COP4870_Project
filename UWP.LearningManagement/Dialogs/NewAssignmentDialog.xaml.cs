@@ -22,7 +22,6 @@ namespace UWP.LearningManagement.Dialogs
         {
             this.InitializeComponent();
             DataContext = new AssignmentViewModel();
-            (DataContext as AssignmentViewModel).ClearCurrent();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

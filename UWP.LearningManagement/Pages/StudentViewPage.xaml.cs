@@ -26,7 +26,6 @@ namespace UWP.LearningManagement
         {
             this.InitializeComponent();
             DataContext = new SelectPersonViewModel(1);
-            (DataContext as SelectPersonViewModel).SelectedPerson = null;
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)

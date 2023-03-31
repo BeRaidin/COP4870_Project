@@ -15,6 +15,7 @@ namespace UWP.LearningManagement.ViewModels
     public class ModuleViewModel
     {
         private readonly CourseService courseService;
+        private readonly ModuleService moduleService;
 
         private Module _module;
         public Module Module
@@ -42,12 +43,14 @@ namespace UWP.LearningManagement.ViewModels
         public ModuleViewModel()
         {
             courseService = CourseService.Current;
+            moduleService = ModuleService.Current;
             Module = new Module();
         }
 
         public void Add()
         {
             Modules.Add(Module);
+            moduleService.CurrentModule = Module;
         }
     }
 }
