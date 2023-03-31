@@ -77,14 +77,26 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Search()
         {
-            if (Query != null)
+            if (Query != null && Query != "")
             {
-                var searchResults = People.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
-                                                || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
-                People.Clear();
-                foreach (var item in searchResults)
+
+                IEnumerable<Person> searchResults;
+
+                if(personType == 0)
                 {
-                    People.Add(item);
+                    searchResults = Instructors.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+                                                || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                }
+                else
+                {
+                    searchResults = Students.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+                                               || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                }
+                
+                People.Clear();
+                foreach (var person in searchResults)
+                {
+                    People.Add(person);
                 }
             }
             else
@@ -98,11 +110,17 @@ namespace UWP.LearningManagement.ViewModels
             People.Clear();
             if(personType == 0)
             {
-                People = Instructors;
+                foreach(var person in Instructors)
+                {
+                    People.Add(person);
+                }
             }
             else if (personType == 1)
             {
-                People = Students;
+                foreach (var person in Students)
+                {
+                    People.Add(person);
+                }
             }
         }
     }

@@ -82,7 +82,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Search()
         {
-            if (Query != null)
+            if (Query != null && Query != "")
             {
                 var searchResults = allPeople.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
                                                 || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
