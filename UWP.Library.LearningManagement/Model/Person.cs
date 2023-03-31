@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Library.LearningManagement.Model;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,11 +26,30 @@ namespace Library.LearningManagement.Models
         public void Add(Course course)
         {
             Courses.Add(course);
+            if(this as Student != null)
+            {
+                foreach (var assignment in course.Assignments)
+                {
+                    var grade = new GradesDictionary { Assignment = assignment, Grade = 0 };
+
+
+                    (this as Student).Grades.Add(grade);
+                }
+                (this as Student).FinalGrades.Add(course, 0);
+            }
         }
 
         public void Remove(Course course)
         {
             Courses.Remove(course);
+            if (this as Student != null)
+            {
+                foreach (var assignment in course.Assignments)
+                {
+                    (this as Student).Remove(assignment);
+                }
+                (this as Student).FinalGrades.Remove(course);
+            }
         }
     }
 }

@@ -50,25 +50,13 @@
         <StackPanel Grid.Row="2">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Grades"></TextBlock>
             <ListBox x:Name="AssignmentListBox" 
-                     ItemsSource="{Binding Grades}" Margin="10,0,10,0"  
+                     ItemsSource="{Binding Path=Grades}" Margin="10,0,10,0"  
                      SelectedItem="{Binding AssignmentKey, Mode=TwoWay}"
                      DoubleTapped="Assign_DoubleTapped"
                      SelectionChanged="Assign_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="3*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding Path=Key.Name, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBlock Margin="15,0,0,0" Grid.Column="2" Text="{Binding Path=Value, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBlock Grid.Column="3" Text="/" />
-                            <TextBlock Grid.Column="4" Text="{Binding Path=Key.TotalAvailablePoints, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                        </Grid>
+                        <TextBlock Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

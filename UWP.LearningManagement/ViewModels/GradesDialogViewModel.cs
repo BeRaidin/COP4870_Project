@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation.Collections;
 using System.Reflection.Metadata;
+using Library.LearningManagement.Model;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -45,15 +46,17 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (double.TryParse(Score, out var value))
             {
+                var grade = SelectedStudent.GetGradeDict(SelectedAssignment);
+                    
                 if (value > Total)
                 {
-                    SelectedStudent.Grades[SelectedAssignment] = value;
+                    grade.Grade = Total;
                 }
                 else if (value < 0)
                 {
-                    SelectedStudent.Grades[SelectedAssignment] = 0;
+                    grade.Grade = 0;
                 }
-                else SelectedStudent.Grades[SelectedAssignment] = value;
+                else grade.Grade = value;
                 GetFinalGrade();
                 UpdateGPA();
             }
@@ -72,11 +75,11 @@ namespace UWP.LearningManagement.ViewModels
 
             double rawGrade = 0;
             selectedCourse.GetMaxGrade();
-            foreach (KeyValuePair<Assignment, double> pair in SelectedStudent.Grades)
+            foreach(GradesDictionary grade in SelectedStudent.Grades)
             {
-                if (selectedCourse.Assignments.Contains(pair.Key))
+                if (selectedCourse.Assignments.Contains(grade.Assignment))
                 {
-                    rawGrade += ((double)pair.Value * (pair.Key.AssignmentGroup.Weight / (double)100));
+                    rawGrade += ((double)grade.Grade * (grade.Assignment.AssignmentGroup.Weight / (double)100));
                 }
             }
 

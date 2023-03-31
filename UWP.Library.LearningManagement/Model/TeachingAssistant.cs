@@ -8,5 +8,6 @@ namespace Library.LearningManagement.Models
 {
     public class TeachingAssistant : Person
     {
+        public override string Display => $"[{Id}] {Name} - Teaching Assistant";
     }
 }

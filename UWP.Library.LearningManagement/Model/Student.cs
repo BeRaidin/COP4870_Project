@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Library.LearningManagement.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
@@ -10,43 +12,44 @@ namespace Library.LearningManagement.Models
 {
     public class Student : Person
     {
-        public Dictionary<Assignment, double> Grades { get; set; }
+        public List<GradesDictionary> Grades { get; set; }
         public Classes Classification { get; set; }
         public enum Classes
         {
             Freshman, Sophmore, Junior, Senior
         }
         public Dictionary<Course, double> FinalGrades { get; set; }
-
         public double GradePointAverage { get; set; }
+
+        public override string Display => $"[{Id}] {Name} - Student";
 
         public Student()
         {
-            Grades = new Dictionary<Assignment, double>();
+            Grades = new List<GradesDictionary>();
             FinalGrades = new Dictionary<Course, double>();
         }
 
-        public void Add(Course course) 
+        public void Remove(Assignment assignment)
         {
-            Courses.Add(course);
-            foreach(var assignment in course.Assignments) 
+            foreach (var grade in Grades)
             {
-                Grades.Add(assignment, 0);
-            }
-            FinalGrades.Add(course, 0);
-        }
-
-        public void Remove(Course course) 
-        { 
-            Courses.Remove(course);
-            foreach (var assignment in course.Assignments)
-            {
-                if(Grades.ContainsKey(assignment))
+                if (grade.Assignment.Equals(assignment))
                 {
-                    Grades.Remove(assignment);
+                    Grades.Remove(grade);
                 }
             }
-            FinalGrades.Remove(course);
+        }
+
+        public GradesDictionary GetGradeDict(Assignment assignment)
+        {
+            foreach (var grade in Grades)
+            {
+                if (grade.Assignment.Equals(assignment))
+                {
+                    return grade;
+                }
+            }
+            return null;
         }
     }
 }

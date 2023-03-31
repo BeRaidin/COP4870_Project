@@ -54,7 +54,10 @@ namespace UWP.LearningManagement
 
         private void Student_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            Frame.Navigate(typeof(DetailedStudent));
+            if ((DataContext as DetailedCourseViewModel).SelectedPerson as Student != null)
+            {
+                Frame.Navigate(typeof(DetailedStudent));
+            }
         }
 
         private void Assignment_Click(object sender, RoutedEventArgs e)

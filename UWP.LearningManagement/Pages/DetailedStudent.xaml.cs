@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Xml.Linq;
 using Library.LearningManagement.Models;
+using Library.LearningManagement.Model;
 
 namespace UWP.LearningManagement
 {
@@ -36,8 +37,8 @@ namespace UWP.LearningManagement
 
         private void Assign_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var tmp = (KeyValuePair<Assignment, Double>)AssignmentListBox.SelectedItem;
-            (DataContext as DetailedPersonViewModel).ChangedSelectedAssignment(tmp.Key);
+            var tmp = (GradesDictionary)AssignmentListBox.SelectedItem;
+            (DataContext as DetailedPersonViewModel).ChangedSelectedAssignment(tmp.Assignment);
         }
     }
 }
