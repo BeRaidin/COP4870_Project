@@ -20,6 +20,12 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly PersonService personService;
         private readonly List<Person> allPeople;
+
+        public Person SelectedPerson
+        {
+            get { return personService.CurrentPerson; }
+            set { personService.CurrentPerson = value; }
+        }
         private ObservableCollection<Person> _people;
         public ObservableCollection<Person> People
         {
@@ -32,7 +38,6 @@ namespace UWP.LearningManagement.ViewModels
                 _people = value;
             }
         }
-        public Person SelectedPerson { get; set; }
         public string Query { get; set; }
 
         public PersonPageViewModel()
@@ -44,7 +49,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public async void Add()
         {
-            personService.CurrentPerson = new Person();
+            SelectedPerson = new Person();
             var dialog = new PersonDialog();
             if (dialog != null)
             {
@@ -57,7 +62,6 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (SelectedPerson != null)
             {
-                UpdateCurrentPerson();
                 personService.Remove();
                 Refresh();
             }
@@ -67,7 +71,6 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (SelectedPerson != null)
             {
-                UpdateCurrentPerson();
                 var dialog = new EditPersonDialog();
                 if (dialog != null)
                 {
@@ -81,7 +84,8 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (Query != null)
             {
-                var searchResults = allPeople.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                var searchResults = allPeople.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+                                                || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 People.Clear();
                 foreach (var item in searchResults)
                 {
@@ -92,11 +96,6 @@ namespace UWP.LearningManagement.ViewModels
             {
                 Refresh();
             }
-        }
-
-        public void UpdateCurrentPerson()
-        {
-            personService.CurrentPerson = SelectedPerson;
         }
 
         public void Refresh()

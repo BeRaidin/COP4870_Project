@@ -25,7 +25,6 @@ namespace UWP.LearningManagement.Dialogs
         {
             this.InitializeComponent();
             this.DataContext = new CourseViewModel();
-            (DataContext as CourseViewModel).FillChecks();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

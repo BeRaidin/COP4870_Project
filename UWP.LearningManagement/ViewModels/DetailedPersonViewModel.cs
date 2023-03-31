@@ -16,7 +16,7 @@ using System.Reflection.Metadata;
 
 namespace UWP.LearningManagement.ViewModels
 {
-    internal class DetailedPersonViewModel : INotifyPropertyChanged
+    public class DetailedPersonViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private void RaisePropertyChanged(string propertyName)
@@ -24,8 +24,27 @@ namespace UWP.LearningManagement.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private PersonService personService;
-        private CourseService courseService;
+        private readonly PersonService personService;
+        private readonly CourseService courseService;
+
+        public Person SelectedPerson
+        {
+            get { return personService.CurrentPerson; }
+            set { personService.CurrentPerson = value; }
+        }
+        public Assignment SelectedAssignment
+        {
+            get { return personService.CurrentAssignment; }
+            set { personService.CurrentAssignment = value; }
+        }
+        public Course SelectedCourse
+        {
+            get { return courseService.CurrentCourse; }
+            set { courseService.CurrentCourse = value; }
+        }
+
+
+
         public Student Student { get; set; }
         public string Name
         {
@@ -59,7 +78,6 @@ namespace UWP.LearningManagement.ViewModels
         {
             get { return Student.GradePointAverage; }
         }
-        public Course SelectedCourse { get; set; }
 
         public Dictionary<Course, double> FinalGrades
         {
@@ -76,7 +94,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             personService = PersonService.Current;
             courseService = CourseService.Current;
-            Student = personService.CurrentPerson as Student;
+            Student = SelectedPerson as Student;
             if (Student != null)
             {
                 _grades = Student.Grades;
@@ -89,12 +107,13 @@ namespace UWP.LearningManagement.ViewModels
         public DetailedPersonViewModel(Assignment assignment)
         {
             personService = PersonService.Current;
-            Student = personService.CurrentPerson as Student;
+            courseService = CourseService.Current;
+            Student = SelectedPerson as Student;
             if (Student != null)
             {
-                _grades = Student.Grades;
+                Grades = Student.Grades;
             }
-            else _grades = new Dictionary<Assignment, double>();
+            else Grades = new Dictionary<Assignment, double>();
             SetType();
             SetGradeLevel();
             AssignmentKey = assignment;
@@ -143,95 +162,17 @@ namespace UWP.LearningManagement.ViewModels
 
         public async void SetGrade()
         {
-            var dialog = new GradeDialog(AssignmentKey);
+            SelectedAssignment = AssignmentKey;
+            var dialog = new GradeDialog();
             if (dialog != null)
             {
                 await dialog.ShowAsync();
-            }
-        }
-
-        public void AddGrade()
-        {
-            if (double.TryParse(Score, out var value))
-            {
-                if (value > Total)
-                {
-                    Student.Grades[AssignmentKey] = value;
-                }
-                else if (value < 0)
-                {
-                    Student.Grades[AssignmentKey] = 0;
-                }
-                else Student.Grades[AssignmentKey] = value;
-                GetFinalGrade();
-                UpdateGPA();
             }
         }
         
         public void ChangedSelectedAssignment(Assignment assignment)
         {
             AssignmentKey = assignment;
-        }
-
-        public void GetFinalGrade()
-        {
-            Course selectedCourse = new Course();
-            foreach( var course in Student.Courses )
-            {
-                if(course.Assignments.Any(i => i == AssignmentKey))
-                {
-                    selectedCourse = course;
-                }
-            }
-
-            double rawGrade = 0;
-            selectedCourse.GetMaxGrade();
-            foreach (KeyValuePair<Assignment, double> pair in Student.Grades )
-            {
-                if (selectedCourse.Assignments.Contains(pair.Key))
-                {
-                    rawGrade += ((double)pair.Value * (pair.Key.AssignmentGroup.Weight / (double)100));
-                }
-            }
-
-            double totalGrade = (double)(rawGrade / selectedCourse.MaxGrade) * 100;
-            Student.FinalGrades[selectedCourse] = totalGrade;
-        }
-
-        public void UpdateGPA()
-        {
-            double GPA = 0;
-            var totalHours = 0;
-            double totalHonorPoints = 0;
-            foreach (KeyValuePair<Course, double> grade in Student.FinalGrades)
-            {
-                var courseHonorPoints = (double)0.0;
-                totalHours += grade.Key.CreditHours;
-                if (grade.Value < 70)
-                {
-                    courseHonorPoints = 0.0;
-                }
-                else if (grade.Value < 80)
-                {
-                    courseHonorPoints = 2.0;
-                }
-                else if (grade.Value < 90)
-                {
-                    courseHonorPoints = 3.0;
-                }
-                else
-                {
-                    courseHonorPoints = 4.0;
-                }
-                totalHonorPoints += (double)courseHonorPoints * grade.Key.CreditHours;
-            }   
-            GPA = (double)totalHonorPoints / totalHours;
-            Student.GradePointAverage = GPA;
-        }
-
-        public void UpdateCurrentAssignment()
-        {
-            courseService.CurrentCourse = SelectedCourse;
         }
     }
 }

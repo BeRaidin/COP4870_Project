@@ -13,6 +13,18 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly ModuleService moduleService;
         private readonly List<ContentItem> allItems;
+
+        public Module SelectedModule
+        {
+            get { return moduleService.CurrentModule; }
+            set { moduleService.CurrentModule = value; }
+        }
+        public ContentItem SelectedItem 
+        {
+            get { return moduleService.CurrentItem; }
+            set { moduleService.CurrentItem = value; }
+        }
+
         private ObservableCollection<ContentItem> _contentItems;
         public ObservableCollection<ContentItem> ContentItems
         {
@@ -25,25 +37,25 @@ namespace UWP.LearningManagement.ViewModels
                 _contentItems = value;
             }
         }
-        public ContentItem SelectedItem { get; set; }
         public string Query { get; set; }
 
         public ItemsPageViewModel() 
         {
             moduleService = ModuleService.Current;
-            allItems = moduleService.CurrentModule.Content;
+            allItems = SelectedModule.Content;
             ContentItems = new ObservableCollection<ContentItem>(allItems);
         }
 
         public async void Add()
         {
+            SelectedItem = new ContentItem();
             var dialog = new ContentItemDialog();
             if (dialog != null)
             {
                 await dialog.ShowAsync();
             }
 
-            if(moduleService.CurrentItem as AssignmentItem != null)
+            if(SelectedItem as AssignmentItem != null)
             {
                 var assignDialog = new AssignmentDialog();
                 if (assignDialog != null)
@@ -51,7 +63,7 @@ namespace UWP.LearningManagement.ViewModels
                     await assignDialog.ShowAsync();
                 }
 
-                var assignment = (moduleService.CurrentItem as AssignmentItem).Assignment;
+                var assignment = (SelectedItem as AssignmentItem).Assignment;
                 if (assignment.AssignmentGroup == null)
                 {
                     var Groupdialog = new AssignGroupDialog(assignment);
@@ -68,8 +80,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (SelectedItem != null)
             {
-                UpdateCurrentItem();
-                moduleService.CurrentModule.Content.Remove(SelectedItem);
+                moduleService.RemoveCurrentItem();
                 Refresh();
             }
         }
@@ -78,7 +89,6 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (SelectedItem != null)
             {
-                UpdateCurrentItem();
                 var dialog = new EditContentItemDialog();
                 if (dialog != null)
                 {
@@ -103,11 +113,6 @@ namespace UWP.LearningManagement.ViewModels
             {
                 Refresh();
             }
-        }
-
-        public void UpdateCurrentItem()
-        {
-            moduleService.CurrentItem = SelectedItem;
         }
 
         public void Refresh()

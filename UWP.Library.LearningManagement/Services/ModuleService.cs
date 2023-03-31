@@ -64,5 +64,10 @@ namespace Library.LearningManagement.Services
         {
             ModuleList.Remove(CurrentModule);
         }
+
+        public void RemoveCurrentItem()
+        {
+            CurrentModule.Remove(CurrentItem);
+        }
     }
 }

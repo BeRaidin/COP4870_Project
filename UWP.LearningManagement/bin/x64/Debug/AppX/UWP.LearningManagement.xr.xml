@@ -28,7 +28,7 @@
     <RootPropertyPathName Name="Hours" />
     <RootPropertyPathName Name="Code" />
     <RootPropertyPathName Name="StudentLevels" />
-    <RootPropertyPathName Name="SelectedLevel" />
+    <RootPropertyPathName Name="SelectedClass" />
     <RootPropertyPathName Name="PersonTypes" />
     <RootPropertyPathName Name="Assignments" />
     <RootPropertyPathName Name="Announcements" />

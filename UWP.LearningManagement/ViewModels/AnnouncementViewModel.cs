@@ -12,6 +12,11 @@ namespace UWP.LearningManagement.ViewModels
     public class AnnouncementViewModel
     {
         private readonly CourseService courseService;
+        public Course SelectedCourse
+        {
+            get { return courseService.CurrentCourse; }
+            set { courseService.CurrentCourse = value; }
+        }
         public Announcement Announcement { get; set; }
         public string Title 
         {
@@ -32,7 +37,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Add()
         {
-            courseService.CurrentCourse.Announcements.Add(Announcement);
+            SelectedCourse.Add(Announcement);
         }
     }
 }

@@ -15,21 +15,19 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class GradeDialog : ContentDialog
     {
-        public GradeDialog(Assignment assignment)
+        public GradeDialog()
         {
             this.InitializeComponent();
-            DataContext = new DetailedPersonViewModel(assignment);
+            DataContext = new GradesDialogViewModel();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as DetailedPersonViewModel).AddGrade();
+            (DataContext as GradesDialogViewModel).AddGrade();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

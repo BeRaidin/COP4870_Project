@@ -52,7 +52,6 @@ namespace UWP.LearningManagement
         {
             if ((DataContext as PersonPageViewModel).SelectedPerson != null)
             {
-                (DataContext as PersonPageViewModel).UpdateCurrentPerson();
                 if ((DataContext as PersonPageViewModel).SelectedPerson as Student != null)
                 {
                     Frame.Navigate(typeof(DetailedStudent));

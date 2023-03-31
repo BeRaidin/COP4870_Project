@@ -19,10 +19,30 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class DetailedCourseViewModel
     {
-        private CourseService courseService;
-        private PersonService personService;
-        private ModuleService moduleService;
+        private readonly CourseService courseService;
+        private readonly PersonService personService;
+        private readonly ModuleService moduleService;
         private readonly List<Module> allModules;
+        private readonly List<Assignment> allAssignments;
+        private readonly List<Person> allRoster;
+        private readonly List<Announcement> allAnnouncements;
+
+        public Module SelectedModule
+        {
+            get { return moduleService.CurrentModule; }
+            set { moduleService.CurrentModule = value; }
+        }
+        public Person SelectedPerson
+        {
+            get { return personService.CurrentPerson; }
+            set { personService.CurrentPerson = value; }
+        }
+        public Course SelectedCourse
+        {
+            get { return courseService.CurrentCourse; }
+            set { courseService.CurrentCourse = value; }
+        }
+
         private ObservableCollection<Module> _modules;
         public ObservableCollection<Module> Modules
         {
@@ -35,57 +55,51 @@ namespace UWP.LearningManagement.ViewModels
                 _modules = value;
             }
         }
-        private readonly List<Assignment> allAssignments;
         private ObservableCollection<Assignment> _assignments;
         public ObservableCollection<Assignment> Assignments
         {
             get { return _assignments; }
             set { _assignments = value; }
         }
-        private readonly List<Person> allRoster;
         private ObservableCollection<Person> _roster;
         public ObservableCollection<Person> Roster
         {
             get { return _roster; }
             set { _roster = value; }
         }
-        private readonly List<Announcement> allAnnouncements;
         private ObservableCollection<Announcement> _announcements;
         public ObservableCollection<Announcement> Announcements
         {
             get { return _announcements; }
             set { _announcements = value; }
         }
-
-
-        public Module SelectedModule { get; set; }
         public string Query { get; set; }
         public string Code
         {
-            get { return courseService.CurrentCourse.Code; }
+            get { return SelectedCourse.Code; }
         }
         public int Hours
         {
-            get { return courseService.CurrentCourse.CreditHours; }
+            get { return SelectedCourse.CreditHours; }
         }
         public string Name
         {
-            get { return courseService.CurrentCourse.Name; }
+            get { return SelectedCourse.Name; }
         }
         public string Room
         {
-            get { return courseService.CurrentCourse.Room; }
+            get { return SelectedCourse.Room; }
         }
-        public Person SelectedPerson { get; set; }
+
         public DetailedCourseViewModel()
         {
             courseService = CourseService.Current;
             personService = PersonService.Current;
             moduleService = ModuleService.Current;
-            allModules = courseService.CurrentCourse.Modules;
-            allAssignments = courseService.CurrentCourse.Assignments;
-            allRoster = courseService.CurrentCourse.Roster;
-            allAnnouncements = courseService.CurrentCourse.Announcements;
+            allModules = SelectedCourse.Modules;
+            allAssignments = SelectedCourse.Assignments;
+            allRoster = SelectedCourse.Roster;
+            allAnnouncements = SelectedCourse.Announcements;
             Modules = new ObservableCollection<Module>(allModules);
             Assignments = new ObservableCollection<Assignment>(allAssignments);
             Roster = new ObservableCollection<Person>(allRoster);
@@ -94,6 +108,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public async void AddModule()
         {
+            SelectedModule = new Module();
             var dialog = new ModuleDialog();
             if (dialog != null)
             {
@@ -112,34 +127,6 @@ namespace UWP.LearningManagement.ViewModels
             Refresh();
         }
 
-        public void UpdateCurrentModule()
-        {
-            moduleService.CurrentModule = SelectedModule;
-        }
-
-        public void Refresh()
-        {
-            Modules.Clear();
-            foreach (var module in allModules)
-            {
-                Modules.Add(module);
-            }
-            Assignments.Clear();
-            foreach(var assignment in allAssignments)
-            {
-                Assignments.Add(assignment);
-            }
-            Roster.Clear();
-            foreach (var person in  allRoster)
-            {
-                Roster.Add(person);
-            }
-            Announcements.Clear();
-            foreach (var announcement in allAnnouncements)
-            {
-                Announcements.Add(announcement);
-            }
-        }
 
         public async void EditRoster()
         {
@@ -149,11 +136,6 @@ namespace UWP.LearningManagement.ViewModels
                 await dialog.ShowAsync();
             }
             Refresh();
-        }
-
-        public void UpdateCurrentPerson()
-        {
-            personService.CurrentPerson = SelectedPerson;
         }
 
         public async void AddAssignment()
@@ -175,6 +157,31 @@ namespace UWP.LearningManagement.ViewModels
             }
             Refresh();
         }
+
+        public void Refresh()
+        {
+            Modules.Clear();
+            foreach (var module in allModules)
+            {
+                Modules.Add(module);
+            }
+            Assignments.Clear();
+            foreach (var assignment in allAssignments)
+            {
+                Assignments.Add(assignment);
+            }
+            Roster.Clear();
+            foreach (var person in allRoster)
+            {
+                Roster.Add(person);
+            }
+            Announcements.Clear();
+            foreach (var announcement in allAnnouncements)
+            {
+                Announcements.Add(announcement);
+            }
+        }
+
 
     }
 }
