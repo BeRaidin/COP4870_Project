@@ -49,8 +49,14 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <Button Margin="10,0,10,0" FontSize="20" Content="ADD AN ANNOUNCEMENT" Click="Announcement_Click"></Button>
-            <ListBox ItemsSource="{Binding Announcements, Mode=OneWay}" Margin="10,0,10,0">
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="10,0,10,0" FontSize="20" Content="ADD AN ANNOUNCEMENT" Click="Announcement_Click"></Button>
+                <Button Margin="10,0,10,0" FontSize="20" Content="Edit" Click="AnnouncementEdit_Click"></Button>
+                <Button Margin="10,0,10,0" FontSize="20" Content="Delete" Click="AnnouncementDelete_Click"></Button>
+
+            </StackPanel>
+            <ListBox ItemsSource="{Binding Announcements, Mode=TwoWay}" Margin="10,0,10,0"
+                                          SelectedItem="{Binding Path=SelectedAnnouncement, Mode=TwoWay}" DoubleTapped="Announcement_DoubleTapped">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

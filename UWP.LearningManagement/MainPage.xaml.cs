@@ -57,5 +57,11 @@ namespace UWP.LearningManagement
                 frame.GoBack();
             }
         }
+
+        private void AddEdit_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as MainPageViewModel).Clear();
+            frame.Navigate(typeof(AddEditPage));
+        }
     }
 }

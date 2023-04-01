@@ -23,7 +23,9 @@ Dialogs\ModuleDialog.xbf
 Dialogs\NewAssignmentDialog.xbf
 Dialogs\PersonDialog.xbf
 Dialogs\RosterDialog.xbf
+Dialogs\UpdateAnnouncementDialog.xbf
 MainPage.xbf
+Pages\AddEditPage.xbf
 Pages\CoursePage.xbf
 Pages\DetailedCourse.xbf
 Pages\DetailedPerson.xbf

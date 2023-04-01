@@ -35,8 +35,8 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="1">
-            <Button x:ConnectionId='13' Margin="10,0,10,0" FontSize="20" Content="EDIT ROSTER"                     ></Button>
-            <ListBox x:ConnectionId='14' ItemsSource="{Binding Roster}" Margin="10,0,10,0"
+            <Button x:ConnectionId='16' Margin="10,0,10,0" FontSize="20" Content="EDIT ROSTER"                     ></Button>
+            <ListBox x:ConnectionId='17' ItemsSource="{Binding Roster}" Margin="10,0,10,0"
                      SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}"                                    >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -49,8 +49,14 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <Button x:ConnectionId='11' Margin="10,0,10,0" FontSize="20" Content="ADD AN ANNOUNCEMENT"                           ></Button>
-            <ListBox ItemsSource="{Binding Announcements, Mode=OneWay}" Margin="10,0,10,0">
+            <StackPanel Orientation="Horizontal">
+                <Button x:ConnectionId='13' Margin="10,0,10,0" FontSize="20" Content="ADD AN ANNOUNCEMENT"                           ></Button>
+                <Button x:ConnectionId='14' Margin="10,0,10,0" FontSize="20" Content="Edit"                               ></Button>
+                <Button x:ConnectionId='15' Margin="10,0,10,0" FontSize="20" Content="Delete"                                 ></Button>
+
+            </StackPanel>
+            <ListBox x:ConnectionId='11' ItemsSource="{Binding Announcements, Mode=TwoWay}" Margin="10,0,10,0"
+                                          SelectedItem="{Binding Path=SelectedAnnouncement, Mode=TwoWay}"                                         >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

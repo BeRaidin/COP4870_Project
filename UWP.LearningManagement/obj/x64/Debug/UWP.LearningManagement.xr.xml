@@ -22,6 +22,8 @@
     <RootPropertyPathName Name="SelectedModuleName" />
     <RootPropertyPathName Name="Students" />
     <RootPropertyPathName Name="SelectedCourse" />
+    <RootPropertyPathName Name="People" />
+    <RootPropertyPathName Name="SelectedPerson" />
     <RootPropertyPathName Name="Query" />
     <RootPropertyPathName Name="Instructors" />
     <RootPropertyPathName Name="Room" />
@@ -34,8 +36,8 @@
     <RootPropertyPathName Name="SelectedAssignment" />
     <RootPropertyPathName Name="SelectedModule" />
     <RootPropertyPathName Name="Announcements" />
+    <RootPropertyPathName Name="SelectedAnnouncement" />
     <RootPropertyPathName Name="Roster" />
-    <RootPropertyPathName Name="SelectedPerson" />
     <RootPropertyPathName Name="Type" />
     <RootPropertyPathName Name="GradePoint" />
     <RootPropertyPathName Name="Grades" />
@@ -44,7 +46,6 @@
     <RootPropertyPathName Name="Value" />
     <RootPropertyPathName Name="Key" />
     <RootPropertyPathName Name="GradeLevel" />
-    <RootPropertyPathName Name="People" />
     <RootPropertyPathName Name="ContentItems" />
     <RootPropertyPathName Name="SelectedItem" />
   </Roots.PropertyPathNames>
@@ -131,6 +132,7 @@
     <RootType FullName="UWP.LearningManagement.Dialogs.AssignmentDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.NewAssignmentDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.RosterDialog" />
+    <RootType FullName="UWP.LearningManagement.Dialogs.UpdateAnnouncementDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
       <RootProperty Name="Background" />
       <RootProperty Name="Content" />
@@ -144,6 +146,7 @@
       <RootProperty Name="Content" />
       <RootEvent Name="Click" />
     </RootType>
+    <RootType FullName="UWP.LearningManagement.AddEditPage" />
     <RootType FullName="UWP.LearningManagement.CoursePage" />
     <RootType FullName="UWP.LearningManagement.Dialogs.CourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditCourseDialog" />

@@ -137,6 +137,22 @@ namespace Library.LearningManagement.Models
                 }
             }
         }
+
+        public void Add(T item)
+        {
+            state.Add(item);
+        }
+
+        public void Remove(T item)
+        {
+            state.Remove(item);
+        }
+
+        public void Clear()
+        {
+            state.Clear();
+        }
+
     }
     public class PageFaultException : Exception
     {
