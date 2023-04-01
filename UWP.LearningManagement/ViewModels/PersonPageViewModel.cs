@@ -26,18 +26,7 @@ namespace UWP.LearningManagement.ViewModels
             get { return personService.CurrentPerson; }
             set { personService.CurrentPerson = value; }
         }
-        private ObservableCollection<Person> _people;
-        public ObservableCollection<Person> People
-        {
-            get
-            {
-                return _people;
-            }
-            private set
-            {
-                _people = value;
-            }
-        }
+        public ObservableCollection<Person> People { get; set; }
         public string Query { get; set; }
 
         public PersonPageViewModel()
