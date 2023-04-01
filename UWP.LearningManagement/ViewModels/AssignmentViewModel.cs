@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UWP.LearningManagement.Dialogs;
+using Windows.ApplicationModel.VoiceCommands;
 using Windows.Foundation.Collections;
 using Windows.Services.Maps;
 
@@ -17,6 +18,7 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly ModuleService moduleService;
         private readonly CourseService courseService;
+        private readonly PersonService personService;
 
         public Course SelectedCourse
         {
@@ -41,22 +43,11 @@ namespace UWP.LearningManagement.ViewModels
             set { _assignment = value; }
         }
         public AssignmentItem AssignmentItem { get; set; }
-        public string Name
-        {
-            get { return SelectedItem.Name; }
-            set { SelectedItem.Name = value; }
-        }
-        public string Description
-        {
-            get { return SelectedItem.Description; }
-            set { SelectedItem.Description = value; }
-        }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public string TotalPoints { get; set; }
         public string Group { get; set; }
-        public DateTimeOffset DueDate {
-            get { return Assignment.DueDate; }
-            set { Assignment.DueDate = value; }
-        }
+        public DateTimeOffset DueDate { get; set; }
         private List<AssignmentGroup> _assignmentGroups;
         public ObservableCollection<string> AssignmentGroups
         { get; set; }
@@ -71,6 +62,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             moduleService = ModuleService.Current;
             courseService = CourseService.Current;
+            personService = PersonService.Current;
 
             if (SelectedItem == null)
             {
@@ -127,6 +119,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             Assignment.Name = Name;
             Assignment.Description = Description;
+            Assignment.DueDate = DueDate;
             if(int.TryParse(TotalPoints, out var totalPoints))
             {
                 Assignment.TotalAvailablePoints = totalPoints;
@@ -201,6 +194,17 @@ namespace UWP.LearningManagement.ViewModels
         {
             SelectedItem = null;
             SelectedModule = null;
+        }
+
+        public void Edit()
+        {
+            personService.CurrentAssignment.Name = Name;
+            personService.CurrentAssignment.Description = Description;
+            personService.CurrentAssignment.DueDate = DueDate;
+            if (int.TryParse(TotalPoints, out var points))
+            {
+                personService.CurrentAssignment.TotalAvailablePoints = points;
+            }
         }
     }
 }
