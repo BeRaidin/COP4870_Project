@@ -8,16 +8,16 @@
     <RootPropertyPathName Name="Courses" />
     <RootPropertyPathName Name="Display" />
     <RootPropertyPathName Name="IsSelected" />
+    <RootPropertyPathName Name="DueDate" />
+    <RootPropertyPathName Name="AssignmentGroups" />
+    <RootPropertyPathName Name="SelectedGroup" />
+    <RootPropertyPathName Name="TotalPoints" />
     <RootPropertyPathName Name="Description" />
     <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="Total" />
     <RootPropertyPathName Name="Score" />
     <RootPropertyPathName Name="ContentTypes" />
     <RootPropertyPathName Name="SelectedType" />
-    <RootPropertyPathName Name="DueDate" />
-    <RootPropertyPathName Name="AssignmentGroups" />
-    <RootPropertyPathName Name="SelectedGroup" />
-    <RootPropertyPathName Name="TotalPoints" />
     <RootPropertyPathName Name="Modules" />
     <RootPropertyPathName Name="SelectedModuleName" />
     <RootPropertyPathName Name="Students" />
@@ -108,6 +108,15 @@
       <RootProperty Name="IsChecked" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.DropCoursesDialog" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
+      <RootProperty Name="Margin" />
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="SelectedItem" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.DatePicker">
+      <RootProperty Name="Margin" />
+      <RootProperty Name="SelectedDate" />
+    </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.EditAssignmentDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditContentItemDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditModuleDialog" />
@@ -118,16 +127,7 @@
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.GradeDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.ModuleDialog" />
-    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
-      <RootProperty Name="ItemsSource" />
-      <RootProperty Name="SelectedItem" />
-      <RootProperty Name="Margin" />
-    </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.ContentItemDialog" />
-    <RootType FullName="Windows.UI.Xaml.Controls.DatePicker">
-      <RootProperty Name="Margin" />
-      <RootProperty Name="SelectedDate" />
-    </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.AssignmentDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.NewAssignmentDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.RosterDialog" />

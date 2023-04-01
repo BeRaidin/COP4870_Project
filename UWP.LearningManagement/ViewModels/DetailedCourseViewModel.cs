@@ -43,7 +43,11 @@ namespace UWP.LearningManagement.ViewModels
             get { return courseService.CurrentCourse; }
             set { courseService.CurrentCourse = value; }
         }
-        public Assignment SelectedAssignment { get; set; }
+        public Assignment SelectedAssignment
+        {
+            get { return personService.CurrentAssignment; }
+            set { personService.CurrentAssignment = value; }
+        }
         private ObservableCollection<Module> _modules;
         public ObservableCollection<Module> Modules
         {
