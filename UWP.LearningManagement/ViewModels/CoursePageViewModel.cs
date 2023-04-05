@@ -19,7 +19,8 @@ namespace UWP.LearningManagement.ViewModels
     public class CoursePageViewModel
     {
         private readonly CourseService courseService;
-        private readonly List<Course> allCourses;
+        private readonly ListNavigator<Course> allCourses;
+        private bool isSearch;
 
         public Course SelectedCourse
         {
@@ -40,12 +41,14 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
         public string Query { get; set; }
+        public ListNavigator<Course> SearchResults { get; set; }
 
         public CoursePageViewModel()
         {
             courseService = CourseService.Current;
-            allCourses = courseService.CourseList;
-            Courses = new ObservableCollection<Course>(allCourses);
+            allCourses = new ListNavigator<Course>(courseService.CourseList);
+            Courses = new ObservableCollection<Course>(allCourses.PrintPage(allCourses.GoToFirstPage()));
+            isSearch = false;
         }
 
         public async void Add()
@@ -85,11 +88,13 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (Query != null)
             {
-                var searchResults = 
-                    allCourses.Where(i => i.Code.Contains(Query, StringComparison.InvariantCultureIgnoreCase) 
+                isSearch = true;
+                var search =
+                    allCourses.State.Where(i => i.Code.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
                     || i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                SearchResults = new ListNavigator<Course>(search.ToList());
                 Courses.Clear();
-                foreach (var course in searchResults)
+                foreach (var course in SearchResults.PrintPage(SearchResults.GoToFirstPage()))
                 {
                     Courses.Add(course);
                 }
@@ -97,15 +102,56 @@ namespace UWP.LearningManagement.ViewModels
             else
             {
                 Refresh();
+                isSearch = false;
             }
         }
 
         public void Refresh()
         {
             Courses.Clear();
-            foreach (var course in allCourses)
+            foreach (var course in allCourses.PrintPage(allCourses.GoToFirstPage()))
             {
                 Courses.Add(course);
+            }
+        }
+
+        public void LeftClick()
+        {
+            if (isSearch && SearchResults.HasPreviousPage)
+            {
+                Courses.Clear();
+                foreach (var course in SearchResults.PrintPage(SearchResults.GoBackward()))
+                {
+                    Courses.Add(course);
+                }
+            }
+            else if (!isSearch && allCourses.HasPreviousPage)
+            {
+                Courses.Clear();
+                foreach (var course in allCourses.PrintPage(allCourses.GoBackward()))
+                {
+                    Courses.Add(course);
+                }
+            }
+        }
+
+        public void RightClick()
+        {
+            if (isSearch && SearchResults.HasNextPage)
+            {
+                Courses.Clear();
+                foreach (var course in SearchResults.PrintPage(SearchResults.GoForward()))
+                {
+                    Courses.Add(course);
+                }
+            }
+            else if (!isSearch && allCourses.HasNextPage)
+            {
+                Courses.Clear();
+                foreach (var course in allCourses.PrintPage(allCourses.GoForward()))
+                {
+                    Courses.Add(course);
+                }
             }
         }
     }

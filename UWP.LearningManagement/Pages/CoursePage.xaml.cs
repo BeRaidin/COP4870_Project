@@ -52,5 +52,16 @@ namespace UWP.LearningManagement
         {
             (DataContext as CoursePageViewModel).Edit();
         }
+
+        private void Right_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as CoursePageViewModel).RightClick();
+        }
+
+        private void Left_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as CoursePageViewModel).LeftClick();
+
+        }
     }
 }

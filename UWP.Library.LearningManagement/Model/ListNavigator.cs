@@ -11,6 +11,13 @@ namespace Library.LearningManagement.Models
         private int pageSize;
         private int currentPage;
         private List<T> state;
+        public List<T> State
+        {
+            get { return state; }
+            set { state = value; }
+        }
+
+
         private int lastPage
         {
             get
@@ -87,19 +94,21 @@ namespace Library.LearningManagement.Models
         private Dictionary<int, T> GetWindow()
         {
             var window = new Dictionary<int, T>();
-            for (int i = (currentPage - 1) * pageSize; i < (currentPage - 1) *pageSize + pageSize && i < state.Count; i++)
+            for (int i = (currentPage - 1) * pageSize; i < (currentPage - 1) * pageSize + pageSize && i < state.Count; i++)
             {
                 window.Add(i + 1, state[i]);
             }
             return window;
         }
 
-        public void PrintPage(Dictionary<int, T> values)
+        public List<T> PrintPage(Dictionary<int, T> values)
         {
-            foreach(KeyValuePair<int, T> value in values)
+            var list = new List<T>();
+            foreach (KeyValuePair<int, T> value in values)
             {
-                Console.WriteLine(value.Value);
+                list.Add(value.Value);
             }
+            return list;
         }
 
         public void ChangePage()
@@ -136,6 +145,21 @@ namespace Library.LearningManagement.Models
                     PrintPage(GetCurrentPage());
                 }
             }
+        }
+
+        public void Add(T item)
+        {
+            state.Add(item);
+        }
+
+        public void Remove(T item)
+        {
+            state.Remove(item);
+        }
+
+        public void Clear()
+        {
+            state.Clear();
         }
     }
     public class PageFaultException : Exception

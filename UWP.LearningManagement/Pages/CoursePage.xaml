@@ -17,11 +17,16 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15*"/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0" Text="{Binding Query, Mode=TwoWay}"></TextBox>
             <Button Click="Search_Click" Grid.Column="1" Content="Search" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+            <Button Click="Left_Click" Grid.Column="2" Content="&lt;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+            <Button Click="Right_Click" Grid.Column="3" Content=">" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+
         </Grid>
-        
+
         <ListBox Grid.Row="1"
             ItemsSource="{Binding Courses, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedCourse, Mode=TwoWay}" DoubleTapped="ListBox_DoubleTapped">
             <ListBox.ItemTemplate>
@@ -32,7 +37,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        
+
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

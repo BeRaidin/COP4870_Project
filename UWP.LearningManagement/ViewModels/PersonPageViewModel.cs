@@ -19,32 +19,24 @@ namespace UWP.LearningManagement.ViewModels
     public class PersonPageViewModel
     {
         private readonly PersonService personService;
-        private readonly List<Person> allPeople;
+        private readonly ListNavigator<Person> allPeople;
+        private bool isSearch;
 
         public Person SelectedPerson
         {
             get { return personService.CurrentPerson; }
             set { personService.CurrentPerson = value; }
         }
-        private ObservableCollection<Person> _people;
-        public ObservableCollection<Person> People
-        {
-            get
-            {
-                return _people;
-            }
-            private set
-            {
-                _people = value;
-            }
-        }
+        public ObservableCollection<Person> People { get; set; }
         public string Query { get; set; }
+        public ListNavigator<Person> SearchResults { get; set; }
 
         public PersonPageViewModel()
         {
             personService = PersonService.Current;
-            allPeople = personService.PersonList;
-            People = new ObservableCollection<Person>(allPeople);
+            allPeople = new ListNavigator<Person>(personService.PersonList);
+            People = new ObservableCollection<Person>(allPeople.PrintPage(allPeople.GoToFirstPage()));
+            isSearch = false;
         }
 
         public async void Add()
@@ -84,16 +76,19 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (Query != null && Query != "")
             {
-                var searchResults = allPeople.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase) 
+                isSearch = true;
+                var search = allPeople.State.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
                                                     || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                SearchResults = new ListNavigator<Person>(search.ToList());
                 People.Clear();
-                foreach (var item in searchResults)
+                foreach (var item in SearchResults.PrintPage(SearchResults.GoToFirstPage()))
                 {
                     People.Add(item);
                 }
             }
             else
             {
+                isSearch = false;
                 Refresh();
             }
         }
@@ -101,9 +96,49 @@ namespace UWP.LearningManagement.ViewModels
         public void Refresh()
         {
             People.Clear();
-            foreach (var person in allPeople)
+            foreach (var person in allPeople.PrintPage(allPeople.GoToFirstPage()))
             {
                 People.Add(person);
+            }
+        }
+
+        public void LeftClick()
+        {
+            if (isSearch && SearchResults.HasPreviousPage)
+            {
+                People.Clear();
+                foreach (var course in SearchResults.PrintPage(SearchResults.GoBackward()))
+                {
+                    People.Add(course);
+                }
+            }
+            else if (!isSearch && allPeople.HasPreviousPage)
+            {
+                People.Clear();
+                foreach (var course in allPeople.PrintPage(allPeople.GoBackward()))
+                {
+                    People.Add(course);
+                }
+            }
+        }
+
+        public void RightClick()
+        {
+            if (isSearch && SearchResults.HasNextPage)
+            {
+                People.Clear();
+                foreach (var course in SearchResults.PrintPage(SearchResults.GoForward()))
+                {
+                    People.Add(course);
+                }
+            }
+            else if (!isSearch && allPeople.HasNextPage)
+            {
+                People.Clear();
+                foreach (var course in allPeople.PrintPage(allPeople.GoForward()))
+                {
+                    People.Add(course);
+                }
             }
         }
     }

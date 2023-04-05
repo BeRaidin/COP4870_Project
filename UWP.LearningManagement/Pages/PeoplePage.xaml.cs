@@ -52,5 +52,16 @@ namespace UWP.LearningManagement
         {
             (DataContext as PersonPageViewModel).Edit();
         }
+
+        private void Right_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as PersonPageViewModel).RightClick();
+        }
+
+        private void Left_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as PersonPageViewModel).LeftClick();
+
+        }
     }
 }

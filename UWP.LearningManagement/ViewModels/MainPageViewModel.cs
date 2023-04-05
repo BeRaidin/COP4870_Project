@@ -13,11 +13,16 @@ namespace LearningManagement.ViewModels
         private readonly ModuleService moduleService;
         private readonly CourseService courseService;
 
+        public string Semester { get; set; }
+        public int Year { get; set; }
+
         public MainPageViewModel() 
         { 
             personService = PersonService.Current;
             moduleService = ModuleService.Current;
             courseService = CourseService.Current;
+            Semester = "Spring";
+            Year = 2023;
         }
 
         public void Clear()
@@ -27,6 +32,40 @@ namespace LearningManagement.ViewModels
             moduleService.CurrentModule = null;
             moduleService.CurrentItem = null;
             courseService.CurrentCourse = null;
+        }
+
+        public void LeftClick()
+        {
+            if (Semester.Equals("Fall"))
+            {
+                Semester = "Spring";
+                Year++;
+            }
+            else if (Semester.Equals("Summer"))
+            {
+                Semester = "Fall";
+            }
+            else if (Semester.Equals("Spring"))
+            {
+                Semester = "Summer";
+            }
+        }
+
+        public void RightClick()
+        {
+            if (Semester.Equals("Spring"))
+            {
+                Semester = "Fall";
+                Year--;
+            }
+            else if (Semester.Equals("Summer"))
+            {
+                Semester = "Spring";
+            }
+            else if (Semester.Equals("Fall"))
+            {
+                Semester = "Summer";
+            }
         }
     }
 }

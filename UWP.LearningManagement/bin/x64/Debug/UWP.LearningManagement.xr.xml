@@ -30,6 +30,8 @@
     <RootPropertyPathName Name="StudentLevels" />
     <RootPropertyPathName Name="SelectedClass" />
     <RootPropertyPathName Name="PersonTypes" />
+    <RootPropertyPathName Name="Year" />
+    <RootPropertyPathName Name="Semester" />
     <RootPropertyPathName Name="Assignments" />
     <RootPropertyPathName Name="SelectedAssignment" />
     <RootPropertyPathName Name="SelectedModule" />
