@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-04-01T03:06:17.885</Modified>
+      <Modified>2023-04-05T17:45:11.135</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\UWP.LearningManagement.exe">
       <PackagePath>entrypoint\UWP.LearningManagement.exe</PackagePath>
-      <Modified>2023-04-01T03:06:17.164</Modified>
+      <Modified>2023-04-05T17:45:09.777</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x64.microsoft.netcore.universalwindowsplatform\6.2.14\runtimes\win10-x64\lib\uap10.0.15138\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
@@ -44,7 +44,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.Library.LearningManagement\bin\Debug\netstandard2.0\UWP.Library.LearningManagement.dll">
       <PackagePath>UWP.Library.LearningManagement.dll</PackagePath>
-      <Modified>2023-04-01T03:06:12.653</Modified>
+      <Modified>2023-04-05T17:45:04.019</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\bin\10.0.22621.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd">
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
@@ -90,127 +90,127 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\UWP.LearningManagement.xr.xml">
       <PackagePath>UWP.LearningManagement.xr.xml</PackagePath>
-      <Modified>2023-04-01T03:00:43.052</Modified>
+      <Modified>2023-04-05T17:12:09.455</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.049</Modified>
+      <Modified>2023-04-05T17:45:09.672</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\AnnouncementDialog.xbf">
       <PackagePath>Dialogs\AnnouncementDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.049</Modified>
+      <Modified>2023-04-05T17:45:09.672</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\AssignGroupDialog.xbf">
       <PackagePath>Dialogs\AssignGroupDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.049</Modified>
+      <Modified>2023-04-05T17:45:09.672</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\DropCoursesDialog.xbf">
       <PackagePath>Dialogs\DropCoursesDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.049</Modified>
+      <Modified>2023-04-05T17:45:09.672</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\EditAssignmentDialog.xbf">
       <PackagePath>Dialogs\EditAssignmentDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.050</Modified>
+      <Modified>2023-04-05T17:45:09.673</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\EditContentItemDialog.xbf">
       <PackagePath>Dialogs\EditContentItemDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.050</Modified>
+      <Modified>2023-04-05T17:45:09.673</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\EditModuleDialog.xbf">
       <PackagePath>Dialogs\EditModuleDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.050</Modified>
+      <Modified>2023-04-05T17:45:09.673</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\GradeDialog.xbf">
       <PackagePath>Dialogs\GradeDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.050</Modified>
+      <Modified>2023-04-05T17:45:09.673</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\ModuleDialog.xbf">
       <PackagePath>Dialogs\ModuleDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.050</Modified>
+      <Modified>2023-04-05T17:45:09.673</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\ContentItemDialog.xbf">
       <PackagePath>Dialogs\ContentItemDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.050</Modified>
+      <Modified>2023-04-05T17:45:09.673</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\AssignmentDialog.xbf">
       <PackagePath>Dialogs\AssignmentDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.051</Modified>
+      <Modified>2023-04-05T17:45:09.674</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\NewAssignmentDialog.xbf">
       <PackagePath>Dialogs\NewAssignmentDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.051</Modified>
+      <Modified>2023-04-05T17:45:09.674</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\RosterDialog.xbf">
       <PackagePath>Dialogs\RosterDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.051</Modified>
+      <Modified>2023-04-05T17:45:09.674</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\UpdateAnnouncementDialog.xbf">
       <PackagePath>Dialogs\UpdateAnnouncementDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.051</Modified>
+      <Modified>2023-04-05T17:45:09.674</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\AddEditPage.xbf">
       <PackagePath>Pages\AddEditPage.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.051</Modified>
+      <Modified>2023-04-05T17:45:09.674</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\CoursePage.xbf">
       <PackagePath>Pages\CoursePage.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.051</Modified>
+      <Modified>2023-04-05T17:45:09.674</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\CourseDialog.xbf">
       <PackagePath>Dialogs\CourseDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.051</Modified>
+      <Modified>2023-04-05T17:45:09.674</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\EditCourseDialog.xbf">
       <PackagePath>Dialogs\EditCourseDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.051</Modified>
+      <Modified>2023-04-05T17:45:09.674</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\EditPersonDialog.xbf">
       <PackagePath>Dialogs\EditPersonDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.051</Modified>
+      <Modified>2023-04-05T17:45:09.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\PersonDialog.xbf">
       <PackagePath>Dialogs\PersonDialog.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.052</Modified>
+      <Modified>2023-04-05T17:45:09.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.052</Modified>
+      <Modified>2023-04-05T17:45:09.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\DetailedCourse.xbf">
       <PackagePath>Pages\DetailedCourse.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.052</Modified>
+      <Modified>2023-04-05T17:45:09.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\DetailedPerson.xbf">
       <PackagePath>Pages\DetailedPerson.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.052</Modified>
+      <Modified>2023-04-05T17:45:09.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\DetailedStudent.xbf">
       <PackagePath>Pages\DetailedStudent.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.052</Modified>
+      <Modified>2023-04-05T17:45:09.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\InstructorDetailsPage.xbf">
       <PackagePath>Pages\InstructorDetailsPage.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.052</Modified>
+      <Modified>2023-04-05T17:45:09.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\InstructorViewPage.xbf">
       <PackagePath>Pages\InstructorViewPage.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.052</Modified>
+      <Modified>2023-04-05T17:45:09.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\ItemsPage.xbf">
       <PackagePath>Pages\ItemsPage.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.052</Modified>
+      <Modified>2023-04-05T17:45:09.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\PeoplePage.xbf">
       <PackagePath>Pages\PeoplePage.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.052</Modified>
+      <Modified>2023-04-05T17:45:09.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\StudentDetailsPage.xbf">
       <PackagePath>Pages\StudentDetailsPage.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.052</Modified>
+      <Modified>2023-04-05T17:45:09.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\StudentViewPage.xbf">
       <PackagePath>Pages\StudentViewPage.xbf</PackagePath>
-      <Modified>2023-04-01T03:06:17.053</Modified>
+      <Modified>2023-04-05T17:45:09.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.22621.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -218,11 +218,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2023-04-01T03:06:17.265</Modified>
+      <Modified>2023-04-05T17:45:10.170</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Core\UWP.LearningManagement.exe">
       <PackagePath>UWP.LearningManagement.exe</PackagePath>
-      <Modified>2023-04-01T03:06:17.882</Modified>
+      <Modified>2023-04-05T17:45:11.131</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
