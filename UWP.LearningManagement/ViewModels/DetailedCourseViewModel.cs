@@ -15,6 +15,7 @@ using Windows.Foundation.Collections;
 using System.Reflection.Metadata;
 using Windows.Graphics.Printing;
 using Windows.Media.Playback;
+using Windows.UI.Popups;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -48,6 +49,8 @@ namespace UWP.LearningManagement.ViewModels
             get { return personService.CurrentAssignment; }
             set { personService.CurrentAssignment = value; }
         }
+        public Announcement SelectedAnnouncement { get; set; }
+
         private ObservableCollection<Module> _modules;
         public ObservableCollection<Module> Modules
         {
@@ -95,6 +98,9 @@ namespace UWP.LearningManagement.ViewModels
         {
             get { return SelectedCourse.Room; }
         }
+
+        public string Title { get; set; }
+        public string Message { get; set; }
 
         public DetailedCourseViewModel()
         {
@@ -260,6 +266,45 @@ namespace UWP.LearningManagement.ViewModels
                 await dialog.ShowAsync();
             }
             Refresh();
+        }
+        
+        public async void UpdateAnnouncement()
+        {
+            if (SelectedAnnouncement != null)
+            {
+                courseService.CurrentAnnouncement = SelectedAnnouncement;
+                var dialog = new UpdateAnnouncementDialog();
+                if (dialog != null)
+                {
+                    await dialog.ShowAsync();
+                }
+                Refresh();
+            }
+        }
+
+        public void DeleteAnnouncement()
+        {
+            if (SelectedAnnouncement != null)
+            {
+                SelectedCourse.Announcements.Remove(SelectedAnnouncement);
+            }
+            Refresh();
+        }
+
+        public async void ViewAnnouncement()
+        {
+            var messageDialog = new MessageDialog(SelectedAnnouncement.Message);
+            messageDialog.Commands.Add(new UICommand("OK"));
+            if (messageDialog != null)
+            {
+                await messageDialog.ShowAsync();
+            }
+        }
+
+        public void Edit()
+        {
+            courseService.CurrentAnnouncement.Title = Title;
+            courseService.CurrentAnnouncement.Message = Message;
         }
     }
 }

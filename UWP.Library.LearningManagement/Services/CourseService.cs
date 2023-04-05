@@ -27,6 +27,7 @@ namespace Library.LearningManagement.Services
             get { return _currentCourse; }
             set { _currentCourse = value; }
         }
+        public Announcement CurrentAnnouncement { get; set; }
         public static CourseService Current
         {
             get

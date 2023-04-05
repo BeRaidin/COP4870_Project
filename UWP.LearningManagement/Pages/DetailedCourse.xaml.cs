@@ -100,5 +100,20 @@ namespace UWP.LearningManagement
                 (DataContext as DetailedCourseViewModel).DeleteAssignment();
             }
         }
+
+        private void AnnouncementEdit_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as DetailedCourseViewModel).UpdateAnnouncement();
+        }
+
+        private void AnnouncementDelete_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as DetailedCourseViewModel).DeleteAnnouncement();
+        }
+
+        private void Announcement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            (DataContext as DetailedCourseViewModel).ViewAnnouncement();
+        }
     }
 }

@@ -89,8 +89,13 @@ namespace UWP.LearningManagement.ViewModels
             if (Query != null)
             {
                 isSearch = true;
+<<<<<<< HEAD
                 var search =
                     allCourses.State.Where(i => i.Code.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+=======
+                var search = 
+                    allCourses.State.Where(i => i.Code.Contains(Query, StringComparison.InvariantCultureIgnoreCase) 
+>>>>>>> e7e33b37b45623cc87c33b6f20421fe0c2de8905
                     || i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 SearchResults = new ListNavigator<Course>(search.ToList());
                 Courses.Clear();
@@ -117,7 +122,11 @@ namespace UWP.LearningManagement.ViewModels
 
         public void LeftClick()
         {
+<<<<<<< HEAD
             if (isSearch && SearchResults.HasPreviousPage)
+=======
+            if(isSearch && SearchResults.HasPreviousPage)
+>>>>>>> e7e33b37b45623cc87c33b6f20421fe0c2de8905
             {
                 Courses.Clear();
                 foreach (var course in SearchResults.PrintPage(SearchResults.GoBackward()))
@@ -125,7 +134,11 @@ namespace UWP.LearningManagement.ViewModels
                     Courses.Add(course);
                 }
             }
+<<<<<<< HEAD
             else if (!isSearch && allCourses.HasPreviousPage)
+=======
+            else if(!isSearch && allCourses.HasPreviousPage)
+>>>>>>> e7e33b37b45623cc87c33b6f20421fe0c2de8905
             {
                 Courses.Clear();
                 foreach (var course in allCourses.PrintPage(allCourses.GoBackward()))

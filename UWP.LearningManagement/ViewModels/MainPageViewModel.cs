@@ -1,7 +1,10 @@
 ﻿using Library.LearningManagement.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,12 +12,27 @@ namespace LearningManagement.ViewModels
 {
     public class MainPageViewModel
     {
+        
+
         private readonly PersonService personService;
         private readonly ModuleService moduleService;
         private readonly CourseService courseService;
 
+<<<<<<< HEAD
         public string Semester { get; set; }
         public int Year { get; set; }
+=======
+        public string Semester
+        {
+            get { return Semester; }
+            set { Semester = value; }
+        }
+        public int Year
+        {
+            get { return Year; }
+            set { Year = value; }
+        }
+>>>>>>> e7e33b37b45623cc87c33b6f20421fe0c2de8905
 
         public MainPageViewModel() 
         { 
