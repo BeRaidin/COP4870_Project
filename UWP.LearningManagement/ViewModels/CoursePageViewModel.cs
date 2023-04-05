@@ -19,6 +19,7 @@ namespace UWP.LearningManagement.ViewModels
     public class CoursePageViewModel
     {
         private readonly CourseService courseService;
+        private readonly SemesterService semesterService;
         private readonly ListNavigator<Course> allCourses;
         private bool isSearch;
 
@@ -46,7 +47,8 @@ namespace UWP.LearningManagement.ViewModels
         public CoursePageViewModel()
         {
             courseService = CourseService.Current;
-            allCourses = new ListNavigator<Course>(courseService.CourseList);
+            semesterService = SemesterService.Current;
+            allCourses = new ListNavigator<Course>(semesterService.CurrentSemester.Courses);
             Courses = new ObservableCollection<Course>(allCourses.PrintPage(allCourses.GoToFirstPage()));
             isSearch = false;
         }

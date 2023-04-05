@@ -14,6 +14,7 @@ namespace UWP.LearningManagement.ViewModels
     public class PersonViewModel
     {
         private readonly PersonService personService;
+        private readonly SemesterService semesterService;
 
         public Person SelectedPerson
         {
@@ -39,6 +40,7 @@ namespace UWP.LearningManagement.ViewModels
         public PersonViewModel()
         {
             personService = PersonService.Current;
+            semesterService = SemesterService.Current;
             PersonTypes = new ObservableCollection<string>
             { "Student", "Instructor", "Teaching Assistant" };
             StudentLevels = new ObservableCollection<string>
@@ -85,10 +87,12 @@ namespace UWP.LearningManagement.ViewModels
                     }
                     else student.Classification = Student.Classes.Freshman;
                     personService.Add(student);
+                    semesterService.CurrentSemester.People.Add(student);
                 }
                 else
                 {
                     personService.Add(Person);
+                    semesterService.CurrentSemester.People.Add(Person);
                 }
             }
             else
