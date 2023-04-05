@@ -63,8 +63,6 @@ namespace Library.LearningManagement.Models
             Assignments.Remove(assignment);
         }
 
-
-
         public void GetMaxGrade()
         {
             MaxGrade = 0;

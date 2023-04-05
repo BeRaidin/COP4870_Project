@@ -17,6 +17,7 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly CourseService courseService;
         private readonly PersonService personService;
+        private readonly SemesterService semesterService;
 
         public Course SelectedCourse
         {
@@ -79,8 +80,9 @@ namespace UWP.LearningManagement.ViewModels
         {
             courseService = CourseService.Current;
             personService = PersonService.Current;
+            semesterService = SemesterService.Current;
             allInstructors = new List<Person>();
-            foreach (var person in personService.PersonList)
+            foreach (var person in semesterService.CurrentSemester.People)
             {
                 if (person as Student == null)
                 {
@@ -119,7 +121,7 @@ namespace UWP.LearningManagement.ViewModels
         public void Add()
         {
             bool test = true;
-            foreach (var course in courseService.CourseList)
+            foreach (var course in semesterService.CurrentSemester.Courses)
             {
                 if (course.Code.Equals(Code, StringComparison.InvariantCultureIgnoreCase)
                     || course.Name.Equals(Name, StringComparison.InvariantCultureIgnoreCase))
@@ -133,6 +135,7 @@ namespace UWP.LearningManagement.ViewModels
             {
                 Set();
                 courseService.Add(SelectedCourse);
+                semesterService.CurrentSemester.Courses.Add(SelectedCourse);
             }
             SelectedCourse = null;
         }
