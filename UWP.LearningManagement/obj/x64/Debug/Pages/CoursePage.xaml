@@ -17,9 +17,14 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15*"/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0" Text="{Binding Query, Mode=TwoWay}"></TextBox>
             <Button x:ConnectionId='6'                      Grid.Column="1" Content="Search" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+            <Button x:ConnectionId='7'                    Grid.Column="2" Content="&lt;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+            <Button x:ConnectionId='8'                     Grid.Column="3" Content=">" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+
         </Grid>
         
         <ListBox x:ConnectionId='2' Grid.Row="1"

@@ -63,5 +63,15 @@ namespace UWP.LearningManagement
             (DataContext as MainPageViewModel).Clear();
             frame.Navigate(typeof(AddEditPage));
         }
+
+        private void Left_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as MainPageViewModel).LeftClick();
+        }
+
+        private void Right_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as MainPageViewModel).RightClick();
+        }
     }
 }

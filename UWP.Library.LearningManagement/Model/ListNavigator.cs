@@ -11,6 +11,13 @@ namespace Library.LearningManagement.Models
         private int pageSize;
         private int currentPage;
         private List<T> state;
+        public List<T> State 
+        { 
+            get { return state; } 
+            set { state = value; }
+        }
+
+
         private int lastPage
         {
             get
@@ -94,12 +101,14 @@ namespace Library.LearningManagement.Models
             return window;
         }
 
-        public void PrintPage(Dictionary<int, T> values)
+        public List<T> PrintPage(Dictionary<int, T> values)
         {
+            var list = new List<T>();
             foreach(KeyValuePair<int, T> value in values)
             {
-                Console.WriteLine(value.Value);
+                list.Add(value.Value);
             }
+            return list;
         }
 
         public void ChangePage()
@@ -152,7 +161,6 @@ namespace Library.LearningManagement.Models
         {
             state.Clear();
         }
-
     }
     public class PageFaultException : Exception
     {
