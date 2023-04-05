@@ -77,11 +77,7 @@ namespace UWP.LearningManagement.ViewModels
             if (Query != null && Query != "")
             {
                 isSearch = true;
-<<<<<<< HEAD
-                var search = allPeople.State.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
-=======
                 var search = allPeople.State.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase) 
->>>>>>> e7e33b37b45623cc87c33b6f20421fe0c2de8905
                                                     || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 SearchResults = new ListNavigator<Person>(search.ToList());
                 People.Clear();

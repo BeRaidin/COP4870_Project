@@ -18,21 +18,8 @@ namespace LearningManagement.ViewModels
         private readonly ModuleService moduleService;
         private readonly CourseService courseService;
 
-<<<<<<< HEAD
         public string Semester { get; set; }
         public int Year { get; set; }
-=======
-        public string Semester
-        {
-            get { return Semester; }
-            set { Semester = value; }
-        }
-        public int Year
-        {
-            get { return Year; }
-            set { Year = value; }
-        }
->>>>>>> e7e33b37b45623cc87c33b6f20421fe0c2de8905
 
         public MainPageViewModel() 
         { 
