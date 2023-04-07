@@ -1,6 +1,7 @@
 ﻿using Library.LearningManagement.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,11 +66,14 @@ namespace Library.LearningManagement.Services
 
         public void Remove()
         {
-            foreach (var course in CurrentPerson.Courses)
+            foreach(Person person in PersonList)
             {
-                course.Roster.Remove(CurrentPerson);
+                if(CurrentPerson.Id == person.Id)
+                {
+                    PersonList.Remove(person);
+                    break;
+                }
             }
-            PersonList.Remove(CurrentPerson);
         }
     }
 }

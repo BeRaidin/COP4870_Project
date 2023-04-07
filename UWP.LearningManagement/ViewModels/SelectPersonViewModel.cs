@@ -19,6 +19,7 @@ namespace UWP.LearningManagement.ViewModels
     public class SelectPersonViewModel
     {
         private readonly PersonService personService;
+        private readonly SemesterService semesterService;
         private readonly List<Person> allPeople;
         private readonly int personType;
 
@@ -56,8 +57,9 @@ namespace UWP.LearningManagement.ViewModels
         public SelectPersonViewModel(int personType) 
         {
             personService = PersonService.Current;
+            semesterService = SemesterService.Current;
             this.personType = personType;
-            allPeople = personService.PersonList;
+            allPeople = semesterService.CurrentSemester.People;
             People = new ObservableCollection<Person>();
             Instructors = new ObservableCollection<Person>();
             Students = new ObservableCollection<Person>();

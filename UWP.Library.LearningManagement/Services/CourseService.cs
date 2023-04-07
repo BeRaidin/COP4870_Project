@@ -54,11 +54,14 @@ namespace Library.LearningManagement.Services
 
         public void Remove()
         {
-            foreach( var person in CurrentCourse.Roster)
+            foreach (var course in CourseList)
             {
-                person.Courses.Remove(CurrentCourse);
+                if(course.Code == CurrentCourse.Code)
+                {
+                    CourseList.Remove(course);
+                    break;
+                }
             }
-            CourseList.Remove(CurrentCourse);
         }
     }
 }

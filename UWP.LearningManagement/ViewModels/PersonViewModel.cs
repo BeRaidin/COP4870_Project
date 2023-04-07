@@ -87,12 +87,18 @@ namespace UWP.LearningManagement.ViewModels
                     }
                     else student.Classification = Student.Classes.Freshman;
                     personService.Add(student);
-                    semesterService.CurrentSemester.People.Add(student);
+                    foreach(var semester in semesterService.SemesterList)
+                    {
+                        semester.People.Add(student);
+                    }
                 }
                 else
                 {
                     personService.Add(Person);
-                    semesterService.CurrentSemester.People.Add(Person);
+                    foreach (var semester in semesterService.SemesterList)
+                    {
+                        semester.People.Add(Person);
+                    }
                 }
             }
             else

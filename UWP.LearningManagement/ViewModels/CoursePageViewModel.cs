@@ -69,6 +69,7 @@ namespace UWP.LearningManagement.ViewModels
             if (SelectedCourse != null)
             {
                 courseService.Remove();
+                semesterService.Remove(SelectedCourse);
                 Refresh();
             }
         }
