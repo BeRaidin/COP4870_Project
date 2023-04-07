@@ -50,5 +50,21 @@ namespace Library.LearningManagement.Services
         {
             SemesterList.Add(semester);
         }
+
+        public void Remove(Person removedPerson)
+        {
+            foreach (var semester in SemesterList)
+            {
+                semester.Remove(removedPerson);
+            }
+        }
+
+        public void Remove(Course removedCourse)
+        {
+            foreach(var semester in SemesterList)
+            {
+                semester.Remove(removedCourse);
+            }
+        }
     }
 }

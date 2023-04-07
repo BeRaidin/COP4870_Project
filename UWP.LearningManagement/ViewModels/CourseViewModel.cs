@@ -135,7 +135,10 @@ namespace UWP.LearningManagement.ViewModels
             {
                 Set();
                 courseService.Add(SelectedCourse);
-                semesterService.CurrentSemester.Courses.Add(SelectedCourse);
+                foreach(var semester in semesterService.SemesterList)
+                {
+                    semester.Courses.Add(SelectedCourse);
+                }
             }
             SelectedCourse = null;
         }

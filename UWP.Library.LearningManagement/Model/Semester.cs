@@ -56,5 +56,38 @@ namespace Library.LearningManagement.Models
                 People.Add(newPerson);
             }
         }
+
+        public void Remove(Person removedPerson)
+        {
+            foreach(var person in People) 
+            { 
+                if(person.Id == removedPerson.Id)
+                {
+                    foreach(var course in person.Courses)
+                    {
+                        course.Remove(removedPerson);
+                    }
+                    People.Remove(person);
+                    break;
+                }
+            }
+        }
+
+        public void Remove(Course removedCourse) 
+        { 
+            foreach(var course in Courses)
+            {
+                if(course.Code == removedCourse.Code)
+                {
+                    foreach(var person in course.Roster)
+                    {
+                        person.Courses.Remove(course);
+                    }
+                    Courses.Remove(course);
+                    break;
+                }
+            }
+
+        }
     }
 }

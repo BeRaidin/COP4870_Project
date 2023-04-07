@@ -73,7 +73,9 @@ namespace LearningManagement.ViewModels
                 if(semester.Year == Year && semester.Period == Semester)
                 {
                     CurrentSemester = semester;
+                    semesterService.CurrentSemester = semester;
                     isNewSemester = false;
+                    break;
                 }
             }
 
@@ -81,6 +83,9 @@ namespace LearningManagement.ViewModels
             {
                 var newSemester = new Semester { Period = Semester, Year = Year };
                 newSemester.SetSemester(courseService.CourseList, personService.PersonList);
+                semesterService.SemesterList.Add(newSemester);
+                CurrentSemester = newSemester;
+                semesterService.CurrentSemester = newSemester;
             }
 
             RaisePropertyChanged("Semester");
@@ -90,6 +95,7 @@ namespace LearningManagement.ViewModels
 
         public void RightClick()
         {
+            isNewSemester = true;
             if (Semester.Equals("Fall"))
             {
                 Semester = "Spring";
@@ -103,6 +109,27 @@ namespace LearningManagement.ViewModels
             {
                 Semester = "Summer";
             }
+
+            foreach (var semester in semesterService.SemesterList)
+            {
+                if (semester.Year == Year && semester.Period == Semester)
+                {
+                    CurrentSemester = semester;
+                    semesterService.CurrentSemester = semester;
+                    isNewSemester = false;
+                    break;
+                }
+            }
+
+            if (isNewSemester)
+            {
+                var newSemester = new Semester { Period = Semester, Year = Year };
+                newSemester.SetSemester(courseService.CourseList, personService.PersonList);
+                semesterService.SemesterList.Add(newSemester);
+                CurrentSemester = newSemester;
+                semesterService.CurrentSemester = newSemester;
+            }
+
             RaisePropertyChanged("Semester");
             RaisePropertyChanged("Year");
         }

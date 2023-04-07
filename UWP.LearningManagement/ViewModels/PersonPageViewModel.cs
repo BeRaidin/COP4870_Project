@@ -19,6 +19,7 @@ namespace UWP.LearningManagement.ViewModels
     public class PersonPageViewModel
     {
         private readonly PersonService personService;
+        private readonly SemesterService semesterService;
         private readonly ListNavigator<Person> allPeople;
         private bool isSearch;
 
@@ -34,7 +35,8 @@ namespace UWP.LearningManagement.ViewModels
         public PersonPageViewModel()
         {
             personService = PersonService.Current;
-            allPeople = new ListNavigator<Person>(personService.PersonList);
+            semesterService = SemesterService.Current;
+            allPeople = new ListNavigator<Person>(semesterService.CurrentSemester.People);
             People = new ObservableCollection<Person>(allPeople.PrintPage(allPeople.GoToFirstPage()));
             isSearch = false;
         }
@@ -55,6 +57,7 @@ namespace UWP.LearningManagement.ViewModels
             if (SelectedPerson != null)
             {
                 personService.Remove();
+                semesterService.Remove(SelectedPerson);
                 Refresh();
             }
         }
