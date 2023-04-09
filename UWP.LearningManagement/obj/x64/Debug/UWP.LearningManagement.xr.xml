@@ -22,8 +22,6 @@
     <RootPropertyPathName Name="SelectedModuleName" />
     <RootPropertyPathName Name="Students" />
     <RootPropertyPathName Name="SelectedCourse" />
-    <RootPropertyPathName Name="People" />
-    <RootPropertyPathName Name="SelectedPerson" />
     <RootPropertyPathName Name="Query" />
     <RootPropertyPathName Name="Instructors" />
     <RootPropertyPathName Name="Room" />
@@ -36,22 +34,25 @@
     <RootPropertyPathName Name="PersonTypes" />
     <RootPropertyPathName Name="Year" />
     <RootPropertyPathName Name="Semester" />
+    <RootPropertyPathName Name="FinalGrades" />
+    <RootPropertyPathName Name="Value" />
+    <RootPropertyPathName Name="Key" />
     <RootPropertyPathName Name="Assignments" />
     <RootPropertyPathName Name="SelectedAssignment" />
     <RootPropertyPathName Name="SelectedModule" />
     <RootPropertyPathName Name="Announcements" />
     <RootPropertyPathName Name="SelectedAnnouncement" />
     <RootPropertyPathName Name="Roster" />
+    <RootPropertyPathName Name="SelectedPerson" />
     <RootPropertyPathName Name="Type" />
     <RootPropertyPathName Name="GradePoint" />
     <RootPropertyPathName Name="Grades" />
     <RootPropertyPathName Name="AssignmentKey" />
-    <RootPropertyPathName Name="FinalGrades" />
-    <RootPropertyPathName Name="Value" />
-    <RootPropertyPathName Name="Key" />
     <RootPropertyPathName Name="GradeLevel" />
+    <RootPropertyPathName Name="People" />
     <RootPropertyPathName Name="ContentItems" />
     <RootPropertyPathName Name="SelectedItem" />
+    <RootPropertyPathName Name="PreviousSemesters" />
     <RootPropertyPathName Name="Id" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
@@ -88,8 +89,9 @@
       <RootProperty Name="FontSize" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="FontWeight" />
+      <RootProperty Name="Width" />
       <RootProperty Name="Inlines" />
+      <RootProperty Name="FontWeight" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Text" />
@@ -134,6 +136,8 @@
       <RootProperty Name="Orientation" />
       <RootProperty Name="Children" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.GradeDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.ModuleDialog" />
@@ -153,9 +157,9 @@
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Content" />
+      <RootProperty Name="Padding" />
       <RootEvent Name="Click" />
     </RootType>
-    <RootType FullName="UWP.LearningManagement.AddEditPage" />
     <RootType FullName="UWP.LearningManagement.CoursePage" />
     <RootType FullName="UWP.LearningManagement.Dialogs.CourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditCourseDialog" />
@@ -167,6 +171,10 @@
       <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.MainPage" />
+    <RootType FullName="Windows.UI.Xaml.Documents.Run">
+      <RootProperty Name="Text" />
+    </RootType>
+    <RootType FullName="UWP.LearningManagement.CurrentSemesterPage" />
     <RootType FullName="UWP.LearningManagement.DetailedCourse" />
     <RootType FullName="UWP.LearningManagement.DetailedPerson" />
     <RootType FullName="UWP.LearningManagement.DetailedStudent" />
@@ -174,9 +182,7 @@
     <RootType FullName="UWP.LearningManagement.InstructorViewPage" />
     <RootType FullName="UWP.LearningManagement.ItemsPage" />
     <RootType FullName="UWP.LearningManagement.PeoplePage" />
-    <RootType FullName="Windows.UI.Xaml.Documents.Run">
-      <RootProperty Name="Text" />
-    </RootType>
+    <RootType FullName="UWP.LearningManagement.PreviousSemesterPage" />
     <RootType FullName="UWP.LearningManagement.StudentDetailsPage" />
     <RootType FullName="UWP.LearningManagement.StudentViewPage" />
   </Roots.RootTypes>

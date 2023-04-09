@@ -16,15 +16,14 @@
         <Frame x:ConnectionId='2' Name="frame" Grid.Column="1" Margin="10,10,10,10" Content=""></Frame>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Button x:ConnectionId='3' Margin="10,10,0,10" Content="Back" FontSize="12"                          HorizontalAlignment="Stretch"/>
-            <Button x:ConnectionId='4' Margin="10,10,0,10" Content="Add/Edit Courses and People" FontSize="12"                       HorizontalAlignment="Stretch"/>
-            <Button x:ConnectionId='5' Margin="10,10,0,10" Content="Edit People" FontSize="12"                          HorizontalAlignment="Stretch"/>
-            <Button x:ConnectionId='6' Margin="10,10,0,10" Content="Edit Courses" FontSize="12"                          HorizontalAlignment="Stretch"/>
-            <Button x:ConnectionId='7' Margin="10,10,0,10" Content="Student View" FontSize="12"                           HorizontalAlignment="Stretch"/>
-            <Button x:ConnectionId='8' Margin="10,10,0,10" Content="Instructor View" FontSize="12"                              HorizontalAlignment="Stretch"/>
-            <Button x:ConnectionId='9' Margin="10,10,0,10" Content="&lt;" FontSize="12" HorizontalAlignment="Stretch"                   />
-            <TextBlock Margin="10,10,0,10" Text="{Binding Path=Semester}" FontSize="12" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+            <Button x:ConnectionId='4' Margin="10,10,0,10" Content="Edit People" FontSize="12"                          HorizontalAlignment="Stretch"/>
+            <Button x:ConnectionId='5' Margin="10,10,0,10" Content="Edit Courses" FontSize="12"                          HorizontalAlignment="Stretch"/>
+            <Button x:ConnectionId='6' Margin="10,10,0,10" Content="Student View" FontSize="12"                           HorizontalAlignment="Stretch"/>
+            <Button x:ConnectionId='7' Margin="10,10,0,10" Content="Instructor View" FontSize="12"                              HorizontalAlignment="Stretch"/>
+            <Button x:ConnectionId='8' Margin="10,10,0,10" Content="&lt;" FontSize="12" HorizontalAlignment="Stretch"                   />
+            <TextBlock Margin="10,10,0,10" Text="{Binding Path=Semester}" FontSize="12" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="48"/>
             <TextBlock Margin="10,10,0,10" Text="{Binding Path=Year}" FontSize="12" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-            <Button x:ConnectionId='10' Margin="10,10,0,10" Content=">" FontSize="12" HorizontalAlignment="Stretch"                    />
+            <Button x:ConnectionId='9' Margin="10,10,0,10" Content=">" FontSize="12" HorizontalAlignment="Stretch"                    />
 
         </StackPanel>
     </Grid>

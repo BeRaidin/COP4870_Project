@@ -112,9 +112,6 @@
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\UpdateAnnouncementDialog.xbf">
       <PackagePath>Dialogs\UpdateAnnouncementDialog.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\AddEditPage.xbf">
-      <PackagePath>Pages\AddEditPage.xbf</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\CoursePage.xbf">
       <PackagePath>Pages\CoursePage.xbf</PackagePath>
     </AppxPackagedFile>
@@ -132,6 +129,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\CurrentSemesterPage.xbf">
+      <PackagePath>Pages\CurrentSemesterPage.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\DetailedCourse.xbf">
       <PackagePath>Pages\DetailedCourse.xbf</PackagePath>
@@ -153,6 +153,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\PeoplePage.xbf">
       <PackagePath>Pages\PeoplePage.xbf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\PreviousSemesterPage.xbf">
+      <PackagePath>Pages\PreviousSemesterPage.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\StudentDetailsPage.xbf">
       <PackagePath>Pages\StudentDetailsPage.xbf</PackagePath>

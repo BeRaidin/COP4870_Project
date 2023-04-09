@@ -12,7 +12,6 @@ C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Deb
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\NewAssignmentDialog.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\RosterDialog.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\UpdateAnnouncementDialog.xbf
-C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\AddEditPage.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\CoursePage.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\CourseDialog.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\EditCourseDialog.xbf
@@ -69,8 +68,6 @@ C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Deb
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\RosterDialog.g.cs
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\UpdateAnnouncementDialog.g.i.cs
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\UpdateAnnouncementDialog.g.cs
-C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\AddEditPage.g.i.cs
-C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\AddEditPage.g.cs
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\CoursePage.g.i.cs
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\CoursePage.g.cs
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\CourseDialog.g.i.cs
@@ -116,7 +113,6 @@ C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Deb
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\NewAssignmentDialog.xaml
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\RosterDialog.xaml
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\UpdateAnnouncementDialog.xaml
-C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\AddEditPage.xaml
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\CoursePage.xaml
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\CourseDialog.xaml
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\EditCourseDialog.xaml
@@ -146,7 +142,6 @@ C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Deb
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\NewAssignmentDialog.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\RosterDialog.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\UpdateAnnouncementDialog.xbf
-C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\AddEditPage.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\CoursePage.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\CourseDialog.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\EditCourseDialog.xbf
@@ -185,3 +180,13 @@ C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Deb
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\ProjectArchitectures.txt
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\.winmd_cache\$Microsoft.UI.Xaml.Markup.winmd_638018009300000000.json
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\CurrentSemesterPage.xbf
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\PreviousSemesterPage.xbf
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\CurrentSemesterPage.g.i.cs
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\CurrentSemesterPage.g.cs
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\PreviousSemesterPage.g.i.cs
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\PreviousSemesterPage.g.cs
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\CurrentSemesterPage.xaml
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\PreviousSemesterPage.xaml
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\CurrentSemesterPage.xbf
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\PreviousSemesterPage.xbf

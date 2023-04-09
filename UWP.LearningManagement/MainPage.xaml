@@ -16,13 +16,12 @@
         <Frame Name="frame" Grid.Column="1" Margin="10,10,10,10" Content=""></Frame>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Button Margin="10,10,0,10" Content="Back" FontSize="12" Click="BackButton_Click" HorizontalAlignment="Stretch"/>
-            <Button Margin="10,10,0,10" Content="Add/Edit Courses and People" FontSize="12" Click="AddEdit_Click" HorizontalAlignment="Stretch"/>
             <Button Margin="10,10,0,10" Content="Edit People" FontSize="12" Click="EditPerson_Click" HorizontalAlignment="Stretch"/>
             <Button Margin="10,10,0,10" Content="Edit Courses" FontSize="12" Click="EditCourse_Click" HorizontalAlignment="Stretch"/>
             <Button Margin="10,10,0,10" Content="Student View" FontSize="12" Click="StudentView_Click" HorizontalAlignment="Stretch"/>
             <Button Margin="10,10,0,10" Content="Instructor View" FontSize="12" Click="InstructorView_Click" HorizontalAlignment="Stretch"/>
             <Button Margin="10,10,0,10" Content="&lt;" FontSize="12" HorizontalAlignment="Stretch" Click="Left_Click"/>
-            <TextBlock Margin="10,10,0,10" Text="{Binding Path=Semester}" FontSize="12" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+            <TextBlock Margin="10,10,0,10" Text="{Binding Path=Semester}" FontSize="12" HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="48"/>
             <TextBlock Margin="10,10,0,10" Text="{Binding Path=Year}" FontSize="12" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
             <Button Margin="10,10,0,10" Content=">" FontSize="12" HorizontalAlignment="Stretch" Click="Right_Click"/>
 

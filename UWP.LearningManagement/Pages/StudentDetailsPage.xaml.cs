@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Xml.Linq;
 using Library.LearningManagement.Models;
+using UWP.LearningManagement;
 
 namespace UWP.LearningManagement
 {
@@ -27,11 +28,22 @@ namespace UWP.LearningManagement
         {
             this.InitializeComponent();
             DataContext = new DetailedPersonViewModel();
+            gradesFrame.Navigate(typeof(CurrentSemesterPage));
         }
 
         private void DropClasses_Click(object sender, RoutedEventArgs e)
         {
             (DataContext as DetailedPersonViewModel).DropClasses();
+        }
+
+        private void Current_Click(object sender, RoutedEventArgs e)
+        {
+            gradesFrame.Navigate(typeof(CurrentSemesterPage));
+        }
+
+        private void Previous_Click(object sender, RoutedEventArgs e)
+        {
+            gradesFrame.Navigate(typeof(PreviousSemesterPage));
         }
     }
 }
