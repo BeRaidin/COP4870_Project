@@ -52,7 +52,7 @@ namespace Library.LearningManagement.Models
                 }
 
                 newPerson.Id = person.Id;
-                newPerson.Name = person.Name;
+                newPerson.FirstName = person.FirstName;
                 People.Add(newPerson);
             }
         }

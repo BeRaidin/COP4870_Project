@@ -28,7 +28,7 @@ namespace UWP.LearningManagement.ViewModels
         }
 
 
-    public Person SelectedPerson
+        public Person SelectedPerson
         {
             get { return personService.CurrentPerson; }
             set { personService.CurrentPerson = value; }
@@ -45,13 +45,22 @@ namespace UWP.LearningManagement.ViewModels
         }
 
         public Student Student { get; set; }
-        public string Name
+        public string FirstName
         {
-            get { return SelectedPerson.Name; }
+            get { return SelectedPerson.FirstName; }
         }
+        public string LastName
+        {
+            get { return SelectedPerson.LastName; }
+        }
+
         public List<Course> Courses 
         {
             get { return SelectedPerson.Courses; }
+        }
+        public string Id
+        {
+            get { return SelectedPerson.Id; }
         }
         public string Type { get; set; }
         public string GradeLevel { get; set; }
@@ -174,5 +183,13 @@ namespace UWP.LearningManagement.ViewModels
             }
             else Grades = new ObservableCollection<GradesDictionary>();
         }
+
+       
+
+
+
+
+
+
     }
 }

@@ -19,7 +19,12 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock FontSize="60*" Text="{Binding Name}"></TextBlock>
+
+
+
+
+
+        <TextBlock FontSize="60*" Text="{Binding FirstName}"></TextBlock>
         <StackPanel Grid.Column="1" Margin="10,10,10,10">
             <TextBlock FontSize="40*" Text="{Binding Type}"></TextBlock>
             <TextBlock FontSize="20*" Text="{Binding GradeLevel}"></TextBlock>
