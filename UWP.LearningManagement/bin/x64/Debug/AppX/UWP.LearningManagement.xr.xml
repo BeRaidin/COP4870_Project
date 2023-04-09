@@ -29,6 +29,8 @@
     <RootPropertyPathName Name="Room" />
     <RootPropertyPathName Name="Hours" />
     <RootPropertyPathName Name="Code" />
+    <RootPropertyPathName Name="LastName" />
+    <RootPropertyPathName Name="FirstName" />
     <RootPropertyPathName Name="StudentLevels" />
     <RootPropertyPathName Name="SelectedClass" />
     <RootPropertyPathName Name="PersonTypes" />
@@ -50,6 +52,7 @@
     <RootPropertyPathName Name="GradeLevel" />
     <RootPropertyPathName Name="ContentItems" />
     <RootPropertyPathName Name="SelectedItem" />
+    <RootPropertyPathName Name="Id" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application" />
@@ -69,6 +72,8 @@
       <RootMethod Name="SetColumn" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
+      <RootMethod Name="GetColumnSpan" />
+      <RootMethod Name="SetColumnSpan" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
       <RootProperty Name="Height" />
@@ -83,6 +88,8 @@
       <RootProperty Name="FontSize" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="FontWeight" />
+      <RootProperty Name="Inlines" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Text" />
@@ -167,6 +174,9 @@
     <RootType FullName="UWP.LearningManagement.InstructorViewPage" />
     <RootType FullName="UWP.LearningManagement.ItemsPage" />
     <RootType FullName="UWP.LearningManagement.PeoplePage" />
+    <RootType FullName="Windows.UI.Xaml.Documents.Run">
+      <RootProperty Name="Text" />
+    </RootType>
     <RootType FullName="UWP.LearningManagement.StudentDetailsPage" />
     <RootType FullName="UWP.LearningManagement.StudentViewPage" />
   </Roots.RootTypes>

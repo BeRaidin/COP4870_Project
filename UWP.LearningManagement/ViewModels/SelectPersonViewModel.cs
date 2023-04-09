@@ -86,12 +86,12 @@ namespace UWP.LearningManagement.ViewModels
 
                 if(personType == 0)
                 {
-                    searchResults = Instructors.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+                    searchResults = Instructors.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
                                                 || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 }
                 else
                 {
-                    searchResults = Students.Where(i => i.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+                    searchResults = Students.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
                                                || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 }
                 

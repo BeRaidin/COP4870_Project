@@ -10,20 +10,48 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock FontSize="60*" Text="{Binding Name}"></TextBlock>
-        <StackPanel Grid.Column="1" Margin="10,10,10,10">
-            <TextBlock FontSize="40*" Text="{Binding Type}"></TextBlock>
-            <TextBlock FontSize="20*" Text="{Binding GradeLevel}"></TextBlock>
-        </StackPanel>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock FontWeight="ExtraBold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2">
+                <Run Text="Welcome, "/>
+                <Run Text="{Binding FirstName}"/>
+                <Run Text="!"/>
+            </TextBlock>
+            <TextBlock FontSize="14" Grid.Row="1" Text="Name:" FontWeight="Bold"/>
+            <TextBlock FontSize="14" Grid.Row="1" Grid.Column="1">
+                <Run Text="{Binding FirstName}"/>
+                <Run Text=" "/>
+                <Run Text="{Binding LastName}"/>
+            </TextBlock>
+            <TextBlock Grid.Row="2" Text="Id:" FontWeight="Bold"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Id}"/>
+            <TextBlock Grid.Row="3" Text="Year:" FontWeight="Bold"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding GradeLevel}"/>
+            <TextBlock Grid.Row="4" Text="Total GPA:" FontWeight="Bold"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding GradePoint}"/>
+        </Grid>
+
         <StackPanel Grid.Row="1">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Enrolled Courses"></TextBlock>
             <Button Margin="10,0,10,0" Content="Drop Courses" Click="DropClasses_Click"></Button>
@@ -58,11 +86,6 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-        </StackPanel>
-        <StackPanel Grid.Row="3">
-            <TextBlock Margin="10,0,10,0" FontSize="20" Text="GPA:"></TextBlock>
-            <TextBlock Margin="10,0,10,0" FontSize="20" Text="{Binding GradePoint}"></TextBlock>
-
         </StackPanel>
     </Grid>
 </Page>

@@ -31,11 +31,18 @@ namespace UWP.LearningManagement.ViewModels
         public ObservableCollection<string> StudentLevels { get; set; }
         public string SelectedType { get; set; }
         public string SelectedClass { get; set; }
-        public string Name {
-            get { return SelectedPerson.Name; }
-            set { SelectedPerson.Name = value; } 
+        public string FirstName {
+            get { return SelectedPerson.FirstName; }
+            set { SelectedPerson.FirstName = value; } 
         }
-        public string TempName { get; set; }
+        public string LastName
+        {
+            get { return SelectedPerson.LastName; }
+            set { SelectedPerson.LastName = value; }
+        }
+        public string TempFirstName { get; set; }
+        public string TempLastName { get; set; }
+
 
         public PersonViewModel()
         {
@@ -49,7 +56,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Add()
         {
-            if (Name != null && Name != "")
+            if (FirstName != null && FirstName != "" && LastName != null && LastName != "")
             {
                 if (SelectedType == "Student")
                 {
@@ -64,7 +71,8 @@ namespace UWP.LearningManagement.ViewModels
                     Person = new TeachingAssistant();
                 }
                 else Person = new Student();
-                Person.Name = Name;
+                Person.FirstName = FirstName;
+                Person.LastName = LastName;
 
                 var student = Person as Student;
                 if (student != null)
@@ -108,22 +116,30 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Edit()
         {
-            if (Name != null && Name != "")
+            if (FirstName != null && FirstName != "" && LastName != null && LastName != "")
             {
-                SelectedPerson.Name = Name;
+                SelectedPerson.FirstName = FirstName;
+                SelectedPerson.LastName = LastName;
             }
-            else Name = TempName;
+            else
+            {
+                FirstName = TempFirstName;
+                LastName = TempLastName;
+            }
             SelectedPerson = null;
         }
 
         public void SetTemp()
         {
-            TempName = Name.ToString();
+            TempFirstName = FirstName.ToString();
+            TempLastName = LastName.ToString();
+
         }
 
         public void GetTemp()
         {
-            Name = TempName;
+            FirstName = TempFirstName;
+            LastName = TempLastName;
         }
     }
 }

@@ -14,9 +14,11 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Header="Name" Text="{Binding Path=Name, Mode=TwoWay}"></TextBox>
+        <TextBox Header="First Name" Text="{Binding Path=FirstName, Mode=TwoWay}"></TextBox>
+        <TextBox Grid.Row="1" Header="Last Name" Text="{Binding Path=LastName, Mode=TwoWay}"></TextBox>
     </Grid>
 </ContentDialog>
 

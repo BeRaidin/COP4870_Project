@@ -21,7 +21,7 @@ namespace Library.LearningManagement.Models
         public Dictionary<Course, double> FinalGrades { get; set; }
         public double GradePointAverage { get; set; }
 
-        public override string Display => $"[{Id}] {Name} - Student";
+        public override string Display => $"[{Id}] {FirstName} {LastName} - Student";
 
         public Student()
         {
