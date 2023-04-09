@@ -23,6 +23,8 @@ namespace Library.LearningManagement.Models
             People = new List<Person>();
         }
 
+        public virtual string Display => $"{Period} {Year}";
+
         public void SetSemester(List<Course> courses, List<Person> people)
         {
             foreach (Course course in courses)

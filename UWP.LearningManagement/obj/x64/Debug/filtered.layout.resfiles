@@ -25,8 +25,8 @@ Dialogs\PersonDialog.xbf
 Dialogs\RosterDialog.xbf
 Dialogs\UpdateAnnouncementDialog.xbf
 MainPage.xbf
-Pages\AddEditPage.xbf
 Pages\CoursePage.xbf
+Pages\CurrentSemesterPage.xbf
 Pages\DetailedCourse.xbf
 Pages\DetailedPerson.xbf
 Pages\DetailedStudent.xbf
@@ -34,6 +34,7 @@ Pages\InstructorDetailsPage.xbf
 Pages\InstructorViewPage.xbf
 Pages\ItemsPage.xbf
 Pages\PeoplePage.xbf
+Pages\PreviousSemesterPage.xbf
 Pages\StudentDetailsPage.xbf
 Pages\StudentViewPage.xbf
 UWP.LearningManagement.xr.xml
