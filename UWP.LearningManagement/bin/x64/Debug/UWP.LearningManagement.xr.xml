@@ -37,13 +37,13 @@
     <RootPropertyPathName Name="FinalGrades" />
     <RootPropertyPathName Name="Value" />
     <RootPropertyPathName Name="Key" />
-    <RootPropertyPathName Name="SelectedPerson" />
     <RootPropertyPathName Name="Assignments" />
     <RootPropertyPathName Name="SelectedAssignment" />
     <RootPropertyPathName Name="SelectedModule" />
     <RootPropertyPathName Name="Announcements" />
     <RootPropertyPathName Name="SelectedAnnouncement" />
     <RootPropertyPathName Name="Roster" />
+    <RootPropertyPathName Name="SelectedPerson" />
     <RootPropertyPathName Name="Type" />
     <RootPropertyPathName Name="GradePoint" />
     <RootPropertyPathName Name="Grades" />
@@ -171,16 +171,16 @@
     </RootType>
     <RootType FullName="UWP.LearningManagement.MainPage" />
     <RootType FullName="UWP.LearningManagement.CurrentSemesterPage" />
-    <RootType FullName="Windows.UI.Xaml.Controls.Frame">
-      <RootProperty Name="Content" />
-      <RootProperty Name="Name" />
-      <RootProperty Name="Margin" />
-    </RootType>
     <RootType FullName="UWP.LearningManagement.UnenrollStudentsPage" />
     <RootType FullName="UWP.LearningManagement.DetailedCourse" />
     <RootType FullName="UWP.LearningManagement.DetailedPerson" />
     <RootType FullName="UWP.LearningManagement.DetailedStudent" />
     <RootType FullName="UWP.LearningManagement.InstructorDetailsPage" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Frame">
+      <RootProperty Name="Content" />
+      <RootProperty Name="Name" />
+      <RootProperty Name="Margin" />
+    </RootType>
     <RootType FullName="UWP.LearningManagement.InstructorViewPage" />
     <RootType FullName="UWP.LearningManagement.ItemsPage" />
     <RootType FullName="UWP.LearningManagement.PeoplePage" />

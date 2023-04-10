@@ -18,12 +18,7 @@ namespace UWP.LearningManagement.ViewModels
         private readonly SemesterService semesterService;
         private readonly List<Person> allInstructors;
 
-        private ObservableCollection<Person> _instructors;
-        public ObservableCollection<Person> Instructors
-        {
-            get { return _instructors; }
-            private set { _instructors = value; }
-        }
+        public ObservableCollection<Person> Instructors { get; set; }
         public Person SelectedPerson
         {
             get { return personService.CurrentPerson; }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UWP.LearningManagement.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -20,7 +21,12 @@ namespace UWP.LearningManagement
         public UnenrollStudentsPage()
         {
             this.InitializeComponent();
+            DataContext = new UnenrollStudentsViewModel();
+        }
 
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as UnenrollStudentsViewModel).Search();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -28,19 +34,12 @@ namespace UWP.LearningManagement
             Frame.Navigate(typeof(InstructorViewPage));
         }
 
-        private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-        {
-
-        }
-
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
-
+            (DataContext as UnenrollStudentsViewModel).Delete();
+            Frame.Navigate(typeof(InstructorViewPage));
         }
 
-        private void Search_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
     }
 }
