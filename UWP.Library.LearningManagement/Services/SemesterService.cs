@@ -44,6 +44,7 @@ namespace Library.LearningManagement.Services
         public SemesterService()
         {
             SemesterList = new List<Semester>();
+            CurrentSemester = new Semester();
         }
 
         public void Add(Semester semester)

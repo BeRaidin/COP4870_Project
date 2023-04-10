@@ -4,23 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UWP.Library.LearningManagement.Database;
 
 namespace Library.LearningManagement.Services
 {
     public class CourseService
     {
-        private List<Course> courseList;
-        public List<Course> CourseList
-        {
-            get
-            {
-                return courseList;
-            }
-            set
-            {
-                courseList = value;
-            }
-        }
+        public List<Course> Courses
+        { get { return FakeDataBase.Courses; } }
+
+
         private Course _currentCourse;
         public Course CurrentCourse
         {
@@ -44,21 +37,20 @@ namespace Library.LearningManagement.Services
 
         public CourseService()
         {
-            CourseList = new List<Course>();   
         }        
 
         public void Add(Course course)
         {
-            CourseList.Add(course);
+            FakeDataBase.Courses.Add(course);
         }
 
         public void Remove()
         {
-            foreach (var course in CourseList)
+            foreach (var course in FakeDataBase.Courses)
             {
                 if(course.Code == CurrentCourse.Code)
                 {
-                    CourseList.Remove(course);
+                    FakeDataBase.Courses.Remove(course);
                     break;
                 }
             }

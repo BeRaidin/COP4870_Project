@@ -28,29 +28,29 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock FontWeight="ExtraBold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2">
+            <TextBlock Margin="10,0,10,0" FontWeight="ExtraBold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2">
                 <Run Text="Welcome, "/>
                 <Run Text="{Binding FirstName}"/>
                 <Run Text="!"/>
             </TextBlock>
-            <TextBlock FontSize="14" Grid.Row="1" Text="Name:" FontWeight="Bold"/>
-            <TextBlock FontSize="14" Grid.Row="1" Grid.Column="1">
+            <TextBlock Margin="10,0,10,0" FontSize="14" Grid.Row="1" Text="Name:" FontWeight="Bold"/>
+            <TextBlock Margin="10,0,10,0" FontSize="14" Grid.Row="1" Grid.Column="1">
                 <Run Text="{Binding FirstName}"/>
                 <Run Text=" "/>
                 <Run Text="{Binding LastName}"/>
             </TextBlock>
-            <TextBlock Grid.Row="2" Text="Id:" FontWeight="Bold"/>
-            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Id}"/>
-            <TextBlock Grid.Row="3" Text="Year:" FontWeight="Bold"/>
-            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding GradeLevel}"/>
-            <TextBlock Grid.Row="4" Text="Total GPA:" FontWeight="Bold"/>
-            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding GradePoint}"/>
+            <TextBlock Margin="10,0,10,0" Grid.Row="2" Text="Id:" FontWeight="Bold"/>
+            <TextBlock Margin="10,0,10,0" Grid.Row="2" Grid.Column="1" Text="{Binding Id}"/>
+            <TextBlock Margin="10,0,10,0" Grid.Row="3" Text="Year:" FontWeight="Bold"/>
+            <TextBlock Margin="10,0,10,0" Grid.Row="3" Grid.Column="1" Text="{Binding GradeLevel}"/>
+            <TextBlock Margin="10,0,10,0" Grid.Row="4" Text="Total GPA:" FontWeight="Bold"/>
+            <TextBlock Margin="10,0,10,0" Grid.Row="4" Grid.Column="1" Text="{Binding GradePoint}"/>
         </Grid>
         <StackPanel Grid.Row="1" Grid.Column="1" >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">

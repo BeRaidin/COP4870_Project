@@ -38,11 +38,6 @@ namespace UWP.LearningManagement
             (DataContext as PersonPageViewModel).Remove();
         }
 
-        private void Edit_Click(object sender, RoutedEventArgs e)
-        {
-            (DataContext as PersonPageViewModel).Edit();
-        }
-
         private void Search_Click(object sender, RoutedEventArgs e)
         {
             (DataContext as PersonPageViewModel).Search();

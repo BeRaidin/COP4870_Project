@@ -179,6 +179,9 @@
     <Compile Include="Pages\CurrentSemesterPage.xaml.cs">
       <DependentUpon>CurrentSemesterPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\UnenrollStudentsPage.xaml.cs">
+      <DependentUpon>UnenrollStudentsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DetailedCourse.xaml.cs">
       <DependentUpon>DetailedCourse.xaml</DependentUpon>
     </Compile>
@@ -216,10 +219,12 @@
     <Compile Include="ViewModels\CoursePageViewModel.cs" />
     <Compile Include="ViewModels\CourseViewModel.cs" />
     <Compile Include="ViewModels\CurrentSemesterViewModel.cs" />
+    <Compile Include="ViewModels\DeletePersonViewModel.cs" />
     <Compile Include="ViewModels\DetailedCourseViewModel.cs" />
     <Compile Include="ViewModels\DetailedPersonViewModel.cs" />
     <Compile Include="ViewModels\DropClassViewModel.cs" />
     <Compile Include="ViewModels\GradesDialogViewModel.cs" />
+    <Compile Include="ViewModels\InstructorViewViewModel.cs" />
     <Compile Include="ViewModels\ItemsPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\ModuleViewModel.cs" />
@@ -326,6 +331,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\CurrentSemesterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UnenrollStudentsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

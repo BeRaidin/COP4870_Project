@@ -36,5 +36,10 @@ namespace UWP.LearningManagement
                 Frame.Navigate(typeof(DetailedCourse));
             }
         }
+
+        private void AddCourse_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as DetailedPersonViewModel).AddCourse();
+        }
     }
 }

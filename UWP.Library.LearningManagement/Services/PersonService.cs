@@ -5,23 +5,17 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UWP.Library.LearningManagement.Database;
 
 namespace Library.LearningManagement.Services
 {
     public class PersonService
     {
-        private List<Person> personList;
-        public List<Person> PersonList
-        {
-            get
-            {
-                return personList;
-            }
-            set
-            {
-                personList = value;
-            }
-        }
+        public List<Person> People
+        { get { return FakeDataBase.People; } }
+
+
+        
         private Person _currentPerson;
         public Person CurrentPerson
         {
@@ -52,25 +46,26 @@ namespace Library.LearningManagement.Services
 
         public PersonService()
         {
-            PersonList = new List<Person>();
             CurrentPerson = new Person();
             totalCount = 0;
+            Add(new Student { FirstName = "Bray", LastName = "Lewis", Classification = Student.Classes.Sophmore });
+            Add(new Instructor { FirstName = "Chris", LastName = "Mills"});
         }
-           
+
         public void Add(Person person)
         {
             person.Id = totalCount.ToString();
             totalCount++;
-            PersonList.Add(person);
+            FakeDataBase.People.Add(person);
         }
 
         public void Remove()
         {
-            foreach(Person person in PersonList)
+            foreach(Person person in People)
             {
                 if(CurrentPerson.Id == person.Id)
                 {
-                    PersonList.Remove(person);
+                    FakeDataBase.People.Remove(person);
                     break;
                 }
             }
