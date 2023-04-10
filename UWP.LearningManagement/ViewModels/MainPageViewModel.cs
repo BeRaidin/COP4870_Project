@@ -35,11 +35,22 @@ namespace LearningManagement.ViewModels
             moduleService = ModuleService.Current;
             courseService = CourseService.Current;
             semesterService = SemesterService.Current;
-            Semester = "Spring";
-            Year = 2023;
-            CurrentSemester = new Semester { Period=Semester, Year=Year};
-            semesterService.CurrentSemester = CurrentSemester;
-            semesterService.Add(CurrentSemester);
+
+            if (semesterService.SemesterList.Count == 0)
+            {
+                Semester = "Spring";
+                Year = 2023;
+                {
+                    CurrentSemester = new Semester { Period = Semester, Year = Year };
+                    semesterService.CurrentSemester = CurrentSemester;
+                    semesterService.Add(CurrentSemester);
+                }
+            }
+            else
+            {
+                Semester = semesterService.CurrentSemester.Period;
+                Year = semesterService.CurrentSemester.Year;
+            }
         }
 
         public void Clear()

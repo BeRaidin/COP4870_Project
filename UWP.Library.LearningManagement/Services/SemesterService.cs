@@ -4,23 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UWP.Library.LearningManagement.Database;
 
 namespace Library.LearningManagement.Services
 {
     public class SemesterService
     {
-        private List<Semester> semesterList;
         public List<Semester> SemesterList
         {
             get
             {
-                return semesterList;
-            }
-            set
-            {
-                semesterList = value;
+                return FakeDataBase.Semesters;
             }
         }
+
         private Semester _currentSemester;
         public Semester CurrentSemester
         {
@@ -43,7 +40,6 @@ namespace Library.LearningManagement.Services
 
         public SemesterService()
         {
-            SemesterList = new List<Semester>();
             CurrentSemester = new Semester();
         }
 

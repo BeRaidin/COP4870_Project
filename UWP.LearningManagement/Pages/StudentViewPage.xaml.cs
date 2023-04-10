@@ -25,7 +25,7 @@ namespace UWP.LearningManagement
         public StudentViewPage()
         {
             this.InitializeComponent();
-            DataContext = new SelectPersonViewModel(1);
+            DataContext = new SelectPersonViewModel();
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
@@ -33,12 +33,17 @@ namespace UWP.LearningManagement
             (DataContext as SelectPersonViewModel).Search();
         }
 
-        private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        private void Student_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             if ((DataContext as SelectPersonViewModel).SelectedPerson != null)
             {
-                Frame.Navigate(typeof(StudentDetailsPage));
+                frame.Navigate(typeof(StudentDetailsPage));
             }
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
         }
     }
 }
