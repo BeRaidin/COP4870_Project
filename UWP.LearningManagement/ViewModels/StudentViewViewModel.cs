@@ -16,7 +16,7 @@ using System.Reflection.Metadata;
 
 namespace UWP.LearningManagement.ViewModels
 {
-    public class SelectPersonViewModel
+    public class StudentViewViewModel
     {
         private readonly PersonService personService;
         private readonly SemesterService semesterService;
@@ -38,7 +38,7 @@ namespace UWP.LearningManagement.ViewModels
             get { return semesterService.CurrentSemester.Year; }
         }
 
-        public SelectPersonViewModel() 
+        public StudentViewViewModel() 
         {
             personService = PersonService.Current;
             semesterService = SemesterService.Current;

@@ -23,10 +23,10 @@
     <RootPropertyPathName Name="Students" />
     <RootPropertyPathName Name="SelectedCourse" />
     <RootPropertyPathName Name="Query" />
-    <RootPropertyPathName Name="Instructors" />
     <RootPropertyPathName Name="Room" />
     <RootPropertyPathName Name="Hours" />
     <RootPropertyPathName Name="Code" />
+    <RootPropertyPathName Name="Instructors" />
     <RootPropertyPathName Name="LastName" />
     <RootPropertyPathName Name="FirstName" />
     <RootPropertyPathName Name="StudentLevels" />

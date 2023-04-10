@@ -25,17 +25,17 @@ namespace UWP.LearningManagement
         public StudentViewPage()
         {
             this.InitializeComponent();
-            DataContext = new SelectPersonViewModel();
+            DataContext = new StudentViewViewModel();
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as SelectPersonViewModel).Search();
+            (DataContext as StudentViewViewModel).Search();
         }
 
         private void Student_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            if ((DataContext as SelectPersonViewModel).SelectedPerson != null)
+            if ((DataContext as StudentViewViewModel).SelectedPerson != null)
             {
                 frame.Navigate(typeof(StudentDetailsPage));
             }
