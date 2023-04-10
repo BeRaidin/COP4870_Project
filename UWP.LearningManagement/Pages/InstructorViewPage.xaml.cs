@@ -33,7 +33,7 @@ namespace UWP.LearningManagement
             (DataContext as InstructorViewViewModel).Search();
         }
 
-        private void Instructor_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             if ((DataContext as InstructorViewViewModel).SelectedPerson != null)
             {

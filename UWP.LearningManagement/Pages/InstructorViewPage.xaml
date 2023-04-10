@@ -28,7 +28,7 @@
                 <Button Click="Search_Click" Grid.Column="1" Content="Search" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
 
                 <ListBox Grid.Row="1" Grid.ColumnSpan="2"
-                ItemsSource="{Binding Instructors, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}" DoubleTapped="Instructor_DoubleTapped">
+                ItemsSource="{Binding Instructors, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}" DoubleTapped="ListBox_DoubleTapped">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -45,7 +45,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal" Margin="10,10,0,10">
+            <StackPanel Orientation="Horizontal">
                 <Button Margin="10,10,0,10" Content="Back to Main Page" Click="Back_Click"></Button>
                 <Button Margin="10,10,0,10" Content="Make a new person" Click="Add_Click"></Button>
                 <Button Margin="10,10,0,10" Content="Unenroll Students" Click="Delete_Click"></Button>

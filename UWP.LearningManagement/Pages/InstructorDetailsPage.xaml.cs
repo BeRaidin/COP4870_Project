@@ -26,12 +26,12 @@ namespace UWP.LearningManagement
         public InstructorDetailsPage()
         {
             this.InitializeComponent();
-            DataContext = new DetailedPersonViewModel();
+            DataContext = new InstructorDetailsViewModel();
         }
 
         public void Course_DoubleTapped(object sender, RoutedEventArgs e)
         {
-            if ((DataContext as DetailedPersonViewModel).SelectedCourse != null)
+            if ((DataContext as InstructorDetailsViewModel).SelectedCourse != null)
             {
                 Frame.Navigate(typeof(DetailedCourse));
             }
@@ -39,7 +39,13 @@ namespace UWP.LearningManagement
 
         private void AddCourse_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as DetailedPersonViewModel).AddCourse();
+            (DataContext as InstructorDetailsViewModel).AddCourse();
+        }
+
+        private void JoinCourse_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as InstructorDetailsViewModel).JoinCourse();
+
         }
     }
 }

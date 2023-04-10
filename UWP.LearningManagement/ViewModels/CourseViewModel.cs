@@ -24,14 +24,9 @@ namespace UWP.LearningManagement.ViewModels
             get { return courseService.CurrentCourse; }
             set { courseService.CurrentCourse = value; }
         }
+        public Person SelectedPerson
+        { get { return personService.CurrentPerson; } } 
 
-        private List<Person> allInstructors;
-        private ObservableCollection<Person> _instructors;
-        public ObservableCollection<Person> Instructors
-        {
-            get { return _instructors; }
-            set { _instructors = value; }
-        }
         public string Name
         {
             get
@@ -81,32 +76,22 @@ namespace UWP.LearningManagement.ViewModels
             courseService = CourseService.Current;
             personService = PersonService.Current;
             semesterService = SemesterService.Current;
-            allInstructors = new List<Person>();
-            foreach (var person in semesterService.CurrentSemester.People)
-            {
-                if (person as Student == null)
-                {
-                    allInstructors.Add(person);
-                }
-            }
-            Instructors = new ObservableCollection<Person>(allInstructors);
-            FillChecks();
         }
 
         public void Set()
         {
-            foreach (Person person in Instructors)
-            {
-                if(person.IsSelected)
-                {
-                    Roster.Add(person);
-                    person.Add(SelectedCourse);
-                    if(person as Student != null)
-                    {
-                        (person as Student).FinalGrades.Add(SelectedCourse, 0);
-                    }
-                }
-            }
+        //    foreach (Person person in Instructors)
+        //    {
+        //        if(person.IsSelected)
+        //        {
+        //            Roster.Add(person);
+        //            person.Add(SelectedCourse);
+        //            if(person as Student != null)
+        //            {
+        //                (person as Student).FinalGrades.Add(SelectedCourse, 0);
+        //            }
+        //        }
+        //    }
 
             if(int.TryParse(Hours, out int hours))
             {
@@ -116,6 +101,8 @@ namespace UWP.LearningManagement.ViewModels
             {
                 SelectedCourse.CreditHours = 3;
             }
+
+            SelectedCourse.Roster.Add(SelectedPerson);
         }
 
         public void Add()
@@ -139,35 +126,36 @@ namespace UWP.LearningManagement.ViewModels
                 {
                     semester.Courses.Add(SelectedCourse);
                 }
+                SelectedPerson.Add(SelectedCourse);
             }
             SelectedCourse = null;
         }
 
         public void Edit()
         {
-            if (Code != null && Code != "" && Name != null && Name != "" && Room != null && Room != "")
-            {
-                SelectedCourse.Name = Name;
-                SelectedCourse.Code = Code;
-                foreach (var instructor in Instructors)
-                {
-                    if (instructor.IsSelected && !SelectedCourse.Roster.Contains(instructor))
-                    {
-                        SelectedCourse.Add(instructor);
-                        instructor.Add(SelectedCourse);
-                    }
-                    else if (!instructor.IsSelected && SelectedCourse.Roster.Contains(instructor))
-                    {
-                        SelectedCourse.Remove(instructor);
-                        instructor.Remove(SelectedCourse);
-                    }
-                }
-            }
-            else
-            {
-                GetTemp();
-            }
-            SelectedCourse = null;
+//            if (Code != null && Code != "" && Name != null && Name != "" && Room != null && Room != "")
+//            {
+//                SelectedCourse.Name = Name;
+//                SelectedCourse.Code = Code;
+//                foreach (var instructor in Instructors)
+//                {
+//                    if (instructor.IsSelected && !SelectedCourse.Roster.Contains(instructor))
+//                    {
+//                        SelectedCourse.Add(instructor);
+//                        instructor.Add(SelectedCourse);
+//                    }
+//                    else if (!instructor.IsSelected && SelectedCourse.Roster.Contains(instructor))
+//                    {
+//                        SelectedCourse.Remove(instructor);
+//                        instructor.Remove(SelectedCourse);
+//                    }
+//                }
+//            }
+//            else
+//            {
+//                GetTemp();
+//            }
+//            SelectedCourse = null;
         }
         public void SetTemp()
         {
@@ -180,21 +168,6 @@ namespace UWP.LearningManagement.ViewModels
             Name = TempName;
             Code = TempCode;
             Room = TempRoom;
-        }
-
-        public void FillChecks()
-        {
-            foreach(var instructor in Instructors)
-            {
-                if(SelectedCourse.Roster.Contains(instructor))
-                {
-                    instructor.IsSelected = true;
-                }
-                else
-                {
-                    instructor.IsSelected = false;
-                }
-            }
         }
     }
 }

@@ -36,12 +36,10 @@
             <TextBlock Margin="10,0,10,0" FontWeight="ExtraBold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2">
                 <Run Text="Welcome, "/>
                 <Run Text="{Binding FirstName}"/>
-                <Run Text="!"/>
             </TextBlock>
             <TextBlock Margin="10,0,10,0" FontSize="14" Grid.Row="1" Text="Name:" FontWeight="Bold"/>
             <TextBlock Margin="10,0,10,0" FontSize="14" Grid.Row="1" Grid.Column="1">
                 <Run Text="{Binding FirstName}"/>
-                <Run Text=" "/>
                 <Run Text="{Binding LastName}"/>
             </TextBlock>
             <TextBlock Margin="10,0,10,0" Grid.Row="2" Text="Id:" FontWeight="Bold"/>
@@ -52,7 +50,7 @@
 
         <StackPanel Grid.Row="1">
             <Button x:ConnectionId='3' Content="Add a new course" HorizontalAlignment="Stretch"                        ></Button>
-            <Button Content="Join an existing course" HorizontalAlignment="Stretch"></Button>
+            <Button x:ConnectionId='4' Content="Join an existing course" HorizontalAlignment="Stretch"                         ></Button>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">

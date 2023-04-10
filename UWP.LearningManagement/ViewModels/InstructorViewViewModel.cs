@@ -16,7 +16,10 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly PersonService personService;
         private readonly SemesterService semesterService;
-        private readonly List<Person> allInstructors;
+        private List<Person> allPeople
+        { 
+            get { return FakeDataBase.People; } 
+        }
 
         public ObservableCollection<Person> Instructors { get; set; }
         public Person SelectedPerson
@@ -39,15 +42,14 @@ namespace UWP.LearningManagement.ViewModels
         {
             personService = PersonService.Current;
             semesterService = SemesterService.Current;
-            allInstructors = new List<Person>();
-            foreach(var person in FakeDataBase.People)
+            Instructors = new ObservableCollection<Person>();
+            foreach (var person in allPeople)
             {
                 if (person as Student == null)
                 {
-                    allInstructors.Add(person);
+                    Instructors.Add(person);
                 }
             }
-            Instructors = new ObservableCollection<Person>(allInstructors);
         }
 
         public void Search()
@@ -55,7 +57,7 @@ namespace UWP.LearningManagement.ViewModels
             if (Query != null && Query != "")
             {
 
-                IEnumerable<Person> searchResults = allInstructors.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+                IEnumerable<Person> searchResults = allPeople.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
                                                     || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 Instructors.Clear();
                 foreach (var person in searchResults)
@@ -83,9 +85,12 @@ namespace UWP.LearningManagement.ViewModels
         public void Refresh()
         {
             Instructors.Clear();
-            foreach(var instructor in allInstructors)
+            foreach (var person in allPeople)
             {
-                Instructors.Add(instructor);
+                if (person as Student == null)
+                {
+                    Instructors.Add(person);
+                }
             }
         }
     }

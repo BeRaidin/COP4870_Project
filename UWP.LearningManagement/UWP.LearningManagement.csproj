@@ -224,6 +224,7 @@
     <Compile Include="ViewModels\DetailedPersonViewModel.cs" />
     <Compile Include="ViewModels\DropClassViewModel.cs" />
     <Compile Include="ViewModels\GradesDialogViewModel.cs" />
+    <Compile Include="ViewModels\InstructorDetailsViewModel.cs" />
     <Compile Include="ViewModels\InstructorViewViewModel.cs" />
     <Compile Include="ViewModels\ItemsPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
@@ -232,7 +233,7 @@
     <Compile Include="ViewModels\PersonViewModel.cs" />
     <Compile Include="ViewModels\PreviousSemesterViewModel.cs" />
     <Compile Include="ViewModels\RosterViewModel.cs" />
-    <Compile Include="ViewModels\SelectPersonViewModel.cs" />
+    <Compile Include="ViewModels\StudentViewViewModel.cs" />
     <Compile Include="ViewModels\UnenrollStudentsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -190,16 +190,5 @@ namespace UWP.LearningManagement.ViewModels
             }
             else Grades = new ObservableCollection<GradesDictionary>();
         }
-
-       public void AddCourse()
-        {
-
-        }
-
-
-
-
-
-
     }
 }
