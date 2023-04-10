@@ -233,6 +233,7 @@
     <Compile Include="ViewModels\PreviousSemesterViewModel.cs" />
     <Compile Include="ViewModels\RosterViewModel.cs" />
     <Compile Include="ViewModels\SelectPersonViewModel.cs" />
+    <Compile Include="ViewModels\UnenrollStudentsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
