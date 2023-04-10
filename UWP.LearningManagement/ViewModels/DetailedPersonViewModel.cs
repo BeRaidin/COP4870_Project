@@ -21,11 +21,16 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly PersonService personService;
         private readonly CourseService courseService;
+        private readonly SemesterService semesterService;
         public event PropertyChangedEventHandler PropertyChanged;
         private void RaisePropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        private List<Semester> SemesterList
+        { get { return semesterService.SemesterList; } }
+        public ObservableCollection<Semester> Semesters { get; set; }
 
 
         public Person SelectedPerson
@@ -86,7 +91,9 @@ namespace UWP.LearningManagement.ViewModels
         {
             personService = PersonService.Current;
             courseService = CourseService.Current;
+            semesterService = SemesterService.Current;
             Student = SelectedPerson as Student;
+            Semesters = new ObservableCollection<Semester>(SemesterList);
             Refresh();
             SetType();
             SetGradeLevel();
@@ -184,7 +191,10 @@ namespace UWP.LearningManagement.ViewModels
             else Grades = new ObservableCollection<GradesDictionary>();
         }
 
-       
+       public void AddCourse()
+        {
+
+        }
 
 
 

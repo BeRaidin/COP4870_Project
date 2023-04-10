@@ -37,23 +37,24 @@
     <RootPropertyPathName Name="FinalGrades" />
     <RootPropertyPathName Name="Value" />
     <RootPropertyPathName Name="Key" />
+    <RootPropertyPathName Name="SelectedPerson" />
     <RootPropertyPathName Name="Assignments" />
     <RootPropertyPathName Name="SelectedAssignment" />
     <RootPropertyPathName Name="SelectedModule" />
     <RootPropertyPathName Name="Announcements" />
     <RootPropertyPathName Name="SelectedAnnouncement" />
     <RootPropertyPathName Name="Roster" />
-    <RootPropertyPathName Name="SelectedPerson" />
     <RootPropertyPathName Name="Type" />
     <RootPropertyPathName Name="GradePoint" />
     <RootPropertyPathName Name="Grades" />
     <RootPropertyPathName Name="AssignmentKey" />
     <RootPropertyPathName Name="GradeLevel" />
-    <RootPropertyPathName Name="People" />
+    <RootPropertyPathName Name="Semesters" />
+    <RootPropertyPathName Name="Id" />
     <RootPropertyPathName Name="ContentItems" />
     <RootPropertyPathName Name="SelectedItem" />
+    <RootPropertyPathName Name="People" />
     <RootPropertyPathName Name="PreviousSemesters" />
-    <RootPropertyPathName Name="Id" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application" />
@@ -135,8 +136,8 @@
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Orientation" />
       <RootProperty Name="Children" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="VerticalAlignment" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.GradeDialog" />
@@ -165,16 +166,17 @@
     <RootType FullName="UWP.LearningManagement.Dialogs.EditCourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditPersonDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.PersonDialog" />
-    <RootType FullName="Windows.UI.Xaml.Controls.Frame">
-      <RootProperty Name="Name" />
-      <RootProperty Name="Margin" />
-      <RootProperty Name="Content" />
-    </RootType>
-    <RootType FullName="UWP.LearningManagement.MainPage" />
     <RootType FullName="Windows.UI.Xaml.Documents.Run">
       <RootProperty Name="Text" />
     </RootType>
+    <RootType FullName="UWP.LearningManagement.MainPage" />
     <RootType FullName="UWP.LearningManagement.CurrentSemesterPage" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Frame">
+      <RootProperty Name="Content" />
+      <RootProperty Name="Name" />
+      <RootProperty Name="Margin" />
+    </RootType>
+    <RootType FullName="UWP.LearningManagement.UnenrollStudentsPage" />
     <RootType FullName="UWP.LearningManagement.DetailedCourse" />
     <RootType FullName="UWP.LearningManagement.DetailedPerson" />
     <RootType FullName="UWP.LearningManagement.DetailedStudent" />

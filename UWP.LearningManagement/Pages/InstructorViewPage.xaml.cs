@@ -25,20 +25,35 @@ namespace UWP.LearningManagement
         public InstructorViewPage()
         {
             this.InitializeComponent();
-            DataContext = new SelectPersonViewModel(0);
+            DataContext = new InstructorViewViewModel();
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as SelectPersonViewModel).Search();
+            (DataContext as InstructorViewViewModel).Search();
         }
 
         private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            if ((DataContext as SelectPersonViewModel).SelectedPerson != null)
+            if ((DataContext as InstructorViewViewModel).SelectedPerson != null)
             {
-                Frame.Navigate(typeof(InstructorDetailsPage));
+                frame.Navigate(typeof(InstructorDetailsPage));
             }
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as InstructorViewViewModel).Add();
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(UnenrollStudentsPage));
         }
     }
 }

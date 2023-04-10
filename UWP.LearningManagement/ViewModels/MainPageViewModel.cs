@@ -82,7 +82,7 @@ namespace LearningManagement.ViewModels
             if (isNewSemester)
             {
                 var newSemester = new Semester { Period = Semester, Year = Year };
-                newSemester.SetSemester(courseService.CourseList, personService.PersonList);
+                newSemester.SetSemester(courseService.Courses, personService.People);
                 semesterService.SemesterList.Add(newSemester);
                 CurrentSemester = newSemester;
                 semesterService.CurrentSemester = newSemester;
@@ -124,7 +124,7 @@ namespace LearningManagement.ViewModels
             if (isNewSemester)
             {
                 var newSemester = new Semester { Period = Semester, Year = Year };
-                newSemester.SetSemester(courseService.CourseList, personService.PersonList);
+                newSemester.SetSemester(courseService.Courses, personService.People);
                 semesterService.SemesterList.Add(newSemester);
                 CurrentSemester = newSemester;
                 semesterService.CurrentSemester = newSemester;

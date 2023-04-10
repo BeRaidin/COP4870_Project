@@ -10,23 +10,54 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock FontSize="60*" Text="{Binding FirstName}"></TextBlock>
-        <StackPanel Grid.Column="1" Margin="10,10,10,10">
-            <TextBlock FontSize="40*" Text="{Binding Type}"></TextBlock>
-        </StackPanel>
+
+        <Grid Grid.Column="2" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="10,0,10,0" FontWeight="ExtraBold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2">
+                <Run Text="Welcome, "/>
+                <Run Text="{Binding FirstName}"/>
+                <Run Text="!"/>
+            </TextBlock>
+            <TextBlock Margin="10,0,10,0" FontSize="14" Grid.Row="1" Text="Name:" FontWeight="Bold"/>
+            <TextBlock Margin="10,0,10,0" FontSize="14" Grid.Row="1" Grid.Column="1">
+                <Run Text="{Binding FirstName}"/>
+                <Run Text=" "/>
+                <Run Text="{Binding LastName}"/>
+            </TextBlock>
+            <TextBlock Margin="10,0,10,0" Grid.Row="2" Text="Id:" FontWeight="Bold"/>
+            <TextBlock Margin="10,0,10,0" Grid.Row="2" Grid.Column="1" Text="{Binding Id}"/>
+            <TextBlock Margin="10,0,10,0" Grid.Row="3" Text="Classification:" FontWeight="Bold"/>
+            <TextBlock Margin="10,0,10,0" Grid.Row="3" Grid.Column="1" Text="{Binding Type}"/>
+        </Grid>
+
         <StackPanel Grid.Row="1">
-            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Courses"></TextBlock>
-            <ListBox x:ConnectionId='2' Margin="10,0,10,0" ItemsSource="{Binding Courses, Mode=TwoWay}"
-            SelectedItem="{Binding Path=SelectedCourse, Mode=TwoWay}"                                   >
+            <Button x:ConnectionId='3' Content="Add a new course" HorizontalAlignment="Stretch"                        ></Button>
+            <Button Content="Join an existing course" HorizontalAlignment="Stretch"></Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Semesters"></TextBlock>
+            <ListBox Margin="10,0,10,0" ItemsSource="{Binding Semesters, Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -36,6 +67,21 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
+        
+        
+<!--        <StackPanel Grid.Row="1" Grid.Column="1">-->
+        <!--            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Courses"></TextBlock>-->
+        <!--            <ListBox Margin="10,0,10,0" ItemsSource="{Binding Courses, Mode=TwoWay}"-->
+        <!--     SelectedItem="{Binding Path=SelectedCourse, Mode=TwoWay}" DoubleTapped="Course_DoubleTapped">-->
+        <!--                <ListBox.ItemTemplate>-->
+<!--                    <DataTemplate>-->
+<!--                        <Grid>-->
+<!--                            <TextBlock Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>-->
+        <!--                        </Grid>-->
+        <!--                    </DataTemplate>-->
+        <!--                </ListBox.ItemTemplate>-->
+        <!--            </ListBox>-->
+        <!--        </StackPanel>-->
     </Grid>
 </Page>
 

@@ -33,7 +33,7 @@ namespace UWP.LearningManagement.ViewModels
             courseService = CourseService.Current;
             personService = PersonService.Current;
             allStudents = new List<Person>();
-            foreach(var person in personService.PersonList)
+            foreach(var person in personService.People)
             {
                 if(person as Student != null)
                 {
