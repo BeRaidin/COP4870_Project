@@ -20,61 +20,37 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly PersonService personService;
         private readonly SemesterService semesterService;
-        private readonly List<Person> allPeople;
-        private readonly int personType;
-
-        private ObservableCollection<Person> _people;
-        public ObservableCollection<Person> People
-        {
-            get
-            {
-                return _people;
-            }
-            private set
-            {
-                _people = value;
-            }
-        }
-        private ObservableCollection<Person> _instructors;
-        public ObservableCollection<Person> Instructors
-        {
-            get { return _instructors; }
-            private set { _instructors = value; }
-        }
-        private ObservableCollection<Person> _students;
-        public ObservableCollection<Person> Students
-        {
-            get { return _students; }
-            private set { _students = value; }
-        }
+        private readonly List<Person> allStudents;
+        
+        public ObservableCollection<Person> Students { get; set; }
         public Person SelectedPerson
         {
             get { return personService.CurrentPerson; }
             set { personService.CurrentPerson = value; }
         }
         public string Query { get; set; }
+        public string Semester
+        { 
+            get { return semesterService.CurrentSemester.Period; } 
+        }
+        public int Year
+        {
+            get { return semesterService.CurrentSemester.Year; }
+        }
 
-        public SelectPersonViewModel(int personType) 
+        public SelectPersonViewModel() 
         {
             personService = PersonService.Current;
             semesterService = SemesterService.Current;
-            this.personType = personType;
-            allPeople = semesterService.CurrentSemester.People;
-            People = new ObservableCollection<Person>();
-            Instructors = new ObservableCollection<Person>();
-            Students = new ObservableCollection<Person>();
-            foreach (Person person in allPeople) 
-            { 
-                if(person as Student == null)
+            allStudents = new List<Person>();
+            foreach (var person in personService.People)
+            {
+                if (person as Student != null)
                 {
-                    Instructors.Add(person);
-                }
-                else
-                {
-                    Students.Add(person);
+                    allStudents.Add(person);
                 }
             }
-            Refresh();
+            Students = new ObservableCollection<Person>(allStudents);
         }
 
         public void Search()
@@ -82,23 +58,13 @@ namespace UWP.LearningManagement.ViewModels
             if (Query != null && Query != "")
             {
 
-                IEnumerable<Person> searchResults;
+                IEnumerable<Person> searchResults = allStudents.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+                                                    || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
 
-                if(personType == 0)
-                {
-                    searchResults = Instructors.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
-                                                || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
-                }
-                else
-                {
-                    searchResults = Students.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
-                                               || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
-                }
-                
-                People.Clear();
+                Students.Clear();
                 foreach (var person in searchResults)
                 {
-                    People.Add(person);
+                    Students.Add(person);
                 }
             }
             else
@@ -109,20 +75,10 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Refresh()
         {
-            People.Clear();
-            if(personType == 0)
+            Students.Clear();
+            foreach (var person in allStudents)
             {
-                foreach(var person in Instructors)
-                {
-                    People.Add(person);
-                }
-            }
-            else if (personType == 1)
-            {
-                foreach (var person in Students)
-                {
-                    People.Add(person);
-                }
+                Students.Add(person);
             }
         }
     }

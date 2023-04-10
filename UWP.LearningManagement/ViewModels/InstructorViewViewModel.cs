@@ -24,9 +24,15 @@ namespace UWP.LearningManagement.ViewModels
             get { return personService.CurrentPerson; }
             set { personService.CurrentPerson = value; }
         }
+        public string Semester
+        {
+            get { return semesterService.CurrentSemester.Period; }
+        }
+        public int Year
+        {
+            get { return semesterService.CurrentSemester.Year; }
+        }
 
-        public string Semester { get { return semesterService.CurrentSemester.Period; } }
-        public int Year { get { return semesterService.CurrentSemester.Year; } }
         public string Query { get; set; }
 
         public InstructorViewViewModel()
@@ -49,7 +55,7 @@ namespace UWP.LearningManagement.ViewModels
             if (Query != null && Query != "")
             {
 
-                IEnumerable<Person> searchResults = Instructors.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+                IEnumerable<Person> searchResults = allInstructors.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
                                                     || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 Instructors.Clear();
                 foreach (var person in searchResults)

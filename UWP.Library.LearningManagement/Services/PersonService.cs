@@ -12,9 +12,9 @@ namespace Library.LearningManagement.Services
     public class PersonService
     {
         public List<Person> People
-        { get { return FakeDataBase.People; } }
-
-
+        { 
+            get { return FakeDataBase.People; } 
+        }
         
         private Person _currentPerson;
         public Person CurrentPerson
