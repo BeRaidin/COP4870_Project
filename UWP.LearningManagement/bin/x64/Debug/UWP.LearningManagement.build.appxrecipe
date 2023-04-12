@@ -115,6 +115,9 @@
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\UpdateAnnouncementDialog.xbf">
       <PackagePath>Dialogs\UpdateAnnouncementDialog.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\CourseDetailsPage.xbf">
+      <PackagePath>Pages\CourseDetailsPage.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\CoursePage.xbf">
       <PackagePath>Pages\CoursePage.xbf</PackagePath>
     </AppxPackagedFile>
@@ -138,12 +141,6 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\UnenrollStudentsPage.xbf">
       <PackagePath>Pages\UnenrollStudentsPage.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\DetailedCourse.xbf">
-      <PackagePath>Pages\DetailedCourse.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\DetailedPerson.xbf">
-      <PackagePath>Pages\DetailedPerson.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\DetailedStudent.xbf">
       <PackagePath>Pages\DetailedStudent.xbf</PackagePath>

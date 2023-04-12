@@ -18,12 +18,11 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Xml.Linq;
 using Library.LearningManagement.Models;
-
 namespace UWP.LearningManagement
 {
-    public sealed partial class DetailedCourse : Page
+    public sealed partial class CourseDetailsPage : Page
     {
-        public DetailedCourse() 
+        public CourseDetailsPage()
         {
             this.InitializeComponent();
             DataContext = new DetailedCourseViewModel();

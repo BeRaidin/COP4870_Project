@@ -161,6 +161,9 @@
     <Compile Include="Dialogs\UpdateAnnouncementDialog.xaml.cs">
       <DependentUpon>UpdateAnnouncementDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CourseDetailsPage.xaml.cs">
+      <DependentUpon>CourseDetailsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\CoursePage.xaml.cs">
       <DependentUpon>CoursePage.xaml</DependentUpon>
     </Compile>
@@ -184,12 +187,6 @@
     </Compile>
     <Compile Include="Pages\UnenrollStudentsPage.xaml.cs">
       <DependentUpon>UnenrollStudentsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\DetailedCourse.xaml.cs">
-      <DependentUpon>DetailedCourse.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\DetailedPerson.xaml.cs">
-      <DependentUpon>DetailedPerson.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DetailedStudent.xaml.cs">
       <DependentUpon>DetailedStudent.xaml</DependentUpon>
@@ -316,6 +313,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\CourseDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\CoursePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -345,14 +346,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\UnenrollStudentsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\DetailedCourse.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\DetailedPerson.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
