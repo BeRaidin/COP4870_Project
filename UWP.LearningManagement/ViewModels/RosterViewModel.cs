@@ -66,7 +66,7 @@ namespace UWP.LearningManagement.ViewModels
                 else if (student.IsSelected == true && !Course.Roster.Contains(student)) 
                 { 
                     Course.Roster.Add(student);
-                    (student as Student).Add(Course);
+                    student.Add(Course);
                 }
             }
         }
