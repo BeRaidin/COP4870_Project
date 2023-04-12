@@ -33,7 +33,7 @@ namespace UWP.LearningManagement
         {
             if ((DataContext as InstructorDetailsViewModel).SelectedCourse != null)
             {
-                Frame.Navigate(typeof(DetailedCourse));
+                Frame.Navigate(typeof(CourseDetailsPage));
             }
         }
 

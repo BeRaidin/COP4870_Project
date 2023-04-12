@@ -26,10 +26,9 @@ Dialogs\PersonDialog.xbf
 Dialogs\RosterDialog.xbf
 Dialogs\UpdateAnnouncementDialog.xbf
 MainPage.xbf
+Pages\CourseDetailsPage.xbf
 Pages\CoursePage.xbf
 Pages\CurrentSemesterPage.xbf
-Pages\DetailedCourse.xbf
-Pages\DetailedPerson.xbf
 Pages\DetailedStudent.xbf
 Pages\InstructorDetailsPage.xbf
 Pages\InstructorViewPage.xbf
