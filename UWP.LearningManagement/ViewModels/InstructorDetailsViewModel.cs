@@ -17,11 +17,11 @@ namespace UWP.LearningManagement.ViewModels
         private readonly CourseService courseService;
         private readonly SemesterService semesterService;
 
-        private List<Semester> SemesterList
+        private List<Course> CourseList
         { 
-            get { return semesterService.SemesterList; } 
+            get { return personService.CurrentPerson.Courses; } 
         }
-        public ObservableCollection<Semester> Semesters { get; set; }
+        public ObservableCollection<Course> Courses { get; set; }
 
         public Person SelectedPerson
         {
@@ -53,7 +53,7 @@ namespace UWP.LearningManagement.ViewModels
             personService = PersonService.Current;
             courseService = CourseService.Current;
             semesterService = SemesterService.Current;
-            Semesters = new ObservableCollection<Semester>(SemesterList);
+            Courses = new ObservableCollection<Course>(CourseList);
             if (SelectedPerson as Instructor != null)
             {
                 Type = "Instructor";
@@ -75,14 +75,24 @@ namespace UWP.LearningManagement.ViewModels
             Refresh();
         }
 
-        public void JoinCourse()
+        public async void JoinCourse()
         {
-
+            SelectedCourse = null;
+            var dialog = new InstructorJoinCourseDialog();
+            if (dialog != null)
+            {
+                await dialog.ShowAsync();
+            }
+            Refresh();
         }
 
         public void Refresh()
         {
-
+            Courses.Clear();
+            foreach (var course in CourseList) 
+            { 
+                Courses.Add(course);
+            }
         }
     }
 }

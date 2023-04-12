@@ -54,8 +54,9 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Semesters"></TextBlock>
-            <ListBox Margin="10,0,10,0" ItemsSource="{Binding Semesters, Mode=TwoWay}">
+            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Courses"></TextBlock>
+            <ListBox Margin="10,0,10,0" ItemsSource="{Binding Courses, Mode=TwoWay}"
+                     DoubleTapped="Course_DoubleTapped" SelectedItem="{Binding Path=SelectedCourse, Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -64,6 +65,10 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="2">
+            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Submitted Assignments"></TextBlock>
         </StackPanel>
         
         

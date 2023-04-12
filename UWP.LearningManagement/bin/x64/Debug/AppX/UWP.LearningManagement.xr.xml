@@ -16,17 +16,18 @@
     <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="Total" />
     <RootPropertyPathName Name="Score" />
+    <RootPropertyPathName Name="AvailableCourses" />
+    <RootPropertyPathName Name="SelectedCourse" />
     <RootPropertyPathName Name="ContentTypes" />
     <RootPropertyPathName Name="SelectedType" />
     <RootPropertyPathName Name="Modules" />
     <RootPropertyPathName Name="SelectedModuleName" />
     <RootPropertyPathName Name="Students" />
-    <RootPropertyPathName Name="SelectedCourse" />
     <RootPropertyPathName Name="Query" />
-    <RootPropertyPathName Name="Instructors" />
     <RootPropertyPathName Name="Room" />
     <RootPropertyPathName Name="Hours" />
     <RootPropertyPathName Name="Code" />
+    <RootPropertyPathName Name="Instructors" />
     <RootPropertyPathName Name="LastName" />
     <RootPropertyPathName Name="FirstName" />
     <RootPropertyPathName Name="StudentLevels" />
@@ -49,7 +50,6 @@
     <RootPropertyPathName Name="Grades" />
     <RootPropertyPathName Name="AssignmentKey" />
     <RootPropertyPathName Name="GradeLevel" />
-    <RootPropertyPathName Name="Semesters" />
     <RootPropertyPathName Name="Id" />
     <RootPropertyPathName Name="ContentItems" />
     <RootPropertyPathName Name="SelectedItem" />
@@ -141,6 +141,7 @@
       <RootProperty Name="VerticalAlignment" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.GradeDialog" />
+    <RootType FullName="UWP.LearningManagement.Dialogs.InstructorJoinCourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.ModuleDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.ContentItemDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.AssignmentDialog" />

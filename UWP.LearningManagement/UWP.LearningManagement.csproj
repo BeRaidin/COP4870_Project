@@ -140,6 +140,9 @@
     <Compile Include="Dialogs\GradeDialog.xaml.cs">
       <DependentUpon>GradeDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\InstructorJoinCourseDialog.xaml.cs">
+      <DependentUpon>InstructorJoinCourseDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ModuleDialog.xaml.cs">
       <DependentUpon>ModuleDialog.xaml</DependentUpon>
     </Compile>
@@ -225,6 +228,7 @@
     <Compile Include="ViewModels\DropClassViewModel.cs" />
     <Compile Include="ViewModels\GradesDialogViewModel.cs" />
     <Compile Include="ViewModels\InstructorDetailsViewModel.cs" />
+    <Compile Include="ViewModels\InstructorJoinCourseDialogViewModel.cs" />
     <Compile Include="ViewModels\InstructorViewViewModel.cs" />
     <Compile Include="ViewModels\ItemsPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
@@ -281,6 +285,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\GradeDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\InstructorJoinCourseDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
