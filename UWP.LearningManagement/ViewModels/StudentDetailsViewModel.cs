@@ -88,6 +88,8 @@ namespace UWP.LearningManagement.ViewModels
             semesterService = SemesterService.Current;
             Student = SelectedPerson as Student;
             Semesters = new ObservableCollection<Semester>(SemesterList);
+            UnsubmittedGrades = new ObservableCollection<GradesDictionary>();
+            GradedGrades = new ObservableCollection<GradesDictionary>();
             Refresh();
             SetType();
             SetGradeLevel();
@@ -168,15 +170,15 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Refresh()
         {
-            UnsubmittedGrades = new ObservableCollection<GradesDictionary>();
-            GradedGrades = new ObservableCollection<GradesDictionary>();
+            UnsubmittedGrades.Clear();
+            GradedGrades.Clear();
             foreach (var grade in Student.Grades)
             {
-                if (grade.Assignment.isGraded == false && grade.Assignment.isSubmitted == false)
+                if (grade.isGraded == false && grade.isSubmitted == false)
                 {
                     UnsubmittedGrades.Add(grade);
                 }
-                else if(grade.Assignment.isGraded == true)
+                else if(grade.isGraded == true)
                 {
                     GradedGrades.Add(grade);
                 }
@@ -187,7 +189,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             if(SelectedGrade != null) 
             { 
-                SelectedGrade.Assignment.isSubmitted = true;
+                SelectedGrade.isSubmitted = true;
             }
             Refresh();
         }

@@ -19,7 +19,7 @@ using Windows.UI.Popups;
 
 namespace UWP.LearningManagement.ViewModels
 {
-    public class DetailedCourseViewModel
+    public class CourseDetailsViewModel
     {
         private readonly CourseService courseService;
         private readonly PersonService personService;
@@ -102,7 +102,7 @@ namespace UWP.LearningManagement.ViewModels
         public string Title { get; set; }
         public string Message { get; set; }
 
-        public DetailedCourseViewModel()
+        public CourseDetailsViewModel()
         {
             courseService = CourseService.Current;
             personService = PersonService.Current;
@@ -237,6 +237,7 @@ namespace UWP.LearningManagement.ViewModels
                 }
             }
             Remove(SelectedAssignment);
+            Refresh();
         }
 
         public void DeleteModule()
@@ -250,6 +251,8 @@ namespace UWP.LearningManagement.ViewModels
                 SelectedModule.Remove(item);
             }
             SelectedCourse.Modules.Remove(SelectedModule);
+            Refresh();
+
         }
 
         public void Remove(Assignment assignment)
@@ -262,6 +265,7 @@ namespace UWP.LearningManagement.ViewModels
                     (student as Student).Remove(assignment);
                 }
             }
+            Refresh();
         }
 
         public async void EditModule()
@@ -310,6 +314,7 @@ namespace UWP.LearningManagement.ViewModels
         public async void ViewAnnouncement()
         {
             var messageDialog = new MessageDialog(SelectedAnnouncement.Message);
+            messageDialog.Title = SelectedAnnouncement.Title;
             messageDialog.Commands.Add(new UICommand("OK"));
             if (messageDialog != null)
             {

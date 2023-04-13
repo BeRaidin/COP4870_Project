@@ -25,17 +25,17 @@ namespace UWP.LearningManagement
         public CourseDetailsPage()
         {
             this.InitializeComponent();
-            DataContext = new DetailedCourseViewModel();
+            DataContext = new CourseDetailsViewModel();
         }
 
         private void Module_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as DetailedCourseViewModel).AddModule();
+            (DataContext as CourseDetailsViewModel).AddModule();
         }
 
         private void Module_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            if ((DataContext as DetailedCourseViewModel).SelectedModule != null)
+            if ((DataContext as CourseDetailsViewModel).SelectedModule != null)
             {
                 Frame.Navigate(typeof(ItemsPage));
             }
@@ -43,64 +43,64 @@ namespace UWP.LearningManagement
 
         private void Announcement_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as DetailedCourseViewModel).AddAnnouncement();
+            (DataContext as CourseDetailsViewModel).AddAnnouncement();
         }
 
         private void Roster_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as DetailedCourseViewModel).EditRoster();
+            (DataContext as CourseDetailsViewModel).EditRoster();
         }
 
         private void Assignment_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as DetailedCourseViewModel).AddAssignment();
+            (DataContext as CourseDetailsViewModel).AddAssignment();
         }
 
         private void EditModule_Click(object sender, RoutedEventArgs e)
         {
-            if ((DataContext as DetailedCourseViewModel).SelectedModule != null)
+            if ((DataContext as CourseDetailsViewModel).SelectedModule != null)
             {
-                (DataContext as DetailedCourseViewModel).EditModule();
+                (DataContext as CourseDetailsViewModel).EditModule();
             }
         }
 
         private void DeleteModule_Click(object sender, RoutedEventArgs e)
         {
-            if ((DataContext as DetailedCourseViewModel).SelectedModule != null)
+            if ((DataContext as CourseDetailsViewModel).SelectedModule != null)
             {
-                (DataContext as DetailedCourseViewModel).DeleteModule();
+                (DataContext as CourseDetailsViewModel).DeleteModule();
             }
         }
 
         private void EditAssignment_Click(object sender, RoutedEventArgs e)
         {
-            if ((DataContext as DetailedCourseViewModel).SelectedAssignment != null)
+            if ((DataContext as CourseDetailsViewModel).SelectedAssignment != null)
             {
-                (DataContext as DetailedCourseViewModel).EditAssignment();
+                (DataContext as CourseDetailsViewModel).EditAssignment();
             }
         }
 
         private void DeleteAssignment_Click(object sender, RoutedEventArgs e)
         {
-            if ((DataContext as DetailedCourseViewModel).SelectedAssignment != null)
+            if ((DataContext as CourseDetailsViewModel).SelectedAssignment != null)
             {
-                (DataContext as DetailedCourseViewModel).DeleteAssignment();
+                (DataContext as CourseDetailsViewModel).DeleteAssignment();
             }
         }
 
         private void AnnouncementEdit_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as DetailedCourseViewModel).UpdateAnnouncement();
+            (DataContext as CourseDetailsViewModel).UpdateAnnouncement();
         }
 
         private void AnnouncementDelete_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as DetailedCourseViewModel).DeleteAnnouncement();
+            (DataContext as CourseDetailsViewModel).DeleteAnnouncement();
         }
 
         private void Announcement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            (DataContext as DetailedCourseViewModel).ViewAnnouncement();
+            (DataContext as CourseDetailsViewModel).ViewAnnouncement();
         }
     }
 }
