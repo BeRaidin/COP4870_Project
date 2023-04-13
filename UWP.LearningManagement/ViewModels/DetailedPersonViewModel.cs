@@ -32,7 +32,6 @@ namespace UWP.LearningManagement.ViewModels
         { get { return semesterService.SemesterList; } }
         public ObservableCollection<Semester> Semesters { get; set; }
 
-
         public Person SelectedPerson
         {
             get { return personService.CurrentPerson; }
@@ -48,6 +47,7 @@ namespace UWP.LearningManagement.ViewModels
             get { return courseService.CurrentCourse; }
             set { courseService.CurrentCourse = value; }
         }
+        public GradesDictionary SelectedGrade { get; set; }
 
         public Student Student { get; set; }
         public string FirstName
@@ -69,14 +69,8 @@ namespace UWP.LearningManagement.ViewModels
         }
         public string Type { get; set; }
         public string GradeLevel { get; set; }
-        public ObservableCollection<GradesDictionary> _grades;
-        public ObservableCollection<GradesDictionary> Grades
-        {
-            get { return _grades; }
-            set {
-                _grades = value;
-            }
-        }
+        public ObservableCollection<GradesDictionary> UnsubmittedGrades { get; set; }
+        public ObservableCollection<GradesDictionary> GradedGrades { get; set; }
 
         public double GradePoint
         {
@@ -174,21 +168,28 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Refresh()
         {
-            if (Student != null)
+            UnsubmittedGrades = new ObservableCollection<GradesDictionary>();
+            GradedGrades = new ObservableCollection<GradesDictionary>();
+            foreach (var grade in Student.Grades)
             {
-                Grades = new ObservableCollection<GradesDictionary>(Student.Grades);
-                if (SelectedCourse != null)
+                if (grade.Assignment.isGraded == false && grade.Assignment.isSubmitted == false)
                 {
-                    foreach (var grade in Student.Grades)
-                    {
-                        if (!SelectedCourse.Assignments.Contains(grade.Assignment))
-                        {
-                            Grades.Remove(grade);
-                        }
-                    }
+                    UnsubmittedGrades.Add(grade);
+                }
+                else if(grade.Assignment.isGraded == true)
+                {
+                    GradedGrades.Add(grade);
                 }
             }
-            else Grades = new ObservableCollection<GradesDictionary>();
+        }
+
+        public void SubmitAssignment()
+        {
+            if(SelectedGrade != null) 
+            { 
+                SelectedGrade.Assignment.isSubmitted = true;
+            }
+            Refresh();
         }
     }
 }

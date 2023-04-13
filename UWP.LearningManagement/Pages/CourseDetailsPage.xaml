@@ -47,8 +47,7 @@
                 Content="Edit Roster" Click="Roster_Click"></Button>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Roster"></TextBlock>
-            <ListBox Margin="10,0,10,0" ItemsSource="{Binding Roster}"
-                     SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}" DoubleTapped="Student_DoubleTapped">
+            <ListBox Margin="10,0,10,0" ItemsSource="{Binding Roster}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

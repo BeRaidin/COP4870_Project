@@ -54,10 +54,10 @@
         </Grid>
         <StackPanel Grid.Row="1" Grid.Column="1" >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <Button x:ConnectionId='6' Content="Current" Padding="10"                      />
-                <Button x:ConnectionId='7' Content="Future" Padding="10"                       />
+                <Button x:ConnectionId='7' Content="Current" Padding="10"                      />
+                <Button x:ConnectionId='8' Content="Future" Padding="10"                       />
             </StackPanel>
-            <Frame x:ConnectionId='5' Name="gradesFrame" Margin="10,10,10,10" Content=""></Frame>
+            <Frame x:ConnectionId='6' Name="gradesFrame" Margin="10,10,10,10" Content=""></Frame>
         </StackPanel>
         
         
@@ -67,14 +67,26 @@
         
         <StackPanel Grid.Row="1">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Enrolled Courses"></TextBlock>
-            <Button x:ConnectionId='4' Margin="10,0,10,0" Content="Drop Courses"                          ></Button>
+            <Button x:ConnectionId='5' Margin="10,0,10,0" Content="Drop Courses"                          ></Button>
         </StackPanel>
 
 
         <StackPanel Grid.Row="2">
-            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Grades"></TextBlock>
-            <ListBox x:ConnectionId='2' x:Name="AssignmentListBox" 
-                     ItemsSource="{Binding Path=Grades}" Margin="10,0,10,0">
+            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Unsubmitted Assignments"></TextBlock>
+            <ListBox x:ConnectionId='3' x:Name="AssignmentListBox" 
+                     ItemsSource="{Binding Path=UnsubmittedGrades}" Margin="10,0,10,0" 
+                                                             SelectedItem="{Binding Path=SelectedGrade, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding DueDateDisplay, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Graded Assignments"></TextBlock>
+            <ListBox ItemsSource="{Binding Path=GradedGrades}" Margin="10,0,10,0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>

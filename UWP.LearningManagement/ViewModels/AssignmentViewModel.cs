@@ -169,7 +169,7 @@ namespace UWP.LearningManagement.ViewModels
                 var student = person as Student;
                 if (student != null)
                 {
-                    var grade = new GradesDictionary { Assignment = Assignment, Grade = 0 };
+                    var grade = new GradesDictionary { Assignment = Assignment, Grade = 0, Course=SelectedCourse, Person = student};
                     student.Grades.Add(grade);
                 }
             }

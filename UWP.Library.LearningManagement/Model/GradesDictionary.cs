@@ -26,13 +26,20 @@ namespace Library.LearningManagement.Model
             set { _grade = value; }
         }
 
-        public GradesDictionary() 
+        public Course Course { get; set; }
+        public Person Person { get; set; }
+
+        public GradesDictionary()
         {
+            Course = new Course();
             Assignment = new Assignment();
             Grade = 0;
         }
 
-        public virtual string Display => $"{Assignment.Name} - {Grade}/{Assignment.TotalAvailablePoints}" +
-                                         $"\nDue: {Assignment.DueDate}";
+        public virtual string Display => $"[{Course.Code}] {Assignment.Name} - {Grade}/{Assignment.TotalAvailablePoints}";
+        public virtual string DueDateDisplay => $"[{Course.Code}] {Assignment.Name}" +
+                                                $"\nDue: {Assignment.DueDate}";
+        public virtual string PersonDisplay => $"[{Course.Code}] {Person.FirstName} {Person.LastName} - {Assignment.Name}";
     }
+
 }

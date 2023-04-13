@@ -1,4 +1,5 @@
-﻿using Library.LearningManagement.Models;
+﻿using Library.LearningManagement.Model;
+using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace UWP.LearningManagement.ViewModels
 
         private List<Course> CourseList
         { 
-            get { return personService.CurrentPerson.Courses; } 
+            get { return SelectedPerson.Courses; } 
         }
         public ObservableCollection<Course> Courses { get; set; }
 
@@ -28,11 +29,14 @@ namespace UWP.LearningManagement.ViewModels
             get { return personService.CurrentPerson; }
             set { personService.CurrentPerson = value; }
         }
+        public Person CurrentInstructor { get; set; }
+
         public Course SelectedCourse
         {
             get { return courseService.CurrentCourse; }
             set { courseService.CurrentCourse = value; }
         }
+        public GradesDictionary SelectedGrade { get;set; }
 
         public string FirstName
         {
@@ -47,6 +51,7 @@ namespace UWP.LearningManagement.ViewModels
             get { return SelectedPerson.Id; }
         }
         public string Type { get; set; }
+        public ObservableCollection<GradesDictionary> SubmittedAssignments { get; set; }
 
         public InstructorDetailsViewModel()
         {
@@ -54,6 +59,8 @@ namespace UWP.LearningManagement.ViewModels
             courseService = CourseService.Current;
             semesterService = SemesterService.Current;
             Courses = new ObservableCollection<Course>(CourseList);
+            CurrentInstructor = SelectedPerson;
+            GetAssignments();
             if (SelectedPerson as Instructor != null)
             {
                 Type = "Instructor";
@@ -86,6 +93,44 @@ namespace UWP.LearningManagement.ViewModels
             Refresh();
         }
 
+        public async void GradeAssignment()
+        {
+            personService.CurrentAssignment = SelectedGrade.Assignment;
+            SelectedPerson = SelectedGrade.Person;
+            SelectedCourse = SelectedGrade.Course;
+            var dialog = new GradeDialog();
+            if (dialog != null)
+            {
+                await dialog.ShowAsync();
+            }
+            SelectedPerson = CurrentInstructor;
+            SelectedGrade.Assignment.isGraded = true;
+            Refresh();
+        }
+
+        public void GetAssignments()
+        {
+            SubmittedAssignments = new ObservableCollection<GradesDictionary>();
+            foreach(var course in CourseList) 
+            { 
+                foreach(var person in course.Roster)
+                {
+                    var student = person as Student;
+                    if (student != null)
+                    {
+                        foreach(var assignment in student.Grades)
+                        {
+                            if(assignment.Course == course && assignment.Assignment.isGraded == false 
+                                && assignment.Assignment.isSubmitted == true)
+                            {
+                                SubmittedAssignments.Add(assignment);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         public void Refresh()
         {
             Courses.Clear();
@@ -93,6 +138,7 @@ namespace UWP.LearningManagement.ViewModels
             { 
                 Courses.Add(course);
             }
+            GetAssignments();
         }
     }
 }

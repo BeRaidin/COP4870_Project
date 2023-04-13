@@ -29,7 +29,6 @@
     <RootPropertyPathName Name="Announcements" />
     <RootPropertyPathName Name="SelectedAnnouncement" />
     <RootPropertyPathName Name="Roster" />
-    <RootPropertyPathName Name="SelectedPerson" />
     <RootPropertyPathName Name="Hours" />
     <RootPropertyPathName Name="Room" />
     <RootPropertyPathName Name="Code" />
@@ -50,11 +49,18 @@
     <RootPropertyPathName Name="AssignmentKey" />
     <RootPropertyPathName Name="GradeLevel" />
     <RootPropertyPathName Name="Type" />
+    <RootPropertyPathName Name="SubmittedAssignments" />
+    <RootPropertyPathName Name="SelectedGrade" />
+    <RootPropertyPathName Name="PersonDisplay" />
     <RootPropertyPathName Name="Id" />
+    <RootPropertyPathName Name="SelectedPerson" />
     <RootPropertyPathName Name="ContentItems" />
     <RootPropertyPathName Name="SelectedItem" />
     <RootPropertyPathName Name="People" />
     <RootPropertyPathName Name="PreviousSemesters" />
+    <RootPropertyPathName Name="GradedGrades" />
+    <RootPropertyPathName Name="UnsubmittedGrades" />
+    <RootPropertyPathName Name="DueDateDisplay" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application" />

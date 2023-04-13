@@ -45,7 +45,11 @@ namespace UWP.LearningManagement
         private void JoinCourse_Click(object sender, RoutedEventArgs e)
         {
             (DataContext as InstructorDetailsViewModel).JoinCourse();
+        }
 
+        private void Grade_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            (DataContext as InstructorDetailsViewModel).GradeAssignment();
         }
     }
 }
