@@ -20,6 +20,7 @@ namespace UWP.LearningManagement.ViewModels
     public class GradesDialogViewModel
     {
         private readonly PersonService personService;
+        private readonly CourseService courseService;
 
         public Assignment SelectedAssignment
         {
@@ -31,6 +32,10 @@ namespace UWP.LearningManagement.ViewModels
             get { return personService.CurrentPerson as Student; }
             set { personService.CurrentPerson = value; }
         }
+        public Course SelectedCourse
+        {
+            get { return courseService.CurrentCourse; }
+        }
 
         public string Score { get; set; }
         public int Total
@@ -40,6 +45,7 @@ namespace UWP.LearningManagement.ViewModels
         public GradesDialogViewModel() 
         {
             personService = PersonService.Current;
+            courseService = CourseService.Current;
         }
 
         public void AddGrade()
@@ -64,27 +70,18 @@ namespace UWP.LearningManagement.ViewModels
 
         public void GetFinalGrade()
         {
-            Course selectedCourse = new Course();
-            foreach (var course in SelectedStudent.Courses)
-            {
-                if (course.Assignments.Any(i => i == SelectedAssignment))
-                {
-                    selectedCourse = course;
-                }
-            }
-
             double rawGrade = 0;
-            selectedCourse.GetMaxGrade();
+            SelectedCourse.GetMaxGrade();
             foreach(GradesDictionary grade in SelectedStudent.Grades)
             {
-                if (selectedCourse.Assignments.Contains(grade.Assignment))
+                if (SelectedCourse.Assignments.Contains(grade.Assignment))
                 {
                     rawGrade += ((double)grade.Grade * (grade.Assignment.AssignmentGroup.Weight / (double)100));
                 }
             }
 
-            double totalGrade = (double)(rawGrade / selectedCourse.MaxGrade) * 100;
-            SelectedStudent.FinalGrades[selectedCourse] = totalGrade;
+            double totalGrade = (double)(rawGrade / SelectedCourse.MaxGrade) * 100;
+            SelectedStudent.FinalGrades[SelectedCourse] = totalGrade;
         }
 
         public void UpdateGPA()

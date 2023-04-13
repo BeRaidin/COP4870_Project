@@ -51,14 +51,6 @@ namespace UWP.LearningManagement
             (DataContext as DetailedCourseViewModel).EditRoster();
         }
 
-        private void Student_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-        {
-            if ((DataContext as DetailedCourseViewModel).SelectedPerson as Student != null)
-            {
-                Frame.Navigate(typeof(DetailedStudent));
-            }
-        }
-
         private void Assignment_Click(object sender, RoutedEventArgs e)
         {
             (DataContext as DetailedCourseViewModel).AddAssignment();
@@ -69,9 +61,7 @@ namespace UWP.LearningManagement
             if ((DataContext as DetailedCourseViewModel).SelectedModule != null)
             {
                 (DataContext as DetailedCourseViewModel).EditModule();
-
             }
-
         }
 
         private void DeleteModule_Click(object sender, RoutedEventArgs e)
@@ -79,9 +69,7 @@ namespace UWP.LearningManagement
             if ((DataContext as DetailedCourseViewModel).SelectedModule != null)
             {
                 (DataContext as DetailedCourseViewModel).DeleteModule();
-
             }
-
         }
 
         private void EditAssignment_Click(object sender, RoutedEventArgs e)

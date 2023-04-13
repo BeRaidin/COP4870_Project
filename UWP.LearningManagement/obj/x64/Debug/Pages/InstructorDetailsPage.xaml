@@ -49,13 +49,13 @@
         </Grid>
 
         <StackPanel Grid.Row="1">
-            <Button x:ConnectionId='4' Content="Add a new course" HorizontalAlignment="Stretch"                        ></Button>
-            <Button x:ConnectionId='5' Content="Join an existing course" HorizontalAlignment="Stretch"                         ></Button>
+            <Button x:ConnectionId='6' Content="Add a new course" HorizontalAlignment="Stretch"                        ></Button>
+            <Button x:ConnectionId='7' Content="Join an existing course" HorizontalAlignment="Stretch"                         ></Button>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Courses"></TextBlock>
-            <ListBox x:ConnectionId='2' Margin="10,0,10,0" ItemsSource="{Binding Courses, Mode=TwoWay}"
+            <ListBox x:ConnectionId='4' Margin="10,0,10,0" ItemsSource="{Binding Courses, Mode=TwoWay}"
                                                         SelectedItem="{Binding Path=SelectedCourse, Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -67,24 +67,19 @@
             </ListBox>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Grid.Column="2">
-            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Submitted Assignments"></TextBlock>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Assignments to grade"></TextBlock>
+            <ListBox x:ConnectionId='2' Margin="10,0,10,0" ItemsSource="{Binding SubmittedAssignments, Mode=TwoWay}"
+                                                       SelectedItem="{Binding Path=SelectedGrade, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Text="{Binding PersonDisplay, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
-        
-        
-<!--        <StackPanel Grid.Row="1" Grid.Column="1">-->
-        <!--            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Courses"></TextBlock>-->
-        <!--            <ListBox Margin="10,0,10,0" ItemsSource="{Binding Courses, Mode=TwoWay}"-->
-        <!--     SelectedItem="{Binding Path=SelectedCourse, Mode=TwoWay}" DoubleTapped="Course_DoubleTapped">-->
-        <!--                <ListBox.ItemTemplate>-->
-<!--                    <DataTemplate>-->
-<!--                        <Grid>-->
-<!--                            <TextBlock Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>-->
-        <!--                        </Grid>-->
-        <!--                    </DataTemplate>-->
-        <!--                </ListBox.ItemTemplate>-->
-        <!--            </ListBox>-->
-        <!--        </StackPanel>-->
     </Grid>
 </Page>
 

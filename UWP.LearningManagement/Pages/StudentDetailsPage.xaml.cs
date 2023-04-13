@@ -1,24 +1,7 @@
-﻿using UWP.LearningManagement.Dialogs;
-using UWP.LearningManagement.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using UWP.LearningManagement.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using System.Xml.Linq;
-using Library.LearningManagement.Models;
-using UWP.LearningManagement;
 
 namespace UWP.LearningManagement
 {
@@ -44,6 +27,11 @@ namespace UWP.LearningManagement
         private void Previous_Click(object sender, RoutedEventArgs e)
         {
             gradesFrame.Navigate(typeof(PreviousSemesterPage));
+        }
+
+        private void Unsubmitted_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            (DataContext as DetailedPersonViewModel).SubmitAssignment();
         }
     }
 }

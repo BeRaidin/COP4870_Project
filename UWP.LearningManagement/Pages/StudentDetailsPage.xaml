@@ -72,9 +72,21 @@
 
 
         <StackPanel Grid.Row="2">
-            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Grades"></TextBlock>
+            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Unsubmitted Assignments"></TextBlock>
             <ListBox x:Name="AssignmentListBox" 
-                     ItemsSource="{Binding Path=Grades}" Margin="10,0,10,0">
+                     ItemsSource="{Binding Path=UnsubmittedGrades}" Margin="10,0,10,0" 
+                     DoubleTapped="Unsubmitted_DoubleTapped" SelectedItem="{Binding Path=SelectedGrade, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding DueDateDisplay, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <TextBlock Margin="10,0,10,0" FontSize="20" Text="Graded Assignments"></TextBlock>
+            <ListBox ItemsSource="{Binding Path=GradedGrades}" Margin="10,0,10,0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>

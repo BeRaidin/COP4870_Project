@@ -33,7 +33,7 @@ namespace Library.LearningManagement.Models
             {
                 foreach (var assignment in course.Assignments)
                 {
-                    var grade = new GradesDictionary { Assignment = assignment, Grade = 0 };
+                    var grade = new GradesDictionary { Assignment = assignment, Grade = 0, Course=course, Person=this};
 
 
                     (this as Student).Grades.Add(grade);

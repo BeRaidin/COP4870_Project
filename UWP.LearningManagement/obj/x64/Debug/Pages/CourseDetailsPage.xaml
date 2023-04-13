@@ -47,8 +47,7 @@
                 Content="Edit Roster"                     ></Button>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Roster"></TextBlock>
-            <ListBox x:ConnectionId='17' Margin="10,0,10,0" ItemsSource="{Binding Roster}"
-                     SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}"                                    >
+            <ListBox Margin="10,0,10,0" ItemsSource="{Binding Roster}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
