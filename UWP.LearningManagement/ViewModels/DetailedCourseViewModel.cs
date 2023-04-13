@@ -152,30 +152,46 @@ namespace UWP.LearningManagement.ViewModels
 
         public async void AddAssignment()
         {
+            var cont = true;
             var dialog = new NewAssignmentDialog();
             if (dialog != null)
             {
                 await dialog.ShowAsync();
             }
-
-            var assignment = (moduleService.CurrentItem as AssignmentItem).Assignment;
-            if (assignment.AssignmentGroup == null)
+            cont = dialog.Test();
+            if (cont)
             {
-                var Groupdialog = new AssignGroupDialog(assignment);
-                if (Groupdialog != null)
+                var assignment = (moduleService.CurrentItem as AssignmentItem).Assignment;
+                if (assignment.AssignmentGroup == null)
                 {
-                    await Groupdialog.ShowAsync();
+                    var Groupdialog = new AssignGroupDialog(assignment);
+                    if (Groupdialog != null)
+                    {
+                        await Groupdialog.ShowAsync();
+                    }
+                    cont = Groupdialog.Test();
                 }
-            }
 
-            if (SelectedModule.Name.Equals("Make new Module"))
-            {
-                var Moduledialog = new ModuleDialog();
-                if (Moduledialog != null)
+                if (cont)
                 {
-                    await Moduledialog.ShowAsync();
+                    if (SelectedModule.Name.Equals("Make new Module"))
+                    {
+                        var Moduledialog = new ModuleDialog();
+                        if (Moduledialog != null)
+                        {
+                            await Moduledialog.ShowAsync();
+                        }
+                        cont = Moduledialog.Test();
+                        if (cont)
+                        {
+                            moduleService.Add();
+                        }
+                    }
                 }
-                moduleService.Add();
+                if (!cont)
+                {
+                    SelectedCourse.Remove(assignment);
+                }
             }
             Refresh();
             moduleService.CurrentItem = null;

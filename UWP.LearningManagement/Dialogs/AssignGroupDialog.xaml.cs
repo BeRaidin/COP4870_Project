@@ -15,8 +15,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class AssignGroupDialog : ContentDialog
@@ -30,11 +28,16 @@ namespace UWP.LearningManagement.Dialogs
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             (DataContext as AssignmentViewModel).MakeNewAssignGroup();
-
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            (DataContext as AssignmentViewModel).False();
+        }
+
+        public bool Test()
+        {
+            return (DataContext as AssignmentViewModel).IsCont;
         }
     }
 }

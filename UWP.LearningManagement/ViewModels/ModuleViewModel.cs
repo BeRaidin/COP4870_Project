@@ -40,11 +40,14 @@ namespace UWP.LearningManagement.ViewModels
             set { Module.Description = value; }
         }
 
+        public bool IsCont;
+
         public ModuleViewModel()
         {
             courseService = CourseService.Current;
             moduleService = ModuleService.Current;
             Module = new Module();
+            IsCont = true;
         }
 
         public void Add()
@@ -68,6 +71,11 @@ namespace UWP.LearningManagement.ViewModels
         {
             moduleService.CurrentModule.Name = Name;
             moduleService.CurrentModule.Description = Description;
+        }
+
+        public void False()
+        {
+            IsCont = false;
         }
     }
 }

@@ -8,6 +8,7 @@
     mc:Ignorable="d"
     Title="Add Assignment Group"
     PrimaryButtonText="Ok"
+    SecondaryButtonText="Cancel"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
     SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
 

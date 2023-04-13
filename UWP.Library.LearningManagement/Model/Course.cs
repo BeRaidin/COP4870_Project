@@ -61,6 +61,14 @@ namespace Library.LearningManagement.Models
         public void Remove(Assignment assignment)
         {
             Assignments.Remove(assignment);
+            foreach(var person in Roster)
+            {
+                var student = person as Student;
+                if(student != null)
+                {
+                    student.Remove(assignment);
+                }
+            }
         }
 
         public void GetMaxGrade()
