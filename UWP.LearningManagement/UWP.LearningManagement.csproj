@@ -220,7 +220,7 @@
     <Compile Include="ViewModels\CourseViewModel.cs" />
     <Compile Include="ViewModels\CurrentSemesterViewModel.cs" />
     <Compile Include="ViewModels\DeletePersonViewModel.cs" />
-    <Compile Include="ViewModels\DetailedCourseViewModel.cs" />
+    <Compile Include="ViewModels\CourseDetailsViewModel.cs" />
     <Compile Include="ViewModels\StudentDetailsViewModel.cs" />
     <Compile Include="ViewModels\DropClassViewModel.cs" />
     <Compile Include="ViewModels\GradesDialogViewModel.cs" />

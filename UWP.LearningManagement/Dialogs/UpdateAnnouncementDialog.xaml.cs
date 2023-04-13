@@ -23,12 +23,12 @@ namespace UWP.LearningManagement.Dialogs
         public UpdateAnnouncementDialog()
         {
             this.InitializeComponent();
-            DataContext = new DetailedCourseViewModel();
+            DataContext = new CourseDetailsViewModel();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as DetailedCourseViewModel).Edit();
+            (DataContext as CourseDetailsViewModel).Edit();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

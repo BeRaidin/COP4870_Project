@@ -59,6 +59,7 @@ namespace UWP.LearningManagement.ViewModels
             courseService = CourseService.Current;
             semesterService = SemesterService.Current;
             Courses = new ObservableCollection<Course>(CourseList);
+            SubmittedAssignments = new ObservableCollection<GradesDictionary>();
             CurrentInstructor = SelectedPerson;
             GetAssignments();
             if (SelectedPerson as Instructor != null)
@@ -104,13 +105,13 @@ namespace UWP.LearningManagement.ViewModels
                 await dialog.ShowAsync();
             }
             SelectedPerson = CurrentInstructor;
-            SelectedGrade.Assignment.isGraded = true;
+            SelectedGrade.isGraded = true;
             Refresh();
         }
 
         public void GetAssignments()
         {
-            SubmittedAssignments = new ObservableCollection<GradesDictionary>();
+            SubmittedAssignments.Clear();
             foreach(var course in CourseList) 
             { 
                 foreach(var person in course.Roster)
@@ -120,8 +121,8 @@ namespace UWP.LearningManagement.ViewModels
                     {
                         foreach(var assignment in student.Grades)
                         {
-                            if(assignment.Course == course && assignment.Assignment.isGraded == false 
-                                && assignment.Assignment.isSubmitted == true)
+                            if(assignment.Course == course && assignment.isGraded == false 
+                                && assignment.isSubmitted == true)
                             {
                                 SubmittedAssignments.Add(assignment);
                             }
