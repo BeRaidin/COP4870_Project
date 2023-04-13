@@ -27,18 +27,18 @@ namespace UWP.LearningManagement
         public DetailedStudent()
         {
             this.InitializeComponent();
-            DataContext = new DetailedPersonViewModel();
+            DataContext = new StudentDetailsViewModel();
         }
 
         private void Assign_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            (DataContext as DetailedPersonViewModel).SetGrade();
+            (DataContext as StudentDetailsViewModel).SetGrade();
         }
 
         private void Assign_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var tmp = (GradesDictionary)AssignmentListBox.SelectedItem;
-            (DataContext as DetailedPersonViewModel).ChangedSelectedAssignment(tmp.Assignment);
+            (DataContext as StudentDetailsViewModel).ChangedSelectedAssignment(tmp.Assignment);
         }
     }
 }

@@ -31,6 +31,12 @@ namespace UWP.LearningManagement.Dialogs
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            (DataContext as ModuleViewModel).False();
+        }
+
+        public bool Test()
+        {
+            return (DataContext as ModuleViewModel).IsCont;
         }
     }
 }

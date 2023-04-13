@@ -17,7 +17,7 @@ using Library.LearningManagement.Model;
 
 namespace UWP.LearningManagement.ViewModels
 {
-    public class DetailedPersonViewModel : INotifyPropertyChanged
+    public class StudentDetailsViewModel : INotifyPropertyChanged
     {
         private readonly PersonService personService;
         private readonly CourseService courseService;
@@ -81,7 +81,7 @@ namespace UWP.LearningManagement.ViewModels
             get { return Student.FinalGrades; }
         }
 
-        public DetailedPersonViewModel()
+        public StudentDetailsViewModel()
         {
             personService = PersonService.Current;
             courseService = CourseService.Current;
@@ -190,6 +190,15 @@ namespace UWP.LearningManagement.ViewModels
                 SelectedGrade.Assignment.isSubmitted = true;
             }
             Refresh();
+        }
+
+        public bool CanDrop()
+        {
+            if (SelectedPerson.Courses.Count == 0)
+            {
+                return false;
+            }
+            else return true;
         }
     }
 }

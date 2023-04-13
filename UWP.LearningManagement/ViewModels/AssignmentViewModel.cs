@@ -58,6 +58,8 @@ namespace UWP.LearningManagement.ViewModels
         private List<Module> _modules;
         public ObservableCollection<string> Modules { get; set; }
 
+        public bool IsCont;
+
         public AssignmentViewModel()
         {
             moduleService = ModuleService.Current;
@@ -85,6 +87,8 @@ namespace UWP.LearningManagement.ViewModels
                 AssignmentGroups.Add(group.Name);
             }
             AssignmentGroups.Add("Make new Assignment Group");
+
+            IsCont = true;
         }
 
         public AssignmentViewModel(Assignment assignment)
@@ -113,6 +117,8 @@ namespace UWP.LearningManagement.ViewModels
                 Modules.Add(module.Name);
             }
             Modules.Add("Make new Module");
+
+            IsCont = true;
         }
 
         public void Set()
@@ -175,7 +181,6 @@ namespace UWP.LearningManagement.ViewModels
             }
             SelectedCourse.Add(Assignment);
             SelectedItem = AssignmentItem;
-
         }
 
         public void MakeNewAssignGroup()
@@ -205,6 +210,11 @@ namespace UWP.LearningManagement.ViewModels
             {
                 personService.CurrentAssignment.TotalAvailablePoints = points;
             }
+        }
+
+        public void False()
+        {
+            IsCont = false;
         }
     }
 }
