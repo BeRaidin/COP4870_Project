@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Xml.Linq;
 using UWP.LearningManagement.Dialogs;
 
 namespace UWP.LearningManagement.ViewModels
@@ -12,12 +11,18 @@ namespace UWP.LearningManagement.ViewModels
     public class ItemsPageViewModel
     {
         private readonly ModuleService moduleService;
+        private readonly CourseService courseService;
         private readonly List<ContentItem> allItems;
 
         public Module SelectedModule
         {
             get { return moduleService.CurrentModule; }
             set { moduleService.CurrentModule = value; }
+        }
+        public Course SelectedCourse
+        {
+            get { return courseService.CurrentCourse; }
+            set { courseService.CurrentCourse = value; }
         }
         public ContentItem SelectedItem 
         {
@@ -42,6 +47,7 @@ namespace UWP.LearningManagement.ViewModels
         public ItemsPageViewModel() 
         {
             moduleService = ModuleService.Current;
+            courseService = CourseService.Current;
             allItems = SelectedModule.Content;
             ContentItems = new ObservableCollection<ContentItem>(allItems);
         }
@@ -81,6 +87,10 @@ namespace UWP.LearningManagement.ViewModels
             if (SelectedItem != null)
             {
                 moduleService.RemoveCurrentItem();
+                if(SelectedItem is AssignmentItem)
+                {
+                    SelectedCourse.Remove((SelectedItem as AssignmentItem).Assignment);
+                }
                 Refresh();
             }
         }

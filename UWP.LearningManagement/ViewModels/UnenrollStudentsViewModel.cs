@@ -1,20 +1,14 @@
 ﻿using Library.LearningManagement.Models;
-using Library.LearningManagement.Services;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UWP.Library.LearningManagement.Database;
 
 namespace UWP.LearningManagement.ViewModels
 {
     public class UnenrollStudentsViewModel
     {
-        private readonly PersonService personService;
-        private readonly SemesterService semesterService;
         private readonly List<Person> allStudents;
 
         public ObservableCollection<Person> Students { get; set; }
@@ -22,8 +16,6 @@ namespace UWP.LearningManagement.ViewModels
 
         public UnenrollStudentsViewModel()
         {
-            personService = PersonService.Current;
-            semesterService = SemesterService.Current;
             allStudents = new List<Person>();
             foreach(var person in FakeDataBase.People)
             {

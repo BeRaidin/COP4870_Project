@@ -25,12 +25,12 @@ namespace UWP.LearningManagement.Dialogs
         public PersonDialog()
         {
             this.InitializeComponent();
-            this.DataContext = new PersonViewModel();
+            this.DataContext = new PersonDialogViewModel();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as PersonViewModel).Add();
+            (DataContext as PersonDialogViewModel).Add();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

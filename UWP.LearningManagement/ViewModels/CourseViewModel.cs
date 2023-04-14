@@ -2,14 +2,6 @@
 using Library.LearningManagement.Services;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.VoiceCommands;
-using Windows.Foundation.Collections;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -26,7 +18,6 @@ namespace UWP.LearningManagement.ViewModels
         }
         public Person SelectedPerson
         { get { return personService.CurrentPerson; } } 
-
         public string Name
         {
             get
@@ -57,7 +48,6 @@ namespace UWP.LearningManagement.ViewModels
         public string TempName { get; set; }
         public string TempCode { get; set; }
         public string TempRoom { get; set; }
-        
         public List<Person> Roster 
         {
             get
@@ -80,19 +70,6 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Set()
         {
-        //    foreach (Person person in Instructors)
-        //    {
-        //        if(person.IsSelected)
-        //        {
-        //            Roster.Add(person);
-        //            person.Add(SelectedCourse);
-        //            if(person as Student != null)
-        //            {
-        //                (person as Student).FinalGrades.Add(SelectedCourse, 0);
-        //            }
-        //        }
-        //    }
-
             if(int.TryParse(Hours, out int hours))
             {
                 SelectedCourse.CreditHours = hours;

@@ -164,9 +164,6 @@
     <Compile Include="Pages\CourseDetailsPage.xaml.cs">
       <DependentUpon>CourseDetailsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\CoursePage.xaml.cs">
-      <DependentUpon>CoursePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\CourseDialog.xaml.cs">
       <DependentUpon>CourseDialog.xaml</DependentUpon>
     </Compile>
@@ -188,9 +185,6 @@
     <Compile Include="Pages\UnenrollStudentsPage.xaml.cs">
       <DependentUpon>UnenrollStudentsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DetailedStudent.xaml.cs">
-      <DependentUpon>DetailedStudent.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\InstructorDetailsPage.xaml.cs">
       <DependentUpon>InstructorDetailsPage.xaml</DependentUpon>
     </Compile>
@@ -199,9 +193,6 @@
     </Compile>
     <Compile Include="Pages\ItemsPage.xaml.cs">
       <DependentUpon>ItemsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\PeoplePage.xaml.cs">
-      <DependentUpon>PeoplePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PreviousSemesterPage.xaml.cs">
       <DependentUpon>PreviousSemesterPage.xaml</DependentUpon>
@@ -216,10 +207,8 @@
     <Compile Include="ViewModels\AnnouncementViewModel.cs" />
     <Compile Include="ViewModels\AssignmentViewModel.cs" />
     <Compile Include="ViewModels\ContentItemViewModel.cs" />
-    <Compile Include="ViewModels\CoursePageViewModel.cs" />
     <Compile Include="ViewModels\CourseViewModel.cs" />
     <Compile Include="ViewModels\CurrentSemesterViewModel.cs" />
-    <Compile Include="ViewModels\DeletePersonViewModel.cs" />
     <Compile Include="ViewModels\CourseDetailsViewModel.cs" />
     <Compile Include="ViewModels\StudentDetailsViewModel.cs" />
     <Compile Include="ViewModels\DropClassViewModel.cs" />
@@ -229,9 +218,8 @@
     <Compile Include="ViewModels\InstructorViewViewModel.cs" />
     <Compile Include="ViewModels\ItemsPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
-    <Compile Include="ViewModels\ModuleViewModel.cs" />
-    <Compile Include="ViewModels\PersonPageViewModel.cs" />
-    <Compile Include="ViewModels\PersonViewModel.cs" />
+    <Compile Include="ViewModels\ModuleDialogViewModel.cs" />
+    <Compile Include="ViewModels\PersonDialogViewModel.cs" />
     <Compile Include="ViewModels\PreviousSemesterViewModel.cs" />
     <Compile Include="ViewModels\RosterViewModel.cs" />
     <Compile Include="ViewModels\StudentViewViewModel.cs" />
@@ -317,10 +305,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\CoursePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Dialogs\CourseDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -349,10 +333,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\DetailedStudent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\InstructorDetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -362,10 +342,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ItemsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\PeoplePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

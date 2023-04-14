@@ -1,11 +1,7 @@
 ﻿using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -17,9 +13,10 @@ namespace UWP.LearningManagement.ViewModels
         {
             get { return  semesterService.CurrentSemester;}
         }
-
         private List<Semester> SemesterList 
-        { get { return semesterService.SemesterList; }}
+        { 
+            get { return semesterService.SemesterList; }
+        }
         public ObservableCollection<Semester> PreviousSemesters { get; set; }
 
         public PreviousSemesterViewModel()

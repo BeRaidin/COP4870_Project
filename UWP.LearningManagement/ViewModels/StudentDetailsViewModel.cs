@@ -1,37 +1,24 @@
-﻿using Library.LearningManagement.Services;
+﻿using Library.LearningManagement.Model;
 using Library.LearningManagement.Models;
-using UWP.LearningManagement.Dialogs;
+using Library.LearningManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Windows.UI.Xaml.Controls;
-using Windows.Foundation.Collections;
-using System.Reflection.Metadata;
-using Library.LearningManagement.Model;
+using UWP.LearningManagement.Dialogs;
 
 namespace UWP.LearningManagement.ViewModels
 {
-    public class StudentDetailsViewModel : INotifyPropertyChanged
+    public class StudentDetailsViewModel
     {
         private readonly PersonService personService;
         private readonly CourseService courseService;
         private readonly SemesterService semesterService;
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void RaisePropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         private List<Semester> SemesterList
-        { get { return semesterService.SemesterList; } }
+        { 
+            get { return semesterService.SemesterList; } 
+        }
         public ObservableCollection<Semester> Semesters { get; set; }
-
         public Person SelectedPerson
         {
             get { return personService.CurrentPerson; }
@@ -52,26 +39,23 @@ namespace UWP.LearningManagement.ViewModels
         public Student Student { get; set; }
         public string FirstName
         {
-            get { return SelectedPerson.FirstName; }
+            get { return Student.FirstName; }
         }
         public string LastName
         {
-            get { return SelectedPerson.LastName; }
+            get { return Student.LastName; }
         }
-
         public List<Course> Courses 
         {
-            get { return SelectedPerson.Courses; }
+            get { return Student.Courses; }
         }
         public string Id
         {
-            get { return SelectedPerson.Id; }
+            get { return Student.Id; }
         }
-        public string Type { get; set; }
         public string GradeLevel { get; set; }
         public ObservableCollection<GradesDictionary> UnsubmittedGrades { get; set; }
         public ObservableCollection<GradesDictionary> GradedGrades { get; set; }
-
         public double GradePoint
         {
             get { return Student.GradePointAverage; }
@@ -91,72 +75,34 @@ namespace UWP.LearningManagement.ViewModels
             UnsubmittedGrades = new ObservableCollection<GradesDictionary>();
             GradedGrades = new ObservableCollection<GradesDictionary>();
             Refresh();
-            SetType();
             SetGradeLevel();
-        }
-
-        public void SetType()
-        {
-            if (SelectedPerson as Student != null) 
-            {
-                Type = "Student";
-            }
-            else if (SelectedPerson as Instructor != null)
-            {
-                Type = "Instructor";
-            }
-            else if (SelectedPerson as TeachingAssistant != null)
-            {
-                Type = "Teaching Assistant";
-            }
         }
 
         public void SetGradeLevel()
         {
-            var student = SelectedPerson as Student;
-            if (student != null)
+            
+            if (Student.Classification == Student.Classes.Freshman)
             {
-                if (student.Classification == Student.Classes.Freshman)
-                {
-                    GradeLevel = "Freshman";
-                }
-                else if (student.Classification == Student.Classes.Sophmore)
-                {
-                    GradeLevel = "Sophmore";
-                }
-                else if (student.Classification == Student.Classes.Junior)
-                {
-                    GradeLevel = "Junior";
-                }
-                else if (student.Classification == Student.Classes.Senior)
-                {
-                    GradeLevel = "Senior";
-                }
-                else GradeLevel = "";
+                GradeLevel = "Freshman";
             }
-        }
-
-        public async void SetGrade()
-        {
-            var grade = (SelectedPerson as Student).GetGradeDict(SelectedAssignment);
-            var dialog = new GradeDialog();
-            if (dialog != null)
+            else if (Student.Classification == Student.Classes.Sophmore)
             {
-                await dialog.ShowAsync();
+                GradeLevel = "Sophmore";
             }
-            RaisePropertyChanged("FinalGrades.Keys");
-            RaisePropertyChanged("GradePoint");
-            RaisePropertyChanged("grade.Grade");
-        }
-
-        public void ChangedSelectedAssignment(Assignment assignment)
-        {
-            SelectedAssignment = assignment;
+            else if (Student.Classification == Student.Classes.Junior)
+            {
+                GradeLevel = "Junior";
+            }
+            else if (Student.Classification == Student.Classes.Senior)
+            {
+                GradeLevel = "Senior";
+            }
+            else GradeLevel = "ERROR";
         }
 
         public async void DropClasses()
         {
-            foreach(var course in SelectedPerson.Courses)
+            foreach(var course in Student.Courses)
             {
                 course.IsSelected = false;
             }
@@ -166,23 +112,6 @@ namespace UWP.LearningManagement.ViewModels
                 await dialog.ShowAsync();
             }
             Refresh();
-        }
-
-        public void Refresh()
-        {
-            UnsubmittedGrades.Clear();
-            GradedGrades.Clear();
-            foreach (var grade in Student.Grades)
-            {
-                if (grade.isGraded == false && grade.isSubmitted == false)
-                {
-                    UnsubmittedGrades.Add(grade);
-                }
-                else if(grade.isGraded == true)
-                {
-                    GradedGrades.Add(grade);
-                }
-            }
         }
 
         public void SubmitAssignment()
@@ -201,6 +130,23 @@ namespace UWP.LearningManagement.ViewModels
                 return false;
             }
             else return true;
+        }
+
+        public void Refresh()
+        {
+            UnsubmittedGrades.Clear();
+            GradedGrades.Clear();
+            foreach (var grade in Student.Grades)
+            {
+                if (grade.isGraded == false && grade.isSubmitted == false)
+                {
+                    UnsubmittedGrades.Add(grade);
+                }
+                else if (grade.isGraded == true)
+                {
+                    GradedGrades.Add(grade);
+                }
+            }
         }
     }
 }

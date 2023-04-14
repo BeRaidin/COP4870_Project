@@ -118,9 +118,6 @@
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\CourseDetailsPage.xbf">
       <PackagePath>Pages\CourseDetailsPage.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\CoursePage.xbf">
-      <PackagePath>Pages\CoursePage.xbf</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Dialogs\CourseDialog.xbf">
       <PackagePath>Dialogs\CourseDialog.xbf</PackagePath>
     </AppxPackagedFile>
@@ -142,9 +139,6 @@
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\UnenrollStudentsPage.xbf">
       <PackagePath>Pages\UnenrollStudentsPage.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\DetailedStudent.xbf">
-      <PackagePath>Pages\DetailedStudent.xbf</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\InstructorDetailsPage.xbf">
       <PackagePath>Pages\InstructorDetailsPage.xbf</PackagePath>
     </AppxPackagedFile>
@@ -153,9 +147,6 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\ItemsPage.xbf">
       <PackagePath>Pages\ItemsPage.xbf</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\PeoplePage.xbf">
-      <PackagePath>Pages\PeoplePage.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\PreviousSemesterPage.xbf">
       <PackagePath>Pages\PreviousSemesterPage.xbf</PackagePath>

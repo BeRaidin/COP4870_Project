@@ -1,13 +1,7 @@
 ﻿using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -17,12 +11,7 @@ namespace UWP.LearningManagement.ViewModels
         private readonly PersonService personService;
         private readonly List<Person> allStudents;
 
-        private ObservableCollection<Person> _students;
-        public ObservableCollection<Person> Students
-        {
-            get { return _students; }
-            set { _students = value; }
-        }
+        public ObservableCollection<Person> Students { get; set; }
         public Course Course 
         {
             get { return courseService.CurrentCourse; }
@@ -61,12 +50,10 @@ namespace UWP.LearningManagement.ViewModels
                 if (student.IsSelected == false && Course.Roster.Contains(student))
                 {
                     Course.Roster.Remove(student);
-                    (student as Student).Remove(Course);
                 }
                 else if (student.IsSelected == true && !Course.Roster.Contains(student)) 
                 { 
                     Course.Roster.Add(student);
-                    student.Add(Course);
                 }
             }
         }

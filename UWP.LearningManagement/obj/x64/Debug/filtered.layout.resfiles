@@ -27,13 +27,10 @@ Dialogs\RosterDialog.xbf
 Dialogs\UpdateAnnouncementDialog.xbf
 MainPage.xbf
 Pages\CourseDetailsPage.xbf
-Pages\CoursePage.xbf
 Pages\CurrentSemesterPage.xbf
-Pages\DetailedStudent.xbf
 Pages\InstructorDetailsPage.xbf
 Pages\InstructorViewPage.xbf
 Pages\ItemsPage.xbf
-Pages\PeoplePage.xbf
 Pages\PreviousSemesterPage.xbf
 Pages\StudentDetailsPage.xbf
 Pages\StudentViewPage.xbf

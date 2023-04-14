@@ -1,17 +1,10 @@
 ﻿using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UWP.LearningManagement.ViewModels
 {
-    public class PersonViewModel
+    public class PersonDialogViewModel
     {
         private readonly PersonService personService;
         private readonly SemesterService semesterService;
@@ -21,17 +14,13 @@ namespace UWP.LearningManagement.ViewModels
             get { return personService.CurrentPerson; }
             set { personService.CurrentPerson = value; }
         }
-        private Person _person;
-        public Person Person
-        {
-            get { return _person; }
-            set { _person = value; }
-        }
+        public Person Person { get; set; }
         public ObservableCollection<string> PersonTypes { get; set; }
         public ObservableCollection<string> StudentLevels { get; set; }
         public string SelectedType { get; set; }
         public string SelectedClass { get; set; }
-        public string FirstName {
+        public string FirstName 
+        {
             get { return SelectedPerson.FirstName; }
             set { SelectedPerson.FirstName = value; } 
         }
@@ -44,7 +33,7 @@ namespace UWP.LearningManagement.ViewModels
         public string TempLastName { get; set; }
 
 
-        public PersonViewModel()
+        public PersonDialogViewModel()
         {
             personService = PersonService.Current;
             semesterService = SemesterService.Current;
@@ -109,24 +98,14 @@ namespace UWP.LearningManagement.ViewModels
                     }
                 }
             }
-            else
-            { GetTemp(); }
-            SelectedPerson = null;
         }
 
         public void Edit()
         {
-            if (FirstName != null && FirstName != "" && LastName != null && LastName != "")
+            if (FirstName == null || FirstName == "" || LastName == null || LastName == "")
             {
-                SelectedPerson.FirstName = FirstName;
-                SelectedPerson.LastName = LastName;
+                GetTemp();
             }
-            else
-            {
-                FirstName = TempFirstName;
-                LastName = TempLastName;
-            }
-            SelectedPerson = null;
         }
 
         public void SetTemp()

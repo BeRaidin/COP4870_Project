@@ -23,19 +23,18 @@ namespace UWP.LearningManagement.Dialogs
         public EditPersonDialog()
         {
             this.InitializeComponent();
-            this.DataContext = new PersonViewModel();
-            (DataContext as PersonViewModel).SetTemp();
+            this.DataContext = new PersonDialogViewModel();
+            (DataContext as PersonDialogViewModel).SetTemp();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as PersonViewModel).Edit();
+            (DataContext as PersonDialogViewModel).Edit();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as PersonViewModel).GetTemp();
-
+            (DataContext as PersonDialogViewModel).GetTemp();
         }
     }
 }

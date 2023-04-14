@@ -21,22 +21,22 @@ namespace UWP.LearningManagement.Dialogs
         public ModuleDialog()
         {
             this.InitializeComponent();
-            this.DataContext = new ModuleViewModel();
+            this.DataContext = new ModuleDialogViewModel();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as ModuleViewModel).Add();
+            (DataContext as ModuleDialogViewModel).Add();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as ModuleViewModel).False();
+            (DataContext as ModuleDialogViewModel).False();
         }
 
         public bool Test()
         {
-            return (DataContext as ModuleViewModel).IsCont;
+            return (DataContext as ModuleDialogViewModel).IsCont;
         }
     }
 }
