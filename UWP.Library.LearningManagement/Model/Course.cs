@@ -46,6 +46,10 @@ namespace Library.LearningManagement.Models
         public void Add(Person person)
         {
             Roster.Add(person);
+            if (person as Student != null)
+            {
+                (person as Student).Add(this);
+            }
         }
 
         public void Add(Assignment assignment)
@@ -56,6 +60,10 @@ namespace Library.LearningManagement.Models
         public void Remove(Person person) 
         { 
             Roster.Remove(person);
+            if(person as Student != null)
+            {
+                (person as Student).Remove(this);
+            }
         }
 
         public void Remove(Assignment assignment)
@@ -63,8 +71,8 @@ namespace Library.LearningManagement.Models
             Assignments.Remove(assignment);
             foreach(var person in Roster)
             {
-                var student = person as Student;
-                if(student != null)
+                Student student = person as Student;
+                if (student != null)
                 {
                     student.Remove(assignment);
                 }

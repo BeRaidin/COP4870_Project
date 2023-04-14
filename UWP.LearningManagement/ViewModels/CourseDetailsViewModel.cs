@@ -4,17 +4,7 @@ using UWP.LearningManagement.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Windows.UI.Xaml.Controls;
-using Windows.Foundation.Collections;
-using System.Reflection.Metadata;
-using Windows.Graphics.Printing;
-using Windows.Media.Playback;
 using Windows.UI.Popups;
 
 namespace UWP.LearningManagement.ViewModels
@@ -176,6 +166,7 @@ namespace UWP.LearningManagement.ViewModels
                 {
                     if (SelectedModule.Name.Equals("Make new Module"))
                     {
+                        SelectedModule = new Module();
                         var Moduledialog = new ModuleDialog();
                         if (Moduledialog != null)
                         {

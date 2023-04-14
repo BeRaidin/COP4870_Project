@@ -21,16 +21,18 @@ namespace UWP.LearningManagement.Dialogs
         public EditModuleDialog()
         {
             this.InitializeComponent();
-            DataContext = new ModuleViewModel();
+            DataContext = new ModuleDialogViewModel();
+            (DataContext as ModuleDialogViewModel).SetTemp();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as ModuleViewModel).Edit();
+            (DataContext as ModuleDialogViewModel).Edit();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            (DataContext as ModuleDialogViewModel).GetTemp();
         }
     }
 }

@@ -1,18 +1,9 @@
 ﻿using Library.LearningManagement.Services;
 using Library.LearningManagement.Models;
-using UWP.LearningManagement.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Windows.UI.Xaml.Controls;
-using Windows.Foundation.Collections;
-using System.Reflection.Metadata;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -29,7 +20,7 @@ namespace UWP.LearningManagement.ViewModels
             set { personService.CurrentPerson = value; }
         }
         public string Query { get; set; }
-        public string Semester
+        public string Period
         { 
             get { return semesterService.CurrentSemester.Period; } 
         }

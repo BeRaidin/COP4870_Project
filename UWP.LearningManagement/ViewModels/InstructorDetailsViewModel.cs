@@ -4,10 +4,6 @@ using Library.LearningManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UWP.LearningManagement.Dialogs;
 
 namespace UWP.LearningManagement.ViewModels
@@ -16,7 +12,6 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly PersonService personService;
         private readonly CourseService courseService;
-        private readonly SemesterService semesterService;
 
         private List<Course> CourseList
         { 
@@ -57,7 +52,6 @@ namespace UWP.LearningManagement.ViewModels
         {
             personService = PersonService.Current;
             courseService = CourseService.Current;
-            semesterService = SemesterService.Current;
             Courses = new ObservableCollection<Course>(CourseList);
             SubmittedAssignments = new ObservableCollection<GradesDictionary>();
             CurrentInstructor = SelectedPerson;

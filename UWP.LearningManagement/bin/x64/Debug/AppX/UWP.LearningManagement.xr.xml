@@ -32,7 +32,6 @@
     <RootPropertyPathName Name="Hours" />
     <RootPropertyPathName Name="Room" />
     <RootPropertyPathName Name="Code" />
-    <RootPropertyPathName Name="Query" />
     <RootPropertyPathName Name="Instructors" />
     <RootPropertyPathName Name="LastName" />
     <RootPropertyPathName Name="FirstName" />
@@ -40,27 +39,26 @@
     <RootPropertyPathName Name="SelectedClass" />
     <RootPropertyPathName Name="PersonTypes" />
     <RootPropertyPathName Name="Year" />
-    <RootPropertyPathName Name="Semester" />
+    <RootPropertyPathName Name="Period" />
     <RootPropertyPathName Name="FinalGrades" />
     <RootPropertyPathName Name="Value" />
     <RootPropertyPathName Name="Key" />
-    <RootPropertyPathName Name="GradePoint" />
-    <RootPropertyPathName Name="Grades" />
-    <RootPropertyPathName Name="AssignmentKey" />
-    <RootPropertyPathName Name="GradeLevel" />
-    <RootPropertyPathName Name="Type" />
+    <RootPropertyPathName Name="Query" />
     <RootPropertyPathName Name="SubmittedAssignments" />
     <RootPropertyPathName Name="SelectedGrade" />
     <RootPropertyPathName Name="PersonDisplay" />
+    <RootPropertyPathName Name="Type" />
     <RootPropertyPathName Name="Id" />
+    <RootPropertyPathName Name="Semester" />
     <RootPropertyPathName Name="SelectedPerson" />
     <RootPropertyPathName Name="ContentItems" />
     <RootPropertyPathName Name="SelectedItem" />
-    <RootPropertyPathName Name="People" />
     <RootPropertyPathName Name="PreviousSemesters" />
     <RootPropertyPathName Name="GradedGrades" />
     <RootPropertyPathName Name="UnsubmittedGrades" />
     <RootPropertyPathName Name="DueDateDisplay" />
+    <RootPropertyPathName Name="GradePoint" />
+    <RootPropertyPathName Name="GradeLevel" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application" />
@@ -96,7 +94,6 @@
       <RootProperty Name="FontWeight" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="TextAlignment" />
       <RootProperty Name="Width" />
       <RootProperty Name="Inlines" />
     </RootType>
@@ -118,7 +115,6 @@
       <RootProperty Name="ItemTemplate" />
       <RootProperty Name="SelectedItem" />
       <RootEvent Name="DoubleTapped" />
-      <RootEvent Name="SelectionChanged" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.DataTemplate">
       <RootProperty Name="Template" />
@@ -163,13 +159,12 @@
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Content" />
-      <RootProperty Name="FontSize" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="FontSize" />
       <RootProperty Name="Padding" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.CourseDetailsPage" />
-    <RootType FullName="UWP.LearningManagement.CoursePage" />
     <RootType FullName="UWP.LearningManagement.Dialogs.CourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditCourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditPersonDialog" />
@@ -180,7 +175,6 @@
     <RootType FullName="UWP.LearningManagement.MainPage" />
     <RootType FullName="UWP.LearningManagement.CurrentSemesterPage" />
     <RootType FullName="UWP.LearningManagement.UnenrollStudentsPage" />
-    <RootType FullName="UWP.LearningManagement.DetailedStudent" />
     <RootType FullName="UWP.LearningManagement.InstructorDetailsPage" />
     <RootType FullName="Windows.UI.Xaml.Controls.Frame">
       <RootProperty Name="Content" />
@@ -189,7 +183,6 @@
     </RootType>
     <RootType FullName="UWP.LearningManagement.InstructorViewPage" />
     <RootType FullName="UWP.LearningManagement.ItemsPage" />
-    <RootType FullName="UWP.LearningManagement.PeoplePage" />
     <RootType FullName="UWP.LearningManagement.PreviousSemesterPage" />
     <RootType FullName="UWP.LearningManagement.StudentDetailsPage" />
     <RootType FullName="UWP.LearningManagement.StudentViewPage" />

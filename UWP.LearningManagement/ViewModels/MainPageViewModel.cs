@@ -1,13 +1,8 @@
 ﻿using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LearningManagement.ViewModels
 {
@@ -24,10 +19,17 @@ namespace LearningManagement.ViewModels
         private readonly CourseService courseService;
         private readonly SemesterService semesterService;
 
-        public Semester CurrentSemester { get; set; }
-        public string Semester { get; set; }
+        public Semester SelectedSemester 
+        {
+            get { return semesterService.CurrentSemester; }
+            set { semesterService.CurrentSemester = value; } 
+        }
+        public List<Semester> SemesterList
+        {
+            get { return semesterService.SemesterList; }
+        }
+        public string Period { get; set; }
         public int Year { get; set; }
-        public bool isNewSemester;
 
         public MainPageViewModel() 
         { 
@@ -36,21 +38,13 @@ namespace LearningManagement.ViewModels
             courseService = CourseService.Current;
             semesterService = SemesterService.Current;
 
-            if (semesterService.SemesterList.Count == 0)
+            if (SemesterList.Count == 0)
             {
-                Semester = "Spring";
-                Year = 2023;
-                {
-                    CurrentSemester = new Semester { Period = Semester, Year = Year };
-                    semesterService.CurrentSemester = CurrentSemester;
-                    semesterService.Add(CurrentSemester);
-                }
+                SelectedSemester = new Semester { Period = "Spring", Year = 2023 };
+                semesterService.Add(SelectedSemester);
             }
-            else
-            {
-                Semester = semesterService.CurrentSemester.Period;
-                Year = semesterService.CurrentSemester.Year;
-            }
+            Period = SelectedSemester.Period;
+            Year = SelectedSemester.Year;
         }
 
         public void Clear()
@@ -64,69 +58,48 @@ namespace LearningManagement.ViewModels
 
         public void LeftClick()
         {
-            isNewSemester = true;
-            if (Semester.Equals("Spring"))
+            if (Period.Equals("Spring"))
             {
-                Semester = "Fall";
+                Period = "Fall";
                 Year--;
             }
-            else if (Semester.Equals("Summer"))
+            else if (Period.Equals("Summer"))
             {
-                Semester = "Spring";
+                Period = "Spring";
             }
-            else if (Semester.Equals("Fall"))
+            else if (Period.Equals("Fall"))
             {
-                Semester = "Summer";
+                Period = "Summer";
             }
-
-            foreach (var semester in semesterService.SemesterList)
-            {
-                if(semester.Year == Year && semester.Period == Semester)
-                {
-                    CurrentSemester = semester;
-                    semesterService.CurrentSemester = semester;
-                    isNewSemester = false;
-                    break;
-                }
-            }
-
-            if (isNewSemester)
-            {
-                var newSemester = new Semester { Period = Semester, Year = Year };
-                newSemester.SetSemester(courseService.Courses, personService.People);
-                semesterService.SemesterList.Add(newSemester);
-                CurrentSemester = newSemester;
-                semesterService.CurrentSemester = newSemester;
-            }
-
-            RaisePropertyChanged("Semester");
-            RaisePropertyChanged("Year");
-
+            SetSelectedSemester();
         }
 
         public void RightClick()
         {
-            isNewSemester = true;
-            if (Semester.Equals("Fall"))
+            if (Period.Equals("Fall"))
             {
-                Semester = "Spring";
+                Period = "Spring";
                 Year++;
             }
-            else if (Semester.Equals("Summer"))
+            else if (Period.Equals("Summer"))
             {
-                Semester = "Fall";
+                Period = "Fall";
             }
-            else if (Semester.Equals("Spring"))
+            else if (Period.Equals("Spring"))
             {
-                Semester = "Summer";
+                Period = "Summer";
             }
+            SetSelectedSemester();
+        }
 
-            foreach (var semester in semesterService.SemesterList)
+        public void SetSelectedSemester()
+        {
+            bool isNewSemester = true;
+            foreach (var semester in SemesterList)
             {
-                if (semester.Year == Year && semester.Period == Semester)
+                if (semester.Year == Year && semester.Period == Period)
                 {
-                    CurrentSemester = semester;
-                    semesterService.CurrentSemester = semester;
+                    SelectedSemester = semester;
                     isNewSemester = false;
                     break;
                 }
@@ -134,14 +107,12 @@ namespace LearningManagement.ViewModels
 
             if (isNewSemester)
             {
-                var newSemester = new Semester { Period = Semester, Year = Year };
-                newSemester.SetSemester(courseService.Courses, personService.People);
-                semesterService.SemesterList.Add(newSemester);
-                CurrentSemester = newSemester;
-                semesterService.CurrentSemester = newSemester;
+                SelectedSemester = new Semester { Period = Period, Year = Year };
+                SelectedSemester.SetSemester(courseService.Courses, personService.People);
+                SemesterList.Add(SelectedSemester);
             }
 
-            RaisePropertyChanged("Semester");
+            RaisePropertyChanged("Period");
             RaisePropertyChanged("Year");
         }
     }

@@ -1,18 +1,6 @@
 ﻿using Library.LearningManagement.Services;
 using Library.LearningManagement.Models;
-using UWP.LearningManagement.Dialogs;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Windows.UI.Xaml.Controls;
-using Windows.Foundation.Collections;
-using System.Reflection.Metadata;
 using Library.LearningManagement.Model;
 
 namespace UWP.LearningManagement.ViewModels
@@ -86,7 +74,6 @@ namespace UWP.LearningManagement.ViewModels
 
         public void UpdateGPA()
         {
-            double GPA = 0;
             var totalHours = 0;
             double totalHonorPoints = 0;
             foreach (KeyValuePair<Course, double> grade in SelectedStudent.FinalGrades)
@@ -111,7 +98,7 @@ namespace UWP.LearningManagement.ViewModels
                 }
                 totalHonorPoints += (double)courseHonorPoints * grade.Key.CreditHours;
             }
-            GPA = (double)totalHonorPoints / totalHours;
+            double GPA = (double)totalHonorPoints / totalHours;
             SelectedStudent.GradePointAverage = GPA;
         }
 
