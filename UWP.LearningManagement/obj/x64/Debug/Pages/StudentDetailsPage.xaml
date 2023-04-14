@@ -59,12 +59,7 @@
             </StackPanel>
             <Frame x:ConnectionId='6' Name="gradesFrame" Margin="10,10,10,10" Content=""></Frame>
         </StackPanel>
-        
-        
-        
-        
-        
-        
+
         <StackPanel Grid.Row="1">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Enrolled Courses"></TextBlock>
             <Button x:ConnectionId='5' Margin="10,0,10,0" Content="Drop Courses"                          ></Button>

@@ -19,7 +19,6 @@ C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Deb
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\MainPage.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\InstructorDetailsPage.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\InstructorViewPage.xbf
-C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\ItemsPage.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\StudentDetailsPage.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\StudentViewPage.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\UWP.LearningManagement.xr.xml
@@ -77,8 +76,6 @@ C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Deb
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\InstructorDetailsPage.g.cs
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\InstructorViewPage.g.i.cs
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\InstructorViewPage.g.cs
-C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\ItemsPage.g.i.cs
-C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\ItemsPage.g.cs
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\StudentDetailsPage.g.i.cs
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\StudentDetailsPage.g.cs
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\StudentViewPage.g.i.cs
@@ -105,7 +102,6 @@ C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Deb
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\MainPage.xaml
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\InstructorDetailsPage.xaml
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\InstructorViewPage.xaml
-C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\ItemsPage.xaml
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\StudentDetailsPage.xaml
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\StudentViewPage.xaml
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\App.xbf
@@ -129,7 +125,6 @@ C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Deb
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\MainPage.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\InstructorDetailsPage.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\InstructorViewPage.xbf
-C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\ItemsPage.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\StudentDetailsPage.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\StudentViewPage.xbf
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\XamlSaveStateFile.xml
@@ -185,3 +180,8 @@ C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Deb
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\ErrorDialog.g.cs
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\ErrorDialog.xaml
 C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Dialogs\ErrorDialog.xbf
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\ModuleContentPage.xbf
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\ModuleContentPage.g.i.cs
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\ModuleContentPage.g.cs
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\ModuleContentPage.xaml
+C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\obj\x64\Debug\Pages\ModuleContentPage.xbf

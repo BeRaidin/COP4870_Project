@@ -194,8 +194,8 @@
     <Compile Include="Pages\InstructorViewPage.xaml.cs">
       <DependentUpon>InstructorViewPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ItemsPage.xaml.cs">
-      <DependentUpon>ItemsPage.xaml</DependentUpon>
+    <Compile Include="Pages\ModuleContentPage.xaml.cs">
+      <DependentUpon>ModuleContentPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PreviousSemesterPage.xaml.cs">
       <DependentUpon>PreviousSemesterPage.xaml</DependentUpon>
@@ -219,7 +219,7 @@
     <Compile Include="ViewModels\InstructorDetailsViewModel.cs" />
     <Compile Include="ViewModels\InstructorJoinCourseDialogViewModel.cs" />
     <Compile Include="ViewModels\InstructorViewViewModel.cs" />
-    <Compile Include="ViewModels\ItemsPageViewModel.cs" />
+    <Compile Include="ViewModels\ModuleContentViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\ModuleDialogViewModel.cs" />
     <Compile Include="ViewModels\PersonDialogViewModel.cs" />
@@ -348,7 +348,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ItemsPage.xaml">
+    <Page Include="Pages\ModuleContentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

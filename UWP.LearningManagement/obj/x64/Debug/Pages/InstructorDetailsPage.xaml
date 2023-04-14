@@ -48,9 +48,9 @@
             <TextBlock Margin="10,0,10,0" Grid.Row="3" Grid.Column="1" Text="{Binding Type}"/>
         </Grid>
 
-        <StackPanel Grid.Row="1">
-            <Button x:ConnectionId='6' Content="Add a new course" HorizontalAlignment="Stretch"                        ></Button>
-            <Button x:ConnectionId='7' Content="Join an existing course" HorizontalAlignment="Stretch"                         ></Button>
+        <StackPanel Grid.Row="1" Margin="5">
+            <Button x:ConnectionId='6' Margin="5" Content="Add a new course" HorizontalAlignment="Stretch"                        ></Button>
+            <Button x:ConnectionId='7' Margin="5" Content="Join an existing course" HorizontalAlignment="Stretch"                         ></Button>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">

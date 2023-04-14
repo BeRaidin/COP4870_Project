@@ -148,8 +148,8 @@
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\InstructorViewPage.xbf">
       <PackagePath>Pages\InstructorViewPage.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\ItemsPage.xbf">
-      <PackagePath>Pages\ItemsPage.xbf</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\ModuleContentPage.xbf">
+      <PackagePath>Pages\ModuleContentPage.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\PreviousSemesterPage.xbf">
       <PackagePath>Pages\PreviousSemesterPage.xbf</PackagePath>
