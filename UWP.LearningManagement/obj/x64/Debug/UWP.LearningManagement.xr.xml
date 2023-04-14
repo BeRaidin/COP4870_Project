@@ -51,6 +51,7 @@
     <RootPropertyPathName Name="Id" />
     <RootPropertyPathName Name="Semester" />
     <RootPropertyPathName Name="SelectedPerson" />
+    <RootPropertyPathName Name="Course" />
     <RootPropertyPathName Name="ContentItems" />
     <RootPropertyPathName Name="SelectedItem" />
     <RootPropertyPathName Name="PreviousSemesters" />
@@ -74,12 +75,15 @@
       <RootProperty Name="RowDefinitions" />
       <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="Children" />
+      <RootProperty Name="Margin" />
       <RootMethod Name="GetColumn" />
       <RootMethod Name="SetColumn" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
       <RootMethod Name="GetColumnSpan" />
       <RootMethod Name="SetColumnSpan" />
+      <RootMethod Name="GetRowSpan" />
+      <RootMethod Name="SetRowSpan" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
       <RootProperty Name="Height" />
@@ -139,8 +143,8 @@
       <RootProperty Name="Children" />
       <RootProperty Name="Orientation" />
       <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="HorizontalAlignment" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.ErrorDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.GradeDialog" />
@@ -157,10 +161,10 @@
     </RootType>
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
+      <RootProperty Name="Margin" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Content" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="Padding" />
       <RootEvent Name="Click" />
@@ -183,7 +187,7 @@
       <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.InstructorViewPage" />
-    <RootType FullName="UWP.LearningManagement.ItemsPage" />
+    <RootType FullName="UWP.LearningManagement.ModuleContentPage" />
     <RootType FullName="UWP.LearningManagement.PreviousSemesterPage" />
     <RootType FullName="UWP.LearningManagement.StudentDetailsPage" />
     <RootType FullName="UWP.LearningManagement.StudentViewPage" />

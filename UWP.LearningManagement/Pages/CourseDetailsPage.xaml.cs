@@ -37,7 +37,7 @@ namespace UWP.LearningManagement
         {
             if ((DataContext as CourseDetailsViewModel).SelectedModule != null)
             {
-                Frame.Navigate(typeof(ItemsPage));
+                Frame.Navigate(typeof(ModuleContentPage));
             }
         }
 

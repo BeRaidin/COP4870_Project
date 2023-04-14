@@ -8,7 +8,7 @@ using UWP.LearningManagement.Dialogs;
 
 namespace UWP.LearningManagement.ViewModels
 {
-    public class ItemsPageViewModel
+    public class ModuleContentViewModel
     {
         private readonly ModuleService moduleService;
         private readonly CourseService courseService;
@@ -43,8 +43,16 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
         public string Query { get; set; }
+        public string Name
+        {
+            get { return SelectedCourse.Name; }
+        }
+        public string Course
+        {
+            get { return SelectedCourse.Code; }
+        }
 
-        public ItemsPageViewModel() 
+        public ModuleContentViewModel() 
         {
             moduleService = ModuleService.Current;
             courseService = CourseService.Current;

@@ -43,7 +43,7 @@
             <TextBlock Margin="10,0,10,0" Grid.Row="3" Grid.Column="1" Text="{Binding Hours}"/>
         </Grid>
 
-        <Button Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+        <Button Margin="5" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top"
                 Content="Edit Roster" Click="Roster_Click"></Button>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Roster"></TextBlock>
@@ -58,12 +58,12 @@
             </ListBox>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Grid.Column="2" VerticalAlignment="Bottom">
-            <Button HorizontalAlignment="Stretch" Content="Add" Click="Announcement_Click"></Button>
-            <Button HorizontalAlignment="Stretch" Content="Edit" Click="AnnouncementEdit_Click"></Button>
-            <Button HorizontalAlignment="Stretch" Content="Delete" Click="AnnouncementDelete_Click"></Button>
+        <StackPanel Grid.Row="3" Grid.Column="2" VerticalAlignment="Top" Orientation="Horizontal" Margin="5">
+            <Button Margin="5" HorizontalAlignment="Stretch" Content="Add" Click="Announcement_Click"></Button>
+            <Button Margin="5" HorizontalAlignment="Stretch" Content="Edit" Click="AnnouncementEdit_Click"></Button>
+            <Button Margin="5" HorizontalAlignment="Stretch" Content="Delete" Click="AnnouncementDelete_Click"></Button>
         </StackPanel>
-        <StackPanel Grid.Row="3" Grid.Column="2">
+        <StackPanel Grid.Row="2" Grid.Column="2">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Announcements"></TextBlock>
             <ListBox ItemsSource="{Binding Announcements}" Margin="10,0,10,0"
                     SelectedItem="{Binding Path=SelectedAnnouncement, Mode=TwoWay}" DoubleTapped="Announcement_DoubleTapped">
@@ -77,10 +77,10 @@
                 </ListBox>
         </StackPanel>
 
-        <StackPanel Grid.Row="2">
-            <Button HorizontalAlignment="Stretch" Content="Add" Click="Module_Click"></Button>
-            <Button HorizontalAlignment="Stretch" Content="Edit" Click="EditModule_Click"></Button>
-            <Button HorizontalAlignment="Stretch" Content="Delete" Click="DeleteModule_Click"></Button>
+        <StackPanel Grid.Row="2" Margin="5">
+            <Button Margin="5" HorizontalAlignment="Stretch" Content="Add" Click="Module_Click"></Button>
+            <Button Margin="5" HorizontalAlignment="Stretch" Content="Edit" Click="EditModule_Click"></Button>
+            <Button Margin="5" HorizontalAlignment="Stretch" Content="Delete" Click="DeleteModule_Click"></Button>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Modules"></TextBlock>
@@ -96,10 +96,10 @@
             </ListBox>
         </StackPanel>
 
-        <StackPanel Grid.Row="3">
-            <Button HorizontalAlignment="Stretch" Content="Add" Click="Assignment_Click"></Button>
-            <Button HorizontalAlignment="Stretch" Content="Edit" Click="EditAssignment_Click"></Button>
-            <Button HorizontalAlignment="Stretch" Content="Delete" Click="DeleteAssignment_Click"></Button>
+        <StackPanel Grid.Row="3" Margin="5">
+            <Button Margin="5" HorizontalAlignment="Stretch" Content="Add" Click="Assignment_Click"></Button>
+            <Button Margin="5" HorizontalAlignment="Stretch" Content="Edit" Click="EditAssignment_Click"></Button>
+            <Button Margin="5" HorizontalAlignment="Stretch" Content="Delete" Click="DeleteAssignment_Click"></Button>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="1">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Assignments"></TextBlock>

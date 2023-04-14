@@ -283,7 +283,6 @@ namespace UWP.LearningManagement.ViewModels
                     (student as Student).Remove(assignment);
                 }
             }
-            Refresh();
         }
 
         public async void EditModule()
