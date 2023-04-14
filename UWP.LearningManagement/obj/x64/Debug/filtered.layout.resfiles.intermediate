@@ -18,6 +18,7 @@ Dialogs\EditContentItemDialog.xbf
 Dialogs\EditCourseDialog.xbf
 Dialogs\EditModuleDialog.xbf
 Dialogs\EditPersonDialog.xbf
+Dialogs\ErrorDialog.xbf
 Dialogs\GradeDialog.xbf
 Dialogs\InstructorJoinCourseDialog.xbf
 Dialogs\ModuleDialog.xbf

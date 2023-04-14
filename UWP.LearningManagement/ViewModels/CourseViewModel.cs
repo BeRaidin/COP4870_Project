@@ -60,12 +60,14 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
         public string Hours { get; set; }
+        public bool IsValid;
 
         public CourseViewModel()
         {
             courseService = CourseService.Current;
             personService = PersonService.Current;
             semesterService = SemesterService.Current;
+            IsValid = true;
         }
 
         public void Set()
@@ -94,7 +96,6 @@ namespace UWP.LearningManagement.ViewModels
                 }
             }
 
-
             if (Code != null && Code != "" && Name != null && Name != "" && Room != null && Room != "" && test)
             {
                 Set();
@@ -105,6 +106,7 @@ namespace UWP.LearningManagement.ViewModels
                 }
                 SelectedPerson.Add(SelectedCourse);
             }
+            else IsValid = false;
             SelectedCourse = null;
         }
 

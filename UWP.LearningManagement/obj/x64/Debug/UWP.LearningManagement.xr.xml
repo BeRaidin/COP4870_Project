@@ -136,12 +136,13 @@
     <RootType FullName="UWP.LearningManagement.Dialogs.EditContentItemDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditModuleDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
-      <RootProperty Name="Orientation" />
       <RootProperty Name="Children" />
+      <RootProperty Name="Orientation" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Margin" />
     </RootType>
+    <RootType FullName="UWP.LearningManagement.Dialogs.ErrorDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.GradeDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.InstructorJoinCourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.ModuleDialog" />

@@ -75,6 +75,14 @@ namespace UWP.LearningManagement.ViewModels
             {
                 await dialog.ShowAsync();
             }
+            if(!dialog.TestValid())
+            {
+                var errorDialog = new ErrorDialog();
+                if (errorDialog != null)
+                {
+                    await errorDialog.ShowAsync();
+                }
+            }
             Refresh();
         }
 

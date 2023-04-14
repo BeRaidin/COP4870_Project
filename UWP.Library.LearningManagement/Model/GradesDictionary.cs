@@ -28,15 +28,15 @@ namespace Library.LearningManagement.Model
 
         public Course Course { get; set; }
         public Person Person { get; set; }
-        public bool isGraded { get; set; }
-        public bool isSubmitted { get; set; }
+        public bool IsGraded { get; set; }
+        public bool IsSubmitted { get; set; }
 
         public GradesDictionary()
         {
             Course = new Course();
             Assignment = new Assignment();
-            isGraded = false;
-            isSubmitted = false;
+            IsGraded = false;
+            IsSubmitted = false;
             Grade = 0;
         }
 

@@ -1,6 +1,7 @@
 ﻿using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
 using System.Collections.ObjectModel;
+using Windows.UI.Xaml;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -31,7 +32,7 @@ namespace UWP.LearningManagement.ViewModels
         }
         public string TempFirstName { get; set; }
         public string TempLastName { get; set; }
-
+        public bool IsValid;
 
         public PersonDialogViewModel()
         {
@@ -41,6 +42,7 @@ namespace UWP.LearningManagement.ViewModels
             { "Student", "Instructor", "Teaching Assistant" };
             StudentLevels = new ObservableCollection<string>
             { "Freshman", "Sophmore", "Junior", "Senior" };
+            IsValid = true;
         }
 
         public void Add()
@@ -63,7 +65,7 @@ namespace UWP.LearningManagement.ViewModels
                 Person.FirstName = FirstName;
                 Person.LastName = LastName;
 
-                var student = Person as Student;
+                Student student = Person as Student;
                 if (student != null)
                 {
                     if (SelectedClass == "Freshman")
@@ -98,6 +100,7 @@ namespace UWP.LearningManagement.ViewModels
                     }
                 }
             }
+            else IsValid = false;
         }
 
         public void Edit()
