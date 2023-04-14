@@ -33,6 +33,7 @@ namespace UWP.LearningManagement.ViewModels
         public string TempName { get; set; }
         public string TempDescription { get; set; }
         public bool IsCont;
+        public bool IsValid;
 
         public ModuleDialogViewModel()
         {
@@ -40,6 +41,7 @@ namespace UWP.LearningManagement.ViewModels
             moduleService = ModuleService.Current;
             Module = new Module();
             IsCont = true;
+            IsValid = true;
         }
 
         public void Add()
@@ -52,11 +54,12 @@ namespace UWP.LearningManagement.ViewModels
                     test = false;
                 }
             }
-            if (test && Name != null && Name != "")
+            if (test && Name != null && Name != "" && Description != null && Description != "")
             {
                 SelectedModule = new Module { Name = Name, Description = Description };
                 Modules.Add(SelectedModule);
             }
+            else IsValid = false;
         }
 
         public void Edit()
@@ -64,6 +67,7 @@ namespace UWP.LearningManagement.ViewModels
             if (Name == null || Name == "" || Description == null || Description == "")
             {
                 GetTemp();
+                IsValid = false;
             }
         }
 

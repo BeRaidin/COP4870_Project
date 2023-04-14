@@ -118,7 +118,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             if(SelectedGrade != null) 
             { 
-                SelectedGrade.isSubmitted = true;
+                SelectedGrade.IsSubmitted = true;
             }
             Refresh();
         }
@@ -138,11 +138,11 @@ namespace UWP.LearningManagement.ViewModels
             GradedGrades.Clear();
             foreach (var grade in Student.Grades)
             {
-                if (grade.isGraded == false && grade.isSubmitted == false)
+                if (grade.IsGraded == false && grade.IsSubmitted == false)
                 {
                     UnsubmittedGrades.Add(grade);
                 }
-                else if (grade.isGraded == true)
+                else if (grade.IsGraded == true)
                 {
                     GradedGrades.Add(grade);
                 }

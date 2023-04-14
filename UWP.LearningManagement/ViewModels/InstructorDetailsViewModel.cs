@@ -74,6 +74,14 @@ namespace UWP.LearningManagement.ViewModels
             {
                 await dialog.ShowAsync();
             }
+            if (!dialog.TestValid())
+            {
+                var errorDialog = new ErrorDialog();
+                if (errorDialog != null)
+                {
+                    await errorDialog.ShowAsync();
+                }
+            }
             Refresh();
         }
 
@@ -99,7 +107,7 @@ namespace UWP.LearningManagement.ViewModels
                 await dialog.ShowAsync();
             }
             SelectedPerson = CurrentInstructor;
-            SelectedGrade.isGraded = true;
+            SelectedGrade.IsGraded = true;
             Refresh();
         }
 
@@ -110,13 +118,13 @@ namespace UWP.LearningManagement.ViewModels
             { 
                 foreach(var person in course.Roster)
                 {
-                    var student = person as Student;
+                    Student student = person as Student;
                     if (student != null)
                     {
                         foreach(var assignment in student.Grades)
                         {
-                            if(assignment.Course == course && assignment.isGraded == false 
-                                && assignment.isSubmitted == true)
+                            if(assignment.Course == course && assignment.IsGraded == false 
+                                && assignment.IsSubmitted == true)
                             {
                                 SubmittedAssignments.Add(assignment);
                             }

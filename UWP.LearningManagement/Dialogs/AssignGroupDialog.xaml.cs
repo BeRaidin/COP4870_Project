@@ -35,9 +35,9 @@ namespace UWP.LearningManagement.Dialogs
             (DataContext as AssignmentViewModel).False();
         }
 
-        public bool Test()
+        public bool TestValid()
         {
-            return (DataContext as AssignmentViewModel).IsCont;
+            return (DataContext as AssignmentViewModel).IsValid;
         }
     }
 }

@@ -137,6 +137,9 @@
     <Compile Include="Dialogs\EditModuleDialog.xaml.cs">
       <DependentUpon>EditModuleDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\ErrorDialog.xaml.cs">
+      <DependentUpon>ErrorDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\GradeDialog.xaml.cs">
       <DependentUpon>GradeDialog.xaml</DependentUpon>
     </Compile>
@@ -266,6 +269,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\EditModuleDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ErrorDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

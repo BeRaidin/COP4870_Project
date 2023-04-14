@@ -115,6 +115,10 @@ namespace UWP.LearningManagement.ViewModels
             {
                 await dialog.ShowAsync();
             }
+            if (!dialog.TestValid())
+            {
+                GetError();
+            }
             Refresh();
             SelectedModule = null;
         }
@@ -126,9 +130,12 @@ namespace UWP.LearningManagement.ViewModels
             {
                 await dialog.ShowAsync();
             }
+            if (!dialog.TestValid())
+            {
+                GetError();
+            }
             Refresh();
         }
-
 
         public async void EditRoster()
         {
@@ -142,14 +149,21 @@ namespace UWP.LearningManagement.ViewModels
 
         public async void AddAssignment()
         {
-            var cont = true;
+            bool cont = true;
             var dialog = new NewAssignmentDialog();
             if (dialog != null)
             {
                 await dialog.ShowAsync();
             }
-            cont = dialog.Test();
-            if (cont)
+            if (!dialog.TestValid())
+            {
+                var errorDialog = new ErrorDialog();
+                if (errorDialog != null)
+                {
+                    await errorDialog.ShowAsync();
+                }
+            }
+            else
             {
                 var assignment = (moduleService.CurrentItem as AssignmentItem).Assignment;
                 if (assignment.AssignmentGroup == null)
@@ -159,7 +173,15 @@ namespace UWP.LearningManagement.ViewModels
                     {
                         await Groupdialog.ShowAsync();
                     }
-                    cont = Groupdialog.Test();
+                    if (!Groupdialog.TestValid())
+                    {
+                        var errorDialog = new ErrorDialog();
+                        if (errorDialog != null)
+                        {
+                            await errorDialog.ShowAsync();
+                        }
+                        cont = false;
+                    }
                 }
 
                 if (cont)
@@ -182,6 +204,11 @@ namespace UWP.LearningManagement.ViewModels
                 if (!cont)
                 {
                     SelectedCourse.Remove(assignment);
+                    var errorDialog = new ErrorDialog();
+                    if (errorDialog != null)
+                    {
+                        await errorDialog.ShowAsync();
+                    }
                 }
             }
             Refresh();
@@ -266,6 +293,10 @@ namespace UWP.LearningManagement.ViewModels
             {
                 await dialog.ShowAsync();
             }
+            if (!dialog.TestValid())
+            {
+                GetError();
+            }
             Refresh();
         }
 
@@ -275,6 +306,10 @@ namespace UWP.LearningManagement.ViewModels
             if (dialog != null)
             {
                 await dialog.ShowAsync();
+            }
+            if (!dialog.TestValid())
+            {
+                GetError();
             }
             Refresh();
         }
@@ -288,6 +323,10 @@ namespace UWP.LearningManagement.ViewModels
                 if (dialog != null)
                 {
                     await dialog.ShowAsync();
+                }
+                if (!dialog.TestValid())
+                {
+                    GetError();
                 }
                 Refresh();
             }
@@ -304,8 +343,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public async void ViewAnnouncement()
         {
-            var messageDialog = new MessageDialog(SelectedAnnouncement.Message);
-            messageDialog.Title = SelectedAnnouncement.Title;
+            var messageDialog = new MessageDialog(SelectedAnnouncement.Message, SelectedAnnouncement.Title);
             messageDialog.Commands.Add(new UICommand("OK"));
             if (messageDialog != null)
             {
@@ -313,10 +351,13 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
 
-        public void Edit()
-        {
-            courseService.CurrentAnnouncement.Title = Title;
-            courseService.CurrentAnnouncement.Message = Message;
+        public async void GetError()
+        {    
+            var errorDialog = new ErrorDialog();
+            if (errorDialog != null)
+            {
+                await errorDialog.ShowAsync();
+            }
         }
     }
 }
