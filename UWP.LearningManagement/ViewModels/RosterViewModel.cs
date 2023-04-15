@@ -2,6 +2,7 @@
 using Library.LearningManagement.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Contracts;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -9,9 +10,11 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly CourseService courseService;
         private readonly PersonService personService;
+        private readonly SemesterService semesterService;
         private readonly List<Person> allStudents;
 
         public ObservableCollection<Person> Students { get; set; }
+        public Semester SelectedSemester { get { return semesterService.CurrentSemester; } }
         public Course Course 
         {
             get { return courseService.CurrentCourse; }
@@ -21,8 +24,9 @@ namespace UWP.LearningManagement.ViewModels
         {
             courseService = CourseService.Current;
             personService = PersonService.Current;
+            semesterService = SemesterService.Current;
             allStudents = new List<Person>();
-            foreach(var person in personService.People)
+            foreach(var person in SelectedSemester.People)
             {
                 if(person as Student != null)
                 {
@@ -49,11 +53,11 @@ namespace UWP.LearningManagement.ViewModels
             {
                 if (student.IsSelected == false && Course.Roster.Contains(student))
                 {
-                    Course.Roster.Remove(student);
+                    Course.Remove(student);
                 }
                 else if (student.IsSelected == true && !Course.Roster.Contains(student)) 
                 { 
-                    Course.Roster.Add(student);
+                    Course.Add(student);
                 }
             }
         }

@@ -8,6 +8,7 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly CourseService courseService;
         private readonly PersonService personService;
+        private readonly SemesterService semesterService;
 
         public Course SelectedCourse
         {
@@ -18,6 +19,10 @@ namespace UWP.LearningManagement.ViewModels
         { 
             get { return personService.CurrentPerson; } 
         }
+        public Semester SelectedSemester
+        {
+            get { return  semesterService.CurrentSemester; }
+        }
 
         public ObservableCollection<Course> AvailableCourses { get; set; }
 
@@ -25,8 +30,9 @@ namespace UWP.LearningManagement.ViewModels
         {
             courseService = CourseService.Current;
             personService = PersonService.Current;
+            semesterService = SemesterService.Current;
             AvailableCourses = new ObservableCollection<Course>();
-            foreach(var course in courseService.Courses)
+            foreach(var course in SelectedSemester.Courses)
             {
                 if(!SelectedPerson.Courses.Contains(course))
                 {

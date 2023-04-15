@@ -41,6 +41,7 @@ namespace LearningManagement.ViewModels
             if (SemesterList.Count == 0)
             {
                 SelectedSemester = new Semester { Period = "Spring", Year = 2023 };
+                SelectedSemester.SetSemester(courseService.Courses, personService.People);
                 semesterService.Add(SelectedSemester);
             }
             Period = SelectedSemester.Period;
@@ -109,7 +110,7 @@ namespace LearningManagement.ViewModels
             {
                 SelectedSemester = new Semester { Period = Period, Year = Year };
                 SelectedSemester.SetSemester(courseService.Courses, personService.People);
-                SemesterList.Add(SelectedSemester);
+                semesterService.Add(SelectedSemester);
             }
 
             RaisePropertyChanged("Period");

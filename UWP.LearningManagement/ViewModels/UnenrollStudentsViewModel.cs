@@ -1,4 +1,5 @@
 ﻿using Library.LearningManagement.Models;
+using Library.LearningManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,15 +10,21 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class UnenrollStudentsViewModel
     {
+        private readonly SemesterService semesterService;
         private readonly List<Person> allStudents;
 
+        public Semester SelectedSemester
+        {
+            get { return semesterService.CurrentSemester; }
+        }
         public ObservableCollection<Person> Students { get; set; }
         public string Query { get; set; }
 
         public UnenrollStudentsViewModel()
         {
+            semesterService = SemesterService.Current;
             allStudents = new List<Person>();
-            foreach(var person in FakeDataBase.People)
+            foreach(var person in SelectedSemester.People)
             {
                 if(person as Student != null)
                 {
@@ -49,12 +56,19 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Delete()
         {
-            foreach(var person in Students)
+            foreach (var person in allStudents)
             {
                 if(person.IsSelected == true)
                 {
-                    FakeDataBase.People.Remove(person);
-                    allStudents.Remove(person);
+                    foreach(var testPerson in FakeDataBase.People)
+                    {
+                        if (testPerson.FirstName == person.FirstName && testPerson.LastName == person.LastName && testPerson.Id == person.Id)
+                        {
+                            FakeDataBase.People.Remove(testPerson);
+                            break;
+                        }
+                    }
+                    semesterService.Remove(person);
                 }
             }
             Refresh();

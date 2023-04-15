@@ -19,14 +19,18 @@ namespace UWP.LearningManagement.ViewModels
             get { return personService.CurrentPerson; }
             set { personService.CurrentPerson = value; }
         }
+        public Semester SelectedSemester
+        {
+            get { return semesterService.CurrentSemester; }
+        }
         public string Query { get; set; }
         public string Period
         { 
-            get { return semesterService.CurrentSemester.Period; } 
+            get { return SelectedSemester.Period; } 
         }
         public int Year
         {
-            get { return semesterService.CurrentSemester.Year; }
+            get { return SelectedSemester.Year; }
         }
 
         public StudentViewViewModel() 
@@ -34,7 +38,7 @@ namespace UWP.LearningManagement.ViewModels
             personService = PersonService.Current;
             semesterService = SemesterService.Current;
             allStudents = new List<Person>();
-            foreach (var person in personService.People)
+            foreach (var person in SelectedSemester.People)
             {
                 if (person as Student != null)
                 {
