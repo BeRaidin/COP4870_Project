@@ -17,7 +17,6 @@ namespace Library.LearningManagement.Services
                 return FakeDataBase.Semesters;
             }
         }
-
         private Semester _currentSemester;
         public Semester CurrentSemester
         {

@@ -29,12 +29,14 @@ namespace Library.LearningManagement.Models
         {
             foreach (Course course in courses)
             {
-                var newCourse = new Course();
-                newCourse.Code = course.Code;
-                newCourse.Name = course.Name;
-                newCourse.Room = course.Room;
-                newCourse.CreditHours = course.CreditHours;
-                newCourse.Description = course.Description;
+                var newCourse = new Course
+                {
+                    Code = course.Code,
+                    Name = course.Name,
+                    Room = course.Room,
+                    CreditHours = course.CreditHours,
+                    Description = course.Description
+                };
                 Courses.Add(newCourse);
             }
             foreach (Person person in people)
@@ -55,6 +57,7 @@ namespace Library.LearningManagement.Models
 
                 newPerson.Id = person.Id;
                 newPerson.FirstName = person.FirstName;
+                newPerson.LastName = person.LastName;
                 People.Add(newPerson);
             }
         }
@@ -67,7 +70,7 @@ namespace Library.LearningManagement.Models
                 {
                     foreach(var course in person.Courses)
                     {
-                        course.Remove(removedPerson);
+                        course.Roster.Remove(person);
                     }
                     People.Remove(person);
                     break;

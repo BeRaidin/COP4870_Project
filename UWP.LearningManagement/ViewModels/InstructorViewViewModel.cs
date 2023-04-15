@@ -13,16 +13,17 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly PersonService personService;
         private readonly SemesterService semesterService;
-        private List<Person> allPeople
-        { 
-            get { return FakeDataBase.People; } 
-        }
+        private List<Person> AllInstructors { get; set; }
 
         public ObservableCollection<Person> Instructors { get; set; }
         public Person SelectedPerson
         {
             get { return personService.CurrentPerson; }
             set { personService.CurrentPerson = value; }
+        }
+        public Semester SelectedSemester
+        {
+            get { return semesterService.CurrentSemester; }
         }
         public string Semester
         {
@@ -38,14 +39,15 @@ namespace UWP.LearningManagement.ViewModels
         {
             personService = PersonService.Current;
             semesterService = SemesterService.Current;
-            Instructors = new ObservableCollection<Person>();
-            foreach (var person in allPeople)
+            AllInstructors = new List<Person>();
+            foreach (var person in SelectedSemester.People)
             {
                 if (person as Student == null)
                 {
-                    Instructors.Add(person);
+                    AllInstructors.Add(person);
                 }
             }
+            Instructors = new ObservableCollection<Person>(AllInstructors);
         }
 
         public void Search()
@@ -53,7 +55,7 @@ namespace UWP.LearningManagement.ViewModels
             if (Query != null && Query != "")
             {
 
-                IEnumerable<Person> searchResults = allPeople.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+                IEnumerable<Person> searchResults = AllInstructors.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
                                                     || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 Instructors.Clear();
                 foreach (var person in searchResults)
@@ -83,18 +85,24 @@ namespace UWP.LearningManagement.ViewModels
                     await errorDialog.ShowAsync();
                 }
             }
-            Refresh();
+            AllInstructors.Clear();
+            Instructors.Clear();
+            foreach (var person in SelectedSemester.People)
+            {
+                if (person as Student == null)
+                {
+                    AllInstructors.Add(person);
+                    Instructors.Add(person);
+                }
+            }
         }
 
         public void Refresh()
         {
             Instructors.Clear();
-            foreach (var person in allPeople)
+            foreach (var person in AllInstructors)
             {
-                if (person as Student == null)
-                {
-                    Instructors.Add(person);
-                }
+                Instructors.Add(person);
             }
         }
     }
