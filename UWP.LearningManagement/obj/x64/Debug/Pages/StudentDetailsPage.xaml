@@ -55,7 +55,7 @@
         <StackPanel Grid.Row="1" Grid.Column="1" >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <Button x:ConnectionId='7' Content="Current" Padding="10"                      />
-                <Button x:ConnectionId='8' Content="Future" Padding="10"                       />
+                <Button x:ConnectionId='8' Content="Previous/Future" Padding="10"                       />
             </StackPanel>
             <Frame x:ConnectionId='6' Name="gradesFrame" Margin="10,10,10,10" Content=""></Frame>
         </StackPanel>

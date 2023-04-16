@@ -1,13 +1,17 @@
 ﻿using Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using UWP.LearningManagement.Dialogs;
+using Windows.Graphics;
 
 namespace UWP.LearningManagement.ViewModels
 {
     public class PreviousSemesterViewModel
     {
         private readonly SemesterService semesterService;
+        private readonly PersonService personService;
 
         private Semester CurrentSemester
         {
@@ -17,11 +21,15 @@ namespace UWP.LearningManagement.ViewModels
         { 
             get { return semesterService.SemesterList; }
         }
-        public ObservableCollection<Semester> PreviousSemesters { get; set; }
+        public Dictionary<Course, double> Courses { get; set; }
 
+        public ObservableCollection<Semester> PreviousSemesters { get; set; }
+        public Semester Semester { get; set; }
+        public string SemesterTitle { get; set; }
         public PreviousSemesterViewModel()
         {
             semesterService = SemesterService.Current;
+            personService = PersonService.Current;
             PreviousSemesters = new ObservableCollection<Semester>();
             foreach(var semester in SemesterList)
             {
@@ -31,6 +39,31 @@ namespace UWP.LearningManagement.ViewModels
                 }
             }
         }
+        public PreviousSemesterViewModel(Semester semester)
+        {
+            personService = PersonService.Current;
+            Semester = semester;
+            SemesterTitle = Semester.Display;
+            foreach(var person in Semester.People)
+            {
+                if(personService.CurrentPerson.Display == person.Display) 
+                {
+                    Courses = (person as Student).FinalGrades;
+                }
+            }    
 
+        }
+
+        public async void ViewPastSemester()
+        {
+            if (Semester != null)
+            {
+                var dialog = new PreviousSemesterDialog(Semester);
+                if (dialog != null)
+                {
+                    await dialog.ShowAsync();
+                }
+            }
+        }
     }
 }

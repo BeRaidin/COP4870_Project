@@ -4,6 +4,7 @@ using Library.LearningManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using UWP.LearningManagement.Dialogs;
 
 namespace UWP.LearningManagement.ViewModels
@@ -100,7 +101,7 @@ namespace UWP.LearningManagement.ViewModels
             else GradeLevel = "ERROR";
         }
 
-        public async void DropClasses()
+        public async Task DropClasses()
         {
             foreach(var course in Student.Courses)
             {
