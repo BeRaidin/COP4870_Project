@@ -9,8 +9,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <ListBox x:ConnectionId='2' x:Name="CoursesListBox" 
-                 ItemsSource="{Binding PreviousSemesters}" Margin="10,0,10,0">
+        <ListBox x:ConnectionId='2' x:Name="CoursesListBox" ItemsSource="{Binding PreviousSemesters}" Margin="10,0,10,0"
+                                                              SelectedItem="{Binding Path=Semester, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

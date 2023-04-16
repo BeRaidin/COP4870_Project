@@ -14,11 +14,12 @@ namespace UWP.LearningManagement
             gradesFrame.Navigate(typeof(CurrentSemesterPage));
         }
 
-        private void DropClasses_Click(object sender, RoutedEventArgs e)
+        private async void DropClasses_Click(object sender, RoutedEventArgs e)
         {
             if ((DataContext as StudentDetailsViewModel).CanDrop())
             {
-                (DataContext as StudentDetailsViewModel).DropClasses();
+                await (DataContext as StudentDetailsViewModel).DropClasses();
+                CurrentSemester();
             }
         }
 
@@ -35,6 +36,11 @@ namespace UWP.LearningManagement
         private void Unsubmitted_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             (DataContext as StudentDetailsViewModel).SubmitAssignment();
+        }
+
+        private void CurrentSemester()
+        {
+            gradesFrame.Navigate(typeof(CurrentSemesterPage));
         }
     }
 }
