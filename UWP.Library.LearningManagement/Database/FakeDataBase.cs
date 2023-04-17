@@ -5,13 +5,30 @@ namespace UWP.Library.LearningManagement.Database
 {
     public static class FakeDataBase
     {
-        private static List<Person> people = new List<Person>();
-        private static List<Course> courses = new List<Course>();
-        private static List<Semester> semesters = new List<Semester>();
+        private static readonly List<Person> people = new List<Person>
+        {
+            new Student {Id = "0", FirstName="Brayden", LastName="Lewis", Classification=Student.Classes.Sophmore},
+            new Person {Id = "1", FirstName="Chris", LastName="Millls"}
+        };
 
-        public static List<Person> People 
+        private static readonly List<Student> students = new List<Student>();
+        private static readonly List<Course> courses = new List<Course>();
+        private static readonly List<Semester> semesters = new List<Semester>();
+
+        public static List<Student> Students 
         { 
-            get { return people; }
+            get 
+            {
+                var returnList = new List<Student>();
+                foreach (var person in people) 
+                {
+                    if (person is Student student)
+                    {
+                        returnList.Add(student);
+                    }
+                }
+                return returnList;
+            }
         }
         public static List<Course> Courses
         {
@@ -20,6 +37,12 @@ namespace UWP.Library.LearningManagement.Database
         public static List<Semester> Semesters
         { 
             get { return semesters; } 
+        }
+
+        public static List<Person> People
+        {
+            get { return people; }
+
         }
     }
 }

@@ -60,11 +60,11 @@ namespace UWP.LearningManagement.ViewModels
             {
                 if(person.IsSelected == true)
                 {
-                    foreach(var testPerson in FakeDataBase.People)
+                    foreach(var testPerson in FakeDataBase.Students)
                     {
                         if (testPerson.FirstName == person.FirstName && testPerson.LastName == person.LastName && testPerson.Id == person.Id)
                         {
-                            FakeDataBase.People.Remove(testPerson);
+                            FakeDataBase.Students.Remove(testPerson);
                             break;
                         }
                     }

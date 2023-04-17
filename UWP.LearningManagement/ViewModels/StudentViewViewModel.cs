@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using UWP.LearningManagement.API.Util;
+using Newtonsoft.Json;
+using UWP.Library.LearningManagement.DTO;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -11,9 +14,18 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly PersonService personService;
         private readonly SemesterService semesterService;
-        private readonly List<Person> allStudents;
+
+        public IEnumerable<StudentViewModel> AllStudents
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Student").Result;
+                var returnVal = JsonConvert.DeserializeObject<List<StudentDTO>>(payload).Select(d => new StudentViewModel(d));
+                return returnVal;
+            }
+        }
         
-        public ObservableCollection<Person> Students { get; set; }
+        public ObservableCollection<StudentViewModel> Students { get; set; }
         public Person SelectedPerson
         {
             get { return personService.CurrentPerson; }
@@ -37,15 +49,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             personService = PersonService.Current;
             semesterService = SemesterService.Current;
-            allStudents = new List<Person>();
-            foreach (var person in SelectedSemester.People)
-            {
-                if (person as Student != null)
-                {
-                    allStudents.Add(person);
-                }
-            }
-            Students = new ObservableCollection<Person>(allStudents);
+            Students = new ObservableCollection<StudentViewModel>(AllStudents);
         }
 
         public void Search()
@@ -53,8 +57,8 @@ namespace UWP.LearningManagement.ViewModels
             if (Query != null && Query != "")
             {
 
-                IEnumerable<Person> searchResults = allStudents.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
-                                                    || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                IEnumerable<StudentViewModel> searchResults = AllStudents.Where(i => i.Dto.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+                                                    || i.Dto.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
 
                 Students.Clear();
                 foreach (var person in searchResults)
@@ -71,7 +75,7 @@ namespace UWP.LearningManagement.ViewModels
         public void Refresh()
         {
             Students.Clear();
-            foreach (var person in allStudents)
+            foreach (var person in AllStudents)
             {
                 Students.Add(person);
             }

@@ -65,8 +65,7 @@ namespace UWP.LearningManagement.ViewModels
                 Person.FirstName = FirstName;
                 Person.LastName = LastName;
 
-                Student student = Person as Student;
-                if (student != null)
+                if (Person is Student student)
                 {
                     if (SelectedClass == "Freshman")
                     {
@@ -86,7 +85,7 @@ namespace UWP.LearningManagement.ViewModels
                     }
                     else student.Classification = Student.Classes.Freshman;
                     personService.Add(student);
-                    foreach(var semester in semesterService.SemesterList)
+                    foreach (var semester in semesterService.SemesterList)
                     {
                         semester.People.Add(student);
                     }
