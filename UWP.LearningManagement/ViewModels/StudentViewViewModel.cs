@@ -1,5 +1,5 @@
 ﻿using Library.LearningManagement.Services;
-using Library.LearningManagement.Models;
+using UWP.Library.LearningManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
