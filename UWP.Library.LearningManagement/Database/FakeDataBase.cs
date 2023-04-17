@@ -1,7 +1,5 @@
-﻿using Library.LearningManagement.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using UWP.Library.LearningManagement.Models;
 
 namespace UWP.Library.LearningManagement.Database
 {
