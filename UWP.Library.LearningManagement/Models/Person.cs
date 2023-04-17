@@ -1,10 +1,5 @@
-﻿using UWP.Library.LearningManagement.Models;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using UWP.Library.LearningManagement.DTO;
 
 namespace UWP.Library.LearningManagement.Models
 {
@@ -13,7 +8,6 @@ namespace UWP.Library.LearningManagement.Models
         public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
         public List<Course> Courses { get; set; }
         public bool IsSelected { get; set; }
 
@@ -24,6 +18,8 @@ namespace UWP.Library.LearningManagement.Models
             Courses = new List<Course>();
             IsSelected = false;
         }
+        
+
 
         public virtual string Display => $"[{Id}] {FirstName} {LastName}";
 

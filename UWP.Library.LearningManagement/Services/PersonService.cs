@@ -12,8 +12,13 @@ namespace Library.LearningManagement.Services
     public class PersonService
     {
         public List<Person> People
+        {
+            get { return FakeDataBase.People; }
+        }
+
+        public List<Student> Students
         { 
-            get { return FakeDataBase.People; } 
+            get { return FakeDataBase.Students; } 
         }
         
         private Person _currentPerson;
@@ -48,8 +53,6 @@ namespace Library.LearningManagement.Services
         {
             CurrentPerson = new Person();
             totalCount = 0;
-            Add(new Student { FirstName = "Bray", LastName = "Lewis", Classification = Student.Classes.Sophmore });
-            Add(new Instructor { FirstName = "Chris", LastName = "Mills"});
         }
 
         public void Add(Person person)
@@ -61,11 +64,11 @@ namespace Library.LearningManagement.Services
 
         public void Remove()
         {
-            foreach(Person person in People)
+            foreach(Student student in Students)
             {
-                if(CurrentPerson.Id == person.Id)
+                if(CurrentPerson.Id == student.Id)
                 {
-                    FakeDataBase.People.Remove(person);
+                    FakeDataBase.Students.Remove(student);
                     break;
                 }
             }

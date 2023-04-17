@@ -47,14 +47,14 @@ namespace UWP.LearningManagement.ViewModels
         public string TotalPoints { get; set; }
         public string Group { get; set; }
         public DateTimeOffset DueDate { get; set; }
-        private List<AssignmentGroup> _assignmentGroups;
+        private readonly List<AssignmentGroup> assignmentGroups;
         public ObservableCollection<string> AssignmentGroups
         { get; set; }
         public string SelectedGroup { get; set; }
         public string SelectedModuleName { get; set; }
         public string GroupName { get; set; }
         public string Weight { get; set; }
-        private List<Module> _modules;
+        private readonly List<Module> modules;
         public ObservableCollection<string> Modules { get; set; }
 
         public bool IsValid;
@@ -72,16 +72,16 @@ namespace UWP.LearningManagement.ViewModels
             AssignmentItem = SelectedItem as AssignmentItem;
             Assignment = new Assignment();
             DueDate = DateTimeOffset.Now;
-            _modules = SelectedCourse.Modules;
+            modules = SelectedCourse.Modules;
             Modules = new ObservableCollection<string>();
-            foreach (var module in _modules)
+            foreach (var module in modules)
             {
                 Modules.Add(module.Name);
             }
             Modules.Add("Make new Module");
-            _assignmentGroups = SelectedCourse.AssignmentGroups;
+            assignmentGroups = SelectedCourse.AssignmentGroups;
             AssignmentGroups = new ObservableCollection<string>();
-            foreach(var group in _assignmentGroups)
+            foreach(var group in assignmentGroups)
             {
                 AssignmentGroups.Add(group.Name);
             }
@@ -101,16 +101,16 @@ namespace UWP.LearningManagement.ViewModels
             AssignmentItem = SelectedItem as AssignmentItem;
             Assignment = assignment;
             DueDate = DateTimeOffset.Now;
-            _assignmentGroups = SelectedCourse.AssignmentGroups;
+            assignmentGroups = SelectedCourse.AssignmentGroups;
             AssignmentGroups = new ObservableCollection<string>();
-            foreach (var group in _assignmentGroups)
+            foreach (var group in assignmentGroups)
             {
                 AssignmentGroups.Add(group.Name);
             }
             AssignmentGroups.Add("Make new Assignment Group");
-            _modules = SelectedCourse.Modules;
+            modules = SelectedCourse.Modules;
             Modules = new ObservableCollection<string>();
-            foreach (var module in _modules)
+            foreach (var module in modules)
             {
                 Modules.Add(module.Name);
             }
@@ -153,7 +153,7 @@ namespace UWP.LearningManagement.ViewModels
             if (IsValid)
             {
                 Set();
-                Assignment.AssignmentGroup = _assignmentGroups.FirstOrDefault(i => i.Name.Equals(SelectedGroup));
+                Assignment.AssignmentGroup = assignmentGroups.FirstOrDefault(i => i.Name.Equals(SelectedGroup));
 
                 if (SelectedModuleName != null && SelectedModuleName != "Make new Module")
                 {
@@ -161,10 +161,12 @@ namespace UWP.LearningManagement.ViewModels
                     {
                         if (module.Name.Equals(SelectedModuleName))
                         {
-                            AssignmentItem = new AssignmentItem();
-                            AssignmentItem.Name = Assignment.Name;
-                            AssignmentItem.Description = Assignment.Description;
-                            AssignmentItem.Assignment = Assignment;
+                            AssignmentItem = new AssignmentItem
+                            {
+                                Name = Assignment.Name,
+                                Description = Assignment.Description,
+                                Assignment = Assignment
+                            };
                             module.Content.Add(AssignmentItem);
                             SelectedModule = module;
                         }
