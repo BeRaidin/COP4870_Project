@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿using UWP.Library.LearningManagement.Models;
+=======
+﻿using Library.LearningManagement.Models;
+>>>>>>> 6f2539601f20f679f9783d6d981f49a0344142e6
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearningManagement.API.Controllers
