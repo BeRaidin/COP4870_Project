@@ -4,22 +4,22 @@ using UWP.Library.LearningManagement.Models;
 
 namespace LearningManagement.API.EC
 {
-    public class StudentEC
+    public class InstructorEC
     {
-        public List<StudentDTO> GetStudents()
+        public List<InstructorDTO> GetInstructors()
         {
-            return FakeDataBase.Students.Select(s => new StudentDTO(s)).ToList();
+            return FakeDataBase.Instructors.Select(s => new InstructorDTO(s)).ToList();
         }
 
-        public StudentDTO AddorUpdateStudent(StudentDTO p)
+        public InstructorDTO AddorUpdateInstructor(InstructorDTO p)
         {
-            if(int.Parse(p.Id) <= 0)
+            if (int.Parse(p.Id) <= 0)
             {
                 var lastId = FakeDataBase.People.Select(p => int.Parse(p.Id)).Max();
                 p.Id = lastId++.ToString();
             }
 
-            FakeDataBase.People.Add(new Student(p));
+            FakeDataBase.People.Add(new Instructor(p));
             return p;
         }
     }
