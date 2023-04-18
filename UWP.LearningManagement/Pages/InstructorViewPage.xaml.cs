@@ -50,7 +50,6 @@ namespace UWP.LearningManagement
         {
             var addDialog = new StudentDialog();
             addDialog.ShowAsync();
-            //(DataContext as InstructorViewViewModel).Add();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)

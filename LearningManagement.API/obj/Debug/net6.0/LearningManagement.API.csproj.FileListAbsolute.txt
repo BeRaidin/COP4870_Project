@@ -9,6 +9,8 @@ C:\Users\Brayden\source\repos\COP4870_Project\LearningManagement.API\bin\Debug\n
 C:\Users\Brayden\source\repos\COP4870_Project\LearningManagement.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Brayden\source\repos\COP4870_Project\LearningManagement.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Brayden\source\repos\COP4870_Project\LearningManagement.API\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Brayden\source\repos\COP4870_Project\LearningManagement.API\bin\Debug\net6.0\UWP.Library.LearningManagement.dll
+C:\Users\Brayden\source\repos\COP4870_Project\LearningManagement.API\bin\Debug\net6.0\UWP.Library.LearningManagement.pdb
 C:\Users\Brayden\source\repos\COP4870_Project\LearningManagement.API\obj\Debug\net6.0\LearningManagement.API.csproj.AssemblyReference.cache
 C:\Users\Brayden\source\repos\COP4870_Project\LearningManagement.API\obj\Debug\net6.0\LearningManagement.API.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Brayden\source\repos\COP4870_Project\LearningManagement.API\obj\Debug\net6.0\LearningManagement.API.AssemblyInfoInputs.cache
@@ -30,5 +32,3 @@ C:\Users\Brayden\source\repos\COP4870_Project\LearningManagement.API\obj\Debug\n
 C:\Users\Brayden\source\repos\COP4870_Project\LearningManagement.API\obj\Debug\net6.0\LearningManagement.API.pdb
 C:\Users\Brayden\source\repos\COP4870_Project\LearningManagement.API\obj\Debug\net6.0\LearningManagement.API.genruntimeconfig.cache
 C:\Users\Brayden\source\repos\COP4870_Project\LearningManagement.API\obj\Debug\net6.0\ref\LearningManagement.API.dll
-C:\Users\Brayden\source\repos\COP4870_Project\LearningManagement.API\bin\Debug\net6.0\UWP.Library.LearningManagement.dll
-C:\Users\Brayden\source\repos\COP4870_Project\LearningManagement.API\bin\Debug\net6.0\UWP.Library.LearningManagement.pdb

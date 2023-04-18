@@ -8,19 +8,45 @@ namespace LearningManagement.API.EC
     {
         public List<InstructorDTO> GetInstructors()
         {
-            return FakeDataBase.Instructors.Select(s => new InstructorDTO(s)).ToList();
+            var returnList = new List<InstructorDTO>();
+            foreach(var person in FakeDataBase.Instructors)
+            {
+                returnList.Add(new InstructorDTO(person));
+            }
+            return returnList;
         }
 
-        public InstructorDTO AddorUpdateInstructor(InstructorDTO p)
+        public List<TeachingAssistantDTO> GetAssistants()
         {
-            if (int.Parse(p.Id) <= 0)
+            var returnList = new List<TeachingAssistantDTO>();
+            foreach (var person in FakeDataBase.Assistants)
+            {
+                returnList.Add(new TeachingAssistantDTO(person));
+            }
+            return returnList;
+        }
+
+        public InstructorDTO AddorUpdateInstructor(InstructorDTO i)
+        {
+            if (int.Parse(i.Id) <= 0)
             {
                 var lastId = FakeDataBase.People.Select(p => int.Parse(p.Id)).Max();
-                p.Id = lastId++.ToString();
+                i.Id = lastId++.ToString();
             }
 
-            FakeDataBase.People.Add(new Instructor(p));
-            return p;
+            FakeDataBase.People.Add(new Instructor(i));
+            return i;
+        }
+        public TeachingAssistantDTO AddorUpdateTeachingAssistant(TeachingAssistantDTO t)
+        {
+            if (int.Parse(t.Id) <= 0)
+            {
+                var lastId = FakeDataBase.People.Select(p => int.Parse(p.Id)).Max();
+                t.Id = lastId++.ToString();
+            }
+       
+            FakeDataBase.People.Add(new TeachingAssistant(t));
+            return t;
         }
     }
 }

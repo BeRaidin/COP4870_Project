@@ -18,17 +18,31 @@ namespace UWP.LearningManagement.ViewModels
         private readonly SemesterService semesterService;
 
 
-        public IEnumerable<InstructorViewModel> AllInstructors
+        public IEnumerable<PersonViewModel> AllInstructors
         {
             get
             {
-                var payload = new WebRequestHandler().Get("http://localhost:5159/Instructor").Result;
-                var returnVal = JsonConvert.DeserializeObject<List<InstructorDTO>>(payload).Select(d => new InstructorViewModel(d));
+                var payloadInstructors = new WebRequestHandler().Get("http://localhost:5159/Instructor").Result;
+                var payloadAssistants = new WebRequestHandler().Get("http://localhost:5159/TeachingAssistant").Result;
+                List<InstructorViewModel> instructorsList = JsonConvert.DeserializeObject<List<InstructorDTO>>(payloadInstructors).Select(d => new InstructorViewModel(d)).ToList();
+                List<TeachingAssistantViewModel> assistantsList = JsonConvert.DeserializeObject<List<TeachingAssistantDTO>>(payloadAssistants).Select(d => new TeachingAssistantViewModel(d)).ToList();
+                List<PersonViewModel> results = new List<PersonViewModel>();
+                foreach(var instructor in  instructorsList)
+                {
+                    results.Add(instructor);
+                }
+                foreach (var TeachingAssistant in assistantsList)
+                {
+                    results.Add(TeachingAssistant);
+                }
+
+                IEnumerable<PersonViewModel> returnVal = results;
+
                 return returnVal;
             }
         }
 
-        public ObservableCollection<InstructorViewModel> Instructors { get; set; }
+        public ObservableCollection<PersonViewModel> Instructors { get; set; }
         public Person SelectedPerson
         {
             get { return personService.CurrentPerson; }
@@ -52,7 +66,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             personService = PersonService.Current;
             semesterService = SemesterService.Current;
-            Instructors = new ObservableCollection<InstructorViewModel>(AllInstructors);
+            Instructors = new ObservableCollection<PersonViewModel>(AllInstructors);
         }
 
         public void Search()
@@ -60,7 +74,7 @@ namespace UWP.LearningManagement.ViewModels
             if (Query != null && Query != "")
             {
 
-                IEnumerable<InstructorViewModel> searchResults = AllInstructors.Where(i => i.Dto.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+                IEnumerable<PersonViewModel> searchResults = AllInstructors.Where(i => i.Dto.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
                                                     || i.Dto.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 Instructors.Clear();
                 foreach (var person in searchResults)
