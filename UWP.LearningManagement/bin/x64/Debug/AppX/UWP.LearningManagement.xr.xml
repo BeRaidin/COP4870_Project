@@ -27,6 +27,9 @@
     <RootPropertyPathName Name="Key" />
     <RootPropertyPathName Name="Code" />
     <RootPropertyPathName Name="Students" />
+    <RootPropertyPathName Name="Dto" />
+    <RootPropertyPathName Name="LastName" />
+    <RootPropertyPathName Name="FirstName" />
     <RootPropertyPathName Name="Assignments" />
     <RootPropertyPathName Name="SelectedAssignment" />
     <RootPropertyPathName Name="SelectedModule" />
@@ -36,8 +39,6 @@
     <RootPropertyPathName Name="Hours" />
     <RootPropertyPathName Name="Room" />
     <RootPropertyPathName Name="Instructors" />
-    <RootPropertyPathName Name="LastName" />
-    <RootPropertyPathName Name="FirstName" />
     <RootPropertyPathName Name="StudentLevels" />
     <RootPropertyPathName Name="SelectedClass" />
     <RootPropertyPathName Name="PersonTypes" />
@@ -159,6 +160,7 @@
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.PreviousSemesterDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.RosterDialog" />
+    <RootType FullName="UWP.LearningManagement.Dialogs.StudentDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.UpdateAnnouncementDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
       <RootProperty Name="Background" />

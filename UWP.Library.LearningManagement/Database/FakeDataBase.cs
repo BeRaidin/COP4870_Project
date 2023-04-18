@@ -5,13 +5,12 @@ namespace UWP.Library.LearningManagement.Database
 {
     public static class FakeDataBase
     {
-        private static readonly List<Person> people = new List<Person>
+        public static List<Person> people = new List<Person>
         {
             new Student {Id = "0", FirstName="Brayden", LastName="Lewis", Classification=Student.Classes.Sophmore},
             new Person {Id = "1", FirstName="Chris", LastName="Millls"}
         };
 
-        private static readonly List<Student> students = new List<Student>();
         private static readonly List<Course> courses = new List<Course>();
         private static readonly List<Semester> semesters = new List<Semester>();
 
