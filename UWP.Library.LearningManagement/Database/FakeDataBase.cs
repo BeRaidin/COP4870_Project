@@ -43,5 +43,21 @@ namespace UWP.Library.LearningManagement.Database
             get { return people; }
 
         }
+
+        public static List<Person> Instructors
+        {
+            get
+            {
+                var returnList = new List<Person>();
+                foreach (var person in people)
+                {
+                    if (person as Student == null)
+                    {
+                        returnList.Add(person);
+                    }
+                }
+                return returnList;
+            }
+        }
     }
 }

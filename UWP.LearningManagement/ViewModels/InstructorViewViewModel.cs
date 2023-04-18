@@ -6,6 +6,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using UWP.LearningManagement.Dialogs;
 using UWP.Library.LearningManagement.Database;
+using Newtonsoft.Json;
+using UWP.LearningManagement.API.Util;
+using UWP.Library.LearningManagement.DTO;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -13,9 +16,19 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly PersonService personService;
         private readonly SemesterService semesterService;
-        private List<Person> AllInstructors { get; set; }
 
-        public ObservableCollection<Person> Instructors { get; set; }
+
+        public IEnumerable<InstructorViewModel> AllInstructors
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Instructor").Result;
+                var returnVal = JsonConvert.DeserializeObject<List<InstructorDTO>>(payload).Select(d => new InstructorViewModel(d));
+                return returnVal;
+            }
+        }
+
+        public ObservableCollection<InstructorViewModel> Instructors { get; set; }
         public Person SelectedPerson
         {
             get { return personService.CurrentPerson; }
@@ -39,15 +52,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             personService = PersonService.Current;
             semesterService = SemesterService.Current;
-            AllInstructors = new List<Person>();
-            foreach (var person in SelectedSemester.People)
-            {
-                if (person as Student == null)
-                {
-                    AllInstructors.Add(person);
-                }
-            }
-            Instructors = new ObservableCollection<Person>(AllInstructors);
+            Instructors = new ObservableCollection<InstructorViewModel>(AllInstructors);
         }
 
         public void Search()
@@ -55,8 +60,8 @@ namespace UWP.LearningManagement.ViewModels
             if (Query != null && Query != "")
             {
 
-                IEnumerable<Person> searchResults = AllInstructors.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
-                                                    || i.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                IEnumerable<InstructorViewModel> searchResults = AllInstructors.Where(i => i.Dto.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+                                                    || i.Dto.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 Instructors.Clear();
                 foreach (var person in searchResults)
                 {
@@ -87,16 +92,7 @@ namespace UWP.LearningManagement.ViewModels
                     await errorDialog.ShowAsync();
                 }
             }
-            AllInstructors.Clear();
-            Instructors.Clear();
-            foreach (var person in SelectedSemester.People)
-            {
-                if (person as Student == null)
-                {
-                    AllInstructors.Add(person);
-                    Instructors.Add(person);
-                }
-            }
+            Refresh();
         }
 
         public void Refresh()

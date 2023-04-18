@@ -27,6 +27,7 @@ namespace UWP.Library.LearningManagement.Models
         {
             Grades = new List<GradesDictionary>();
             FinalGrades = new Dictionary<Course, double>();
+            IsSelected = false;
         }
         public Student(StudentDTO dto)
         {
@@ -34,6 +35,7 @@ namespace UWP.Library.LearningManagement.Models
             FirstName = dto.FirstName;
             LastName = dto.LastName;
             Courses = dto.Courses;
+            IsSelected = false;
             if (dto.Classification == StudentDTO.Classes.Freshman)
             {
                 Classification = Classes.Freshman;
