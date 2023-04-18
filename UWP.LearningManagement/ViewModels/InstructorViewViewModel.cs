@@ -69,6 +69,8 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
 
+        
+
         public async void Add()
         {
             SelectedPerson = new Person();

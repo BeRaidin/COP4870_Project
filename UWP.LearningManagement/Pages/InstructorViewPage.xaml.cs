@@ -46,9 +46,11 @@ namespace UWP.LearningManagement
             Frame.Navigate(typeof(MainPage));
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
+        private async void Add_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as InstructorViewViewModel).Add();
+            var addDialog = new StudentDialog();
+            addDialog.ShowAsync();
+            //(DataContext as InstructorViewViewModel).Add();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)

@@ -13,7 +13,13 @@ namespace LearningManagement.API.EC
 
         public StudentDTO AddorUpdateStudent(StudentDTO p)
         {
-            FakeDataBase.Students.Add(new Student(p));
+            if(int.Parse(p.Id) <= 0)
+            {
+                var lastId = FakeDataBase.Students.Select(p => int.Parse(p.Id)).Max();
+                p.Id = lastId++.ToString();
+            }
+
+            FakeDataBase.people.Add(new Student(p));
             return p;
         }
     }
