@@ -8,7 +8,8 @@ namespace UWP.Library.LearningManagement.Database
         public static List<Person> people = new List<Person>
         {
             new Student {Id = "0", FirstName="Brayden", LastName="Lewis", Classification=Student.Classes.Sophmore},
-            new Person {Id = "1", FirstName="Chris", LastName="Millls"}
+            new Instructor {Id = "1", FirstName="Chris", LastName="Millls"},
+            new TeachingAssistant {Id = "2", FirstName="Joe", LastName="Joey"}
         };
 
         private static readonly List<Course> courses = new List<Course>();
@@ -44,16 +45,32 @@ namespace UWP.Library.LearningManagement.Database
 
         }
 
-        public static List<Person> Instructors
+        public static List<Instructor> Instructors
         {
             get
             {
-                var returnList = new List<Person>();
+                var returnList = new List<Instructor>();
                 foreach (var person in people)
                 {
-                    if (person as Student == null)
+                    if (person is Instructor instructor)
                     {
-                        returnList.Add(person);
+                        returnList.Add(instructor);
+                    }
+                }
+                return returnList;
+            }
+        }
+
+        public static List<TeachingAssistant> Assistants
+        {
+            get
+            {
+                var returnList = new List<TeachingAssistant>();
+                foreach (var person in people)
+                {
+                    if (person is TeachingAssistant assistant)
+                    {
+                        returnList.Add(assistant);
                     }
                 }
                 return returnList;

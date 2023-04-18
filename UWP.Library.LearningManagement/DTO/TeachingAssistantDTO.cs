@@ -5,13 +5,13 @@ using UWP.Library.LearningManagement.Models;
 
 namespace UWP.Library.LearningManagement.DTO
 {
-    public class InstructorDTO : PersonDTO
+    public class TeachingAssistantDTO : PersonDTO
     {
-        public InstructorDTO()
+        public TeachingAssistantDTO()
         {
         }
 
-        public InstructorDTO(Person person)
+        public TeachingAssistantDTO(Person person)
         {
             Id = person.Id;
             FirstName = person.FirstName;

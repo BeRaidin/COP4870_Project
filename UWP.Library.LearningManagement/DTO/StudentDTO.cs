@@ -3,13 +3,8 @@ using UWP.Library.LearningManagement.Models;
 
 namespace UWP.Library.LearningManagement.DTO
 {
-    public class StudentDTO
+    public class StudentDTO : PersonDTO
     {
-        public string Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public List<Course> Courses { get; set; }
-        public bool IsSelected { get; set; }
         public List<GradesDictionary> Grades { get; set; }
         public Classes Classification { get; set; }
         public enum Classes

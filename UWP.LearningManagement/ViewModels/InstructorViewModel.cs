@@ -9,13 +9,12 @@ using UWP.Library.LearningManagement.DTO;
 
 namespace UWP.LearningManagement.ViewModels
 {
-    public class InstructorViewModel
+    public class InstructorViewModel : PersonViewModel
     {
-        public InstructorDTO Dto { get; set; }
 
-        public string Display
+        public new string Display
         {
-            get { return $"[{Dto.Id}] {Dto.FirstName} {Dto.LastName}"; }
+            get { return $"[{Dto.Id}] {Dto.FirstName} {Dto.LastName} - Instructor"; }
         }
 
         public InstructorViewModel(InstructorDTO dto)
@@ -26,15 +25,14 @@ namespace UWP.LearningManagement.ViewModels
         public InstructorViewModel()
         {
             Dto = new InstructorDTO { Id = "-1" };
-
         }
 
-        public async Task<InstructorDTO> Addstudent()
-        {
-            var handler = new WebRequestHandler();
-            var returnVal = await handler.Post("http://localhost:5159/Instructor", Dto);
-            var deserializedReturn = JsonConvert.DeserializeObject<InstructorDTO>(returnVal);
-            return deserializedReturn;
-        }
+       // public async Task<InstructorDTO> AddInstructor()
+       // {
+       //     var handler = new WebRequestHandler();
+       //     var returnVal = await handler.Post("http://localhost:5159/Instructor", Dto);
+       //     var deserializedReturn = JsonConvert.DeserializeObject<InstructorDTO>(returnVal);
+       //     return deserializedReturn;
+       // }
     }
 }
