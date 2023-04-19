@@ -22,10 +22,16 @@ namespace LearningManagement.API.Controllers
             return new InstructorEC().GetAssistants();
         }
 
-        [HttpPost]
-        public Person AddorUpdate([FromBody] TeachingAssistant dto)
+        [HttpPost("AddOrUpdate")]
+        public Person AddorUpdate([FromBody] TeachingAssistant assistant)
         {
-            return new InstructorEC().AddorUpdateAdmin(dto);
+            return new InstructorEC().AddorUpdateAdmin(assistant);
+        }
+
+        [HttpPost("Delete")]
+        public void DeleteInstructor([FromBody] TeachingAssistant assistant)
+        {
+            new InstructorEC().Delete(assistant);
         }
     }
 }

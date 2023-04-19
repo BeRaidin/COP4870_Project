@@ -52,9 +52,9 @@ namespace UWP.LearningManagement
             await addDialog.ShowAsync();
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        private void GoToEditStudents_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(UnenrollStudentsPage));
+            Frame.Navigate(typeof(EditStudentsPage));
         }
 
         private async void AddAdmin_Click(object sender, RoutedEventArgs e)
@@ -64,10 +64,19 @@ namespace UWP.LearningManagement
             (DataContext as InstructorViewViewModel).Refresh();
         }
 
-        private async void EditPerson_Click(object sender, RoutedEventArgs e)
+        private async void EditAdmin_Click(object sender, RoutedEventArgs e)
         {
-            var addDialog = new AdminDialog(DataContext as InstructorViewViewModel);
-            await addDialog.ShowAsync();
+            if ((DataContext as InstructorViewViewModel).SelectedInstructor != null)
+            {
+                var addDialog = new AdminDialog(DataContext as InstructorViewViewModel);
+                await addDialog.ShowAsync();
+                (DataContext as InstructorViewViewModel).Refresh();
+            }
+        }
+
+        private async void RemoveAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            await (DataContext as InstructorViewViewModel).Delete();
             (DataContext as InstructorViewViewModel).Refresh();
         }
     }

@@ -20,15 +20,15 @@ namespace UWP.LearningManagement.ViewModels
             get { return $"[{Student.Id}] {Student.FirstName} {Student.LastName} - {Student.Classification}"; }
         }
 
+
+        public StudentViewModel() 
+        {
+            Student = new Student { Id = "-1" };
+        }
+
         public StudentViewModel(Student student)
         {
             Student = student;
-        }
-
-        public StudentViewModel()
-        {
-            Student = new Student { Id = "-1"};
-
         }
 
         public async Task<Student> Addstudent()
@@ -48,7 +48,7 @@ namespace UWP.LearningManagement.ViewModels
             else Student.Classification = Student.Classes.Senior;
 
             var handler = new WebRequestHandler();
-            var returnVal = await handler.Post("http://localhost:5159/Student", Student);
+            var returnVal = await handler.Post("http://localhost:5159/Student/AddOrUpdate", Student);
             var deserializedReturn = JsonConvert.DeserializeObject<Student>(returnVal);
             return deserializedReturn;
         }

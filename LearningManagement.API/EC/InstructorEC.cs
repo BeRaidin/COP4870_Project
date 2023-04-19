@@ -15,46 +15,53 @@ namespace LearningManagement.API.EC
             return FakeDataBase.Assistants;
         }
 
-        public Person AddorUpdateAdmin(Person p)
+        public Person AddorUpdateAdmin(Person i)
         {
             bool isNew = false;
             if(FakeDataBase.People.Count == 0)        
             {
-                p.Id = "0";
+                i.Id = "0";
                 isNew = true;
             }
-            else if (int.Parse(p.Id) <= 0)
+            else if (int.Parse(i.Id) < 0)
             {
                 var lastId = FakeDataBase.People.Select(p => int.Parse(p.Id)).Max();
                 lastId++;
-                p.Id = lastId.ToString();
+                i.Id = lastId.ToString();
                 isNew = true;
             }
 
             if (isNew)
             {
-                if (p is Instructor instructor)
+                if (i is Instructor instructor)
                 {
                     FakeDataBase.People.Add(instructor);
                 }
-                else if (p is TeachingAssistant assistant)
+                else if (i is TeachingAssistant assistant)
                 {
                     FakeDataBase.People.Add(assistant);
                 }
             }
             else
             {
-                foreach(var person in FakeDataBase.People)
+                var editedInstructor = FakeDataBase.People.FirstOrDefault(p => p.Id == i.Id);
+                if(editedInstructor != null)
                 {
-                    if(person.Id == p.Id)
-                    {
-                        person.FirstName = p.FirstName;
-                        person.LastName = p.LastName;
-                        break;
-                    }
+                    editedInstructor.FirstName = i.FirstName;
+                    editedInstructor.LastName = i.LastName;
                 }
             }
-            return p;
+            return i;
+        }
+
+        public void Delete(Person p)
+        {
+
+            var deletedPerson = FakeDataBase.People.FirstOrDefault(d => d.Id == p.Id);
+            if(deletedPerson != null)
+            {
+                FakeDataBase.People.Remove(deletedPerson);
+            }
         }
     }
 }

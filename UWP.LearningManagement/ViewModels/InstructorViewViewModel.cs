@@ -9,6 +9,7 @@ using UWP.Library.LearningManagement.Database;
 using Newtonsoft.Json;
 using UWP.LearningManagement.API.Util;
 using Windows.Devices.Bluetooth.Advertisement;
+using System.Threading.Tasks;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -88,6 +89,13 @@ namespace UWP.LearningManagement.ViewModels
             {
                 Refresh();
             }
+        }
+
+        public async Task<Person> Delete()
+        {
+            string returnVal = await new WebRequestHandler().Post("http://localhost:5159/Instructor/Delete", SelectedInstructor.Person);
+            var deserializedReturn = JsonConvert.DeserializeObject<Instructor>(returnVal);
+            return deserializedReturn;
         }
 
         public void Refresh()

@@ -12,16 +12,45 @@ namespace LearningManagement.API.EC
 
         public Student AddorUpdateStudent(Student s)
         {
-            if (int.Parse(s.Id) <= 0 && FakeDataBase.People.Count > 0)
+            bool isNew = false;
+            if (FakeDataBase.People.Count == 0)
+            {
+                s.Id = "0";
+                isNew = true;
+            }
+            else if (int.Parse(s.Id) < 0)
             {
                 var lastId = FakeDataBase.People.Select(p => int.Parse(p.Id)).Max();
                 lastId++;
                 s.Id = lastId.ToString();
+                isNew = true;
             }
-            else s.Id = "0";
 
-            FakeDataBase.People.Add(s);
+            if (isNew)
+            {
+                FakeDataBase.People.Add(s);
+            }
+            else
+            {
+                var editedStudent = FakeDataBase.People.FirstOrDefault(p => p.Id == s.Id) as Student;
+                if(editedStudent != null)
+                {
+                    editedStudent.FirstName = s.FirstName;
+                    editedStudent.LastName = s.LastName;
+                    editedStudent.Classification = s.Classification;
+                }
+            }
             return s;
+        }
+
+        public void Delete(Person p)
+        {
+
+            var deletedPerson = FakeDataBase.People.FirstOrDefault(d => d.Id == p.Id);
+            if (deletedPerson != null)
+            {
+                FakeDataBase.People.Remove(deletedPerson);
+            }
         }
     }
 }

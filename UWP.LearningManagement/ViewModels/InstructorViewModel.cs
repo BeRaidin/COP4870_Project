@@ -30,7 +30,6 @@ namespace UWP.LearningManagement.ViewModels
         public InstructorViewModel(InstructorViewViewModel ivm, Instructor instructor)
         {
             ParentViewModel = ivm;
-            ParentViewModel.SelectedPerson = instructor;
             Person = instructor;
         }
 

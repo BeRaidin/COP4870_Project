@@ -29,7 +29,6 @@ namespace UWP.LearningManagement.ViewModels
         public TeachingAssistantViewModel(InstructorViewViewModel ivm, TeachingAssistant assistant)
         {
             ParentViewModel = ivm;
-            ParentViewModel.SelectedPerson = assistant;
             Person = assistant;
         }
     }

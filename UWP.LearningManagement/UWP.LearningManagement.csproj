@@ -191,8 +191,8 @@
     <Compile Include="Pages\CurrentSemesterPage.xaml.cs">
       <DependentUpon>CurrentSemesterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\UnenrollStudentsPage.xaml.cs">
-      <DependentUpon>UnenrollStudentsPage.xaml</DependentUpon>
+    <Compile Include="Pages\EditStudentsPage.xaml.cs">
+      <DependentUpon>EditStudentsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\InstructorDetailsPage.xaml.cs">
       <DependentUpon>InstructorDetailsPage.xaml</DependentUpon>
@@ -237,7 +237,7 @@
     <Compile Include="ViewModels\RosterViewModel.cs" />
     <Compile Include="ViewModels\StudentViewViewModel.cs" />
     <Compile Include="ViewModels\TeachingAssistantViewModel.cs" />
-    <Compile Include="ViewModels\UnenrollStudentsViewModel.cs" />
+    <Compile Include="ViewModels\EditStudentsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -355,7 +355,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\UnenrollStudentsPage.xaml">
+    <Page Include="Pages\EditStudentsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

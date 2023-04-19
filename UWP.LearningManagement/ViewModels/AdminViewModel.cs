@@ -51,12 +51,12 @@ namespace UWP.LearningManagement.ViewModels
             Person deserializedReturn;
             if (SelectedType == "Instructor")
             {
-                returnVal = await handler.Post("http://localhost:5159/Instructor", Person);
+                returnVal = await handler.Post("http://localhost:5159/Instructor/AddOrUpdate", Person);
                 deserializedReturn = JsonConvert.DeserializeObject<Instructor>(returnVal);
             }
             else
             {
-                returnVal = await handler.Post("http://localhost:5159/TeachingAssistant", Person);
+                returnVal = await handler.Post("http://localhost:5159/TeachingAssistant/AddOrUpdate", Person);
                 deserializedReturn = JsonConvert.DeserializeObject<TeachingAssistant>(returnVal);
             }
 

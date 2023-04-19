@@ -46,6 +46,7 @@
     <RootPropertyPathName Name="Year" />
     <RootPropertyPathName Name="Period" />
     <RootPropertyPathName Name="FinalGrades" />
+    <RootPropertyPathName Name="SelectedStudent" />
     <RootPropertyPathName Name="Query" />
     <RootPropertyPathName Name="SubmittedAssignments" />
     <RootPropertyPathName Name="SelectedGrade" />
@@ -186,7 +187,7 @@
     <RootType FullName="UWP.LearningManagement.Dialogs.EditPersonDialog" />
     <RootType FullName="UWP.LearningManagement.MainPage" />
     <RootType FullName="UWP.LearningManagement.CurrentSemesterPage" />
-    <RootType FullName="UWP.LearningManagement.UnenrollStudentsPage" />
+    <RootType FullName="UWP.LearningManagement.EditStudentsPage" />
     <RootType FullName="UWP.LearningManagement.InstructorDetailsPage" />
     <RootType FullName="Windows.UI.Xaml.Controls.Frame">
       <RootProperty Name="Content" />

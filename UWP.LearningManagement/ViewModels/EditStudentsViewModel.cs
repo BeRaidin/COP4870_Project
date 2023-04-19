@@ -1,19 +1,18 @@
-﻿using Library.LearningManagement.Services;
-using UWP.Library.LearningManagement.Models;
+﻿using UWP.Library.LearningManagement.Models;
+using Library.LearningManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using UWP.LearningManagement.API.Util;
+using UWP.Library.LearningManagement.Database;
 using Newtonsoft.Json;
+using UWP.LearningManagement.API.Util;
+using System.Threading.Tasks;
 
 namespace UWP.LearningManagement.ViewModels
 {
-    public class StudentViewViewModel
+    public class EditStudentsViewModel
     {
-        private readonly PersonService personService;
-        private readonly SemesterService semesterService;
-
         private IEnumerable<StudentViewModel> AllStudents
         {
             get
@@ -23,33 +22,13 @@ namespace UWP.LearningManagement.ViewModels
                 return returnVal;
             }
         }
-        
         public ObservableCollection<StudentViewModel> Students { get; set; }
-        public StudentViewModel SelectedViewModel { get; set; }
-        public Person SelectedPerson
-        {
-            get { return personService.CurrentPerson; }
-            set { personService.CurrentPerson = value; }
-        }
-        public Semester SelectedSemester
-        {
-            get { return semesterService.CurrentSemester; }
-        }
-        public string Query { get; set; }
-        public string Period
-        { 
-            get { return SelectedSemester.Period; } 
-        }
-        public int Year
-        {
-            get { return SelectedSemester.Year; }
-        }
+        public StudentViewModel SelectedStudent { get; set; }
 
-        public StudentViewViewModel() 
+        public string Query { get; set; }
+
+        public EditStudentsViewModel()
         {
-            personService = PersonService.Current;
-            semesterService = SemesterService.Current;
-           
             Students = new ObservableCollection<StudentViewModel>(AllStudents);
         }
 
@@ -57,7 +36,6 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (Query != null && Query != "")
             {
-
                 IEnumerable<StudentViewModel> searchResults = AllStudents.Where(i => i.Student.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
                                                     || i.Student.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
 
@@ -73,12 +51,19 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
 
+        public async Task<Student> Delete()
+        {
+            string returnVal = await new WebRequestHandler().Post("http://localhost:5159/Student/Delete", SelectedStudent.Student);
+            var deserializedReturn = JsonConvert.DeserializeObject<Student>(returnVal);
+            return deserializedReturn;
+        }
+
         public void Refresh()
         {
             Students.Clear();
-            foreach (var person in AllStudents)
+            foreach (var student in AllStudents)
             {
-                Students.Add(person);
+                Students.Add(student);
             }
         }
     }

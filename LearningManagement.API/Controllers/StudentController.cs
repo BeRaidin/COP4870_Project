@@ -21,10 +21,16 @@ namespace LearningManagement.API.Controllers
             return new StudentEC().GetStudents();
         }
 
-        [HttpPost]
-        public Student AddorUpdate([FromBody] Student dto) 
+        [HttpPost("AddOrUpdate")]
+        public Student AddorUpdate([FromBody] Student student) 
         { 
-            return new StudentEC().AddorUpdateStudent(dto);
+            return new StudentEC().AddorUpdateStudent(student);
+        }
+
+        [HttpPost("Delete")]
+        public void DeleteInstructor([FromBody] Student student)
+        {
+            new StudentEC().Delete(student);
         }
     }
 }

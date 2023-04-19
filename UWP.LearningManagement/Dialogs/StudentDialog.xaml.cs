@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UWP.LearningManagement.ViewModels;
+using UWP.Library.LearningManagement.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,6 +23,11 @@ namespace UWP.LearningManagement.Dialogs
         {
             this.InitializeComponent();
             DataContext = new StudentViewModel();
+        }
+        public StudentDialog(Student student)
+        {
+            this.InitializeComponent();
+            DataContext = new StudentViewModel(student);
         }
 
         private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
