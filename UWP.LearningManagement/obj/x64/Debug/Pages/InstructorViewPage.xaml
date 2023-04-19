@@ -28,7 +28,7 @@
                 <Button x:ConnectionId='7'                      Grid.Column="1" Content="Search" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
 
                 <ListBox x:ConnectionId='8' Grid.Row="1" Grid.ColumnSpan="2"
-                ItemsSource="{Binding Instructors, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}"                                    >
+                ItemsSource="{Binding Instructors, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedViewModel, Mode=TwoWay}"                                    >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>

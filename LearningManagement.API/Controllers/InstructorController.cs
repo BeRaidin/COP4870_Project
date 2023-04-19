@@ -1,6 +1,5 @@
 ﻿using LearningManagement.API.EC;
 using Microsoft.AspNetCore.Mvc;
-using UWP.Library.LearningManagement.DTO;
 using UWP.Library.LearningManagement.Models;
 
 namespace LearningManagement.API.Controllers
@@ -17,13 +16,13 @@ namespace LearningManagement.API.Controllers
         }
 
         [HttpGet]
-        public List<InstructorDTO> Get()
+        public List<Instructor> Get()
         {
             return new InstructorEC().GetInstructors();
         }
 
         [HttpPost]
-        public PersonDTO AddorUpdate([FromBody] InstructorDTO dto)
+        public Person AddorUpdate([FromBody] Instructor dto)
         {
             return new InstructorEC().AddorUpdateAdmin(dto);
         }

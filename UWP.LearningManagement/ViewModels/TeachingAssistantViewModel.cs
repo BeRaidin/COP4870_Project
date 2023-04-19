@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UWP.LearningManagement.API.Util;
-using UWP.Library.LearningManagement.DTO;
+using UWP.Library.LearningManagement.Models;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -13,25 +13,24 @@ namespace UWP.LearningManagement.ViewModels
     {
         public new string Display
         {
-            get { return $"[{Dto.Id}] {Dto.FirstName} {Dto.LastName} - Teaching Assistant"; }
+            get { return $"[{Person.Id}] {Person.FirstName} {Person.LastName} - Teaching Assistant"; }
         }
 
-        public TeachingAssistantViewModel(TeachingAssistantDTO dto)
+        public TeachingAssistantViewModel(TeachingAssistant assistant)
         {
-            Dto = dto;
+            Person = assistant;
         }
 
         public TeachingAssistantViewModel()
         {
-            Dto = new TeachingAssistantDTO { Id = "-1" };
-
+            Person = new TeachingAssistant { Id = "-1" };
         }
 
-        public async Task<TeachingAssistantDTO> AddTeachingAssistant()
+        public async Task<TeachingAssistant> AddTeachingAssistant()
         {
             var handler = new WebRequestHandler();
-            var returnVal = await handler.Post("http://localhost:5159/TeachingAssistant", Dto);
-            var deserializedReturn = JsonConvert.DeserializeObject<TeachingAssistantDTO>(returnVal);
+            var returnVal = await handler.Post("http://localhost:5159/TeachingAssistant", Person);
+            var deserializedReturn = JsonConvert.DeserializeObject<TeachingAssistant>(returnVal);
             return deserializedReturn;
         }
     }

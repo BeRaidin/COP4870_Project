@@ -24,7 +24,6 @@ Dialogs\GradeDialog.xbf
 Dialogs\InstructorJoinCourseDialog.xbf
 Dialogs\ModuleDialog.xbf
 Dialogs\NewAssignmentDialog.xbf
-Dialogs\PersonDialog.xbf
 Dialogs\PreviousSemesterDialog.xbf
 Dialogs\RosterDialog.xbf
 Dialogs\StudentDialog.xbf

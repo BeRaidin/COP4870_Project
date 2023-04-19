@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UWP.Library.LearningManagement.DTO;
 
 namespace UWP.Library.LearningManagement.Models
 {

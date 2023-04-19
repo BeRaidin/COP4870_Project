@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UWP.Library.LearningManagement.DTO;
 
 namespace UWP.Library.LearningManagement.Models
 {
@@ -13,13 +12,5 @@ namespace UWP.Library.LearningManagement.Models
 
         public Instructor() { }
 
-        public Instructor(InstructorDTO dto) 
-        { 
-            Id = dto.Id ;
-            FirstName = dto.FirstName;
-            LastName = dto.LastName;
-            Courses = dto.Courses;
-            IsSelected = false;
-        }
     }
 }

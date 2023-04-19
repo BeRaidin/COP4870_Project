@@ -1,20 +1,14 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using UWP.LearningManagement.API.Util;
-using UWP.Library.LearningManagement.DTO;
 using UWP.Library.LearningManagement.Models;
-using Windows.Data.Json;
 
 namespace UWP.LearningManagement.ViewModels
 {
     public class StudentViewModel
     {
-        public StudentDTO Dto { get; set; }
+        public Student Student { get; set; }
         public ObservableCollection<string> StudentLevels
         {
             get { return new ObservableCollection<string> { "Freshman", "Sophmore", "Junior", "Senior" }; }
@@ -23,39 +17,39 @@ namespace UWP.LearningManagement.ViewModels
 
         public string Display
         {
-            get { return $"[{Dto.Id}] {Dto.FirstName} {Dto.LastName} - {Dto.Classification}"; }
+            get { return $"[{Student.Id}] {Student.FirstName} {Student.LastName} - {Student.Classification}"; }
         }
 
-        public StudentViewModel(StudentDTO dto)
+        public StudentViewModel(Student student)
         {
-            Dto = dto;
+            Student = student;
         }
 
         public StudentViewModel()
         {
-            Dto = new StudentDTO{ Id = "-1"};
+            Student = new Student { Id = "-1"};
 
         }
 
-        public async Task<StudentDTO> Addstudent()
+        public async Task<Student> Addstudent()
         {
             if (SelectedClass == null || SelectedClass == "" || SelectedClass == "Freshman")
             {
-                Dto.Classification = StudentDTO.Classes.Freshman;
+                Student.Classification = Student.Classes.Freshman;
             }
             else if (SelectedClass == "Sophmore")
             {
-                Dto.Classification = StudentDTO.Classes.Sophmore;
+                Student.Classification = Student.Classes.Sophmore;
             }
             else if (SelectedClass == "Junior")
             {
-                Dto.Classification = StudentDTO.Classes.Junior;
+                Student.Classification = Student.Classes.Junior;
             }
-            else Dto.Classification = StudentDTO.Classes.Senior;
+            else Student.Classification = Student.Classes.Senior;
 
             var handler = new WebRequestHandler();
-            var returnVal = await handler.Post("http://localhost:5159/Student", Dto);
-            var deserializedReturn = JsonConvert.DeserializeObject<StudentDTO>(returnVal);
+            var returnVal = await handler.Post("http://localhost:5159/Student", Student);
+            var deserializedReturn = JsonConvert.DeserializeObject<Student>(returnVal);
             return deserializedReturn;
         }
         

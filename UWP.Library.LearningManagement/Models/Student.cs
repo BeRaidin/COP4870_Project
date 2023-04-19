@@ -6,7 +6,6 @@ using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UWP.Library.LearningManagement.DTO;
 
 namespace UWP.Library.LearningManagement.Models
 {
@@ -28,30 +27,6 @@ namespace UWP.Library.LearningManagement.Models
             Grades = new List<GradesDictionary>();
             FinalGrades = new Dictionary<Course, double>();
             IsSelected = false;
-        }
-        public Student(StudentDTO dto)
-        {
-            Id = dto.Id;
-            FirstName = dto.FirstName;
-            LastName = dto.LastName;
-            Courses = dto.Courses;
-            IsSelected = false;
-            if (dto.Classification == StudentDTO.Classes.Freshman)
-            {
-                Classification = Classes.Freshman;
-            }
-            else if (dto.Classification == StudentDTO.Classes.Sophmore)
-            {
-                Classification = Classes.Sophmore;
-            }
-            else if (dto.Classification == StudentDTO.Classes.Junior)
-            {
-                Classification = Classes.Junior;
-            }
-            else
-            {
-                Classification = Classes.Senior;
-            }
         }
 
         public void Remove(Assignment assignment)

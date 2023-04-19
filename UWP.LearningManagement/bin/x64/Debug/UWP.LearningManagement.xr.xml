@@ -3,7 +3,7 @@
   <Roots.PropertyPathNames>
     <RootPropertyPathName Name="AdminTypes" />
     <RootPropertyPathName Name="SelectedType" />
-    <RootPropertyPathName Name="Dto" />
+    <RootPropertyPathName Name="Person" />
     <RootPropertyPathName Name="LastName" />
     <RootPropertyPathName Name="FirstName" />
     <RootPropertyPathName Name="Message" />
@@ -33,6 +33,7 @@
     <RootPropertyPathName Name="Students" />
     <RootPropertyPathName Name="StudentLevels" />
     <RootPropertyPathName Name="SelectedClass" />
+    <RootPropertyPathName Name="Student" />
     <RootPropertyPathName Name="Assignments" />
     <RootPropertyPathName Name="SelectedAssignment" />
     <RootPropertyPathName Name="SelectedModule" />
@@ -42,7 +43,6 @@
     <RootPropertyPathName Name="Hours" />
     <RootPropertyPathName Name="Room" />
     <RootPropertyPathName Name="Instructors" />
-    <RootPropertyPathName Name="PersonTypes" />
     <RootPropertyPathName Name="Year" />
     <RootPropertyPathName Name="Period" />
     <RootPropertyPathName Name="FinalGrades" />
@@ -53,7 +53,7 @@
     <RootPropertyPathName Name="Type" />
     <RootPropertyPathName Name="Id" />
     <RootPropertyPathName Name="Semester" />
-    <RootPropertyPathName Name="SelectedPerson" />
+    <RootPropertyPathName Name="SelectedViewModel" />
     <RootPropertyPathName Name="Course" />
     <RootPropertyPathName Name="ContentItems" />
     <RootPropertyPathName Name="SelectedItem" />
@@ -183,7 +183,6 @@
     <RootType FullName="UWP.LearningManagement.Dialogs.CourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditCourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.EditPersonDialog" />
-    <RootType FullName="UWP.LearningManagement.Dialogs.PersonDialog" />
     <RootType FullName="UWP.LearningManagement.MainPage" />
     <RootType FullName="UWP.LearningManagement.CurrentSemesterPage" />
     <RootType FullName="UWP.LearningManagement.UnenrollStudentsPage" />
