@@ -24,9 +24,9 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Text="First Name"/>
-        <TextBox Grid.Column="1" Text="{Binding Path=Dto.FirstName, Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Text="{Binding Path=Student.FirstName, Mode=TwoWay}"/>
         <TextBlock Grid.Row="1" Text="Last Name"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=Dto.LastName, Mode=TwoWay}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=Student.LastName, Mode=TwoWay}"/>
         <TextBlock Grid.Row="2" Text="Grade Level"/>
         <ComboBox HorizontalAlignment="Stretch" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding StudentLevels}" SelectedItem="{Binding SelectedClass, Mode=TwoWay}" />
 

@@ -6,17 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UWP.LearningManagement.API.Util;
-using UWP.Library.LearningManagement.Models;
+using UWP.Library.LearningManagement.DTO;
 
 namespace UWP.LearningManagement.ViewModels
 {
-    public class AdminViewModel
+    public class PersonViewModel
     {
-        public Person Person { get; set; }
+        public PersonDTO Dto { get; set; }
 
         public string Display
         {
-            get { return $"[{Person.Id}] {Person.FirstName} {Person.LastName}"; }
+            get { return $"[{Dto.Id}] {Dto.FirstName} {Dto.LastName}"; }
         }
 
         public ObservableCollection<string> AdminTypes
@@ -29,32 +29,32 @@ namespace UWP.LearningManagement.ViewModels
 
         public string SelectedType { get; set; }
 
-        public AdminViewModel(Person person)
+        public PersonViewModel(PersonDTO dto)
         {
-            Person = person;
+            Dto = dto;
         }
 
-        public AdminViewModel()
+        public PersonViewModel()
         {
-            Person = new Person { Id = "-1" };
+            Dto = new PersonDTO { Id = "-1" };
         }
 
-        public async Task<Person> AddAdmin()
+        public async Task<PersonDTO> AddAdmin()
         {
             var handler = new WebRequestHandler();
             string returnVal;
 
 
-            Person deserializedReturn;
+            PersonDTO deserializedReturn;
             if (SelectedType == "Instructor")
             {
-                returnVal = await handler.Post("http://localhost:5159/Instructor", Person);
-                deserializedReturn = JsonConvert.DeserializeObject<Instructor>(returnVal);
+                returnVal = await handler.Post("http://localhost:5159/Instructor", Dto);
+                deserializedReturn = JsonConvert.DeserializeObject<InstructorDTO>(returnVal);
             }
             else
             {
-                returnVal = await handler.Post("http://localhost:5159/TeachingAssistant", Person);
-                deserializedReturn = JsonConvert.DeserializeObject<TeachingAssistant>(returnVal);
+                returnVal = await handler.Post("http://localhost:5159/TeachingAssistant", Dto);
+                deserializedReturn = JsonConvert.DeserializeObject<TeachingAssistantDTO>(returnVal);
             }
 
             return deserializedReturn;

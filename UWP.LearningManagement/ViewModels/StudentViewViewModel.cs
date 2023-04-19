@@ -6,7 +6,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using UWP.LearningManagement.API.Util;
 using Newtonsoft.Json;
-using UWP.Library.LearningManagement.DTO;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -20,12 +19,23 @@ namespace UWP.LearningManagement.ViewModels
             get
             {
                 var payload = new WebRequestHandler().Get("http://localhost:5159/Student").Result;
-                var returnVal = JsonConvert.DeserializeObject<List<StudentDTO>>(payload).Select(d => new StudentViewModel(d));
+                var returnVal = JsonConvert.DeserializeObject<List<Student>>(payload).Select(d => new StudentViewModel(d));
                 return returnVal;
             }
         }
         
         public ObservableCollection<StudentViewModel> Students { get; set; }
+        public StudentViewModel SelectedViewModel
+        {
+            get
+            {
+                return new StudentViewModel(personService.CurrentPerson as Student);
+            }
+            set
+            {
+                personService.CurrentPerson = value.Student;
+            }
+        }
         public Person SelectedPerson
         {
             get { return personService.CurrentPerson; }
@@ -57,8 +67,8 @@ namespace UWP.LearningManagement.ViewModels
             if (Query != null && Query != "")
             {
 
-                IEnumerable<StudentViewModel> searchResults = AllStudents.Where(i => i.Dto.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
-                                                    || i.Dto.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                IEnumerable<StudentViewModel> searchResults = AllStudents.Where(i => i.Student.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+                                                    || i.Student.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
 
                 Students.Clear();
                 foreach (var person in searchResults)

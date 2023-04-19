@@ -1,26 +1,25 @@
 ﻿using UWP.Library.LearningManagement.Database;
-using UWP.Library.LearningManagement.DTO;
 using UWP.Library.LearningManagement.Models;
 
 namespace LearningManagement.API.EC
 {
     public class StudentEC
     {
-        public List<StudentDTO> GetStudents()
+        public List<Student> GetStudents()
         {
-            return FakeDataBase.Students.Select(s => new StudentDTO(s)).ToList();
+            return FakeDataBase.Students;
         }
 
-        public StudentDTO AddorUpdateStudent(StudentDTO p)
+        public Student AddorUpdateStudent(Student s)
         {
-            if(int.Parse(p.Id) <= 0)
+            if(int.Parse(s.Id) <= 0)
             {
                 var lastId = FakeDataBase.People.Select(p => int.Parse(p.Id)).Max();
-                p.Id = lastId++.ToString();
+                s.Id = lastId++.ToString();
             }
 
-            FakeDataBase.People.Add(new Student(p));
-            return p;
+            FakeDataBase.People.Add(s);
+            return s;
         }
     }
 }

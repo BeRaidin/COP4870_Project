@@ -8,7 +8,7 @@ using UWP.LearningManagement.Dialogs;
 using UWP.Library.LearningManagement.Database;
 using Newtonsoft.Json;
 using UWP.LearningManagement.API.Util;
-using UWP.Library.LearningManagement.DTO;
+using Windows.Devices.Bluetooth.Advertisement;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -24,8 +24,8 @@ namespace UWP.LearningManagement.ViewModels
             {
                 var payloadInstructors = new WebRequestHandler().Get("http://localhost:5159/Instructor").Result;
                 var payloadAssistants = new WebRequestHandler().Get("http://localhost:5159/TeachingAssistant").Result;
-                List<InstructorViewModel> instructorsList = JsonConvert.DeserializeObject<List<InstructorDTO>>(payloadInstructors).Select(d => new InstructorViewModel(d)).ToList();
-                List<TeachingAssistantViewModel> assistantsList = JsonConvert.DeserializeObject<List<TeachingAssistantDTO>>(payloadAssistants).Select(d => new TeachingAssistantViewModel(d)).ToList();
+                List<InstructorViewModel> instructorsList = JsonConvert.DeserializeObject<List<Instructor>>(payloadInstructors).Select(d => new InstructorViewModel(d)).ToList();
+                List<TeachingAssistantViewModel> assistantsList = JsonConvert.DeserializeObject<List<TeachingAssistant>>(payloadAssistants).Select(d => new TeachingAssistantViewModel(d)).ToList();
                 List<AdminViewModel> results = new List<AdminViewModel>();
                 foreach(var instructor in  instructorsList)
                 {
@@ -43,11 +43,21 @@ namespace UWP.LearningManagement.ViewModels
         }
 
         public ObservableCollection<AdminViewModel> Instructors { get; set; }
+        public AdminViewModel SelectedViewModel
+        {
+            get {
+                return new AdminViewModel(personService.CurrentPerson);
+            }
+            set {
+                personService.CurrentPerson = value.Person;
+            }
+        }
         public Person SelectedPerson
         {
             get { return personService.CurrentPerson; }
             set { personService.CurrentPerson = value; }
         }
+        
         public Semester SelectedSemester
         {
             get { return semesterService.CurrentSemester; }
@@ -74,8 +84,8 @@ namespace UWP.LearningManagement.ViewModels
             if (Query != null && Query != "")
             {
 
-                IEnumerable<AdminViewModel> searchResults = AllInstructors.Where(i => i.Dto.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
-                                                    || i.Dto.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                IEnumerable<AdminViewModel> searchResults = AllInstructors.Where(i => i.Person.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+                                                    || i.Person.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 Instructors.Clear();
                 foreach (var person in searchResults)
                 {

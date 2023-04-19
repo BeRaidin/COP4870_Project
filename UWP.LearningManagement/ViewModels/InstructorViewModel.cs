@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UWP.LearningManagement.API.Util;
-using UWP.Library.LearningManagement.DTO;
+using UWP.Library.LearningManagement.Models;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -14,17 +14,17 @@ namespace UWP.LearningManagement.ViewModels
 
         public new string Display
         {
-            get { return $"[{Dto.Id}] {Dto.FirstName} {Dto.LastName} - Instructor"; }
+            get { return $"[{Person.Id}] {Person.FirstName} {Person.LastName} - Instructor"; }
         }
 
-        public InstructorViewModel(InstructorDTO dto)
+        public InstructorViewModel(Instructor instructor)
         {
-            Dto = dto;
+            Person = instructor;
         }
 
         public InstructorViewModel()
         {
-            Dto = new InstructorDTO { Id = "-1" };
+            Person = new Instructor { Id = "-1" };
         }
     }
 }

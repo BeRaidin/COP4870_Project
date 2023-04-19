@@ -1,32 +1,21 @@
 ﻿using UWP.Library.LearningManagement.Database;
-using UWP.Library.LearningManagement.DTO;
 using UWP.Library.LearningManagement.Models;
 
 namespace LearningManagement.API.EC
 {
     public class InstructorEC
     {
-        public List<InstructorDTO> GetInstructors()
+        public List<Instructor> GetInstructors()
         {
-            var returnList = new List<InstructorDTO>();
-            foreach(var person in FakeDataBase.Instructors)
-            {
-                returnList.Add(new InstructorDTO(person));
-            }
-            return returnList;
+            return FakeDataBase.Instructors;
         }
 
-        public List<TeachingAssistantDTO> GetAssistants()
+        public List<TeachingAssistant> GetAssistants()
         {
-            var returnList = new List<TeachingAssistantDTO>();
-            foreach (var person in FakeDataBase.Assistants)
-            {
-                returnList.Add(new TeachingAssistantDTO(person));
-            }
-            return returnList;
+            return FakeDataBase.Assistants;
         }
 
-        public PersonDTO AddorUpdateAdmin(PersonDTO p)
+        public Person AddorUpdateAdmin(Person p)
         {
             if (int.Parse(p.Id) <= 0)
             {
@@ -34,13 +23,13 @@ namespace LearningManagement.API.EC
                 p.Id = lastId++.ToString();
             }
 
-            if (p is InstructorDTO instructor)
+            if (p is Instructor instructor)
             {
-                FakeDataBase.People.Add(new Instructor(instructor));
+                FakeDataBase.People.Add(instructor);
             }
-            else if( p is TeachingAssistantDTO assistant)
+            else if( p is TeachingAssistant assistant)
             {
-                FakeDataBase.People.Add(new TeachingAssistant(assistant));
+                FakeDataBase.People.Add(assistant);
             }
 
             return p;
