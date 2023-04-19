@@ -17,11 +17,13 @@ namespace LearningManagement.API.EC
 
         public Person AddorUpdateAdmin(Person p)
         {
-            if (int.Parse(p.Id) <= 0)
+            if (int.Parse(p.Id) <= 0 && FakeDataBase.People.Count > 0)
             {
                 var lastId = FakeDataBase.People.Select(p => int.Parse(p.Id)).Max();
-                p.Id = lastId++.ToString();
+                lastId++;
+                p.Id = lastId.ToString();
             }
+            else p.Id = "0";
 
             if (p is Instructor instructor)
             {

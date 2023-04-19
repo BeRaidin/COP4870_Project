@@ -12,11 +12,13 @@ namespace LearningManagement.API.EC
 
         public Student AddorUpdateStudent(Student s)
         {
-            if(int.Parse(s.Id) <= 0)
+            if (int.Parse(s.Id) <= 0 && FakeDataBase.People.Count > 0)
             {
                 var lastId = FakeDataBase.People.Select(p => int.Parse(p.Id)).Max();
-                s.Id = lastId++.ToString();
+                lastId++;
+                s.Id = lastId.ToString();
             }
+            else s.Id = "0";
 
             FakeDataBase.People.Add(s);
             return s;
