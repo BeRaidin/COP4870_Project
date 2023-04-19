@@ -18,7 +18,7 @@ namespace UWP.LearningManagement.ViewModels
         private readonly SemesterService semesterService;
 
 
-        public IEnumerable<PersonViewModel> AllInstructors
+        public IEnumerable<AdminViewModel> AllInstructors
         {
             get
             {
@@ -26,7 +26,7 @@ namespace UWP.LearningManagement.ViewModels
                 var payloadAssistants = new WebRequestHandler().Get("http://localhost:5159/TeachingAssistant").Result;
                 List<InstructorViewModel> instructorsList = JsonConvert.DeserializeObject<List<InstructorDTO>>(payloadInstructors).Select(d => new InstructorViewModel(d)).ToList();
                 List<TeachingAssistantViewModel> assistantsList = JsonConvert.DeserializeObject<List<TeachingAssistantDTO>>(payloadAssistants).Select(d => new TeachingAssistantViewModel(d)).ToList();
-                List<PersonViewModel> results = new List<PersonViewModel>();
+                List<AdminViewModel> results = new List<AdminViewModel>();
                 foreach(var instructor in  instructorsList)
                 {
                     results.Add(instructor);
@@ -36,13 +36,13 @@ namespace UWP.LearningManagement.ViewModels
                     results.Add(TeachingAssistant);
                 }
 
-                IEnumerable<PersonViewModel> returnVal = results;
+                IEnumerable<AdminViewModel> returnVal = results;
 
                 return returnVal;
             }
         }
 
-        public ObservableCollection<PersonViewModel> Instructors { get; set; }
+        public ObservableCollection<AdminViewModel> Instructors { get; set; }
         public Person SelectedPerson
         {
             get { return personService.CurrentPerson; }
@@ -66,7 +66,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             personService = PersonService.Current;
             semesterService = SemesterService.Current;
-            Instructors = new ObservableCollection<PersonViewModel>(AllInstructors);
+            Instructors = new ObservableCollection<AdminViewModel>(AllInstructors);
         }
 
         public void Search()
@@ -74,7 +74,7 @@ namespace UWP.LearningManagement.ViewModels
             if (Query != null && Query != "")
             {
 
-                IEnumerable<PersonViewModel> searchResults = AllInstructors.Where(i => i.Dto.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
+                IEnumerable<AdminViewModel> searchResults = AllInstructors.Where(i => i.Dto.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
                                                     || i.Dto.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 Instructors.Clear();
                 foreach (var person in searchResults)
@@ -86,27 +86,6 @@ namespace UWP.LearningManagement.ViewModels
             {
                 Refresh();
             }
-        }
-
-        
-
-        public async void Add()
-        {
-            SelectedPerson = new Person();
-            var dialog = new PersonDialog();
-            if (dialog != null)
-            {
-                await dialog.ShowAsync();
-            }
-            if(!dialog.TestValid())
-            {
-                var errorDialog = new ErrorDialog();
-                if (errorDialog != null)
-                {
-                    await errorDialog.ShowAsync();
-                }
-            }
-            Refresh();
         }
 
         public void Refresh()

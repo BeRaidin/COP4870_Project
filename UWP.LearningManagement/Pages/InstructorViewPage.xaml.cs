@@ -46,15 +46,21 @@ namespace UWP.LearningManagement
             Frame.Navigate(typeof(MainPage));
         }
 
-        private async void Add_Click(object sender, RoutedEventArgs e)
+        private async void AddStudent_Click(object sender, RoutedEventArgs e)
         {
             var addDialog = new StudentDialog();
-            addDialog.ShowAsync();
+            await addDialog.ShowAsync();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(UnenrollStudentsPage));
+        }
+
+        private async void AddAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            var addDialog = new AdminDialog();
+            await addDialog.ShowAsync();
         }
     }
 }
