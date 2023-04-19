@@ -9,7 +9,7 @@ using UWP.Library.LearningManagement.DTO;
 
 namespace UWP.LearningManagement.ViewModels
 {
-    public class InstructorViewModel : PersonViewModel
+    public class InstructorViewModel : AdminViewModel
     {
 
         public new string Display
@@ -26,13 +26,5 @@ namespace UWP.LearningManagement.ViewModels
         {
             Dto = new InstructorDTO { Id = "-1" };
         }
-
-       // public async Task<InstructorDTO> AddInstructor()
-       // {
-       //     var handler = new WebRequestHandler();
-       //     var returnVal = await handler.Post("http://localhost:5159/Instructor", Dto);
-       //     var deserializedReturn = JsonConvert.DeserializeObject<InstructorDTO>(returnVal);
-       //     return deserializedReturn;
-       // }
     }
 }

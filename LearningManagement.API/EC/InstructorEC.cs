@@ -26,27 +26,24 @@ namespace LearningManagement.API.EC
             return returnList;
         }
 
-        public InstructorDTO AddorUpdateInstructor(InstructorDTO i)
+        public PersonDTO AddorUpdateAdmin(PersonDTO p)
         {
-            if (int.Parse(i.Id) <= 0)
+            if (int.Parse(p.Id) <= 0)
             {
                 var lastId = FakeDataBase.People.Select(p => int.Parse(p.Id)).Max();
-                i.Id = lastId++.ToString();
+                p.Id = lastId++.ToString();
             }
 
-            FakeDataBase.People.Add(new Instructor(i));
-            return i;
-        }
-        public TeachingAssistantDTO AddorUpdateTeachingAssistant(TeachingAssistantDTO t)
-        {
-            if (int.Parse(t.Id) <= 0)
+            if (p is InstructorDTO instructor)
             {
-                var lastId = FakeDataBase.People.Select(p => int.Parse(p.Id)).Max();
-                t.Id = lastId++.ToString();
+                FakeDataBase.People.Add(new Instructor(instructor));
             }
-       
-            FakeDataBase.People.Add(new TeachingAssistant(t));
-            return t;
+            else if( p is TeachingAssistantDTO assistant)
+            {
+                FakeDataBase.People.Add(new TeachingAssistant(assistant));
+            }
+
+            return p;
         }
     }
 }

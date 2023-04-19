@@ -23,9 +23,9 @@ namespace LearningManagement.API.Controllers
         }
 
         [HttpPost]
-        public InstructorDTO AddorUpdate([FromBody] InstructorDTO dto)
+        public PersonDTO AddorUpdate([FromBody] InstructorDTO dto)
         {
-            return new InstructorEC().AddorUpdateInstructor(dto);
+            return new InstructorEC().AddorUpdateAdmin(dto);
         }
     }
 }

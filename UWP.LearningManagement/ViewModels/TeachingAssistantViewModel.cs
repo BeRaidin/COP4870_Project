@@ -9,7 +9,7 @@ using UWP.Library.LearningManagement.DTO;
 
 namespace UWP.LearningManagement.ViewModels
 {
-    public class TeachingAssistantViewModel : PersonViewModel
+    public class TeachingAssistantViewModel : AdminViewModel
     {
         public new string Display
         {
