@@ -59,8 +59,16 @@ namespace UWP.LearningManagement
 
         private async void AddAdmin_Click(object sender, RoutedEventArgs e)
         {
-            var addDialog = new AdminDialog();
+            var addDialog = new AdminDialog(DataContext as InstructorViewViewModel);
             await addDialog.ShowAsync();
+            (DataContext as InstructorViewViewModel).Refresh();
+        }
+
+        private async void EditPerson_Click(object sender, RoutedEventArgs e)
+        {
+            var addDialog = new AdminDialog(DataContext as InstructorViewViewModel);
+            await addDialog.ShowAsync();
+            (DataContext as InstructorViewViewModel).Refresh();
         }
     }
 }

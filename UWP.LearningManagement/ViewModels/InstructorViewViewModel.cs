@@ -24,8 +24,8 @@ namespace UWP.LearningManagement.ViewModels
             {
                 var payloadInstructors = new WebRequestHandler().Get("http://localhost:5159/Instructor").Result;
                 var payloadAssistants = new WebRequestHandler().Get("http://localhost:5159/TeachingAssistant").Result;
-                List<InstructorViewModel> instructorsList = JsonConvert.DeserializeObject<List<Instructor>>(payloadInstructors).Select(d => new InstructorViewModel(d)).ToList();
-                List<TeachingAssistantViewModel> assistantsList = JsonConvert.DeserializeObject<List<TeachingAssistant>>(payloadAssistants).Select(d => new TeachingAssistantViewModel(d)).ToList();
+                List<InstructorViewModel> instructorsList = JsonConvert.DeserializeObject<List<Instructor>>(payloadInstructors).Select(d => new InstructorViewModel(this, d)).ToList();
+                List<TeachingAssistantViewModel> assistantsList = JsonConvert.DeserializeObject<List<TeachingAssistant>>(payloadAssistants).Select(d => new TeachingAssistantViewModel(this, d)).ToList();
                 List<AdminViewModel> results = new List<AdminViewModel>();
                 foreach(var instructor in  instructorsList)
                 {
@@ -43,15 +43,7 @@ namespace UWP.LearningManagement.ViewModels
         }
 
         public ObservableCollection<AdminViewModel> Instructors { get; set; }
-        public AdminViewModel SelectedViewModel
-        {
-            get {
-                return new AdminViewModel(personService.CurrentPerson);
-            }
-            set {
-                personService.CurrentPerson = value.Person;
-            }
-        }
+        public AdminViewModel SelectedInstructor { get; set; }
         public Person SelectedPerson
         {
             get { return personService.CurrentPerson; }
