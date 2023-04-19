@@ -17,14 +17,23 @@ namespace UWP.LearningManagement.ViewModels
             get { return $"[{Person.Id}] {Person.FirstName} {Person.LastName} - Instructor"; }
         }
 
-        public InstructorViewModel(Instructor instructor)
+        public InstructorViewModel(InstructorViewViewModel ivm)
         {
+            ParentViewModel = ivm;
+            if (ParentViewModel.SelectedInstructor.Person == null)
+            {
+                Person = new Instructor { Id = "-1" };
+            }
+            else Person = ParentViewModel.SelectedInstructor.Person;
+        }
+
+        public InstructorViewModel(InstructorViewViewModel ivm, Instructor instructor)
+        {
+            ParentViewModel = ivm;
+            ParentViewModel.SelectedPerson = instructor;
             Person = instructor;
         }
 
-        public InstructorViewModel()
-        {
-            Person = new Instructor { Id = "-1" };
-        }
+
     }
 }

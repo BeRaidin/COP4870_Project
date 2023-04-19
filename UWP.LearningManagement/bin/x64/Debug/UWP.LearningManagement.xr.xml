@@ -53,7 +53,7 @@
     <RootPropertyPathName Name="Type" />
     <RootPropertyPathName Name="Id" />
     <RootPropertyPathName Name="Semester" />
-    <RootPropertyPathName Name="SelectedViewModel" />
+    <RootPropertyPathName Name="SelectedInstructor" />
     <RootPropertyPathName Name="Course" />
     <RootPropertyPathName Name="ContentItems" />
     <RootPropertyPathName Name="SelectedItem" />
@@ -63,6 +63,7 @@
     <RootPropertyPathName Name="DueDateDisplay" />
     <RootPropertyPathName Name="GradePoint" />
     <RootPropertyPathName Name="GradeLevel" />
+    <RootPropertyPathName Name="SelectedViewModel" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application" />

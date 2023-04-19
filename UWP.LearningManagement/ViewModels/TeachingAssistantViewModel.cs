@@ -16,22 +16,21 @@ namespace UWP.LearningManagement.ViewModels
             get { return $"[{Person.Id}] {Person.FirstName} {Person.LastName} - Teaching Assistant"; }
         }
 
-        public TeachingAssistantViewModel(TeachingAssistant assistant)
+        public TeachingAssistantViewModel(InstructorViewViewModel ivm)
         {
+            ParentViewModel = ivm;
+            if (ParentViewModel.SelectedInstructor == null)
+            {
+                Person = new TeachingAssistant { Id = "-1" };
+            }
+            else Person = ParentViewModel.SelectedPerson;
+        }
+
+        public TeachingAssistantViewModel(InstructorViewViewModel ivm, TeachingAssistant assistant)
+        {
+            ParentViewModel = ivm;
+            ParentViewModel.SelectedPerson = assistant;
             Person = assistant;
-        }
-
-        public TeachingAssistantViewModel()
-        {
-            Person = new TeachingAssistant { Id = "-1" };
-        }
-
-        public async Task<TeachingAssistant> AddTeachingAssistant()
-        {
-            var handler = new WebRequestHandler();
-            var returnVal = await handler.Post("http://localhost:5159/TeachingAssistant", Person);
-            var deserializedReturn = JsonConvert.DeserializeObject<TeachingAssistant>(returnVal);
-            return deserializedReturn;
         }
     }
 }

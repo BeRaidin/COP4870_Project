@@ -12,6 +12,7 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class AdminViewModel
     {
+        public InstructorViewViewModel ParentViewModel;
         public Person Person { get; set; }
 
         public string Display
@@ -29,15 +30,17 @@ namespace UWP.LearningManagement.ViewModels
 
         public string SelectedType { get; set; }
 
-        public AdminViewModel(Person person)
+        public AdminViewModel(InstructorViewViewModel ivm)
         {
-            Person = person;
+            ParentViewModel = ivm;
+            if (ParentViewModel?.SelectedInstructor?.Person == null)
+            {
+                Person = new Person { Id = "-1" };
+            }
+            else Person = ParentViewModel.SelectedInstructor.Person;
         }
 
-        public AdminViewModel()
-        {
-            Person = new Person { Id = "-1" };
-        }
+        public AdminViewModel() { }
 
         public async Task<Person> AddAdmin()
         {

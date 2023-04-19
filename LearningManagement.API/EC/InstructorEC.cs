@@ -17,23 +17,43 @@ namespace LearningManagement.API.EC
 
         public Person AddorUpdateAdmin(Person p)
         {
-            if (int.Parse(p.Id) <= 0 && FakeDataBase.People.Count > 0)
+            bool isNew = false;
+            if(FakeDataBase.People.Count == 0)        
+            {
+                p.Id = "0";
+                isNew = true;
+            }
+            else if (int.Parse(p.Id) <= 0)
             {
                 var lastId = FakeDataBase.People.Select(p => int.Parse(p.Id)).Max();
                 lastId++;
                 p.Id = lastId.ToString();
-            }
-            else p.Id = "0";
-
-            if (p is Instructor instructor)
-            {
-                FakeDataBase.People.Add(instructor);
-            }
-            else if( p is TeachingAssistant assistant)
-            {
-                FakeDataBase.People.Add(assistant);
+                isNew = true;
             }
 
+            if (isNew)
+            {
+                if (p is Instructor instructor)
+                {
+                    FakeDataBase.People.Add(instructor);
+                }
+                else if (p is TeachingAssistant assistant)
+                {
+                    FakeDataBase.People.Add(assistant);
+                }
+            }
+            else
+            {
+                foreach(var person in FakeDataBase.People)
+                {
+                    if(person.Id == p.Id)
+                    {
+                        person.FirstName = p.FirstName;
+                        person.LastName = p.LastName;
+                        break;
+                    }
+                }
+            }
             return p;
         }
     }
