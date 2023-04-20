@@ -47,10 +47,11 @@ namespace UWP.LearningManagement.ViewModels
         public string Type { get; set; }
         public ObservableCollection<GradesDictionary> SubmittedAssignments { get; set; }
 
-        public InstructorDetailsViewModel()
+        public InstructorDetailsViewModel(Person p)
         {
             personService = PersonService.Current;
             courseService = CourseService.Current;
+            SelectedPerson = p;
             Courses = new ObservableCollection<Course>(CourseList);
             SubmittedAssignments = new ObservableCollection<GradesDictionary>();
             CurrentInstructor = SelectedPerson;

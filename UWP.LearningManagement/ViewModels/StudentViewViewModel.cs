@@ -36,11 +36,6 @@ namespace UWP.LearningManagement.ViewModels
                 personService.CurrentPerson = value.Student;
             }
         }
-        public Person SelectedPerson
-        {
-            get { return personService.CurrentPerson; }
-            set { personService.CurrentPerson = value; }
-        }
         public Semester SelectedSemester
         {
             get { return semesterService.CurrentSemester; }

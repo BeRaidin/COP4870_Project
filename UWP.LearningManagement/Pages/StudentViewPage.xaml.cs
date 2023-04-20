@@ -35,9 +35,9 @@ namespace UWP.LearningManagement
 
         private void Student_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            if ((DataContext as StudentViewViewModel).SelectedPerson != null)
+            if ((DataContext as StudentViewViewModel).SelectedViewModel != null)
             {
-                frame.Navigate(typeof(StudentDetailsPage));
+                frame.Navigate(typeof(StudentDetailsPage), (DataContext as StudentViewViewModel).SelectedViewModel.Student);
             }
         }
 

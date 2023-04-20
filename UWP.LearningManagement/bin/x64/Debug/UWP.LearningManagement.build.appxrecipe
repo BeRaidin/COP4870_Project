@@ -148,8 +148,8 @@
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\CurrentSemesterPage.xbf">
       <PackagePath>Pages\CurrentSemesterPage.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\UnenrollStudentsPage.xbf">
-      <PackagePath>Pages\UnenrollStudentsPage.xbf</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\EditStudentsPage.xbf">
+      <PackagePath>Pages\EditStudentsPage.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\InstructorDetailsPage.xbf">
       <PackagePath>Pages\InstructorDetailsPage.xbf</PackagePath>

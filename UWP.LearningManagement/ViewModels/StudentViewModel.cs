@@ -48,7 +48,7 @@ namespace UWP.LearningManagement.ViewModels
             else Student.Classification = Student.Classes.Senior;
 
             var handler = new WebRequestHandler();
-            var returnVal = await handler.Post("http://localhost:5159/Student", Student);
+            var returnVal = await handler.Post("http://localhost:5159/Student/AddOrUpdate", Student);
             var deserializedReturn = JsonConvert.DeserializeObject<Student>(returnVal);
             return deserializedReturn;
         }

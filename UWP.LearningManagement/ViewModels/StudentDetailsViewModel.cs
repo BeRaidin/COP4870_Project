@@ -19,9 +19,9 @@ namespace UWP.LearningManagement.ViewModels
             get { return semesterService.SemesterList; } 
         }
         public ObservableCollection<Semester> Semesters { get; set; }
-        public Person SelectedPerson
+        public Student SelectedStudent
         {
-            get { return personService.CurrentPerson; }
+            get { return personService.CurrentPerson as Student; }
             set { personService.CurrentPerson = value; }
         }
         public Assignment SelectedAssignment
@@ -36,41 +36,40 @@ namespace UWP.LearningManagement.ViewModels
         }
         public GradesDictionary SelectedGrade { get; set; }
 
-        public Student Student { get; set; }
         public string FirstName
         {
-            get { return Student.FirstName; }
+            get { return SelectedStudent.FirstName; }
         }
         public string LastName
         {
-            get { return Student.LastName; }
+            get { return SelectedStudent.LastName; }
         }
         public List<Course> Courses 
         {
-            get { return Student.Courses; }
+            get { return SelectedStudent.Courses; }
         }
         public string Id
         {
-            get { return Student.Id; }
+            get { return SelectedStudent.Id; }
         }
         public string GradeLevel { get; set; }
         public ObservableCollection<GradesDictionary> UnsubmittedGrades { get; set; }
         public ObservableCollection<GradesDictionary> GradedGrades { get; set; }
         public double GradePoint
         {
-            get { return Student.GradePointAverage; }
+            get { return SelectedStudent.GradePointAverage; }
         }
         public Dictionary<Course, double> FinalGrades
         {
-            get { return Student.FinalGrades; }
+            get { return SelectedStudent.FinalGrades; }
         }
 
-        public StudentDetailsViewModel()
+        public StudentDetailsViewModel(Student s)
         {
             personService = PersonService.Current;
             courseService = CourseService.Current;
             semesterService = SemesterService.Current;
-            Student = SelectedPerson as Student;
+            SelectedStudent = s;
             Semesters = new ObservableCollection<Semester>(SemesterList);
             UnsubmittedGrades = new ObservableCollection<GradesDictionary>();
             GradedGrades = new ObservableCollection<GradesDictionary>();
@@ -81,19 +80,19 @@ namespace UWP.LearningManagement.ViewModels
         public void SetGradeLevel()
         {
             
-            if (Student.Classification == Student.Classes.Freshman)
+            if (SelectedStudent.Classification == Student.Classes.Freshman)
             {
                 GradeLevel = "Freshman";
             }
-            else if (Student.Classification == Student.Classes.Sophmore)
+            else if (SelectedStudent.Classification == Student.Classes.Sophmore)
             {
                 GradeLevel = "Sophmore";
             }
-            else if (Student.Classification == Student.Classes.Junior)
+            else if (SelectedStudent.Classification == Student.Classes.Junior)
             {
                 GradeLevel = "Junior";
             }
-            else if (Student.Classification == Student.Classes.Senior)
+            else if (SelectedStudent.Classification == Student.Classes.Senior)
             {
                 GradeLevel = "Senior";
             }
@@ -102,7 +101,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public async Task DropClasses()
         {
-            foreach(var course in Student.Courses)
+            foreach(var course in SelectedStudent.Courses)
             {
                 course.IsSelected = false;
             }
@@ -125,7 +124,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public bool CanDrop()
         {
-            if (SelectedPerson.Courses.Count == 0)
+            if (SelectedStudent.Courses.Count == 0)
             {
                 return false;
             }
@@ -136,7 +135,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             UnsubmittedGrades.Clear();
             GradedGrades.Clear();
-            foreach (var grade in Student.Grades)
+            foreach (var grade in SelectedStudent.Grades)
             {
                 if (grade.IsGraded == false && grade.IsSubmitted == false)
                 {

@@ -17,6 +17,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Xml.Linq;
+using UWP.Library.LearningManagement.Models;
+using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace UWP.LearningManagement
 {
@@ -25,7 +28,12 @@ namespace UWP.LearningManagement
         public InstructorDetailsPage()
         {
             this.InitializeComponent();
-            DataContext = new InstructorDetailsViewModel();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            Person p = e.Parameter as Person;
+            DataContext = new InstructorDetailsViewModel(p);
         }
 
         public void Course_DoubleTapped(object sender, RoutedEventArgs e)

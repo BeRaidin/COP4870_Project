@@ -18,13 +18,19 @@ namespace LearningManagement.API.Controllers
         [HttpGet]
         public List<Instructor> Get()
         {
-            return new InstructorEC().GetInstructors();
+            return new PersonEC().GetInstructors();
         }
 
-        [HttpPost]
-        public Person AddorUpdate([FromBody] Instructor dto)
+        [HttpPost("AddOrUpdate")]
+        public Person AddorUpdate([FromBody] Instructor instructor)
         {
-            return new InstructorEC().AddorUpdateAdmin(dto);
+            return new PersonEC().AddorUpdateAdmin(instructor);
+        }
+
+        [HttpPost("Delete")]
+        public void Delete([FromBody] Instructor instructor)
+        {
+            new PersonEC().Delete(instructor);
         }
     }
 }

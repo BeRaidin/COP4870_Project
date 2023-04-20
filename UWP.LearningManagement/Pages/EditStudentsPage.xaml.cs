@@ -16,9 +16,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace UWP.LearningManagement
 {
-    public sealed partial class UnenrollStudentsPage : Page
+    public sealed partial class EditStudentsPage : Page
     {
-        public UnenrollStudentsPage()
+        public EditStudentsPage()
         {
             this.InitializeComponent();
             DataContext = new UnenrollStudentsViewModel();
