@@ -1,0 +1,68 @@
+﻿<Page
+    x:Class="UWP.LearningManagement.InstructorViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWP.LearningManagement"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Frame x:ConnectionId='2' x:Name="frame">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="12*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Text="{Binding Query, Mode=TwoWay}"></TextBox>
+                <Button x:ConnectionId='9'                      Grid.Column="1" Content="Search" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+
+                <ListBox x:ConnectionId='10' Grid.Row="1" Grid.ColumnSpan="2"
+                ItemsSource="{Binding Instructors, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedInstructor, Mode=TwoWay}"                                    >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Grid.Column="0" Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Frame>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Button x:ConnectionId='3' Margin="10,10,0,10" Content="Back to Main Page"                   ></Button>
+                <Button x:ConnectionId='4' Margin="10,10,0,10" Content="Make a new student"                         ></Button>
+                <Button x:ConnectionId='5' Margin="10,10,0,10" Content="Make a new admin"                       ></Button>
+                <Button x:ConnectionId='6' Margin="10,10,0,10" Content="Remove admin"                          ></Button>
+                <Button x:ConnectionId='7' Margin="10,10,0,10" Content="Edit admin"                        ></Button>
+                <Button x:ConnectionId='8' Margin="10,10,0,10" Content="Edit Students"                               ></Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                <TextBlock FontWeight="Bold" Margin="10,10,0,10" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Instructor View"/>
+                <TextBlock Margin="10,10,0,10"  FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Width="210">
+                    <Run Text="Semester:"/>
+                    <Run Text="{Binding Path=Semester}"/>
+                    <Run Text="{Binding Path=Year}"/>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
+
