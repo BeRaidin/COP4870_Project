@@ -6,15 +6,14 @@ namespace LearningManagement.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class InstructorController
+    public class SemesterController
     {
-        private readonly ILogger<InstructorController> _logger;
+        private readonly ILogger<SemesterController> _logger;
 
-        public InstructorController(ILogger<InstructorController> logger)
+        public SemesterController(ILogger<SemesterController> logger)
         {
             _logger = logger;
         }
-
         [HttpGet]
         public List<Instructor> Get()
         {
@@ -25,12 +24,6 @@ namespace LearningManagement.API.Controllers
         public Person AddorUpdate([FromBody] Instructor instructor)
         {
             return new PersonEC().AddorUpdateAdmin(instructor);
-        }
-
-        [HttpPost("Delete")]
-        public void DeleteInstructor([FromBody] Instructor instructor)
-        {
-            new PersonEC().Delete(instructor);
         }
     }
 }

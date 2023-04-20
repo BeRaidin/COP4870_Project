@@ -6,11 +6,11 @@ namespace LearningManagement.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class InstructorController
+    public class ModuleController
     {
-        private readonly ILogger<InstructorController> _logger;
+        private readonly ILogger<ModuleController> _logger;
 
-        public InstructorController(ILogger<InstructorController> logger)
+        public ModuleController(ILogger<ModuleController> logger)
         {
             _logger = logger;
         }

@@ -3,7 +3,7 @@ using UWP.Library.LearningManagement.Models;
 
 namespace LearningManagement.API.EC
 {
-    public class InstructorEC
+    public class PersonEC
     {
         public List<Instructor> GetInstructors()
         {
@@ -13,6 +13,44 @@ namespace LearningManagement.API.EC
         public List<TeachingAssistant> GetAssistants()
         {
             return FakeDataBase.Assistants;
+        }
+
+        public List<Student> GetStudents()
+        {
+            return FakeDataBase.Students;
+        }
+
+        public Student AddorUpdateStudent(Student s)
+        {
+            bool isNew = false;
+            if (FakeDataBase.People.Count == 0)
+            {
+                s.Id = "0";
+                isNew = true;
+            }
+            else if (int.Parse(s.Id) < 0)
+            {
+                var lastId = FakeDataBase.People.Select(p => int.Parse(p.Id)).Max();
+                lastId++;
+                s.Id = lastId.ToString();
+                isNew = true;
+            }
+
+            if (isNew)
+            {
+                FakeDataBase.People.Add(s);
+            }
+            else
+            {
+                var editedStudent = FakeDataBase.People.FirstOrDefault(p => p.Id == s.Id) as Student;
+                if (editedStudent != null)
+                {
+                    editedStudent.FirstName = s.FirstName;
+                    editedStudent.LastName = s.LastName;
+                    editedStudent.Classification = s.Classification;
+                }
+            }
+            return s;
         }
 
         public Person AddorUpdateAdmin(Person i)
