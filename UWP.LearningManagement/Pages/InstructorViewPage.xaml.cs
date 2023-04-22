@@ -35,9 +35,9 @@ namespace UWP.LearningManagement
 
         private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            if ((DataContext as InstructorViewViewModel).SelectedPerson != null)
+            if ((DataContext as InstructorViewViewModel).SelectedInstructor != null)
             {
-                frame.Navigate(typeof(InstructorDetailsPage));
+                frame.Navigate(typeof(InstructorDetailsPage), (DataContext as InstructorViewViewModel).SelectedInstructor);
             }
         }
 
@@ -76,8 +76,11 @@ namespace UWP.LearningManagement
 
         private async void RemoveAdmin_Click(object sender, RoutedEventArgs e)
         {
-            await (DataContext as InstructorViewViewModel).Delete();
-            (DataContext as InstructorViewViewModel).Refresh();
+            if ((DataContext as InstructorViewViewModel).SelectedInstructor != null)
+            {
+                await (DataContext as InstructorViewViewModel).Delete();
+                (DataContext as InstructorViewViewModel).Refresh();
+            }
         }
     }
 }

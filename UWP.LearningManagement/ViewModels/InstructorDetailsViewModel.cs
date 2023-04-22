@@ -51,6 +51,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             personService = PersonService.Current;
             courseService = CourseService.Current;
+            SelectedPerson = new Person();
             Courses = new ObservableCollection<Course>(CourseList);
             SubmittedAssignments = new ObservableCollection<GradesDictionary>();
             CurrentInstructor = SelectedPerson;
@@ -60,6 +61,25 @@ namespace UWP.LearningManagement.ViewModels
                 Type = "Instructor";
             }
             else if (SelectedPerson as TeachingAssistant != null) 
+            {
+                Type = "Teaching Assistant";
+            }
+        }
+
+        public InstructorDetailsViewModel(AdminViewModel person)
+        {
+            personService = PersonService.Current;
+            courseService = CourseService.Current;
+            SelectedPerson = person.Person;
+            CurrentInstructor = SelectedPerson;
+            Courses = new ObservableCollection<Course>(CourseList);
+            SubmittedAssignments = new ObservableCollection<GradesDictionary>();
+            GetAssignments();
+            if (SelectedPerson as Instructor != null)
+            {
+                Type = "Instructor";
+            }
+            else if (SelectedPerson as TeachingAssistant != null)
             {
                 Type = "Teaching Assistant";
             }

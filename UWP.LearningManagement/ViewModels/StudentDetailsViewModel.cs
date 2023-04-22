@@ -78,6 +78,20 @@ namespace UWP.LearningManagement.ViewModels
             SetGradeLevel();
         }
 
+        public StudentDetailsViewModel(StudentViewModel student)
+        {
+            personService = PersonService.Current;
+            courseService = CourseService.Current;
+            semesterService = SemesterService.Current;
+            SelectedPerson = student.Student;
+            Student = SelectedPerson as Student;
+            Semesters = new ObservableCollection<Semester>(SemesterList);
+            UnsubmittedGrades = new ObservableCollection<GradesDictionary>();
+            GradedGrades = new ObservableCollection<GradesDictionary>();
+            Refresh();
+            SetGradeLevel();
+        }
+
         public void SetGradeLevel()
         {
             

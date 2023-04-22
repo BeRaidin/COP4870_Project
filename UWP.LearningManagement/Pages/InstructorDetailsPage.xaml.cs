@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Xml.Linq;
+using UWP.Library.LearningManagement.Models;
 
 namespace UWP.LearningManagement
 {
@@ -25,7 +26,16 @@ namespace UWP.LearningManagement
         public InstructorDetailsPage()
         {
             this.InitializeComponent();
-            DataContext = new InstructorDetailsViewModel();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (e.Parameter is AdminViewModel selectedPerson)
+            {
+                DataContext = new InstructorDetailsViewModel(selectedPerson);
+            }
         }
 
         public void Course_DoubleTapped(object sender, RoutedEventArgs e)
