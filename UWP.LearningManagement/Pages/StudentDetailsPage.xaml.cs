@@ -2,6 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Navigation;
 
 namespace UWP.LearningManagement
 {
@@ -10,8 +11,17 @@ namespace UWP.LearningManagement
         public StudentDetailsPage()
         {
             this.InitializeComponent();
-            DataContext = new StudentDetailsViewModel();
-            gradesFrame.Navigate(typeof(CurrentSemesterPage));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (e.Parameter is StudentViewModel selectedPerson)
+            {
+                DataContext = new StudentDetailsViewModel(selectedPerson);
+                gradesFrame.Navigate(typeof(CurrentSemesterPage));
+            }
         }
 
         private async void DropClasses_Click(object sender, RoutedEventArgs e)

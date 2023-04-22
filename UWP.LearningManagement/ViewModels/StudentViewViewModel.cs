@@ -25,12 +25,7 @@ namespace UWP.LearningManagement.ViewModels
         }
         
         public ObservableCollection<StudentViewModel> Students { get; set; }
-        public StudentViewModel SelectedViewModel { get; set; }
-        public Person SelectedPerson
-        {
-            get { return personService.CurrentPerson; }
-            set { personService.CurrentPerson = value; }
-        }
+        public StudentViewModel SelectedStudent { get; set; }
         public Semester SelectedSemester
         {
             get { return semesterService.CurrentSemester; }
