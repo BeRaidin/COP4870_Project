@@ -32,9 +32,9 @@ namespace UWP.LearningManagement
         {
             base.OnNavigatedTo(e);
 
-            if (e.Parameter is AdminViewModel selectedPerson)
+            if (e.Parameter is int id)
             {
-                DataContext = new InstructorDetailsViewModel(selectedPerson);
+                DataContext = new InstructorDetailsViewModel(id);
             }
         }
 
@@ -46,9 +46,11 @@ namespace UWP.LearningManagement
             }
         }
 
-        private void AddCourse_Click(object sender, RoutedEventArgs e)
+        private async void AddCourse_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as InstructorDetailsViewModel).AddCourse();
+            var addDialog = new CourseDialog(DataContext as InstructorDetailsViewModel);
+            await addDialog.ShowAsync();
+            (DataContext as InstructorDetailsViewModel).Refresh();
         }
 
         private void JoinCourse_Click(object sender, RoutedEventArgs e)

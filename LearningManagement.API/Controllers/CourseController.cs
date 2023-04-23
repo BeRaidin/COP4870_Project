@@ -1,5 +1,6 @@
 ﻿using LearningManagement.API.EC;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using UWP.Library.LearningManagement.Models;
 
 namespace LearningManagement.API.Controllers
@@ -16,21 +17,20 @@ namespace LearningManagement.API.Controllers
         }
 
         [HttpGet]
-        public List<Instructor> Get()
+        public List<Course> Get()
         {
-            return new PersonEC().GetInstructors();
+            return new CourseEC().GetCourses();
         }
 
         [HttpPost("AddOrUpdate")]
-        public Person AddorUpdate([FromBody] Instructor instructor)
+        public Course AddorUpdate([FromBody] Course course)
         {
-            return new PersonEC().AddorUpdateAdmin(instructor);
+            return new CourseEC().AddOrUpdateCourse(course);
         }
 
         [HttpPost("Delete")]
-        public void DeleteInstructor([FromBody] Instructor instructor)
+        public void DeleteInstructor([FromBody] Course course)
         {
-            new PersonEC().Delete(instructor);
         }
     }
 }

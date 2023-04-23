@@ -2,6 +2,12 @@
 using Library.LearningManagement.Services;
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using UWP.LearningManagement.API.Util;
+using System.Threading.Tasks;
+using UWP.Library.LearningManagement.Database;
+using System.Linq;
+using Windows.Services.Maps;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -9,7 +15,11 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly CourseService courseService;
         private readonly PersonService personService;
-        private readonly SemesterService semesterService;
+
+        public InstructorDetailsViewModel ParentViewModel { get; set; }
+
+        public Course Course { get; set; }
+        public Person Person { get; set; }
 
         public Course SelectedCourse
         {
@@ -62,13 +72,36 @@ namespace UWP.LearningManagement.ViewModels
         public string Hours { get; set; }
         public bool IsValid;
 
-        public CourseViewModel()
+        public CourseViewModel(InstructorDetailsViewModel idvm)
         {
+            ParentViewModel = idvm;
             courseService = CourseService.Current;
             personService = PersonService.Current;
-            semesterService = SemesterService.Current;
+            if (ParentViewModel?.SelectedCourse?.Course == null)
+            {
+                Course = new Course { Id = -1 };
+            }
+            else Course = ParentViewModel.SelectedCourse.Course;
+            if (ParentViewModel?.SelectedPerson == null)
+            {
+                Person = new Person { Id = -1 };
+            }
+            else Person = ParentViewModel.SelectedPerson;
+
             IsValid = true;
         }
+
+        public CourseViewModel(InstructorDetailsViewModel idvm, Course course)
+        {
+            ParentViewModel = idvm;
+            courseService = CourseService.Current;
+            personService = PersonService.Current;
+            Course = course;
+            Person = new Person { Id = -1 };
+            IsValid = true;
+        }
+
+        public CourseViewModel() { }
 
         public void Set()
         {
@@ -84,30 +117,26 @@ namespace UWP.LearningManagement.ViewModels
             SelectedCourse.Roster.Add(SelectedPerson);
         }
 
-        public void Add()
+        public async Task<Course> AddCourse()
         {
-            bool test = true;
-            foreach (var course in semesterService.CurrentSemester.Courses)
-            {
-                if (course.Code.Equals(Code, StringComparison.InvariantCultureIgnoreCase)
-                    || course.Name.Equals(Name, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    test = false;
-                }
+
+            if(Person != null)
+            { 
+                var person = FakeDataBase.People.FirstOrDefault(p => p.Id == SelectedPerson.Id );
+                person?.Add(Course);
             }
 
-            if (Code != null && Code != "" && Name != null && Name != "" && Room != null && Room != "" && test)
-            {
-                Set();
-                courseService.Add(SelectedCourse);
-                foreach(var semester in semesterService.SemesterList)
-                {
-                    semester.Courses.Add(SelectedCourse);
-                }
-                SelectedPerson.Add(SelectedCourse);
-            }
-            else IsValid = false;
-            SelectedCourse = null;
+
+            var handler = new WebRequestHandler();
+            string returnVal;
+
+
+            Course deserializedReturn;
+
+            returnVal = await handler.Post("http://localhost:5159/Course/AddOrUpdate", Course);
+            deserializedReturn = JsonConvert.DeserializeObject<Course>(returnVal);
+
+            return deserializedReturn;
         }
 
         public void Edit()

@@ -33,11 +33,11 @@ namespace UWP.LearningManagement.ViewModels
         public AdminViewModel(InstructorViewViewModel ivm)
         {
             ParentViewModel = ivm;
-            if (ParentViewModel?.SelectedInstructor?.Person == null)
+            if (ParentViewModel?.SelectedInstructor == null)
             {
-                Person = new Person { Id = "-1" };
+                Person = new Person { Id = -1 };
             }
-            else Person = ParentViewModel.SelectedInstructor.Person;
+            else Person = ParentViewModel.SelectedInstructor;
         }
 
         public AdminViewModel() { }

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using UWP.LearningManagement.Dialogs;
+using UWP.Library.LearningManagement.Database;
+using System.Linq;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -49,7 +51,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             get { return Student.Courses; }
         }
-        public string Id
+        public int Id
         {
             get { return Student.Id; }
         }
@@ -78,12 +80,12 @@ namespace UWP.LearningManagement.ViewModels
             SetGradeLevel();
         }
 
-        public StudentDetailsViewModel(StudentViewModel student)
+        public StudentDetailsViewModel(int id)
         {
             personService = PersonService.Current;
             courseService = CourseService.Current;
             semesterService = SemesterService.Current;
-            SelectedPerson = student.Student;
+            SelectedPerson = FakeDataBase.People.FirstOrDefault(i =>i.Id == id);
             Student = SelectedPerson as Student;
             Semesters = new ObservableCollection<Semester>(SemesterList);
             UnsubmittedGrades = new ObservableCollection<GradesDictionary>();

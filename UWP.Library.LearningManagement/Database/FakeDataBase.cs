@@ -7,12 +7,14 @@ namespace UWP.Library.LearningManagement.Database
     {
         public static List<Person> people = new List<Person>
         {
-            new Student {Id = "0", FirstName="Brayden", LastName="Lewis", Classification=Student.Classes.Sophmore},
-            new Instructor {Id = "1", FirstName="Chris", LastName="Millls"},
-            new TeachingAssistant {Id = "2", FirstName="Joe", LastName="Joey"}
+            new Student {Id = 0, FirstName="Brayden", LastName="Lewis", Classification=Student.Classes.Sophmore},
+            new Instructor {Id = 1, FirstName="Chris", LastName="Millls"},
+            new TeachingAssistant {Id = 2, FirstName="Joe", LastName="Joey"}
         };
 
-        private static readonly List<Course> courses = new List<Course>();
+        private static readonly List<Course> courses = new List<Course>{
+            new Course {Id = 0, Code="COP4530", Name="C#", CreditHours=4, Room="HCB"}
+        };
         private static readonly List<Semester> semesters = new List<Semester>();
 
         public static List<Student> Students 

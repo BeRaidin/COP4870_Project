@@ -15,41 +15,39 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class InstructorViewViewModel
     {
-        private readonly PersonService personService;
         private readonly SemesterService semesterService;
-
-
-        public IEnumerable<AdminViewModel> AllInstructors
+        private IEnumerable<Person> AllInstructors
         {
             get
             {
                 var payloadInstructors = new WebRequestHandler().Get("http://localhost:5159/Instructor").Result;
                 var payloadAssistants = new WebRequestHandler().Get("http://localhost:5159/TeachingAssistant").Result;
-                List<InstructorViewModel> instructorsList = JsonConvert.DeserializeObject<List<Instructor>>(payloadInstructors).Select(d => new InstructorViewModel(this, d)).ToList();
-                List<TeachingAssistantViewModel> assistantsList = JsonConvert.DeserializeObject<List<TeachingAssistant>>(payloadAssistants).Select(d => new TeachingAssistantViewModel(this, d)).ToList();
-                List<AdminViewModel> results = new List<AdminViewModel>();
+                List<Instructor> instructorsList = JsonConvert.DeserializeObject<List<Instructor>>(payloadInstructors).ToList();
+                List<TeachingAssistant> assistantsList = JsonConvert.DeserializeObject<List<TeachingAssistant>>(payloadAssistants).ToList();
+                List<Person> results = new List<Person>();
                 foreach(var instructor in  instructorsList)
                 {
                     results.Add(instructor);
                 }
-                foreach (var TeachingAssistant in assistantsList)
+                foreach (var teachingAssistant in assistantsList)
                 {
-                    results.Add(TeachingAssistant);
+                    results.Add(teachingAssistant);
                 }
 
-                IEnumerable<AdminViewModel> returnVal = results;
+                IEnumerable<Person> returnVal = results;
 
                 return returnVal;
             }
         }
 
-        public ObservableCollection<AdminViewModel> Instructors { get; set; }
-        public AdminViewModel SelectedInstructor { get; set; }
-        public Person SelectedPerson
-        {
-            get { return personService.CurrentPerson; }
-            set { personService.CurrentPerson = value; }
-        }
+
+
+
+
+
+
+        public ObservableCollection<Person> Instructors { get; set; }
+        public Person SelectedInstructor { get; set; }
         
         public Semester SelectedSemester
         {
@@ -67,18 +65,25 @@ namespace UWP.LearningManagement.ViewModels
 
         public InstructorViewViewModel()
         {
-            personService = PersonService.Current;
             semesterService = SemesterService.Current;
-            Instructors = new ObservableCollection<AdminViewModel>(AllInstructors);
+            Instructors = new ObservableCollection<Person>(AllInstructors);
         }
 
         public void Search()
         {
             if (Query != null && Query != "")
             {
+                IEnumerable<Person> searchResults;
+                if (int.TryParse(Query, out int id))
+                {
+                    searchResults = AllInstructors.Where(i => i.Id == id).ToList();
+                }
+                else
+                {
+                    searchResults = AllInstructors.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                }
 
-                IEnumerable<AdminViewModel> searchResults = AllInstructors.Where(i => i.Person.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
-                                                    || i.Person.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+
                 Instructors.Clear();
                 foreach (var person in searchResults)
                 {
@@ -93,7 +98,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public async Task<Person> Delete()
         {
-            string returnVal = await new WebRequestHandler().Post("http://localhost:5159/Instructor/Delete", SelectedInstructor.Person);
+            string returnVal = await new WebRequestHandler().Post("http://localhost:5159/Instructor/Delete", SelectedInstructor);
             var deserializedReturn = JsonConvert.DeserializeObject<Instructor>(returnVal);
             return deserializedReturn;
         }

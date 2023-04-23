@@ -36,8 +36,15 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (Query != null && Query != "")
             {
-                IEnumerable<StudentViewModel> searchResults = AllStudents.Where(i => i.Student.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
-                                                    || i.Student.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                IEnumerable<StudentViewModel> searchResults;
+                if (int.TryParse(Query, out int id))
+                {
+                    searchResults = AllStudents.Where(i => i.Student.Id == id).ToList();
+                }
+                else
+                {
+                    searchResults = AllStudents.Where(i => i.Student.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                }
 
                 Students.Clear();
                 foreach (var person in searchResults)
