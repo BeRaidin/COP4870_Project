@@ -18,10 +18,10 @@ namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class InstructorJoinCourseDialog : ContentDialog
     {
-        public InstructorJoinCourseDialog()
+        public InstructorJoinCourseDialog(int id)
         {
             this.InitializeComponent();
-            DataContext = new InstructorJoinCourseDialogViewModel();
+            DataContext = new InstructorJoinCourseDialogViewModel(id);
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

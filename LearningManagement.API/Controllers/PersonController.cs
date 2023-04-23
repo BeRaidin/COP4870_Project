@@ -9,6 +9,13 @@ namespace LearningManagement.API.Controllers
     [Route("[controller]")]
     public class PersonController
     {
+        private readonly ILogger<PersonController> _logger;
+
+        public PersonController(ILogger<PersonController> logger)
+        {
+            _logger = logger;
+        }
+
         [HttpGet("GetPeople")]
         public List<Person> GetPeople()
         {
@@ -51,8 +58,15 @@ namespace LearningManagement.API.Controllers
             return new PersonEC().AddorUpdateAdmin(assistant);
         }
 
+        [HttpPost("UpdateCourses")]
+        public Person UpdateCourses([FromBody] Person person)
+        {
+            return new PersonEC().UpdateCourses(person);
+        }
+
+
         [HttpPost("Delete")]
-        public void DeleteInstructor([FromBody] Person person)
+        public void Delete([FromBody] Person person)
         {
             new PersonEC().Delete(person);
         }

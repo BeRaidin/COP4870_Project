@@ -48,7 +48,7 @@ namespace UWP.LearningManagement
 
         private async void AddCourse_Click(object sender, RoutedEventArgs e)
         {
-            var addDialog = new CourseDialog(DataContext as InstructorDetailsViewModel);
+            var addDialog = new CourseDialog((DataContext as InstructorDetailsViewModel).SelectedPerson.Id);
             await addDialog.ShowAsync();
             (DataContext as InstructorDetailsViewModel).Refresh();
         }

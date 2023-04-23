@@ -60,12 +60,10 @@ namespace UWP.LearningManagement.ViewModels
             {
                 SelectedPerson = AssistantList.FirstOrDefault(i => i.Id == id);
                 Type = "Teaching Assistant";
-
             }
             else
             {
                 Type = "Instructor";
-
             }
             CurrentInstructor = SelectedPerson;
             Courses = new ObservableCollection<Course>(SelectedPerson.Courses);
@@ -94,8 +92,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public async void JoinCourse()
         {
-          //  SelectedCourse = null;
-            var dialog = new InstructorJoinCourseDialog();
+            var dialog = new InstructorJoinCourseDialog(SelectedPerson.Id);
             if (dialog != null)
             {
                 await dialog.ShowAsync();

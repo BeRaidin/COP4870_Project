@@ -16,8 +16,23 @@ namespace UWP.LearningManagement.ViewModels
         private readonly CourseService courseService;
         private readonly PersonService personService;
 
-        public InstructorDetailsViewModel ParentViewModel { get; set; }
+        private List<Instructor> InstructorList
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Person/GetInstructors").Result;
+                return JsonConvert.DeserializeObject<List<Instructor>>(payload).ToList();
+            }
+        }
+        private List<TeachingAssistant> AssistantList
 
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Person/GetAssistants").Result;
+                return JsonConvert.DeserializeObject<List<TeachingAssistant>>(payload).ToList();
+            }
+        }
         public Course Course { get; set; }
         public Person Person { get; set; }
 
@@ -72,32 +87,31 @@ namespace UWP.LearningManagement.ViewModels
         public string Hours { get; set; }
         public bool IsValid;
 
-        public CourseViewModel(InstructorDetailsViewModel idvm)
+        public CourseViewModel(int id, Course course = null)
         {
-            ParentViewModel = idvm;
             courseService = CourseService.Current;
             personService = PersonService.Current;
-            if (ParentViewModel?.SelectedCourse?.Course == null)
-            {
-                Course = new Course { Id = -1 };
-            }
-            else Course = ParentViewModel.SelectedCourse.Course;
-            if (ParentViewModel?.SelectedPerson == null)
+            if(id < 0)
             {
                 Person = new Person { Id = -1 };
             }
-            else Person = ParentViewModel.SelectedPerson;
+            else
+            {
+                Person = InstructorList.FirstOrDefault(x => x.Id == id);
+                if (Person == null)
+                {
+                    Person = AssistantList.FirstOrDefault(x => x.Id == id);
+                }
+            }
 
-            IsValid = true;
-        }
-
-        public CourseViewModel(InstructorDetailsViewModel idvm, Course course)
-        {
-            ParentViewModel = idvm;
-            courseService = CourseService.Current;
-            personService = PersonService.Current;
-            Course = course;
-            Person = new Person { Id = -1 };
+            if(course == null)
+            {
+                Course = new Course { Id = -1 };
+            }
+            else
+            {
+                Course = course;
+            }
             IsValid = true;
         }
 
@@ -122,8 +136,8 @@ namespace UWP.LearningManagement.ViewModels
 
             if(Person != null)
             { 
-                var person = FakeDataBase.People.FirstOrDefault(p => p.Id == SelectedPerson.Id );
-                person?.Add(Course);
+                Person.Add(Course);
+                await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateCourses", Person);
             }
 
 

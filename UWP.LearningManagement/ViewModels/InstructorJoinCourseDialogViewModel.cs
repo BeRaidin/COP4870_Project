@@ -5,6 +5,7 @@ using UWP.LearningManagement.API.Util;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.ApplicationModel.Activation;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -14,25 +15,32 @@ namespace UWP.LearningManagement.ViewModels
         private readonly PersonService personService;
         private readonly SemesterService semesterService;
 
-        public IEnumerable<CourseViewModel> AllCourses
+        public IEnumerable<Course> AllCourses
         {
             get 
             {
                 var payload = new WebRequestHandler().Get("http://localhost:5159/Course").Result;
-                var returnVal = JsonConvert.DeserializeObject<List<Course>>(payload).Select(d => new CourseViewModel(new InstructorDetailsViewModel(), d));
+                var returnVal = JsonConvert.DeserializeObject<List<Course>>(payload);
                 return returnVal;
             }
         }
+        public IEnumerable<Person> AllPeople
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Person/GetPeople").Result;
+                var returnVal = JsonConvert.DeserializeObject<List<Person>>(payload);
+                return returnVal;
+            }
+        }
+
 
         public Course SelectedCourse
         {
             get { return courseService.CurrentCourse; }
             set { courseService.CurrentCourse = value; }
         }
-        public Person SelectedPerson
-        { 
-            get { return personService.CurrentPerson; } 
-        }
+        public Person SelectedPerson { get; set; }
         public Semester SelectedSemester
         {
             get { return  semesterService.CurrentSemester; }
@@ -40,27 +48,31 @@ namespace UWP.LearningManagement.ViewModels
 
         public ObservableCollection<Course> AvailableCourses { get; set; }
 
-        public InstructorJoinCourseDialogViewModel() 
+        public InstructorJoinCourseDialogViewModel(int id) 
         {
             courseService = CourseService.Current;
             personService = PersonService.Current;
             semesterService = SemesterService.Current;
+            SelectedPerson = AllPeople.FirstOrDefault(p => p.Id == id);
             AvailableCourses = new ObservableCollection<Course>();
-            foreach(var courseModel in AllCourses)
+            foreach(var course in AllCourses)
             {
-                if(!SelectedPerson.Courses.Contains(courseModel.Course))
+                if(!SelectedPerson.Courses.Contains(course))
                 {
-                    AvailableCourses.Add(courseModel.Course);
+                    AvailableCourses.Add(course);
                 }
             }
         }
 
-        public void Join()
+        public async void Join()
         {
             if(SelectedCourse != null) 
             {
-                SelectedPerson.Add(SelectedCourse);
+                //SelectedPerson.Add(SelectedCourse);
+                //await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateCourses", SelectedPerson);
+
                 SelectedCourse.Add(SelectedPerson);
+                await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateRoster", SelectedCourse);
             }
         }
     }
