@@ -96,6 +96,16 @@ namespace LearningManagement.API.EC
             return i;
         }
 
+        public Person UpdateCourses(Person p)
+        {
+            var editedPerson = FakeDataBase.People.FirstOrDefault(i => i.Id == p.Id);
+            if (editedPerson != null) 
+            { 
+                editedPerson.Courses = p.Courses;
+            }
+            return p;
+        }
+
         public void Delete(Person p)
         {
 

@@ -28,9 +28,16 @@ namespace LearningManagement.API.Controllers
             return new CourseEC().AddOrUpdateCourse(course);
         }
 
-        [HttpPost("Delete")]
-        public void DeleteInstructor([FromBody] Course course)
+        [HttpPost("UpdateRoster")]
+        public Course UpdateRoster([FromBody] Course course)
         {
+            return new CourseEC().UpdateRoster(course);
+        }
+
+        [HttpPost("Delete")]
+        public void DeleteCourse([FromBody] Course course)
+        {
+            new CourseEC().Delete(course);
         }
     }
 }
