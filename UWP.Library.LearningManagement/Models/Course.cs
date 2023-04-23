@@ -8,6 +8,7 @@ namespace UWP.Library.LearningManagement.Models
 {
     public class Course
     {
+        public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
         public string Room { get; set; }
@@ -46,10 +47,6 @@ namespace UWP.Library.LearningManagement.Models
         public void Add(Person person)
         {
             Roster.Add(person);
-            if (person as Student != null)
-            {
-                (person as Student).Add(this);
-            }
         }
 
         public void Add(Assignment assignment)
@@ -71,8 +68,7 @@ namespace UWP.Library.LearningManagement.Models
             Assignments.Remove(assignment);
             foreach (var person in Roster)
             {
-                Student student = person as Student;
-                if (student != null)
+                if (person is Student student)
                 {
                     student.Remove(assignment);
                 }

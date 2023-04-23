@@ -20,7 +20,7 @@ namespace UWP.Library.LearningManagement.Models
         public Dictionary<Course, double> FinalGrades { get; set; }
         public double GradePointAverage { get; set; }
 
-        public override string Display => $"[{Id}] {FirstName} {LastName} - Student";
+        public override string Display => $"[{Id}] {FirstName} {LastName} - {Classification}";
 
         public Student()
         {

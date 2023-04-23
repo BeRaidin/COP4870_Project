@@ -11,21 +11,20 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class StudentViewViewModel
     {
-        private readonly PersonService personService;
         private readonly SemesterService semesterService;
 
-        private IEnumerable<StudentViewModel> AllStudents
+        private IEnumerable<Student> AllStudents
         {
             get
             {
                 var payload = new WebRequestHandler().Get("http://localhost:5159/Student").Result;
-                var returnVal = JsonConvert.DeserializeObject<List<Student>>(payload).Select(d => new StudentViewModel(d));
+                var returnVal = JsonConvert.DeserializeObject<List<Student>>(payload);
                 return returnVal;
             }
         }
         
-        public ObservableCollection<StudentViewModel> Students { get; set; }
-        public StudentViewModel SelectedStudent { get; set; }
+        public ObservableCollection<Student> Students { get; set; }
+        public Student SelectedStudent { get; set; }
         public Semester SelectedSemester
         {
             get { return semesterService.CurrentSemester; }
@@ -42,19 +41,24 @@ namespace UWP.LearningManagement.ViewModels
 
         public StudentViewViewModel() 
         {
-            personService = PersonService.Current;
             semesterService = SemesterService.Current;
-           
-            Students = new ObservableCollection<StudentViewModel>(AllStudents);
+            Students = new ObservableCollection<Student>(AllStudents);
         }
 
         public void Search()
         {
             if (Query != null && Query != "")
             {
+                IEnumerable<Student> searchResults;
+                if (int.TryParse(Query, out int id))
+                {
+                    searchResults = AllStudents.Where(i => i.Id == id).ToList();
+                }
+                else
+                {
+                    searchResults = AllStudents.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                }
 
-                IEnumerable<StudentViewModel> searchResults = AllStudents.Where(i => i.Student.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase)
-                                                    || i.Student.Id.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
 
                 Students.Clear();
                 foreach (var person in searchResults)

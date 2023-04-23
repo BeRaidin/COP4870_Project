@@ -1,6 +1,10 @@
 ﻿using UWP.Library.LearningManagement.Models;
 using Library.LearningManagement.Services;
 using System.Collections.ObjectModel;
+using UWP.LearningManagement.API.Util;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -9,6 +13,16 @@ namespace UWP.LearningManagement.ViewModels
         private readonly CourseService courseService;
         private readonly PersonService personService;
         private readonly SemesterService semesterService;
+
+        public IEnumerable<CourseViewModel> AllCourses
+        {
+            get 
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Course").Result;
+                var returnVal = JsonConvert.DeserializeObject<List<Course>>(payload).Select(d => new CourseViewModel(new InstructorDetailsViewModel(), d));
+                return returnVal;
+            }
+        }
 
         public Course SelectedCourse
         {
@@ -32,11 +46,11 @@ namespace UWP.LearningManagement.ViewModels
             personService = PersonService.Current;
             semesterService = SemesterService.Current;
             AvailableCourses = new ObservableCollection<Course>();
-            foreach(var course in SelectedSemester.Courses)
+            foreach(var courseModel in AllCourses)
             {
-                if(!SelectedPerson.Courses.Contains(course))
+                if(!SelectedPerson.Courses.Contains(courseModel.Course))
                 {
-                    AvailableCourses.Add(course);
+                    AvailableCourses.Add(courseModel.Course);
                 }
             }
         }

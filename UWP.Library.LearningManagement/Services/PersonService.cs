@@ -57,7 +57,7 @@ namespace Library.LearningManagement.Services
 
         public void Add(Person person)
         {
-            person.Id = totalCount.ToString();
+            person.Id = totalCount;
             totalCount++;
             FakeDataBase.People.Add(person);
         }

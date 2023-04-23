@@ -1,19 +1,28 @@
-﻿using UWP.LearningManagement.ViewModels;
+﻿using System;
+using UWP.LearningManagement.ViewModels;
 using Windows.UI.Xaml.Controls;
 
 namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class CourseDialog : ContentDialog
     {
-        public CourseDialog()
+        public CourseDialog(InstructorDetailsViewModel idvm)
         {
             InitializeComponent();
-            DataContext = new CourseViewModel();
+            if (idvm.CurrentCourse != null)
+            {
+                DataContext = idvm.CurrentCourse;
+            }
+            else
+            {
+                DataContext = new CourseViewModel(idvm);
+            }
         }
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as CourseViewModel).Add();
+            var test = await (DataContext as CourseViewModel).AddCourse();
+            Console.WriteLine(test.Name);
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

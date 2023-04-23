@@ -23,7 +23,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public StudentViewModel() 
         {
-            Student = new Student { Id = "-1" };
+            Student = new Student { Id = -1 };
         }
 
         public StudentViewModel(Student student)

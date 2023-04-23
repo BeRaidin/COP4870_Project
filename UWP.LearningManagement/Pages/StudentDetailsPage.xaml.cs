@@ -17,9 +17,9 @@ namespace UWP.LearningManagement
         {
             base.OnNavigatedTo(e);
 
-            if (e.Parameter is StudentViewModel selectedPerson)
+            if (e.Parameter is int id)
             {
-                DataContext = new StudentDetailsViewModel(selectedPerson);
+                DataContext = new StudentDetailsViewModel(id);
                 gradesFrame.Navigate(typeof(CurrentSemesterPage));
             }
         }

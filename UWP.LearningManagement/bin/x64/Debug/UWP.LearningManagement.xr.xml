@@ -42,6 +42,7 @@
     <RootPropertyPathName Name="Roster" />
     <RootPropertyPathName Name="Hours" />
     <RootPropertyPathName Name="Room" />
+    <RootPropertyPathName Name="Course" />
     <RootPropertyPathName Name="Instructors" />
     <RootPropertyPathName Name="Year" />
     <RootPropertyPathName Name="Period" />
@@ -52,10 +53,10 @@
     <RootPropertyPathName Name="SelectedGrade" />
     <RootPropertyPathName Name="PersonDisplay" />
     <RootPropertyPathName Name="Type" />
+    <RootPropertyPathName Name="SelectedPerson" />
     <RootPropertyPathName Name="Id" />
     <RootPropertyPathName Name="Semester" />
     <RootPropertyPathName Name="SelectedInstructor" />
-    <RootPropertyPathName Name="Course" />
     <RootPropertyPathName Name="ContentItems" />
     <RootPropertyPathName Name="SelectedItem" />
     <RootPropertyPathName Name="PreviousSemesters" />

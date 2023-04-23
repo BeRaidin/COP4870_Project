@@ -21,9 +21,9 @@ namespace UWP.LearningManagement.ViewModels
             ParentViewModel = ivm;
             if (ParentViewModel.SelectedInstructor == null)
             {
-                Person = new TeachingAssistant { Id = "-1" };
+                Person = new TeachingAssistant { Id = -1 };
             }
-            else Person = ParentViewModel.SelectedPerson;
+            else Person = ParentViewModel.SelectedInstructor;
         }
 
         public TeachingAssistantViewModel(InstructorViewViewModel ivm, TeachingAssistant assistant)

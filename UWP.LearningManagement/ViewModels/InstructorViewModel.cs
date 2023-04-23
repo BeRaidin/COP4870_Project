@@ -20,11 +20,11 @@ namespace UWP.LearningManagement.ViewModels
         public InstructorViewModel(InstructorViewViewModel ivm)
         {
             ParentViewModel = ivm;
-            if (ParentViewModel.SelectedInstructor.Person == null)
+            if (ParentViewModel.SelectedInstructor == null)
             {
-                Person = new Instructor { Id = "-1" };
+                Person = new Instructor { Id = -1 };
             }
-            else Person = ParentViewModel.SelectedInstructor.Person;
+            else Person = ParentViewModel.SelectedInstructor;
         }
 
         public InstructorViewModel(InstructorViewViewModel ivm, Instructor instructor)

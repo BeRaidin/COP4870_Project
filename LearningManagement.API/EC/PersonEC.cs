@@ -25,14 +25,14 @@ namespace LearningManagement.API.EC
             bool isNew = false;
             if (FakeDataBase.People.Count == 0)
             {
-                s.Id = "0";
+                s.Id = 0;
                 isNew = true;
             }
-            else if (int.Parse(s.Id) < 0)
+            else if (s.Id < 0)
             {
-                var lastId = FakeDataBase.People.Select(p => int.Parse(p.Id)).Max();
+                var lastId = FakeDataBase.People.Select(p => p.Id).Max();
                 lastId++;
-                s.Id = lastId.ToString();
+                s.Id = lastId;
                 isNew = true;
             }
 
@@ -58,14 +58,14 @@ namespace LearningManagement.API.EC
             bool isNew = false;
             if(FakeDataBase.People.Count == 0)        
             {
-                i.Id = "0";
+                i.Id = 0;
                 isNew = true;
             }
-            else if (int.Parse(i.Id) < 0)
+            else if (i.Id < 0)
             {
-                var lastId = FakeDataBase.People.Select(p => int.Parse(p.Id)).Max();
+                var lastId = FakeDataBase.People.Select(p =>p.Id).Max();
                 lastId++;
-                i.Id = lastId.ToString();
+                i.Id = lastId;
                 isNew = true;
             }
 
