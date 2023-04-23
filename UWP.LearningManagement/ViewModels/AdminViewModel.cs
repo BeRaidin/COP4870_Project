@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UWP.LearningManagement.API.Util;
+using UWP.Library.LearningManagement.Database;
 using UWP.Library.LearningManagement.Models;
+using Windows.UI.Xaml;
 
 namespace UWP.LearningManagement.ViewModels
 {
     public class AdminViewModel
     {
-        public InstructorViewViewModel ParentViewModel;
         public Person Person { get; set; }
 
         public string Display
@@ -30,14 +31,13 @@ namespace UWP.LearningManagement.ViewModels
 
         public string SelectedType { get; set; }
 
-        public AdminViewModel(InstructorViewViewModel ivm)
+        public AdminViewModel(int id)
         {
-            ParentViewModel = ivm;
-            if (ParentViewModel?.SelectedInstructor == null)
+            if(id != -1)
             {
-                Person = new Person { Id = -1 };
+                Person = FakeDataBase.People.FirstOrDefault(x => x.Id == id);
             }
-            else Person = ParentViewModel.SelectedInstructor;
+            else Person = new Person { Id = -1 };
         }
 
         public AdminViewModel() { }
@@ -51,12 +51,12 @@ namespace UWP.LearningManagement.ViewModels
             Person deserializedReturn;
             if (SelectedType == "Instructor")
             {
-                returnVal = await handler.Post("http://localhost:5159/Instructor/AddOrUpdate", Person);
+                returnVal = await handler.Post("http://localhost:5159/Person/AddOrUpdateInstructor", Person);
                 deserializedReturn = JsonConvert.DeserializeObject<Instructor>(returnVal);
             }
             else
             {
-                returnVal = await handler.Post("http://localhost:5159/TeachingAssistant/AddOrUpdate", Person);
+                returnVal = await handler.Post("http://localhost:5159/Person/AddOrUpdateAssistant", Person);
                 deserializedReturn = JsonConvert.DeserializeObject<TeachingAssistant>(returnVal);
             }
 

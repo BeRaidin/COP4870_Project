@@ -6,17 +6,32 @@ using System.Collections.ObjectModel;
 using UWP.LearningManagement.Dialogs;
 using UWP.Library.LearningManagement.Database;
 using System.Linq;
+using Newtonsoft.Json;
+using UWP.LearningManagement.API.Util;
 
 namespace UWP.LearningManagement.ViewModels
 {
     public class InstructorDetailsViewModel
     {
         private readonly PersonService personService;
-
-        private List<Course> CourseList
-        { 
-            get { return SelectedPerson.Courses; } 
+        private List<Instructor> InstructorList
+        {
+            get 
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Person/GetInstructors").Result;
+                return JsonConvert.DeserializeObject<List<Instructor>>(payload).ToList();
+            }
         }
+        private List<TeachingAssistant> AssistantList
+
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Person/GetAssistants").Result;
+                return JsonConvert.DeserializeObject<List<TeachingAssistant>>(payload).ToList();
+            }
+        }
+
         public ObservableCollection<Course> Courses { get; set; }
 
         public Person SelectedPerson
@@ -35,40 +50,27 @@ namespace UWP.LearningManagement.ViewModels
 
         public CourseViewModel CurrentCourse { get; set; }
 
-        public InstructorDetailsViewModel()
-        {
-            personService = PersonService.Current;
-            SelectedPerson = new Person();
-            Courses = new ObservableCollection<Course>(CourseList);
-            SubmittedAssignments = new ObservableCollection<GradesDictionary>();
-            CurrentInstructor = SelectedPerson;
-            GetAssignments();
-            if (SelectedPerson as Instructor != null)
-            {
-                Type = "Instructor";
-            }
-            else if (SelectedPerson as TeachingAssistant != null) 
-            {
-                Type = "Teaching Assistant";
-            }
-        }
+        public InstructorDetailsViewModel() {}
 
         public InstructorDetailsViewModel(int id)
         {
             personService = PersonService.Current;
-            SelectedPerson = FakeDataBase.People.FirstOrDefault(i => i.Id == id);
-            CurrentInstructor = SelectedPerson;
-            Courses = new ObservableCollection<Course>(CourseList);
-            SubmittedAssignments = new ObservableCollection<GradesDictionary>();
-            GetAssignments();
-            if (SelectedPerson as Instructor != null)
+            SelectedPerson = InstructorList.FirstOrDefault(i => i.Id == id);
+            if(SelectedPerson == null)
+            {
+                SelectedPerson = AssistantList.FirstOrDefault(i => i.Id == id);
+                Type = "Teaching Assistant";
+
+            }
+            else
             {
                 Type = "Instructor";
+
             }
-            else if (SelectedPerson as TeachingAssistant != null)
-            {
-                Type = "Teaching Assistant";
-            }
+            CurrentInstructor = SelectedPerson;
+            Courses = new ObservableCollection<Course>(SelectedPerson.Courses);
+            SubmittedAssignments = new ObservableCollection<GradesDictionary>();
+            GetAssignments();
         }
 
         //public async void AddCourse()
@@ -105,7 +107,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             personService.CurrentAssignment = SelectedGrade.Assignment;
             SelectedPerson = SelectedGrade.Person;
-           // SelectedCourse = SelectedGrade.Course;
+            //SelectedCourse = SelectedGrade.Course;
             var dialog = new GradeDialog();
             if (dialog != null)
             {
@@ -119,7 +121,7 @@ namespace UWP.LearningManagement.ViewModels
         public void GetAssignments()
         {
             SubmittedAssignments.Clear();
-            foreach(var course in CourseList) 
+            foreach(var course in SelectedPerson.Courses) 
             { 
                 foreach(var person in course.Roster)
                 {
@@ -141,7 +143,7 @@ namespace UWP.LearningManagement.ViewModels
         public void Refresh()
         {
             Courses.Clear();
-            foreach (var course in CourseList) 
+            foreach (var course in SelectedPerson.Courses) 
             { 
                 Courses.Add(course);
             }

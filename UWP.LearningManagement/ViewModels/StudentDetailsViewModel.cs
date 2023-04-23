@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using UWP.LearningManagement.Dialogs;
 using UWP.Library.LearningManagement.Database;
 using System.Linq;
+using Newtonsoft.Json;
+using UWP.LearningManagement.API.Util;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -15,6 +17,15 @@ namespace UWP.LearningManagement.ViewModels
         private readonly PersonService personService;
         private readonly CourseService courseService;
         private readonly SemesterService semesterService;
+        private List<Student> StudentList
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Person/GetStudents").Result;
+                return JsonConvert.DeserializeObject<List<Student>>(payload).ToList();
+            }
+        }
+
 
         private List<Semester> SemesterList
         { 
@@ -67,25 +78,14 @@ namespace UWP.LearningManagement.ViewModels
             get { return Student.FinalGrades; }
         }
 
-        public StudentDetailsViewModel()
-        {
-            personService = PersonService.Current;
-            courseService = CourseService.Current;
-            semesterService = SemesterService.Current;
-            Student = SelectedPerson as Student;
-            Semesters = new ObservableCollection<Semester>(SemesterList);
-            UnsubmittedGrades = new ObservableCollection<GradesDictionary>();
-            GradedGrades = new ObservableCollection<GradesDictionary>();
-            Refresh();
-            SetGradeLevel();
-        }
+        public StudentDetailsViewModel(){}
 
         public StudentDetailsViewModel(int id)
         {
             personService = PersonService.Current;
             courseService = CourseService.Current;
             semesterService = SemesterService.Current;
-            SelectedPerson = FakeDataBase.People.FirstOrDefault(i =>i.Id == id);
+            SelectedPerson = StudentList.FirstOrDefault(i =>i.Id == id);
             Student = SelectedPerson as Student;
             Semesters = new ObservableCollection<Semester>(SemesterList);
             UnsubmittedGrades = new ObservableCollection<GradesDictionary>();
@@ -141,7 +141,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public bool CanDrop()
         {
-            if (SelectedPerson.Courses.Count == 0)
+            if (Student.Courses.Count == 0)
             {
                 return false;
             }

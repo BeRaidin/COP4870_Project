@@ -18,17 +18,10 @@ namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class AdminDialog : ContentDialog
     {
-        public AdminDialog( InstructorViewViewModel ivm)
+        public AdminDialog(int id = -1)
         {
             this.InitializeComponent();
-            if (ivm.SelectedInstructor != null)
-            {
-                DataContext = ivm.SelectedInstructor;
-            }
-            else
-            {
-                DataContext = new AdminViewModel(ivm);
-            }
+            DataContext = new AdminViewModel(id);
         }
 
         private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
