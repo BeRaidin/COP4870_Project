@@ -20,8 +20,8 @@ namespace UWP.LearningManagement.ViewModels
         {
             get
             {
-                var payloadInstructors = new WebRequestHandler().Get("http://localhost:5159/Instructor").Result;
-                var payloadAssistants = new WebRequestHandler().Get("http://localhost:5159/TeachingAssistant").Result;
+                var payloadInstructors = new WebRequestHandler().Get("http://localhost:5159/Person/GetInstructors").Result;
+                var payloadAssistants = new WebRequestHandler().Get("http://localhost:5159/Person/GetAssistants").Result;
                 List<Instructor> instructorsList = JsonConvert.DeserializeObject<List<Instructor>>(payloadInstructors).ToList();
                 List<TeachingAssistant> assistantsList = JsonConvert.DeserializeObject<List<TeachingAssistant>>(payloadAssistants).ToList();
                 List<Person> results = new List<Person>();

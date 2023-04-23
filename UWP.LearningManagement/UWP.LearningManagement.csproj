@@ -220,7 +220,6 @@
     <Compile Include="ViewModels\CourseViewModel.cs" />
     <Compile Include="ViewModels\CurrentSemesterViewModel.cs" />
     <Compile Include="ViewModels\CourseDetailsViewModel.cs" />
-    <Compile Include="ViewModels\InstructorViewModel.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\StudentViewModel.cs" />
     <Compile Include="ViewModels\StudentDetailsViewModel.cs" />
@@ -236,7 +235,6 @@
     <Compile Include="ViewModels\PreviousSemesterViewModel.cs" />
     <Compile Include="ViewModels\RosterViewModel.cs" />
     <Compile Include="ViewModels\StudentViewViewModel.cs" />
-    <Compile Include="ViewModels\TeachingAssistantViewModel.cs" />
     <Compile Include="ViewModels\EditStudentsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

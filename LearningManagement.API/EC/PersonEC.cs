@@ -5,6 +5,10 @@ namespace LearningManagement.API.EC
 {
     public class PersonEC
     {
+        public List<Person> GetPeople()
+        {
+            return FakeDataBase.People;
+        }
         public List<Instructor> GetInstructors()
         {
             return FakeDataBase.Instructors;

@@ -59,7 +59,7 @@ namespace UWP.LearningManagement
 
         private async void AddAdmin_Click(object sender, RoutedEventArgs e)
         {
-            var addDialog = new AdminDialog(DataContext as InstructorViewViewModel);
+            var addDialog = new AdminDialog();
             await addDialog.ShowAsync();
             (DataContext as InstructorViewViewModel).Refresh();
         }
@@ -68,7 +68,7 @@ namespace UWP.LearningManagement
         {
             if ((DataContext as InstructorViewViewModel).SelectedInstructor != null)
             {
-                var addDialog = new AdminDialog(DataContext as InstructorViewViewModel);
+                var addDialog = new AdminDialog((DataContext as InstructorViewViewModel).SelectedInstructor.Id);
                 await addDialog.ShowAsync();
                 (DataContext as InstructorViewViewModel).Refresh();
             }
