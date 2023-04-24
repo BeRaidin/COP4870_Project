@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using UWP.LearningManagement.API.Util;
 using UWP.Library.LearningManagement.Models;
@@ -8,6 +10,14 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class StudentViewModel
     {
+        private List<Student> StudentList
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Person/GetStudents").Result;
+                return JsonConvert.DeserializeObject<List<Student>>(payload);
+            }
+        }
         public Student Student { get; set; }
         public ObservableCollection<string> StudentLevels
         {
@@ -21,14 +31,14 @@ namespace UWP.LearningManagement.ViewModels
         }
 
 
-        public StudentViewModel() 
+        public StudentViewModel()
         {
             Student = new Student { Id = -1 };
         }
 
-        public StudentViewModel(Student student)
+        public StudentViewModel(int id)
         {
-            Student = student;
+            Student = StudentList.FirstOrDefault(x => x.Id == id);
         }
 
         public async Task<Student> Addstudent()
@@ -52,6 +62,6 @@ namespace UWP.LearningManagement.ViewModels
             var deserializedReturn = JsonConvert.DeserializeObject<Student>(returnVal);
             return deserializedReturn;
         }
-        
+
     }
 }

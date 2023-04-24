@@ -40,6 +40,7 @@
     <RootPropertyPathName Name="Announcements" />
     <RootPropertyPathName Name="SelectedAnnouncement" />
     <RootPropertyPathName Name="Roster" />
+    <RootPropertyPathName Name="Admin" />
     <RootPropertyPathName Name="Hours" />
     <RootPropertyPathName Name="Room" />
     <RootPropertyPathName Name="Course" />

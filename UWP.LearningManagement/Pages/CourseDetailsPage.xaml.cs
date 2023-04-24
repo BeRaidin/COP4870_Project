@@ -31,9 +31,9 @@ namespace UWP.LearningManagement
         {
             base.OnNavigatedTo(e);
 
-            if (e.Parameter is int id)
+            if (e.Parameter is Course course)
             {
-                DataContext = new CourseDetailsViewModel(id);
+                DataContext = new CourseDetailsViewModel(course);
             }
         }
 

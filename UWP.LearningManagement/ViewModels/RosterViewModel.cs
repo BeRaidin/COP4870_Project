@@ -19,7 +19,7 @@ namespace UWP.LearningManagement.ViewModels
             get
             {
                 var payload = new WebRequestHandler().Get("http://localhost:5159/Person/GetStudents").Result;
-                var returnVal = JsonConvert.DeserializeObject<List<Student>>(payload).Select(d => new StudentViewModel(d)); ;
+                var returnVal = JsonConvert.DeserializeObject<List<Student>>(payload).Select(d => new StudentViewModel(d.Id)); ;
                 return returnVal;
             }
         }
@@ -55,7 +55,6 @@ namespace UWP.LearningManagement.ViewModels
                     Course.Remove(student.Student);
                     await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateRoster", Course);
                     var payload = await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateCourses", student);
-
                 }
                 else if (student.Student.IsSelected == true && !Course.Roster.Contains(student.Student)) 
                 { 

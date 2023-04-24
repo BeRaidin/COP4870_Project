@@ -8,6 +8,7 @@ using System.Linq;
 using Windows.UI.Popups;
 using Newtonsoft.Json;
 using UWP.LearningManagement.API.Util;
+using Windows.ApplicationModel.UserActivities.Core;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -18,18 +19,7 @@ namespace UWP.LearningManagement.ViewModels
         private readonly ModuleService moduleService;
         private readonly List<Module> allModules;
         private readonly List<Assignment> allAssignments;
-        private readonly List<Person> allRoster;
         private readonly List<Announcement> allAnnouncements;
-        private readonly int Id;
-
-        private IEnumerable<Course> Courses
-        {
-            get
-            {
-                var payload = new WebRequestHandler().Get("http://localhost:5159/Course").Result;
-                return JsonConvert.DeserializeObject<List<Course>>(payload);
-            }
-        }
 
         public Module SelectedModule
         {
@@ -71,12 +61,6 @@ namespace UWP.LearningManagement.ViewModels
             get { return _assignments; }
             set { _assignments = value; }
         }
-        private ObservableCollection<Person> _roster;
-        public ObservableCollection<Person> Roster
-        {
-            get { return _roster; }
-            set { _roster = value; }
-        }
         private ObservableCollection<Announcement> _announcements;
         public ObservableCollection<Announcement> Announcements
         {
@@ -104,20 +88,43 @@ namespace UWP.LearningManagement.ViewModels
         public string Title { get; set; }
         public string Message { get; set; }
 
-        public CourseDetailsViewModel(int id)
+
+
+
+
+
+
+        public ObservableCollection<StudentViewModel> Roster { get; set; }
+        public ObservableCollection<AdminViewModel> Admin { get; set; }
+
+
+        public CourseDetailsViewModel(Course course)
         {
-            Id = id;
             courseService = CourseService.Current;
             personService = PersonService.Current;
             moduleService = ModuleService.Current;
-            SelectedCourse = Courses.FirstOrDefault(i => i.Id == Id);
+            SelectedCourse = course;
             allModules = SelectedCourse.Modules;
             allAssignments = SelectedCourse.Assignments;
-            allRoster = SelectedCourse.Roster;
+            Roster = new ObservableCollection<StudentViewModel>();
+            Admin = new ObservableCollection<AdminViewModel>();
+            foreach (var person in SelectedCourse.Roster) 
+            { 
+                if(person is Student student)
+                {
+                    Roster.Add(new StudentViewModel(student.Id));
+                }
+                else
+                {
+                    Admin.Add(new AdminViewModel(person.Id));
+                }
+            }
+
+
+
             allAnnouncements = SelectedCourse.Announcements;
             Modules = new ObservableCollection<Module>(allModules);
             Assignments = new ObservableCollection<Assignment>(allAssignments);
-            Roster = new ObservableCollection<Person>(allRoster);
             Announcements = new ObservableCollection<Announcement>(allAnnouncements);
         }
 
@@ -243,11 +250,7 @@ namespace UWP.LearningManagement.ViewModels
             {
                 Assignments.Add(assignment);
             }
-            Roster.Clear();
-            foreach (var person in allRoster)
-            {
-                Roster.Add(person);
-            }
+            
             Announcements.Clear();
             foreach (var announcement in allAnnouncements)
             {
