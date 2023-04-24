@@ -32,13 +32,14 @@ namespace LearningManagement.API.EC
             }
             else
             {
-                var editedCourse = FakeDataBase.Courses.FirstOrDefault(c => c.Id == c.Id);
+                var editedCourse = FakeDataBase.Courses.FirstOrDefault(i => i.Id == c.Id);
                 if (editedCourse != null)
                 {
                     editedCourse.Code = c.Code;
                     editedCourse.Name = c.Name;
                     editedCourse.Room = c.Room;
                     editedCourse.CreditHours = c.CreditHours;
+                    return editedCourse;
                 }
             }
             return c;
@@ -46,10 +47,11 @@ namespace LearningManagement.API.EC
 
         public Course UpdateRoster(Course c)
         {
-            var editedCourse = FakeDataBase.Courses.FirstOrDefault(c => c.Id == c.Id);
+            var editedCourse = FakeDataBase.Courses.FirstOrDefault(i => i.Id == c.Id);
             if (editedCourse != null)
             {
                 editedCourse.Roster = c.Roster;
+                return editedCourse;
             }
             return c;
         }

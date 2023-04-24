@@ -18,7 +18,7 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <ListBox Margin="10,10,10,10" Grid.Column="1"
-            ItemsSource="{Binding Students, Mode=TwoWay}">
+            ItemsSource="{Binding AllStudents, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -26,7 +26,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
-                        <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}"/>
+                        <CheckBox Grid.Column="0" IsChecked="{Binding Path=Student.IsSelected, Mode=TwoWay}"/>
                         <TextBlock Grid.Column="1" Text="{Binding Display, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                     </Grid>
                 </DataTemplate>

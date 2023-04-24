@@ -42,7 +42,7 @@ namespace UWP.LearningManagement
         {
             if ((DataContext as InstructorDetailsViewModel).SelectedCourse != null)
             {
-                Frame.Navigate(typeof(CourseDetailsPage), (DataContext as InstructorDetailsViewModel).SelectedCourse.Id);
+                Frame.Navigate(typeof(CourseDetailsPage), (DataContext as InstructorDetailsViewModel).SelectedCourse.Course.Id);
             }
         }
 
