@@ -13,18 +13,18 @@ namespace UWP.LearningManagement.ViewModels
     {
         private readonly SemesterService semesterService;
 
-        private IEnumerable<Student> AllStudents
+        private IEnumerable<StudentViewModel> AllStudents
         {
             get
             {
                 var payload = new WebRequestHandler().Get("http://localhost:5159/Person/GetStudents").Result;
-                var returnVal = JsonConvert.DeserializeObject<List<Student>>(payload);
+                var returnVal = JsonConvert.DeserializeObject<List<Student>>(payload).Select(d => new StudentViewModel(d)); ;
                 return returnVal;
             }
         }
         
-        public ObservableCollection<Student> Students { get; set; }
-        public Student SelectedStudent { get; set; }
+        public ObservableCollection<StudentViewModel> Students { get; set; }
+        public StudentViewModel SelectedStudent { get; set; }
         public Semester SelectedSemester
         {
             get { return semesterService.CurrentSemester; }
@@ -42,21 +42,21 @@ namespace UWP.LearningManagement.ViewModels
         public StudentViewViewModel() 
         {
             semesterService = SemesterService.Current;
-            Students = new ObservableCollection<Student>(AllStudents);
+            Students = new ObservableCollection<StudentViewModel>(AllStudents);
         }
 
         public void Search()
         {
             if (Query != null && Query != "")
             {
-                IEnumerable<Student> searchResults;
+                IEnumerable<StudentViewModel> searchResults;
                 if (int.TryParse(Query, out int id))
                 {
-                    searchResults = AllStudents.Where(i => i.Id == id).ToList();
+                    searchResults = AllStudents.Where(i => i.Student.Id == id).ToList();
                 }
                 else
                 {
-                    searchResults = AllStudents.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                    searchResults = AllStudents.Where(i => i.Student.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 }
 
 

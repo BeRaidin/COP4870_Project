@@ -106,7 +106,7 @@ namespace LearningManagement.API.EC
             return p;
         }
 
-        public void Delete(Person p)
+        public Person Delete(Person p)
         {
 
             var deletedPerson = FakeDataBase.People.FirstOrDefault(d => d.Id == p.Id);
@@ -114,6 +114,7 @@ namespace LearningManagement.API.EC
             {
                 FakeDataBase.People.Remove(deletedPerson);
             }
+            return p;
         }
     }
 }
