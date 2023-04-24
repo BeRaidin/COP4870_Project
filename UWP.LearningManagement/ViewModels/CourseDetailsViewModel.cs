@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Windows.UI.Popups;
+using Newtonsoft.Json;
+using UWP.LearningManagement.API.Util;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -18,6 +20,16 @@ namespace UWP.LearningManagement.ViewModels
         private readonly List<Assignment> allAssignments;
         private readonly List<Person> allRoster;
         private readonly List<Announcement> allAnnouncements;
+        private readonly int Id;
+
+        private IEnumerable<Course> Courses
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Course").Result;
+                return JsonConvert.DeserializeObject<List<Course>>(payload);
+            }
+        }
 
         public Module SelectedModule
         {
@@ -92,11 +104,13 @@ namespace UWP.LearningManagement.ViewModels
         public string Title { get; set; }
         public string Message { get; set; }
 
-        public CourseDetailsViewModel()
+        public CourseDetailsViewModel(int id)
         {
+            Id = id;
             courseService = CourseService.Current;
             personService = PersonService.Current;
             moduleService = ModuleService.Current;
+            SelectedCourse = Courses.FirstOrDefault(i => i.Id == Id);
             allModules = SelectedCourse.Modules;
             allAssignments = SelectedCourse.Assignments;
             allRoster = SelectedCourse.Roster;
@@ -106,6 +120,8 @@ namespace UWP.LearningManagement.ViewModels
             Roster = new ObservableCollection<Person>(allRoster);
             Announcements = new ObservableCollection<Announcement>(allAnnouncements);
         }
+
+
 
         public async void AddModule()
         {

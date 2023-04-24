@@ -14,10 +14,11 @@ namespace UWP.LearningManagement.ViewModels
         private readonly CourseService courseService;
         private readonly PersonService personService;
         private readonly SemesterService semesterService;
+        private readonly int Id;
 
         public IEnumerable<Course> AllCourses
         {
-            get 
+            get
             {
                 var payload = new WebRequestHandler().Get("http://localhost:5159/Course").Result;
                 var returnVal = JsonConvert.DeserializeObject<List<Course>>(payload);
@@ -43,30 +44,33 @@ namespace UWP.LearningManagement.ViewModels
         public Person SelectedPerson { get; set; }
         public Semester SelectedSemester
         {
-            get { return  semesterService.CurrentSemester; }
+            get { return semesterService.CurrentSemester; }
         }
 
         public ObservableCollection<Course> AvailableCourses { get; set; }
 
-        public InstructorJoinCourseDialogViewModel(int id) 
+        public InstructorJoinCourseDialogViewModel(int id)
         {
+            Id = id;
             courseService = CourseService.Current;
             personService = PersonService.Current;
             semesterService = SemesterService.Current;
-            SelectedPerson = AllPeople.FirstOrDefault(p => p.Id == id);
+            SelectedPerson = AllPeople.FirstOrDefault(p => p.Id == Id);
             AvailableCourses = new ObservableCollection<Course>();
-            foreach(var course in AllCourses)
+            foreach (var course in AllCourses)
             {
-                if(!SelectedPerson.Courses.Contains(course))
+                bool hasSameId = SelectedPerson.Courses.Any(c => c.Id == course.Id);
+                if(!hasSameId)
                 {
                     AvailableCourses.Add(course);
                 }
+
             }
         }
 
         public async void Join()
         {
-            if(SelectedCourse != null) 
+            if (SelectedCourse != null)
             {
                 SelectedPerson.Add(SelectedCourse);
                 var payload = await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateCourses", SelectedPerson);
@@ -74,6 +78,7 @@ namespace UWP.LearningManagement.ViewModels
 
                 SelectedCourse.Add(returnVal);
                 await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateRoster", SelectedCourse);
+                SelectedPerson = AllPeople.FirstOrDefault(p => p.Id == Id);
             }
         }
     }

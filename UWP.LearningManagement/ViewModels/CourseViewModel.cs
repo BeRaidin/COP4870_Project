@@ -133,22 +133,20 @@ namespace UWP.LearningManagement.ViewModels
 
         public async Task<Course> AddCourse()
         {
+            var handler = new WebRequestHandler();
+            string returnVal;
+            Course deserializedReturn;
+            returnVal = await handler.Post("http://localhost:5159/Course/AddOrUpdate", Course);
+            deserializedReturn = JsonConvert.DeserializeObject<Course>(returnVal);
 
-            if(Person != null)
+            if (Person != null)
             { 
-                Person.Add(Course);
+                Person.Add(deserializedReturn);
                 await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateCourses", Person);
             }
 
 
-            var handler = new WebRequestHandler();
-            string returnVal;
-
-
-            Course deserializedReturn;
-
-            returnVal = await handler.Post("http://localhost:5159/Course/AddOrUpdate", Course);
-            deserializedReturn = JsonConvert.DeserializeObject<Course>(returnVal);
+            
 
             return deserializedReturn;
         }

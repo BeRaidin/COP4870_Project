@@ -25,7 +25,16 @@ namespace UWP.LearningManagement
         public CourseDetailsPage()
         {
             this.InitializeComponent();
-            DataContext = new CourseDetailsViewModel();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (e.Parameter is int id)
+            {
+                DataContext = new CourseDetailsViewModel(id);
+            }
         }
 
         private void Module_Click(object sender, RoutedEventArgs e)
