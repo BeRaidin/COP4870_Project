@@ -18,7 +18,7 @@ namespace UWP.LearningManagement.ViewModels
             get
             {
                 var payload = new WebRequestHandler().Get("http://localhost:5159/Person/GetStudents").Result;
-                var returnVal = JsonConvert.DeserializeObject<List<Student>>(payload).Select(d => new StudentViewModel(d));
+                var returnVal = JsonConvert.DeserializeObject<List<Student>>(payload).Select(d => new StudentViewModel(d.Id));
                 return returnVal;
             }
         }

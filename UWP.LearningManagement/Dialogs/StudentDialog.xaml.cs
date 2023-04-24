@@ -27,7 +27,7 @@ namespace UWP.LearningManagement.Dialogs
         public StudentDialog(Student student)
         {
             this.InitializeComponent();
-            DataContext = new StudentViewModel(student);
+            DataContext = new StudentViewModel(student.Id);
         }
 
         private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
