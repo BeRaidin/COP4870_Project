@@ -33,18 +33,9 @@ namespace UWP.LearningManagement.ViewModels
                 return JsonConvert.DeserializeObject<List<TeachingAssistant>>(payload).ToList();
             }
         }
+        
+        public ObservableCollection<CourseViewModel> Courses { get; set; }
 
-        private List<Course> CourseList
-
-        {
-            get
-            {
-                var payload = new WebRequestHandler().Get("http://localhost:5159/Course").Result;
-                return JsonConvert.DeserializeObject<List<Course>>(payload).ToList();
-            }
-        }
-
-        public ObservableCollection<Course> Courses { get; set; }
 
         public Person SelectedPerson
         {
@@ -53,7 +44,7 @@ namespace UWP.LearningManagement.ViewModels
         }
         public Person CurrentInstructor { get; set; }
 
-        public Course SelectedCourse { get; set; }
+        public CourseViewModel SelectedCourse { get; set; }
         public GradesDictionary SelectedGrade { get; set; }
 
         public string Type { get; set; }
@@ -79,7 +70,12 @@ namespace UWP.LearningManagement.ViewModels
                 Type = "Instructor";
             }
             CurrentInstructor = SelectedPerson;
-            Courses = new ObservableCollection<Course>(SelectedPerson.Courses);
+            Courses = new ObservableCollection<CourseViewModel>();
+            foreach(var course in CurrentInstructor.Courses)
+            {
+                Courses.Add(new CourseViewModel(CurrentInstructor.Id, course.Id));
+            }
+
             SubmittedAssignments = new ObservableCollection<GradesDictionary>();
             GetAssignments();
         }
@@ -153,7 +149,6 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Refresh()
         {
-            Courses.Clear();
             if (Type == "Instructor")
             {
                 SelectedPerson = InstructorList.FirstOrDefault(i => i.Id == Id);
@@ -161,10 +156,6 @@ namespace UWP.LearningManagement.ViewModels
             else
             {
                 SelectedPerson = AssistantList.FirstOrDefault(i => i.Id == Id);
-            }
-            foreach (var course in SelectedPerson.Courses)
-            {
-                Courses.Add(course);
             }
             GetAssignments();
         }

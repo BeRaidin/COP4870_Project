@@ -3,17 +3,26 @@ using Library.LearningManagement.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Contracts;
+using UWP.LearningManagement.API.Util;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace UWP.LearningManagement.ViewModels
 {
     internal class RosterViewModel
     {
         private readonly CourseService courseService;
-        private readonly PersonService personService;
         private readonly SemesterService semesterService;
-        private readonly List<Person> allStudents;
-
-        public ObservableCollection<Person> Students { get; set; }
+        public IEnumerable<StudentViewModel> AllStudents
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Person/GetStudents").Result;
+                var returnVal = JsonConvert.DeserializeObject<List<Student>>(payload).Select(d => new StudentViewModel(d)); ;
+                return returnVal;
+            }
+        }
         public Semester SelectedSemester { get { return semesterService.CurrentSemester; } }
         public Course Course 
         {
@@ -23,41 +32,36 @@ namespace UWP.LearningManagement.ViewModels
         public RosterViewModel()
         {
             courseService = CourseService.Current;
-            personService = PersonService.Current;
             semesterService = SemesterService.Current;
-            allStudents = new List<Person>();
-            foreach(var person in SelectedSemester.People)
+            foreach (var student in AllStudents)
             {
-                if(person as Student != null)
+                if(Course.Roster.Contains(student.Student))
                 {
-                    allStudents.Add(person);
-                }
-            }
-            Students = new ObservableCollection<Person>(allStudents);
-            foreach (var student in Students)
-            {
-                if(Course.Roster.Contains(student))
-                {
-                    student.IsSelected = true;
+                    student.Student.IsSelected = true;
                 }
                 else
                 {
-                    student.IsSelected = false;
+                    student.Student.IsSelected = false;
                 }
             }
         }
 
-        public void AddRoster()
+        public async Task AddRoster()
         {
-            foreach(var student in Students)
+            foreach(var student in AllStudents)
             {
-                if (student.IsSelected == false && Course.Roster.Contains(student))
+                if (student.Student.IsSelected == false && Course.Roster.Contains(student.Student))
                 {
-                    Course.Remove(student);
+                    Course.Remove(student.Student);
+                    await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateRoster", Course);
+                    var payload = await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateCourses", student);
+
                 }
-                else if (student.IsSelected == true && !Course.Roster.Contains(student)) 
+                else if (student.Student.IsSelected == true && !Course.Roster.Contains(student.Student)) 
                 { 
-                    Course.Add(student);
+                    Course.Add(student.Student);
+                    await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateRoster", Course);
+                    var payload = await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateCourses", student);
                 }
             }
         }

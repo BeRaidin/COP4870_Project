@@ -13,8 +13,8 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class CourseViewModel
     {
-        private readonly CourseService courseService;
-        private readonly PersonService personService;
+        public virtual string Display => $"[{Course.Code}] - {Course.Name}";
+
 
         private List<Instructor> InstructorList
         {
@@ -33,65 +33,68 @@ namespace UWP.LearningManagement.ViewModels
                 return JsonConvert.DeserializeObject<List<TeachingAssistant>>(payload).ToList();
             }
         }
+        private List<Course> CourseList
+
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Course").Result;
+                return JsonConvert.DeserializeObject<List<Course>>(payload).ToList();
+            }
+        }
+
         public Course Course { get; set; }
         public Person Person { get; set; }
 
-        public Course SelectedCourse
-        {
-            get { return courseService.CurrentCourse; }
-            set { courseService.CurrentCourse = value; }
-        }
-        public Person SelectedPerson
-        { get { return personService.CurrentPerson; } } 
+
+
         public string Name
         {
             get
             {
-                return SelectedCourse.Name;
+                return Course.Name;
             }
             set
             {
-                SelectedCourse.Name = value;
+                Course.Name = value;
             }
         }
         public string Code
         {
             get
             {
-                return SelectedCourse.Code;
+                return Course.Code;
             }
             set
             {
-                SelectedCourse.Code = value;
+                Course.Code = value;
             }
         }
         public string Room
         {
-            get { return SelectedCourse.Room; }
-            set { SelectedCourse.Room = value; }
+            get { return Course.Room; }
+            set { Course.Room = value; }
         }
         public string TempName { get; set; }
         public string TempCode { get; set; }
         public string TempRoom { get; set; }
-        public List<Person> Roster 
+        public List<Person> Roster
         {
             get
             {
-                return SelectedCourse.Roster;
+                return Course.Roster;
             }
             set
             {
-                SelectedCourse.Roster = value; 
+                Course.Roster = value;
             }
         }
         public string Hours { get; set; }
         public bool IsValid;
 
-        public CourseViewModel(int id, Course course = null)
+        public CourseViewModel(int id, int courseId = -1)
         {
-            courseService = CourseService.Current;
-            personService = PersonService.Current;
-            if(id < 0)
+            if (id < 0)
             {
                 Person = new Person { Id = -1 };
             }
@@ -104,13 +107,13 @@ namespace UWP.LearningManagement.ViewModels
                 }
             }
 
-            if(course == null)
+            if (courseId == -1)
             {
                 Course = new Course { Id = -1 };
             }
             else
             {
-                Course = course;
+                Course = CourseList.FirstOrDefault(x => x.Id == courseId);
             }
             IsValid = true;
         }
@@ -119,63 +122,55 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Set()
         {
-            if(int.TryParse(Hours, out int hours))
+            if (int.TryParse(Hours, out int hours))
             {
-                SelectedCourse.CreditHours = hours;
+                Course.CreditHours = hours;
             }
             else
             {
-                SelectedCourse.CreditHours = 3;
+                Course.CreditHours = 3;
             }
 
-            SelectedCourse.Roster.Add(SelectedPerson);
+            //Course.Roster.Add(SelectedPerson);
         }
 
         public async Task<Course> AddCourse()
         {
-            var handler = new WebRequestHandler();
-            string returnVal;
-            Course deserializedReturn;
-            returnVal = await handler.Post("http://localhost:5159/Course/AddOrUpdate", Course);
-            deserializedReturn = JsonConvert.DeserializeObject<Course>(returnVal);
+            Course.Add(Person);
+            var returnVal = await new WebRequestHandler().Post("http://localhost:5159/Course/AddOrUpdate", Course);
+            Course deserializedReturn = JsonConvert.DeserializeObject<Course>(returnVal);
 
-            if (Person != null)
-            { 
-                Person.Add(deserializedReturn);
-                await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateCourses", Person);
-            }
-
-
-            
+            Person.Add(deserializedReturn);
+            await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateCourses", Person);
 
             return deserializedReturn;
         }
 
         public void Edit()
         {
-//            if (Code != null && Code != "" && Name != null && Name != "" && Room != null && Room != "")
-//            {
-//                SelectedCourse.Name = Name;
-//                SelectedCourse.Code = Code;
-//                foreach (var instructor in Instructors)
-//                {
-//                    if (instructor.IsSelected && !SelectedCourse.Roster.Contains(instructor))
-//                    {
-//                        SelectedCourse.Add(instructor);
-//                        instructor.Add(SelectedCourse);
-//                    }
-//                    else if (!instructor.IsSelected && SelectedCourse.Roster.Contains(instructor))
-//                    {
-//                        SelectedCourse.Remove(instructor);
-//                        instructor.Remove(SelectedCourse);
-//                    }
-//                }
-//            }
-//            else
-//            {
-//                GetTemp();
-//            }
-//            SelectedCourse = null;
+            //            if (Code != null && Code != "" && Name != null && Name != "" && Room != null && Room != "")
+            //            {
+            //                SelectedCourse.Name = Name;
+            //                SelectedCourse.Code = Code;
+            //                foreach (var instructor in Instructors)
+            //                {
+            //                    if (instructor.IsSelected && !SelectedCourse.Roster.Contains(instructor))
+            //                    {
+            //                        SelectedCourse.Add(instructor);
+            //                        instructor.Add(SelectedCourse);
+            //                    }
+            //                    else if (!instructor.IsSelected && SelectedCourse.Roster.Contains(instructor))
+            //                    {
+            //                        SelectedCourse.Remove(instructor);
+            //                        instructor.Remove(SelectedCourse);
+            //                    }
+            //                }
+            //            }
+            //            else
+            //            {
+            //                GetTemp();
+            //            }
+            //            SelectedCourse = null;
         }
         public void SetTemp()
         {

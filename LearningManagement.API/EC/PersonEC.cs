@@ -46,12 +46,12 @@ namespace LearningManagement.API.EC
             }
             else
             {
-                var editedStudent = FakeDataBase.People.FirstOrDefault(p => p.Id == s.Id) as Student;
-                if (editedStudent != null)
+                if (FakeDataBase.People.FirstOrDefault(p => p.Id == s.Id) is Student editedStudent)
                 {
                     editedStudent.FirstName = s.FirstName;
                     editedStudent.LastName = s.LastName;
                     editedStudent.Classification = s.Classification;
+                    return editedStudent;
                 }
             }
             return s;
@@ -91,6 +91,7 @@ namespace LearningManagement.API.EC
                 {
                     editedInstructor.FirstName = i.FirstName;
                     editedInstructor.LastName = i.LastName;
+                    return editedInstructor;
                 }
             }
             return i;
@@ -102,6 +103,7 @@ namespace LearningManagement.API.EC
             if (editedPerson != null) 
             { 
                 editedPerson.Courses = p.Courses;
+                return editedPerson;
             }
             return p;
         }

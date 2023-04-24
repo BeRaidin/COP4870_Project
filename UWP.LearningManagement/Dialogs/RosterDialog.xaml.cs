@@ -24,9 +24,9 @@ namespace UWP.LearningManagement.Dialogs
             DataContext = new RosterViewModel();
         }
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as RosterViewModel).AddRoster();
+            await (DataContext as RosterViewModel).AddRoster();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
