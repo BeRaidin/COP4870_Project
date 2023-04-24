@@ -30,7 +30,6 @@ namespace LearningManagement.API.Controllers
         [HttpPost("Delete")]
         public void DeleteInstructor([FromBody] Instructor instructor)
         {
-            new PersonEC().Delete(instructor);
         }
     }
 }

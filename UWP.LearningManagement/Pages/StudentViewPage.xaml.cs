@@ -37,7 +37,7 @@ namespace UWP.LearningManagement
         {
             if ((DataContext as StudentViewViewModel).SelectedStudent != null)
             {
-                frame.Navigate(typeof(StudentDetailsPage), (DataContext as StudentViewViewModel).SelectedStudent.Id);
+                frame.Navigate(typeof(StudentDetailsPage), (DataContext as StudentViewViewModel).SelectedStudent.Student.Id);
             }
         }
 

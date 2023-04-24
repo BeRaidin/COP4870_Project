@@ -16,16 +16,16 @@ namespace UWP.LearningManagement.ViewModels
     public class InstructorViewViewModel
     {
         private readonly SemesterService semesterService;
-        private IEnumerable<Person> AllInstructors
+        private IEnumerable<AdminViewModel> AllInstructors
         {
             get
             {
                 var payloadInstructors = new WebRequestHandler().Get("http://localhost:5159/Person/GetInstructors").Result;
                 var payloadAssistants = new WebRequestHandler().Get("http://localhost:5159/Person/GetAssistants").Result;
-                List<Instructor> instructorsList = JsonConvert.DeserializeObject<List<Instructor>>(payloadInstructors).ToList();
-                List<TeachingAssistant> assistantsList = JsonConvert.DeserializeObject<List<TeachingAssistant>>(payloadAssistants).ToList();
-                List<Person> results = new List<Person>();
-                foreach(var instructor in  instructorsList)
+                var instructorsList = JsonConvert.DeserializeObject<List<Instructor>>(payloadInstructors).Select(d => new AdminViewModel(d.Id));
+                var assistantsList = JsonConvert.DeserializeObject<List<TeachingAssistant>>(payloadAssistants).Select(d => new AdminViewModel(d.Id));
+                List<AdminViewModel> results = new List<AdminViewModel>();
+                foreach (var instructor in instructorsList)
                 {
                     results.Add(instructor);
                 }
@@ -34,21 +34,15 @@ namespace UWP.LearningManagement.ViewModels
                     results.Add(teachingAssistant);
                 }
 
-                IEnumerable<Person> returnVal = results;
+                IEnumerable<AdminViewModel> returnVal = results;
 
                 return returnVal;
             }
         }
 
+        public ObservableCollection<AdminViewModel> Instructors { get; set; }
+        public AdminViewModel SelectedInstructor { get; set; }
 
-
-
-
-
-
-        public ObservableCollection<Person> Instructors { get; set; }
-        public Person SelectedInstructor { get; set; }
-        
         public Semester SelectedSemester
         {
             get { return semesterService.CurrentSemester; }
@@ -66,21 +60,21 @@ namespace UWP.LearningManagement.ViewModels
         public InstructorViewViewModel()
         {
             semesterService = SemesterService.Current;
-            Instructors = new ObservableCollection<Person>(AllInstructors);
+            Instructors = new ObservableCollection<AdminViewModel>(AllInstructors);
         }
 
         public void Search()
         {
             if (Query != null && Query != "")
             {
-                IEnumerable<Person> searchResults;
+                IEnumerable<AdminViewModel> searchResults;
                 if (int.TryParse(Query, out int id))
                 {
-                    searchResults = AllInstructors.Where(i => i.Id == id).ToList();
+                    searchResults = AllInstructors.Where(i => i.Person.Id == id).ToList();
                 }
                 else
                 {
-                    searchResults = AllInstructors.Where(i => i.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                    searchResults = AllInstructors.Where(i => i.Person.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 }
 
 
@@ -98,8 +92,8 @@ namespace UWP.LearningManagement.ViewModels
 
         public async Task<Person> Delete()
         {
-            string returnVal = await new WebRequestHandler().Post("http://localhost:5159/Instructor/Delete", SelectedInstructor);
-            var deserializedReturn = JsonConvert.DeserializeObject<Instructor>(returnVal);
+            string returnVal = await new WebRequestHandler().Post("http://localhost:5159/Person/Delete", SelectedInstructor.Person);
+            var deserializedReturn = JsonConvert.DeserializeObject<Person>(returnVal);
             return deserializedReturn;
         }
 

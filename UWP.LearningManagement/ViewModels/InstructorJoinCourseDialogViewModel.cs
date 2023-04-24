@@ -68,10 +68,11 @@ namespace UWP.LearningManagement.ViewModels
         {
             if(SelectedCourse != null) 
             {
-                //SelectedPerson.Add(SelectedCourse);
-                //await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateCourses", SelectedPerson);
+                SelectedPerson.Add(SelectedCourse);
+                var payload = await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateCourses", SelectedPerson);
+                var returnVal = JsonConvert.DeserializeObject<Person>(payload);
 
-                SelectedCourse.Add(SelectedPerson);
+                SelectedCourse.Add(returnVal);
                 await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateRoster", SelectedCourse);
             }
         }

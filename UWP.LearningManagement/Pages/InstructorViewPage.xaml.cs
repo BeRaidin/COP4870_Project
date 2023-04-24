@@ -33,11 +33,11 @@ namespace UWP.LearningManagement
             (DataContext as InstructorViewViewModel).Search();
         }
 
-        private void ListBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        private void AdminList_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             if ((DataContext as InstructorViewViewModel).SelectedInstructor != null)
             {
-                frame.Navigate(typeof(InstructorDetailsPage), (DataContext as InstructorViewViewModel).SelectedInstructor.Id);
+                frame.Navigate(typeof(InstructorDetailsPage), (DataContext as InstructorViewViewModel).SelectedInstructor.Person.Id);
             }
         }
 
@@ -61,6 +61,7 @@ namespace UWP.LearningManagement
         {
             var addDialog = new AdminDialog();
             await addDialog.ShowAsync();
+
             (DataContext as InstructorViewViewModel).Refresh();
         }
 
@@ -68,7 +69,7 @@ namespace UWP.LearningManagement
         {
             if ((DataContext as InstructorViewViewModel).SelectedInstructor != null)
             {
-                var addDialog = new AdminDialog((DataContext as InstructorViewViewModel).SelectedInstructor.Id);
+                var addDialog = new AdminDialog((DataContext as InstructorViewViewModel).SelectedInstructor.Person.Id);
                 await addDialog.ShowAsync();
                 (DataContext as InstructorViewViewModel).Refresh();
             }

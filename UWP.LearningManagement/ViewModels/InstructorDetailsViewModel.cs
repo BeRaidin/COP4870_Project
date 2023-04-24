@@ -14,6 +14,7 @@ namespace UWP.LearningManagement.ViewModels
     public class InstructorDetailsViewModel
     {
         private readonly PersonService personService;
+        private readonly int Id;
         private List<Instructor> InstructorList
         {
             get 
@@ -29,6 +30,16 @@ namespace UWP.LearningManagement.ViewModels
             {
                 var payload = new WebRequestHandler().Get("http://localhost:5159/Person/GetAssistants").Result;
                 return JsonConvert.DeserializeObject<List<TeachingAssistant>>(payload).ToList();
+            }
+        }
+
+        private List<Course> CourseList
+
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Course").Result;
+                return JsonConvert.DeserializeObject<List<Course>>(payload).ToList();
             }
         }
 
@@ -54,11 +65,12 @@ namespace UWP.LearningManagement.ViewModels
 
         public InstructorDetailsViewModel(int id)
         {
+            Id = id;
             personService = PersonService.Current;
-            SelectedPerson = InstructorList.FirstOrDefault(i => i.Id == id);
+            SelectedPerson = InstructorList.FirstOrDefault(i => i.Id == Id);
             if(SelectedPerson == null)
             {
-                SelectedPerson = AssistantList.FirstOrDefault(i => i.Id == id);
+                SelectedPerson = AssistantList.FirstOrDefault(i => i.Id == Id);
                 Type = "Teaching Assistant";
             }
             else
@@ -92,14 +104,17 @@ namespace UWP.LearningManagement.ViewModels
 
         public async void JoinCourse()
         {
-            var dialog = new InstructorJoinCourseDialog(SelectedPerson.Id);
-            if (dialog != null)
+            if (SelectedPerson.Courses != CourseList)
             {
-                await dialog.ShowAsync();
+                var dialog = new InstructorJoinCourseDialog(Id);
+                if (dialog != null)
+                {
+                    await dialog.ShowAsync();
+                }
+                Refresh();
             }
-            Refresh();
         }
-
+        
         public async void GradeAssignment()
         {
             personService.CurrentAssignment = SelectedGrade.Assignment;
@@ -140,6 +155,15 @@ namespace UWP.LearningManagement.ViewModels
         public void Refresh()
         {
             Courses.Clear();
+            if (Type == "Instructor")
+            {
+                SelectedPerson = InstructorList.FirstOrDefault(i => i.Id == Id);
+            }
+            else
+            {
+                SelectedPerson = AssistantList.FirstOrDefault(i => i.Id == Id);
+
+            }
             foreach (var course in SelectedPerson.Courses) 
             { 
                 Courses.Add(course);

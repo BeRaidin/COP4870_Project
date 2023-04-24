@@ -28,7 +28,7 @@
                 <Button Click="Search_Click" Grid.Column="1" Content="Search" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
 
                 <ListBox Grid.Row="1" Grid.ColumnSpan="2"
-                ItemsSource="{Binding Instructors, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedInstructor, Mode=TwoWay}" DoubleTapped="ListBox_DoubleTapped">
+                ItemsSource="{Binding Instructors, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedInstructor, Mode=TwoWay}" DoubleTapped="AdminList_DoubleTapped">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>

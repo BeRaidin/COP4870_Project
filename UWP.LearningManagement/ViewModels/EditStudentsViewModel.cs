@@ -17,7 +17,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             get
             {
-                var payload = new WebRequestHandler().Get("http://localhost:5159/Student").Result;
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Person/GetStudents").Result;
                 var returnVal = JsonConvert.DeserializeObject<List<Student>>(payload).Select(d => new StudentViewModel(d));
                 return returnVal;
             }
@@ -60,7 +60,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public async Task<Student> Delete()
         {
-            string returnVal = await new WebRequestHandler().Post("http://localhost:5159/Student/Delete", SelectedStudent.Student);
+            string returnVal = await new WebRequestHandler().Post("http://localhost:5159/Person/Delete", SelectedStudent.Student);
             var deserializedReturn = JsonConvert.DeserializeObject<Student>(returnVal);
             return deserializedReturn;
         }
