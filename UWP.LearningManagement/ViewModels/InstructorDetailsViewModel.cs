@@ -8,6 +8,7 @@ using UWP.Library.LearningManagement.Database;
 using System.Linq;
 using Newtonsoft.Json;
 using UWP.LearningManagement.API.Util;
+using System.Collections;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -17,7 +18,7 @@ namespace UWP.LearningManagement.ViewModels
         private readonly int Id;
         private List<Instructor> InstructorList
         {
-            get 
+            get
             {
                 var payload = new WebRequestHandler().Get("http://localhost:5159/Person/GetInstructors").Result;
                 return JsonConvert.DeserializeObject<List<Instructor>>(payload).ToList();
@@ -52,8 +53,8 @@ namespace UWP.LearningManagement.ViewModels
         }
         public Person CurrentInstructor { get; set; }
 
-        public CourseViewModel SelectedCourse { get; set; }
-        public GradesDictionary SelectedGrade { get;set; }
+        public Course SelectedCourse { get; set; }
+        public GradesDictionary SelectedGrade { get; set; }
 
         public string Type { get; set; }
         public ObservableCollection<GradesDictionary> SubmittedAssignments { get; set; }
@@ -61,14 +62,14 @@ namespace UWP.LearningManagement.ViewModels
 
         public CourseViewModel CurrentCourse { get; set; }
 
-        public InstructorDetailsViewModel() {}
+        public InstructorDetailsViewModel() { }
 
         public InstructorDetailsViewModel(int id)
         {
             Id = id;
             personService = PersonService.Current;
             SelectedPerson = InstructorList.FirstOrDefault(i => i.Id == Id);
-            if(SelectedPerson == null)
+            if (SelectedPerson == null)
             {
                 SelectedPerson = AssistantList.FirstOrDefault(i => i.Id == Id);
                 Type = "Teaching Assistant";
@@ -104,17 +105,15 @@ namespace UWP.LearningManagement.ViewModels
 
         public async void JoinCourse()
         {
-            if (SelectedPerson.Courses != CourseList)
+
+            var dialog = new InstructorJoinCourseDialog(Id);
+            if (dialog != null)
             {
-                var dialog = new InstructorJoinCourseDialog(Id);
-                if (dialog != null)
-                {
-                    await dialog.ShowAsync();
-                }
-                Refresh();
+                await dialog.ShowAsync();
             }
+            Refresh();
         }
-        
+
         public async void GradeAssignment()
         {
             personService.CurrentAssignment = SelectedGrade.Assignment;
@@ -133,9 +132,9 @@ namespace UWP.LearningManagement.ViewModels
         public void GetAssignments()
         {
             SubmittedAssignments.Clear();
-            foreach(var course in SelectedPerson.Courses) 
-            { 
-                foreach(var person in course.Roster)
+            foreach (var course in SelectedPerson.Courses)
+            {
+                foreach (var person in course.Roster)
                 {
                     if (person is Student student)
                     {
@@ -162,10 +161,9 @@ namespace UWP.LearningManagement.ViewModels
             else
             {
                 SelectedPerson = AssistantList.FirstOrDefault(i => i.Id == Id);
-
             }
-            foreach (var course in SelectedPerson.Courses) 
-            { 
+            foreach (var course in SelectedPerson.Courses)
+            {
                 Courses.Add(course);
             }
             GetAssignments();
