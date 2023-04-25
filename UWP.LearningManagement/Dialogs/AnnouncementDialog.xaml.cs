@@ -17,7 +17,6 @@ namespace UWP.LearningManagement.Dialogs
         {
             var test = await (DataContext as AnnouncementViewModel).Add();
             Console.WriteLine(test.Title);
-
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

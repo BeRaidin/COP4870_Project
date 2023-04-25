@@ -18,14 +18,15 @@ namespace UWP.Library.LearningManagement.Database
         public static List<Semester> semesters = new List<Semester>();
         public static List<Assignment> assignments = new List<Assignment>();
         public static List<Announcement> announcements = new List<Announcement>();
-        
+        public static List<Module> modules = new List<Module>();
 
-        public static List<Student> Students 
-        { 
-            get 
+
+        public static List<Student> Students
+        {
+            get
             {
                 var returnList = new List<Student>();
-                foreach (var person in people) 
+                foreach (var person in people)
                 {
                     if (person is Student student)
                     {
@@ -40,8 +41,8 @@ namespace UWP.Library.LearningManagement.Database
             get { return courses; }
         }
         public static List<Semester> Semesters
-        { 
-            get { return semesters; } 
+        {
+            get { return semesters; }
         }
         public static List<Assignment> Assignments
         {
@@ -51,13 +52,16 @@ namespace UWP.Library.LearningManagement.Database
         {
             get { return announcements; }
         }
+        public static List<Module> Modules
+        {
+            get { return modules; }
+        }
 
         public static List<Person> People
         {
             get { return people; }
 
         }
-
         public static List<Instructor> Instructors
         {
             get
@@ -73,7 +77,6 @@ namespace UWP.Library.LearningManagement.Database
                 return returnList;
             }
         }
-
         public static List<TeachingAssistant> Assistants
         {
             get

@@ -2,13 +2,33 @@
 using Library.LearningManagement.Services;
 using System.Collections.Generic;
 using Windows.Networking;
+using Newtonsoft.Json;
+using UWP.LearningManagement.API.Util;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace UWP.LearningManagement.ViewModels
 {
-    public class ModuleDialogViewModel
+    public class ModuleViewModel
     {
         private readonly CourseService courseService;
         private readonly ModuleService moduleService;
+        public IEnumerable<Module> Modules
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Module").Result;
+                return JsonConvert.DeserializeObject<List<Module>>(payload);
+            }
+        }
+        public IEnumerable<Course> Courses
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Course").Result;
+                return JsonConvert.DeserializeObject<List<Course>>(payload);
+            }
+        }
 
         public Module SelectedModule
         {
@@ -16,10 +36,6 @@ namespace UWP.LearningManagement.ViewModels
             set { moduleService.CurrentModule = value; }
         }
         public Module Module { get; set; }
-        public List<Module> Modules
-        {
-            get { return courseService.CurrentCourse.Modules; }
-        }
         public string Name
         {
             get { return SelectedModule.Name; }
@@ -35,7 +51,10 @@ namespace UWP.LearningManagement.ViewModels
         public bool IsCont;
         public bool IsValid;
 
-        public ModuleDialogViewModel()
+
+        public Course Course { get; set; }
+
+        public ModuleViewModel()
         {
             courseService = CourseService.Current;
             moduleService = ModuleService.Current;
@@ -43,23 +62,34 @@ namespace UWP.LearningManagement.ViewModels
             IsCont = true;
             IsValid = true;
         }
-
-        public void Add()
+        public ModuleViewModel(int id, int courseId = -1)
         {
-            bool test = true;
-            foreach(var module in Modules)
+            courseService = CourseService.Current;
+            moduleService = ModuleService.Current;
+
+            if (id != -1)
             {
-                if (module.Name == Name)
-                {
-                    test = false;
-                }
+                Module = Modules.FirstOrDefault(x => x.Id == id);
             }
-            if (test && Name != null && Name != "" && Description != null && Description != "")
+            else Module = new Module { Id = -1 };
+            if (courseId != -1)
             {
-                SelectedModule = new Module { Name = Name, Description = Description };
-                Modules.Add(SelectedModule);
+                Course = Courses.FirstOrDefault(x => x.Id == courseId);
             }
-            else IsValid = false;
+            IsCont = true;
+            IsValid = true;
+        }
+
+        public virtual string Display => $"{Module.Name} - {Module.Description}";
+
+        public async Task<Module> Add()
+        {
+            var handler = new WebRequestHandler();
+            var returnVal = await handler.Post("http://localhost:5159/Module/AddOrUpdate", Module);
+            var deserializedReturn = JsonConvert.DeserializeObject<Module>(returnVal);
+            Course.Add(deserializedReturn);
+            await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateModules", Course);
+            return deserializedReturn;
         }
 
         public void Edit()

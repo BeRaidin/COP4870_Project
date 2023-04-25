@@ -230,7 +230,7 @@
     <Compile Include="ViewModels\InstructorViewViewModel.cs" />
     <Compile Include="ViewModels\ModuleContentViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
-    <Compile Include="ViewModels\ModuleDialogViewModel.cs" />
+    <Compile Include="ViewModels\ModuleViewModel.cs" />
     <Compile Include="ViewModels\PersonDialogViewModel.cs" />
     <Compile Include="ViewModels\PreviousSemesterViewModel.cs" />
     <Compile Include="ViewModels\RosterViewModel.cs" />
