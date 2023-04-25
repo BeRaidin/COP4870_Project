@@ -42,7 +42,7 @@ namespace UWP.LearningManagement
         {
             if ((DataContext as InstructorDetailsViewModel).SelectedCourse != null)
             {
-                Frame.Navigate(typeof(CourseDetailsPage), (DataContext as InstructorDetailsViewModel).SelectedCourse.Course);
+                Frame.Navigate(typeof(CourseDetailsPage), (DataContext as InstructorDetailsViewModel).SelectedCourse.Course.Id);
             }
         }
 
@@ -61,6 +61,7 @@ namespace UWP.LearningManagement
         private void Grade_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             (DataContext as InstructorDetailsViewModel).GradeAssignment();
+
         }
     }
 }

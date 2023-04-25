@@ -31,17 +31,64 @@ namespace UWP.LearningManagement
         {
             base.OnNavigatedTo(e);
 
-            if (e.Parameter is Course course)
+            if (e.Parameter is int courseId)
             {
-                DataContext = new CourseDetailsViewModel(course);
+                DataContext = new CourseDetailsViewModel(courseId);
             }
         }
 
-        private async void Module_Click(object sender, RoutedEventArgs e)
+        private async void AddModule_Click(object sender, RoutedEventArgs e)
         {
-            int courseId = (DataContext as CourseDetailsViewModel).SelectedCourse.Id;
+            int courseId = (DataContext as CourseDetailsViewModel).Course.Id;
             var addDialog = new ModuleDialog(-1, courseId);
             await addDialog.ShowAsync();
+            (DataContext as CourseDetailsViewModel).Refresh();
+        }
+        private async void AddAnnouncement_Click(object sender, RoutedEventArgs e)
+        {
+            int courseId = (DataContext as CourseDetailsViewModel).Course.Id;
+            var addDialog = new AnnouncementDialog(-1, courseId);
+            await addDialog.ShowAsync();
+            (DataContext as CourseDetailsViewModel).Refresh();
+
+        }
+        private void AddAssignment_Click(object sender, RoutedEventArgs e)
+        {
+            //int courseId = (DataContext as CourseDetailsViewModel).SelectedCourse.Id;
+            //var addDialog = new AnnouncementDialog(-1, courseId);
+            //await addDialog.ShowAsync();
+            //(DataContext as CourseDetailsViewModel).Refresh();
+        }
+
+
+        private void UpdateRoster_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as CourseDetailsViewModel).UpdateRoster();
+        }
+        private void UpdateModule_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as CourseDetailsViewModel).UpdateModule();
+        }
+        private void UpdateAnnouncement_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as CourseDetailsViewModel).UpdateAnnouncement();
+        }
+        private void UpdateAssignment_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as CourseDetailsViewModel).UpdateAssignment();
+        }
+
+        private async void RemoveModule_Click(object sender, RoutedEventArgs e)
+        {
+            await (DataContext as CourseDetailsViewModel).RemoveModule();
+        }
+        private async void RemoveAnnouncement_Click(object sender, RoutedEventArgs e)
+        {
+            await (DataContext as CourseDetailsViewModel).RemoveAnnouncement();
+        }
+        private void RemoveAssignment_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as CourseDetailsViewModel).RemoveAssignment();
         }
 
         private void Module_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
@@ -51,68 +98,6 @@ namespace UWP.LearningManagement
                 Frame.Navigate(typeof(ModuleContentPage));
             }
         }
-
-        private async void AddAnnouncement_Click(object sender, RoutedEventArgs e)
-        {
-            int courseId = (DataContext as CourseDetailsViewModel).SelectedCourse.Id;
-            var addDialog = new AnnouncementDialog(-1, courseId);
-            await addDialog.ShowAsync();
-        }
-
-        private void Roster_Click(object sender, RoutedEventArgs e)
-        {
-            (DataContext as CourseDetailsViewModel).EditRoster();
-        }
-
-        private async void Assignment_Click(object sender, RoutedEventArgs e)
-        {
-            //int courseId = (DataContext as CourseDetailsViewModel).SelectedCourse.Id;
-            //var addDialog = new AnnouncementDialog(-1, courseId);
-            //await addDialog.ShowAsync();
-        }
-
-        private void EditModule_Click(object sender, RoutedEventArgs e)
-        {
-            if ((DataContext as CourseDetailsViewModel).SelectedModule != null)
-            {
-                (DataContext as CourseDetailsViewModel).EditModule();
-            }
-        }
-
-        private void DeleteModule_Click(object sender, RoutedEventArgs e)
-        {
-            if ((DataContext as CourseDetailsViewModel).SelectedModule != null)
-            {
-                (DataContext as CourseDetailsViewModel).RemoveModule();
-            }
-        }
-
-        private void EditAssignment_Click(object sender, RoutedEventArgs e)
-        {
-            if ((DataContext as CourseDetailsViewModel).SelectedAssignment != null)
-            {
-                (DataContext as CourseDetailsViewModel).EditAssignment();
-            }
-        }
-
-        private void DeleteAssignment_Click(object sender, RoutedEventArgs e)
-        {
-            if ((DataContext as CourseDetailsViewModel).SelectedAssignment != null)
-            {
-                (DataContext as CourseDetailsViewModel).DeleteAssignment();
-            }
-        }
-
-        private void AnnouncementEdit_Click(object sender, RoutedEventArgs e)
-        {
-            (DataContext as CourseDetailsViewModel).UpdateAnnouncement();
-        }
-
-        private async void AnnouncementDelete_Click(object sender, RoutedEventArgs e)
-        {
-            await (DataContext as CourseDetailsViewModel).RemoveAnnouncement();
-        }
-
         private void Announcement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             (DataContext as CourseDetailsViewModel).ViewAnnouncement();
