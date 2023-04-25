@@ -77,7 +77,7 @@
         </Grid>
 
         <StackPanel Grid.Row="3" Grid.Column="2" VerticalAlignment="Top" Orientation="Horizontal" Margin="5">
-            <Button Margin="5" HorizontalAlignment="Stretch" Content="Add" Click="Announcement_Click"></Button>
+            <Button Margin="5" HorizontalAlignment="Stretch" Content="Add" Click="AddAnnouncement_Click"></Button>
             <Button Margin="5" HorizontalAlignment="Stretch" Content="Edit" Click="AnnouncementEdit_Click"></Button>
             <Button Margin="5" HorizontalAlignment="Stretch" Content="Delete" Click="AnnouncementDelete_Click"></Button>
         </StackPanel>

@@ -75,6 +75,15 @@ namespace UWP.Library.LearningManagement.Models
             }
         }
 
+        public void Remove(Announcement announcement)
+        {
+            var removedAnnouncement = Announcements.FirstOrDefault(x => x.Id == announcement.Id);
+            if (removedAnnouncement != null)
+            {
+                Announcements.Remove(removedAnnouncement);
+            }
+        }
+
         public void GetMaxGrade()
         {
             MaxGrade = 0;

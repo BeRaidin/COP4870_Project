@@ -9,6 +9,8 @@ using Windows.UI.Popups;
 using Newtonsoft.Json;
 using UWP.LearningManagement.API.Util;
 using Windows.ApplicationModel.UserActivities.Core;
+using Windows.UI.WebUI;
+using System.Threading.Tasks;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -19,7 +21,6 @@ namespace UWP.LearningManagement.ViewModels
         private readonly ModuleService moduleService;
         private readonly List<Module> allModules;
         private readonly List<Assignment> allAssignments;
-        private readonly List<Announcement> allAnnouncements;
 
         public Module SelectedModule
         {
@@ -41,7 +42,7 @@ namespace UWP.LearningManagement.ViewModels
             get { return personService.CurrentAssignment; }
             set { personService.CurrentAssignment = value; }
         }
-        public Announcement SelectedAnnouncement { get; set; }
+        public AnnouncementViewModel SelectedAnnouncement { get; set; }
 
         private ObservableCollection<Module> _modules;
         public ObservableCollection<Module> Modules
@@ -55,18 +56,7 @@ namespace UWP.LearningManagement.ViewModels
                 _modules = value;
             }
         }
-        private ObservableCollection<Assignment> _assignments;
-        public ObservableCollection<Assignment> Assignments
-        {
-            get { return _assignments; }
-            set { _assignments = value; }
-        }
-        private ObservableCollection<Announcement> _announcements;
-        public ObservableCollection<Announcement> Announcements
-        {
-            get { return _announcements; }
-            set { _announcements = value; }
-        }
+        public ObservableCollection<Assignment> Assignments { get; set; }
         public string Query { get; set; }
         public string Code
         {
@@ -96,6 +86,8 @@ namespace UWP.LearningManagement.ViewModels
 
         public ObservableCollection<StudentViewModel> Roster { get; set; }
         public ObservableCollection<AdminViewModel> Admin { get; set; }
+        public ObservableCollection<AnnouncementViewModel> Announcements { get; set; }
+
 
 
         public CourseDetailsViewModel(Course course)
@@ -108,6 +100,7 @@ namespace UWP.LearningManagement.ViewModels
             allAssignments = SelectedCourse.Assignments;
             Roster = new ObservableCollection<StudentViewModel>();
             Admin = new ObservableCollection<AdminViewModel>();
+            Announcements = new ObservableCollection<AnnouncementViewModel>();
             foreach (var person in SelectedCourse.Roster) 
             {
                 AdminViewModel admin = new AdminViewModel(person.Id);
@@ -122,13 +115,15 @@ namespace UWP.LearningManagement.ViewModels
                     Admin.Add(admin);
                 }
             }
+            foreach (var announcement in SelectedCourse.Announcements) 
+            {
+                Announcements.Add(new AnnouncementViewModel(announcement.Id));
+            }
 
 
 
-            allAnnouncements = SelectedCourse.Announcements;
             Modules = new ObservableCollection<Module>(allModules);
             Assignments = new ObservableCollection<Assignment>(allAssignments);
-            Announcements = new ObservableCollection<Announcement>(allAnnouncements);
         }
 
 
@@ -147,20 +142,6 @@ namespace UWP.LearningManagement.ViewModels
             }
             Refresh();
             SelectedModule = null;
-        }
-
-        public async void AddAnnouncement()
-        {
-            var dialog = new AnnouncementDialog();
-            if (dialog != null)
-            {
-                await dialog.ShowAsync();
-            }
-            if (!dialog.TestValid())
-            {
-                GetError();
-            }
-            Refresh();
         }
 
         public async void EditRoster()
@@ -254,12 +235,10 @@ namespace UWP.LearningManagement.ViewModels
                 Assignments.Add(assignment);
             }
             
-            Announcements.Clear();
-            foreach (var announcement in allAnnouncements)
-            {
-                Announcements.Add(announcement);
-            }
+            
         }
+
+
 
         public void DeleteAssignment()
         {
@@ -339,7 +318,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (SelectedAnnouncement != null)
             {
-                courseService.CurrentAnnouncement = SelectedAnnouncement;
+                courseService.CurrentAnnouncement = SelectedAnnouncement.Announcement;
                 var dialog = new UpdateAnnouncementDialog();
                 if (dialog != null)
                 {
@@ -353,11 +332,27 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
 
-        public void DeleteAnnouncement()
+        public async void GetError()
+        {
+            var errorDialog = new ErrorDialog();
+            if (errorDialog != null)
+            {
+                await errorDialog.ShowAsync();
+            }
+        }
+
+
+
+
+
+
+        public async Task DeleteAnnouncement()
         {
             if (SelectedAnnouncement != null)
             {
-                SelectedCourse.Announcements.Remove(SelectedAnnouncement);
+                SelectedCourse.Remove(SelectedAnnouncement.Announcement);
+                await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAnnouncements", SelectedCourse);
+                await new WebRequestHandler().Post("http://localhost:5159/Announcement/Delete", SelectedAnnouncement.Announcement);
             }
             Refresh();
         }
@@ -369,15 +364,6 @@ namespace UWP.LearningManagement.ViewModels
             if (messageDialog != null)
             {
                 await messageDialog.ShowAsync();
-            }
-        }
-
-        public async void GetError()
-        {    
-            var errorDialog = new ErrorDialog();
-            if (errorDialog != null)
-            {
-                await errorDialog.ShowAsync();
             }
         }
     }

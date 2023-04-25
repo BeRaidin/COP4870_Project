@@ -33,6 +33,12 @@ namespace LearningManagement.API.Controllers
         {
             return new CourseEC().UpdateRoster(course);
         }
+        [HttpPost("UpdateAnnouncements")]
+        public Course UpdateAnnouncements([FromBody] Course course)
+        {
+            return new CourseEC().UpdateAnnouncements(course);
+        }
+
 
         [HttpPost("Delete")]
         public void DeleteCourse([FromBody] Course course)

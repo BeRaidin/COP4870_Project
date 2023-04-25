@@ -55,6 +55,17 @@ namespace LearningManagement.API.EC
             }
             return c;
         }
+        public Course UpdateAnnouncements(Course c)
+        {
+            var editedCourse = FakeDataBase.Courses.FirstOrDefault(i => i.Id == c.Id);
+            if (editedCourse != null)
+            {
+                editedCourse.Announcements = c.Announcements;
+                return editedCourse;
+            }
+            return c;
+        }
+
         public void Delete(Course c)
         {
 
