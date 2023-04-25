@@ -109,14 +109,17 @@ namespace UWP.LearningManagement.ViewModels
             Roster = new ObservableCollection<StudentViewModel>();
             Admin = new ObservableCollection<AdminViewModel>();
             foreach (var person in SelectedCourse.Roster) 
-            { 
-                if(person is Student student)
+            {
+                AdminViewModel admin = new AdminViewModel(person.Id);
+                if (admin.Person == null)
                 {
-                    Roster.Add(new StudentViewModel(student.Id));
+                    StudentViewModel student = new StudentViewModel(person.Id);
+                    Roster.Add(student);
+
                 }
                 else
                 {
-                    Admin.Add(new AdminViewModel(person.Id));
+                    Admin.Add(admin);
                 }
             }
 
