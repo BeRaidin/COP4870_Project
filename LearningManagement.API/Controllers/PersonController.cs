@@ -64,6 +64,12 @@ namespace LearningManagement.API.Controllers
             return new PersonEC().UpdateCourses(person);
         }
 
+        [HttpPost("UpdateStudentCourses")]
+        public Student UpdateStudentCourses([FromBody] Student student)
+        {
+            return new PersonEC().UpdateStudentCourses(student);
+        }
+
 
         [HttpPost("Delete")]
         public Person Delete([FromBody] Person person)

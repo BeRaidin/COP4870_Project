@@ -14,7 +14,7 @@ namespace UWP.LearningManagement.ViewModels
             set { personService.CurrentPerson = value; }
         }
         public Student Student { get; set; }
-        public Dictionary<Course, double> FinalGrades
+        public List<FinalGradesDictionary> FinalGrades
         {
             get { return Student.FinalGrades; }
         }

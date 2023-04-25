@@ -1,6 +1,7 @@
 ﻿using Library.LearningManagement.Services;
 using UWP.Library.LearningManagement.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -68,14 +69,15 @@ namespace UWP.LearningManagement.ViewModels
             }
 
             double totalGrade = (double)(rawGrade / SelectedCourse.MaxGrade) * 100;
-            SelectedStudent.FinalGrades[SelectedCourse] = totalGrade;
+            var courseGrade = SelectedStudent.FinalGrades.FirstOrDefault(x => x.Key.Id == SelectedCourse.Id);
+            courseGrade.Value = totalGrade;
         }
 
         public void UpdateGPA()
         {
             var totalHours = 0;
             double totalHonorPoints = 0;
-            foreach (KeyValuePair<Course, double> grade in SelectedStudent.FinalGrades)
+            foreach (var grade in SelectedStudent.FinalGrades)
             {
                 var courseHonorPoints = (double)0.0;
                 totalHours += grade.Key.CreditHours;

@@ -21,7 +21,7 @@ namespace UWP.LearningManagement.ViewModels
         { 
             get { return semesterService.SemesterList; }
         }
-        public Dictionary<Course, double> Courses { get; set; }
+        public List<FinalGradesDictionary> Courses { get; set; }
 
         public ObservableCollection<Semester> PreviousSemesters { get; set; }
         public Semester Semester { get; set; }
