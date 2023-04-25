@@ -25,6 +25,7 @@
     <RootPropertyPathName Name="SelectedCourse" />
     <RootPropertyPathName Name="Module" />
     <RootPropertyPathName Name="ContentTypes" />
+    <RootPropertyPathName Name="Assignment" />
     <RootPropertyPathName Name="Modules" />
     <RootPropertyPathName Name="SelectedModuleName" />
     <RootPropertyPathName Name="SemesterTitle" />

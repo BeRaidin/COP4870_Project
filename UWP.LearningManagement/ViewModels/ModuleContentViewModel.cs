@@ -71,21 +71,21 @@ namespace UWP.LearningManagement.ViewModels
 
             if(SelectedItem as AssignmentItem != null)
             {
-                var assignDialog = new AssignmentDialog();
-                if (assignDialog != null)
-                {
-                    await assignDialog.ShowAsync();
-                }
-
-                var assignment = (SelectedItem as AssignmentItem).Assignment;
-                if (assignment.AssignmentGroup == null)
-                {
-                    var Groupdialog = new AssignGroupDialog(assignment);
-                    if (Groupdialog != null)
-                    {
-                        await Groupdialog.ShowAsync();
-                    }
-                }
+                //var assignDialog = new AssignmentDialog();
+                //if (assignDialog != null)
+                //{
+                //    await assignDialog.ShowAsync();
+                //}
+                //
+                //var assignment = (SelectedItem as AssignmentItem).Assignment;
+                //if (assignment.AssignmentGroup == null)
+                //{
+                //    var Groupdialog = new AssignGroupDialog(assignment);
+                //    if (Groupdialog != null)
+                //    {
+                //        await Groupdialog.ShowAsync();
+                //    }
+                //}
             }
             Refresh();
         }

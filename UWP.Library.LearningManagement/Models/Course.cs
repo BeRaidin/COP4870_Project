@@ -70,14 +70,19 @@ namespace UWP.Library.LearningManagement.Models
 
         public void Remove(Assignment assignment)
         {
-            Assignments.Remove(assignment);
-            foreach (var person in Roster)
+            var removedAssignment = Assignments.FirstOrDefault(x => x.Id == assignment.Id);
+            if (removedAssignment != null)
             {
-                if (person is Student student)
-                {
-                    student.Remove(assignment);
-                }
+                Assignments.Remove(removedAssignment);
             }
+
+            //foreach (var person in Roster)
+            //{
+            //    if (person is Student student)
+            //    {
+            //        student.Remove(assignment);
+            //    }
+            //}
         }
 
         public void Remove(Announcement announcement)
