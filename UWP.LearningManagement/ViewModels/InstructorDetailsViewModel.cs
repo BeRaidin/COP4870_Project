@@ -42,7 +42,7 @@ namespace UWP.LearningManagement.ViewModels
             get { return personService.CurrentPerson; }
             set { personService.CurrentPerson = value; }
         }
-        public Person CurrentInstructor { get; set; }
+        public Person Instructor { get; set; }
 
         public CourseViewModel SelectedCourse { get; set; }
         public GradesDictionary SelectedGrade { get; set; }
@@ -69,11 +69,11 @@ namespace UWP.LearningManagement.ViewModels
             {
                 Type = "Instructor";
             }
-            CurrentInstructor = SelectedPerson;
+            Instructor = SelectedPerson;
             Courses = new ObservableCollection<CourseViewModel>();
-            foreach(var course in CurrentInstructor.Courses)
+            foreach(var course in Instructor.Courses)
             {
-                Courses.Add(new CourseViewModel(CurrentInstructor.Id, course.Id));
+                Courses.Add(new CourseViewModel(Instructor.Id, course.Id));
             }
 
             SubmittedAssignments = new ObservableCollection<GradesDictionary>();
@@ -120,7 +120,7 @@ namespace UWP.LearningManagement.ViewModels
             {
                 await dialog.ShowAsync();
             }
-            SelectedPerson = CurrentInstructor;
+            SelectedPerson = Instructor;
             SelectedGrade.IsGraded = true;
             Refresh();
         }
@@ -149,13 +149,17 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Refresh()
         {
-            if (Type == "Instructor")
+            if(Type == "Teaching Assistant")
             {
-                SelectedPerson = InstructorList.FirstOrDefault(i => i.Id == Id);
+                SelectedPerson = AssistantList.FirstOrDefault(x => x.Id == Id);
             }
-            else
+            else SelectedPerson = InstructorList.FirstOrDefault(x => x.Id == Id);
+
+
+            Courses.Clear();
+            foreach (var course in SelectedPerson.Courses)
             {
-                SelectedPerson = AssistantList.FirstOrDefault(i => i.Id == Id);
+                Courses.Add(new CourseViewModel(Instructor.Id, course.Id));
             }
             GetAssignments();
         }

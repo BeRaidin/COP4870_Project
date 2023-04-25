@@ -11,6 +11,7 @@ using UWP.LearningManagement.API.Util;
 using Windows.ApplicationModel.UserActivities.Core;
 using Windows.UI.WebUI;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Activation;
 
 namespace UWP.LearningManagement.ViewModels
 {
@@ -19,15 +20,23 @@ namespace UWP.LearningManagement.ViewModels
         private readonly CourseService courseService;
         private readonly PersonService personService;
         private readonly ModuleService moduleService;
-        private readonly List<Assignment> allAssignments;
+        private readonly int Id;
+        private List<Course> CourseList
 
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Course").Result;
+                return JsonConvert.DeserializeObject<List<Course>>(payload).ToList();
+            }
+        }
 
         public Person SelectedPerson
         {
             get { return personService.CurrentPerson; }
             set { personService.CurrentPerson = value; }
         }
-        public Course SelectedCourse
+        public Course Course
         {
             get { return courseService.CurrentCourse; }
             set { courseService.CurrentCourse = value; }
@@ -43,19 +52,19 @@ namespace UWP.LearningManagement.ViewModels
         public string Query { get; set; }
         public string Code
         {
-            get { return SelectedCourse.Code; }
+            get { return Course.Code; }
         }
         public int Hours
         {
-            get { return SelectedCourse.CreditHours; }
+            get { return Course.CreditHours; }
         }
         public string Name
         {
-            get { return SelectedCourse.Name; }
+            get { return Course.Name; }
         }
         public string Room
         {
-            get { return SelectedCourse.Room; }
+            get { return Course.Room; }
         }
 
         public string Title { get; set; }
@@ -74,18 +83,18 @@ namespace UWP.LearningManagement.ViewModels
 
 
 
-        public CourseDetailsViewModel(Course course)
+        public CourseDetailsViewModel(int courseId)
         {
+            Id = courseId;
             courseService = CourseService.Current;
             personService = PersonService.Current;
             moduleService = ModuleService.Current;
-            SelectedCourse = course;
-            allAssignments = SelectedCourse.Assignments;
+            Course = CourseList.FirstOrDefault(x => x.Id == Id);
             Roster = new ObservableCollection<StudentViewModel>();
             Admin = new ObservableCollection<AdminViewModel>();
             Announcements = new ObservableCollection<AnnouncementViewModel>();
             Modules = new ObservableCollection<ModuleViewModel>();
-            foreach (var person in SelectedCourse.Roster)
+            foreach (var person in Course.Roster)
             {
                 AdminViewModel admin = new AdminViewModel(person.Id);
                 if (admin.Person == null)
@@ -99,25 +108,25 @@ namespace UWP.LearningManagement.ViewModels
                     Admin.Add(admin);
                 }
             }
-            foreach (var announcement in SelectedCourse.Announcements)
+            foreach (var announcement in Course.Announcements)
             {
                 Announcements.Add(new AnnouncementViewModel(announcement.Id));
             }
-            foreach (var module in SelectedCourse.Modules)
+            foreach (var module in Course.Modules)
             {
                 Modules.Add(new ModuleViewModel(module.Id));
             }
 
 
 
-            Assignments = new ObservableCollection<Assignment>(allAssignments);
+            Assignments = new ObservableCollection<Assignment>(Course.Assignments);
         }
 
 
 
-        
 
-        public async void EditRoster()
+
+        public async void UpdateRoster()
         {
             var dialog = new RosterDialog();
             if (dialog != null)
@@ -183,7 +192,7 @@ namespace UWP.LearningManagement.ViewModels
                 }
                 if (!cont)
                 {
-                    SelectedCourse.Remove(assignment);
+                    Course.Remove(assignment);
                     var errorDialog = new ErrorDialog();
                     if (errorDialog != null)
                     {
@@ -197,24 +206,47 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Refresh()
         {
+            Course = CourseList.FirstOrDefault(x => x.Id == Id);
+            Roster.Clear();
+            Admin.Clear();
             Modules.Clear();
-            foreach (var module in SelectedCourse.Modules)
+            Assignments.Clear();
+            Announcements.Clear();
+            foreach (var person in Course.Roster)
+            {
+                AdminViewModel admin = new AdminViewModel(person.Id);
+                if (admin.Person == null)
+                {
+                    StudentViewModel student = new StudentViewModel(person.Id);
+                    Roster.Add(student);
+
+                }
+                else
+                {
+                    Admin.Add(admin);
+                }
+            }
+            foreach (var module in Course.Modules)
             {
                 Modules.Add(new ModuleViewModel(module.Id));
             }
-            Assignments.Clear();
-            foreach (var assignment in allAssignments)
+            foreach (var assignment in Course.Assignments)
             {
                 Assignments.Add(assignment);
             }
-
+            foreach (var announcements in Course.Announcements)
+            {
+                Announcements.Add(new AnnouncementViewModel(announcements.Id));
+            }
 
         }
 
 
 
-        public void DeleteAssignment()
+        public void RemoveAssignment()
         {
+            //if (SelectedAssignment != null)
+            //{
             //foreach (var module in Modules)
             //{
             //    foreach (var item in module.Content.ToList())
@@ -230,47 +262,55 @@ namespace UWP.LearningManagement.ViewModels
             //}
             //Remove(SelectedAssignment);
             //Refresh();
+            //}
         }
 
 
         public void Remove(Assignment assignment)
         {
-            SelectedCourse.Remove(assignment);
-            foreach (var student in SelectedCourse.Roster.ToList())
+            Course.Remove(assignment);
+            foreach (var student in Course.Roster.ToList())
             {
                 if (student as Student != null)
                 {
                     (student as Student).Remove(assignment);
                 }
             }
-        }
-
-        public async void EditModule()
-        {
-            var dialog = new EditModuleDialog();
-            if (dialog != null)
-            {
-                await dialog.ShowAsync();
-            }
-            if (!dialog.TestValid())
-            {
-                GetError();
-            }
             Refresh();
         }
 
-        public async void EditAssignment()
+        public async void UpdateModule()
         {
-            var dialog = new EditAssignmentDialog();
-            if (dialog != null)
+            if (SelectedModule != null)
             {
-                await dialog.ShowAsync();
+                var dialog = new EditModuleDialog();
+                if (dialog != null)
+                {
+                    await dialog.ShowAsync();
+                }
+                if (!dialog.TestValid())
+                {
+                    GetError();
+                }
+                Refresh();
             }
-            if (!dialog.TestValid())
+        }
+
+        public async void UpdateAssignment()
+        {
+            if (SelectedAssignment != null)
             {
-                GetError();
+                var dialog = new EditAssignmentDialog();
+                if (dialog != null)
+                {
+                    await dialog.ShowAsync();
+                }
+                if (!dialog.TestValid())
+                {
+                    GetError();
+                }
+                Refresh();
             }
-            Refresh();
         }
 
         public async void UpdateAnnouncement()
@@ -309,22 +349,22 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (SelectedAnnouncement != null)
             {
-                SelectedCourse.Remove(SelectedAnnouncement.Announcement);
-                await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAnnouncements", SelectedCourse);
+                Course.Remove(SelectedAnnouncement.Announcement);
+                await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAnnouncements", Course);
                 await new WebRequestHandler().Post("http://localhost:5159/Announcement/Delete", SelectedAnnouncement.Announcement);
+                Refresh();
             }
-            Refresh();
         }
 
         public async Task RemoveModule()
         {
             if (SelectedModule != null)
             {
-                SelectedCourse.Remove(SelectedModule.Module);
-                await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAnnouncements", SelectedCourse);
-                await new WebRequestHandler().Post("http://localhost:5159/Announcement/Delete", SelectedModule.Module);
+                Course.Remove(SelectedModule.Module);
+                await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateModules", Course);
+                await new WebRequestHandler().Post("http://localhost:5159/Module/Delete", SelectedModule.Module);
+                Refresh();
             }
-            Refresh();
         }
 
         public async void ViewAnnouncement()

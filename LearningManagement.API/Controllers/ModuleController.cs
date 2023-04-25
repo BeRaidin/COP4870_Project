@@ -28,7 +28,7 @@ namespace LearningManagement.API.Controllers
         }
 
         [HttpPost("Delete")]
-        public void DeleteInstructor([FromBody] Module module)
+        public void DeleteModule([FromBody] Module module)
         {
             new ModuleEC().Delete(module);
         }
