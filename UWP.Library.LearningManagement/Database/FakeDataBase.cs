@@ -12,10 +12,13 @@ namespace UWP.Library.LearningManagement.Database
             new TeachingAssistant {Id = 2, FirstName="Joe", LastName="Joey"}
         };
 
-        private static readonly List<Course> courses = new List<Course>{
+        public static List<Course> courses = new List<Course>{
             new Course {Id = 0, Code="COP4530", Name="C#", CreditHours=4, Room="HCB"}
         };
-        private static readonly List<Semester> semesters = new List<Semester>();
+        public static List<Semester> semesters = new List<Semester>();
+        public static List<Assignment> assignments = new List<Assignment>();
+        public static List<Announcement> announcements = new List<Announcement>();
+        
 
         public static List<Student> Students 
         { 
@@ -39,6 +42,14 @@ namespace UWP.Library.LearningManagement.Database
         public static List<Semester> Semesters
         { 
             get { return semesters; } 
+        }
+        public static List<Assignment> Assignments
+        {
+            get { return assignments; }
+        }
+        public static List<Announcement> Announcements
+        {
+            get { return announcements; }
         }
 
         public static List<Person> People

@@ -50,9 +50,11 @@ namespace UWP.LearningManagement
             }
         }
 
-        private void Announcement_Click(object sender, RoutedEventArgs e)
+        private async void AddAnnouncement_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as CourseDetailsViewModel).AddAnnouncement();
+            int courseId = (DataContext as CourseDetailsViewModel).SelectedCourse.Id;
+            var addDialog = new AnnouncementDialog(-1, courseId);
+            await addDialog.ShowAsync();
         }
 
         private void Roster_Click(object sender, RoutedEventArgs e)
@@ -102,9 +104,9 @@ namespace UWP.LearningManagement
             (DataContext as CourseDetailsViewModel).UpdateAnnouncement();
         }
 
-        private void AnnouncementDelete_Click(object sender, RoutedEventArgs e)
+        private async void AnnouncementDelete_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as CourseDetailsViewModel).DeleteAnnouncement();
+            await (DataContext as CourseDetailsViewModel).DeleteAnnouncement();
         }
 
         private void Announcement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)

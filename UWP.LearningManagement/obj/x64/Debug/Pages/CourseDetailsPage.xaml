@@ -77,7 +77,7 @@
         </Grid>
 
         <StackPanel Grid.Row="3" Grid.Column="2" VerticalAlignment="Top" Orientation="Horizontal" Margin="5">
-            <Button x:ConnectionId='14' Margin="5" HorizontalAlignment="Stretch" Content="Add"                           ></Button>
+            <Button x:ConnectionId='14' Margin="5" HorizontalAlignment="Stretch" Content="Add"                              ></Button>
             <Button x:ConnectionId='15' Margin="5" HorizontalAlignment="Stretch" Content="Edit"                               ></Button>
             <Button x:ConnectionId='16' Margin="5" HorizontalAlignment="Stretch" Content="Delete"                                 ></Button>
         </StackPanel>

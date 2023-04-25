@@ -7,22 +7,39 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation.Collections;
+using Newtonsoft.Json;
+using UWP.LearningManagement.API.Util;
 
 namespace UWP.LearningManagement.ViewModels
 {
     public class AnnouncementViewModel
     {
-        private readonly CourseService courseService;
-        public Course SelectedCourse
+        public IEnumerable<Announcement> Announcements
         {
-            get { return courseService.CurrentCourse; }
-            set { courseService.CurrentCourse = value; }
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Announcement").Result;
+                return JsonConvert.DeserializeObject<List<Announcement>>(payload);
+            }
         }
+        public IEnumerable<Course> Courses
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Course").Result;
+                return JsonConvert.DeserializeObject<List<Course>>(payload);
+            }
+        }
+
+        public virtual string Display => $"{Title}";
+
+
+        public Course Course { get; set; }
         public Announcement Announcement { get; set; }
-        public string Title 
+        public string Title
         {
             get { return Announcement.Title; }
-            set { Announcement.Title = value; } 
+            set { Announcement.Title = value; }
         }
         public string Message
         {
@@ -33,33 +50,36 @@ namespace UWP.LearningManagement.ViewModels
 
         public AnnouncementViewModel()
         {
-            courseService = CourseService.Current;
             Announcement = new Announcement();
             IsValid = true;
         }
 
-        public void Add()
+        public AnnouncementViewModel(int id, int courseId = -1)
         {
-            bool isNew = true;
-            foreach(var announcement in SelectedCourse.Announcements)
+            if (id != -1)
             {
-                if (announcement.Title == Title)
-                {
-                    isNew = false;
-                    break;
-                }
+                Announcement = Announcements.FirstOrDefault(x => x.Id == id);
             }
+            else Announcement = new Announcement { Id = -1 };
+            if (courseId != -1)
+            {
+                Course = Courses.FirstOrDefault(x => x.Id == courseId);
+            }
+        }
 
-            if (Title != null && Title != "" && Message != null && Message != "" && isNew)
-            {
-                SelectedCourse.Add(Announcement);
-            }
-            else IsValid = false;
+        public async Task<Announcement> Add()
+        {
+            var handler = new WebRequestHandler();
+            var returnVal = await handler.Post("http://localhost:5159/Announcement/AddOrUpdate", Announcement);
+            var deserializedReturn = JsonConvert.DeserializeObject<Announcement>(returnVal);
+            Course.Add(deserializedReturn);
+            await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAnnouncements", Course);
+            return deserializedReturn;
         }
 
         public void Edit()
         {
-            foreach (var announcement in SelectedCourse.Announcements)
+            foreach (var announcement in Course.Announcements)
             {
                 if (Title == announcement.Title)
                 {
@@ -70,11 +90,11 @@ namespace UWP.LearningManagement.ViewModels
             {
                 IsValid = false;
             }
-            if (IsValid)
-            {
-                courseService.CurrentAnnouncement.Title = Title;
-                courseService.CurrentAnnouncement.Message = Message;
-            }
+            //if (IsValid)
+            //{
+            //    courseService.CurrentAnnouncement.Title = Title;
+            //    courseService.CurrentAnnouncement.Message = Message;
+            //}
         }
     }
 }
