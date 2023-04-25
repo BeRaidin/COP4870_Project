@@ -18,16 +18,15 @@ namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class AssignmentDialog : ContentDialog
     {
-        public AssignmentDialog()
+        public AssignmentDialog(int id, int courseId)
         {
             this.InitializeComponent();
-            DataContext = new AssignmentViewModel();
+            DataContext = new AssignmentViewModel(id, courseId);
         }
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as AssignmentViewModel).Add();
-
+            await (DataContext as AssignmentViewModel).Add();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

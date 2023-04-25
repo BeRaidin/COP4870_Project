@@ -43,6 +43,11 @@ namespace LearningManagement.API.Controllers
         {
             return new CourseEC().UpdateModules(course);
         }
+        [HttpPost("UpdateAssignments")]
+        public Course UpdateAssignments([FromBody] Course course)
+        {
+            return new CourseEC().UpdateAssignments(course);
+        }
 
 
         [HttpPost("Delete")]

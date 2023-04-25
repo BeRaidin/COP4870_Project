@@ -10,11 +10,30 @@ using UWP.LearningManagement.Dialogs;
 using Windows.ApplicationModel.VoiceCommands;
 using Windows.Foundation.Collections;
 using Windows.Services.Maps;
+using Newtonsoft.Json;
+using UWP.LearningManagement.API.Util;
 
 namespace UWP.LearningManagement.ViewModels
 {
     public class AssignmentViewModel
     {
+
+        public IEnumerable<Assignment> Assignments
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Assignment").Result;
+                return JsonConvert.DeserializeObject<List<Assignment>>(payload);
+            }
+        }
+        public IEnumerable<Course> Courses
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Course").Result;
+                return JsonConvert.DeserializeObject<List<Course>>(payload);
+            }
+        }
         private readonly ModuleService moduleService;
         private readonly CourseService courseService;
         private readonly PersonService personService;
@@ -35,16 +54,13 @@ namespace UWP.LearningManagement.ViewModels
             set { moduleService.CurrentModule = value; }
         }
 
-        private Assignment _assignment;
-        public Assignment Assignment
-        {
-            get { return _assignment; }
-            set { _assignment = value; }
-        }
+        public Assignment Assignment { get; set; }
+        public Course Course { get; set; }
+        
+        
         public AssignmentItem AssignmentItem { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string TotalPoints { get; set; }
         public string Group { get; set; }
         public DateTimeOffset DueDate { get; set; }
         private readonly List<AssignmentGroup> assignmentGroups;
@@ -59,34 +75,52 @@ namespace UWP.LearningManagement.ViewModels
 
         public bool IsValid;
 
-        public AssignmentViewModel()
-        {
-            moduleService = ModuleService.Current;
-            courseService = CourseService.Current;
-            personService = PersonService.Current;
 
-            if (SelectedItem == null)
+        public string TotalPoints { get; set; }
+
+        public virtual string Display => $"({Assignment.DueDate}) {Assignment.Name}";
+
+        public AssignmentViewModel(int id, int courseId = -1)
+        {
+            if (id != -1)
             {
-                SelectedItem = new AssignmentItem();
+                Assignment = Assignments.FirstOrDefault(x => x.Id == id);
             }
-            AssignmentItem = SelectedItem as AssignmentItem;
-            Assignment = new Assignment();
-            DueDate = DateTimeOffset.Now;
-            modules = SelectedCourse.Modules;
-            Modules = new ObservableCollection<string>();
-            foreach (var module in modules)
+            else Assignment = new Assignment { Id = -1 };
+            if (courseId != -1)
             {
-                Modules.Add(module.Name);
+                Course = Courses.FirstOrDefault(x => x.Id == courseId);
             }
-            Modules.Add("Make new Module");
-            assignmentGroups = SelectedCourse.AssignmentGroups;
-            AssignmentGroups = new ObservableCollection<string>();
-            foreach(var group in assignmentGroups)
-            {
-                AssignmentGroups.Add(group.Name);
-            }
-            AssignmentGroups.Add("Make new Assignment Group");
-            IsValid = true;
+
+
+
+
+            //moduleService = ModuleService.Current;
+            //courseService = CourseService.Current;
+            //personService = PersonService.Current;
+            //
+            //if (SelectedItem == null)
+            //{
+            //    SelectedItem = new AssignmentItem();
+            //}
+            //AssignmentItem = SelectedItem as AssignmentItem;
+            //Assignment = new Assignment();
+            //DueDate = DateTimeOffset.Now;
+            //modules = SelectedCourse.Modules;
+            //Modules = new ObservableCollection<string>();
+            //foreach (var module in modules)
+            //{
+            //    Modules.Add(module.Name);
+            //}
+            //Modules.Add("Make new Module");
+            //assignmentGroups = SelectedCourse.AssignmentGroups;
+            //AssignmentGroups = new ObservableCollection<string>();
+            //foreach(var group in assignmentGroups)
+            //{
+            //    AssignmentGroups.Add(group.Name);
+            //}
+            //AssignmentGroups.Add("Make new Assignment Group");
+            //IsValid = true;
         }
 
         public AssignmentViewModel(Assignment assignment)
@@ -123,7 +157,11 @@ namespace UWP.LearningManagement.ViewModels
             Assignment.Name = Name;
             Assignment.Description = Description;
             Assignment.DueDate = DueDate;
-            if(int.TryParse(TotalPoints, out var totalPoints))
+        }
+
+        public async Task<Assignment> Add()
+        {
+            if (int.TryParse(TotalPoints, out var totalPoints))
             {
                 Assignment.TotalAvailablePoints = totalPoints;
             }
@@ -131,72 +169,80 @@ namespace UWP.LearningManagement.ViewModels
             {
                 Assignment.TotalAvailablePoints = 100;
             }
-        }
-
-        public void Add()
-        {
-            if(Name == null || Name == "" || Description == null || Description == "")
-            {
-                IsValid = false;
-            }
-            if (IsValid)
-            {
-                foreach (var assignment in SelectedCourse.Assignments)
-                {
-                    if (Name == assignment.Name)
-                    {
-                        IsValid = false;
-                        break;
-                    }
-                }
-            }
-            if (IsValid)
-            {
-                Set();
-                Assignment.AssignmentGroup = assignmentGroups.FirstOrDefault(i => i.Name.Equals(SelectedGroup));
-
-                if (SelectedModuleName != null && SelectedModuleName != "Make new Module")
-                {
-                    foreach (var module in SelectedCourse.Modules)
-                    {
-                        if (module.Name.Equals(SelectedModuleName))
-                        {
-                            AssignmentItem = new AssignmentItem
-                            {
-                                Name = Assignment.Name,
-                                Description = Assignment.Description,
-                                Assignment = Assignment
-                            };
-                            module.Content.Add(AssignmentItem);
-                            SelectedModule = module;
-                        }
-                    }
-
-                }
-                else if ((SelectedModuleName == null || SelectedModuleName == "Make new Module") && AssignmentItem != null)
-                {
-                    AssignmentItem.Assignment = Assignment;
-                }
-
-                if (SelectedModuleName == null || SelectedModuleName == "Make new Module")
-                {
-                    var tempModule = new Module { Name = "Make new Module" };
-                    SelectedModule = tempModule;
-                    SelectedModule.Content.Add(AssignmentItem);
-                }
+            var handler = new WebRequestHandler();
+            var returnVal = await handler.Post("http://localhost:5159/Assignment/AddOrUpdate", Assignment);
+            var deserializedReturn = JsonConvert.DeserializeObject<Assignment>(returnVal);
+            Course.Add(deserializedReturn);
+            await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAssignments", Course);
+            return deserializedReturn;
 
 
-                foreach (Person person in SelectedCourse.Roster)
-                {
-                    if (person is Student student)
-                    {
-                        var grade = new GradesDictionary { Assignment = Assignment, Grade = 0, Course = SelectedCourse, Person = student };
-                        student.Grades.Add(grade);
-                    }
-                }
-                SelectedCourse.Add(Assignment);
-                SelectedItem = AssignmentItem;
-            }
+
+
+
+
+            //if (Name == null || Name == "" || Description == null || Description == "")
+            //{
+            //    IsValid = false;
+            //}
+            //if (IsValid)
+            //{
+            //    foreach (var assignment in SelectedCourse.Assignments)
+            //    {
+            //        if (Name == assignment.Name)
+            //        {
+            //            IsValid = false;
+            //            break;
+            //        }
+            //    }
+            //}
+            //if (IsValid)
+            //{
+            //    Set();
+            //    Assignment.AssignmentGroup = assignmentGroups.FirstOrDefault(i => i.Name.Equals(SelectedGroup));
+            //
+            //    if (SelectedModuleName != null && SelectedModuleName != "Make new Module")
+            //    {
+            //        foreach (var module in SelectedCourse.Modules)
+            //        {
+            //            if (module.Name.Equals(SelectedModuleName))
+            //            {
+            //                AssignmentItem = new AssignmentItem
+            //                {
+            //                    Name = Assignment.Name,
+            //                    Description = Assignment.Description,
+            //                    Assignment = Assignment
+            //                };
+            //                module.Content.Add(AssignmentItem);
+            //                SelectedModule = module;
+            //            }
+            //        }
+            //
+            //    }
+            //    else if ((SelectedModuleName == null || SelectedModuleName == "Make new Module") && AssignmentItem != null)
+            //    {
+            //        AssignmentItem.Assignment = Assignment;
+            //    }
+            //
+            //    if (SelectedModuleName == null || SelectedModuleName == "Make new Module")
+            //    {
+            //        var tempModule = new Module { Name = "Make new Module" };
+            //        SelectedModule = tempModule;
+            //        SelectedModule.Content.Add(AssignmentItem);
+            //    }
+            //
+            //
+            //    foreach (Person person in SelectedCourse.Roster)
+            //    {
+            //        if (person is Student student)
+            //        {
+            //            var grade = new GradesDictionary { Assignment = Assignment, Grade = 0, Course = SelectedCourse, Person = student };
+            //            student.Grades.Add(grade);
+            //        }
+            //    }
+            //    SelectedCourse.Add(Assignment);
+            //    SelectedItem = AssignmentItem;
+            //}
         }
 
         public void MakeNewAssignGroup()

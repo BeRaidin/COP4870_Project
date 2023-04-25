@@ -52,14 +52,13 @@ namespace UWP.LearningManagement
             (DataContext as CourseDetailsViewModel).Refresh();
 
         }
-        private void AddAssignment_Click(object sender, RoutedEventArgs e)
+        private async void AddAssignment_Click(object sender, RoutedEventArgs e)
         {
-            //int courseId = (DataContext as CourseDetailsViewModel).SelectedCourse.Id;
-            //var addDialog = new AnnouncementDialog(-1, courseId);
-            //await addDialog.ShowAsync();
-            //(DataContext as CourseDetailsViewModel).Refresh();
+            int courseId = (DataContext as CourseDetailsViewModel).Course.Id;
+            var addDialog = new AssignmentDialog(-1, courseId);
+            await addDialog.ShowAsync();
+            (DataContext as CourseDetailsViewModel).Refresh();
         }
-
 
         private void UpdateRoster_Click(object sender, RoutedEventArgs e)
         {
@@ -86,9 +85,9 @@ namespace UWP.LearningManagement
         {
             await (DataContext as CourseDetailsViewModel).RemoveAnnouncement();
         }
-        private void RemoveAssignment_Click(object sender, RoutedEventArgs e)
+        private async void RemoveAssignment_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as CourseDetailsViewModel).RemoveAssignment();
+            await (DataContext as CourseDetailsViewModel).RemoveAssignment();
         }
 
         private void Module_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)

@@ -41,14 +41,9 @@ namespace UWP.LearningManagement.ViewModels
             get { return courseService.CurrentCourse; }
             set { courseService.CurrentCourse = value; }
         }
-        public Assignment SelectedAssignment
-        {
-            get { return personService.CurrentAssignment; }
-            set { personService.CurrentAssignment = value; }
-        }
+        public AssignmentViewModel SelectedAssignment { get; set; }
         public AnnouncementViewModel SelectedAnnouncement { get; set; }
 
-        public ObservableCollection<Assignment> Assignments { get; set; }
         public string Query { get; set; }
         public string Code
         {
@@ -80,6 +75,7 @@ namespace UWP.LearningManagement.ViewModels
         public ObservableCollection<AdminViewModel> Admin { get; set; }
         public ObservableCollection<AnnouncementViewModel> Announcements { get; set; }
         public ObservableCollection<ModuleViewModel> Modules { get; set; }
+        public ObservableCollection<AssignmentViewModel> Assignments { get; set; }
 
 
 
@@ -94,14 +90,13 @@ namespace UWP.LearningManagement.ViewModels
             Admin = new ObservableCollection<AdminViewModel>();
             Announcements = new ObservableCollection<AnnouncementViewModel>();
             Modules = new ObservableCollection<ModuleViewModel>();
+            Assignments = new ObservableCollection<AssignmentViewModel>();
             foreach (var person in Course.Roster)
             {
                 AdminViewModel admin = new AdminViewModel(person.Id);
                 if (admin.Person == null)
                 {
-                    StudentViewModel student = new StudentViewModel(person.Id);
-                    Roster.Add(student);
-
+                    Roster.Add(new StudentViewModel(person.Id));
                 }
                 else
                 {
@@ -116,10 +111,10 @@ namespace UWP.LearningManagement.ViewModels
             {
                 Modules.Add(new ModuleViewModel(module.Id));
             }
-
-
-
-            Assignments = new ObservableCollection<Assignment>(Course.Assignments);
+            foreach (var assignment in Course.Assignments)
+            {
+                Assignments.Add(new AssignmentViewModel(assignment.Id));
+            }
         }
 
 
@@ -136,73 +131,73 @@ namespace UWP.LearningManagement.ViewModels
             Refresh();
         }
 
-        public async void AddAssignment()
-        {
-            bool cont = true;
-            var dialog = new NewAssignmentDialog();
-            if (dialog != null)
-            {
-                await dialog.ShowAsync();
-            }
-            if (!dialog.TestValid())
-            {
-                var errorDialog = new ErrorDialog();
-                if (errorDialog != null)
-                {
-                    await errorDialog.ShowAsync();
-                }
-            }
-            else
-            {
-                var assignment = (moduleService.CurrentItem as AssignmentItem).Assignment;
-                if (assignment.AssignmentGroup == null)
-                {
-                    var Groupdialog = new AssignGroupDialog(assignment);
-                    if (Groupdialog != null)
-                    {
-                        await Groupdialog.ShowAsync();
-                    }
-                    if (!Groupdialog.TestValid())
-                    {
-                        var errorDialog = new ErrorDialog();
-                        if (errorDialog != null)
-                        {
-                            await errorDialog.ShowAsync();
-                        }
-                        cont = false;
-                    }
-                }
-
-                if (cont)
-                {
-                    if (SelectedModule.Name.Equals("Make new Module"))
-                    {
-                        //SelectedModule = new Module();
-                        //var Moduledialog = new ModuleDialog();
-                        //if (Moduledialog != null)
-                        //{
-                        //    await Moduledialog.ShowAsync();
-                        //}
-                        //cont = Moduledialog.Test();
-                        //if (cont)
-                        //{
-                        //    moduleService.Add();
-                        //}
-                    }
-                }
-                if (!cont)
-                {
-                    Course.Remove(assignment);
-                    var errorDialog = new ErrorDialog();
-                    if (errorDialog != null)
-                    {
-                        await errorDialog.ShowAsync();
-                    }
-                }
-            }
-            Refresh();
-            moduleService.CurrentItem = null;
-        }
+        //public async void AddAssignment()
+        //{
+        //    bool cont = true;
+        //    var dialog = new NewAssignmentDialog();
+        //    if (dialog != null)
+        //    {
+        //        await dialog.ShowAsync();
+        //    }
+        //    if (!dialog.TestValid())
+        //    {
+        //        var errorDialog = new ErrorDialog();
+        //        if (errorDialog != null)
+        //        {
+        //            await errorDialog.ShowAsync();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        var assignment = (moduleService.CurrentItem as AssignmentItem).Assignment;
+        //        if (assignment.AssignmentGroup == null)
+        //        {
+        //            var Groupdialog = new AssignGroupDialog(assignment);
+        //            if (Groupdialog != null)
+        //            {
+        //                await Groupdialog.ShowAsync();
+        //            }
+        //            if (!Groupdialog.TestValid())
+        //            {
+        //                var errorDialog = new ErrorDialog();
+        //                if (errorDialog != null)
+        //                {
+        //                    await errorDialog.ShowAsync();
+        //                }
+        //                cont = false;
+        //            }
+        //        }
+        //
+        //        if (cont)
+        //        {
+        //            if (SelectedModule.Name.Equals("Make new Module"))
+        //            {
+        //                //SelectedModule = new Module();
+        //                //var Moduledialog = new ModuleDialog();
+        //                //if (Moduledialog != null)
+        //                //{
+        //                //    await Moduledialog.ShowAsync();
+        //                //}
+        //                //cont = Moduledialog.Test();
+        //                //if (cont)
+        //                //{
+        //                //    moduleService.Add();
+        //                //}
+        //            }
+        //        }
+        //        if (!cont)
+        //        {
+        //            Course.Remove(assignment);
+        //            var errorDialog = new ErrorDialog();
+        //            if (errorDialog != null)
+        //            {
+        //                await errorDialog.ShowAsync();
+        //            }
+        //        }
+        //    }
+        //    Refresh();
+        //    moduleService.CurrentItem = null;
+        //}
 
         public void Refresh()
         {
@@ -232,7 +227,7 @@ namespace UWP.LearningManagement.ViewModels
             }
             foreach (var assignment in Course.Assignments)
             {
-                Assignments.Add(assignment);
+                Assignments.Add(new AssignmentViewModel(assignment.Id));
             }
             foreach (var announcements in Course.Announcements)
             {
@@ -243,41 +238,10 @@ namespace UWP.LearningManagement.ViewModels
 
 
 
-        public void RemoveAssignment()
-        {
-            //if (SelectedAssignment != null)
-            //{
-            //foreach (var module in Modules)
-            //{
-            //    foreach (var item in module.Content.ToList())
-            //    {
-            //        if (item as AssignmentItem != null)
-            //        {
-            //            if ((item as AssignmentItem).Assignment.Equals(SelectedAssignment))
-            //            {
-            //                module.Remove(item);
-            //            }
-            //        }
-            //    }
-            //}
-            //Remove(SelectedAssignment);
-            //Refresh();
-            //}
-        }
+        
 
 
-        public void Remove(Assignment assignment)
-        {
-            Course.Remove(assignment);
-            foreach (var student in Course.Roster.ToList())
-            {
-                if (student as Student != null)
-                {
-                    (student as Student).Remove(assignment);
-                }
-            }
-            Refresh();
-        }
+        
 
         public async void UpdateModule()
         {
@@ -355,7 +319,6 @@ namespace UWP.LearningManagement.ViewModels
                 Refresh();
             }
         }
-
         public async Task RemoveModule()
         {
             if (SelectedModule != null)
@@ -363,6 +326,16 @@ namespace UWP.LearningManagement.ViewModels
                 Course.Remove(SelectedModule.Module);
                 await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateModules", Course);
                 await new WebRequestHandler().Post("http://localhost:5159/Module/Delete", SelectedModule.Module);
+                Refresh();
+            }
+        }
+        public async Task RemoveAssignment()
+        {
+            if (SelectedAssignment != null)
+            {
+                Course.Remove(SelectedAssignment.Assignment);
+                await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAssignments", Course);
+                await new WebRequestHandler().Post("http://localhost:5159/Assignment/Delete", SelectedAssignment.Assignment);
                 Refresh();
             }
         }
