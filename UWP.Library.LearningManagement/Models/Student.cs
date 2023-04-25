@@ -17,7 +17,7 @@ namespace UWP.Library.LearningManagement.Models
         {
             Freshman, Sophmore, Junior, Senior
         }
-        public Dictionary<Course, double> FinalGrades { get; set; }
+        public List<FinalGradesDictionary> FinalGrades { get; set; }
         public double GradePointAverage { get; set; }
 
         public override string Display => $"[{Id}] {FirstName} {LastName} - {Classification}";
@@ -25,7 +25,7 @@ namespace UWP.Library.LearningManagement.Models
         public Student()
         {
             Grades = new List<GradesDictionary>();
-            FinalGrades = new Dictionary<Course, double>();
+            FinalGrades = new List<FinalGradesDictionary>();
             IsSelected = false;
         }
 

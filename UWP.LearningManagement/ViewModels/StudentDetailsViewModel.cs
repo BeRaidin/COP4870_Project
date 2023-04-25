@@ -73,7 +73,7 @@ namespace UWP.LearningManagement.ViewModels
         {
             get { return Student.GradePointAverage; }
         }
-        public Dictionary<Course, double> FinalGrades
+        public List<FinalGradesDictionary> FinalGrades
         {
             get { return Student.FinalGrades; }
         }

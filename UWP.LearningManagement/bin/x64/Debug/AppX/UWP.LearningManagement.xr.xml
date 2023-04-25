@@ -30,10 +30,10 @@
     <RootPropertyPathName Name="Value" />
     <RootPropertyPathName Name="Key" />
     <RootPropertyPathName Name="Code" />
-    <RootPropertyPathName Name="AllStudents" />
-    <RootPropertyPathName Name="Student" />
+    <RootPropertyPathName Name="Students" />
     <RootPropertyPathName Name="StudentLevels" />
     <RootPropertyPathName Name="SelectedClass" />
+    <RootPropertyPathName Name="Student" />
     <RootPropertyPathName Name="Assignments" />
     <RootPropertyPathName Name="SelectedAssignment" />
     <RootPropertyPathName Name="SelectedModule" />
@@ -48,7 +48,6 @@
     <RootPropertyPathName Name="Year" />
     <RootPropertyPathName Name="Period" />
     <RootPropertyPathName Name="FinalGrades" />
-    <RootPropertyPathName Name="Students" />
     <RootPropertyPathName Name="SelectedStudent" />
     <RootPropertyPathName Name="Query" />
     <RootPropertyPathName Name="SubmittedAssignments" />

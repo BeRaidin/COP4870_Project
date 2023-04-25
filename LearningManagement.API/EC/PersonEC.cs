@@ -60,14 +60,14 @@ namespace LearningManagement.API.EC
         public Person AddorUpdateAdmin(Person i)
         {
             bool isNew = false;
-            if(FakeDataBase.People.Count == 0)        
+            if (FakeDataBase.People.Count == 0)
             {
                 i.Id = 0;
                 isNew = true;
             }
             else if (i.Id < 0)
             {
-                var lastId = FakeDataBase.People.Select(p =>p.Id).Max();
+                var lastId = FakeDataBase.People.Select(p => p.Id).Max();
                 lastId++;
                 i.Id = lastId;
                 isNew = true;
@@ -87,7 +87,7 @@ namespace LearningManagement.API.EC
             else
             {
                 var editedInstructor = FakeDataBase.People.FirstOrDefault(p => p.Id == i.Id);
-                if(editedInstructor != null)
+                if (editedInstructor != null)
                 {
                     editedInstructor.FirstName = i.FirstName;
                     editedInstructor.LastName = i.LastName;
@@ -100,19 +100,31 @@ namespace LearningManagement.API.EC
         public Person UpdateCourses(Person p)
         {
             var editedPerson = FakeDataBase.People.FirstOrDefault(i => i.Id == p.Id);
-            if (editedPerson != null) 
-            { 
+            if (editedPerson != null)
+            {
                 editedPerson.Courses = p.Courses;
                 return editedPerson;
             }
             return p;
         }
 
+        public Student UpdateStudentCourses(Student s)
+        {
+            var editedStudent = FakeDataBase.Students.FirstOrDefault(i => i.Id == s.Id);
+            if (editedStudent != null)
+            {
+                editedStudent.Courses = s.Courses;
+                editedStudent.FinalGrades = s.FinalGrades;
+                return editedStudent;
+            }
+            return s;
+        }
+
         public Person Delete(Person p)
         {
 
             var deletedPerson = FakeDataBase.People.FirstOrDefault(d => d.Id == p.Id);
-            if(deletedPerson != null)
+            if (deletedPerson != null)
             {
                 FakeDataBase.People.Remove(deletedPerson);
             }
