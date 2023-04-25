@@ -9,6 +9,7 @@ namespace UWP.Library.LearningManagement.Models
 {
     public class Module
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public List<ContentItem> Content { get; set; }

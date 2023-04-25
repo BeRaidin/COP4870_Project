@@ -18,29 +18,30 @@ namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class ModuleDialog : ContentDialog
     {
-        public ModuleDialog()
+        public ModuleDialog(int id, int courseId)
         {
             this.InitializeComponent();
-            this.DataContext = new ModuleDialogViewModel();
+            this.DataContext = new ModuleViewModel(id, courseId);
         }
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as ModuleDialogViewModel).Add();
+            var test = await(DataContext as ModuleViewModel).Add();
+            Console.WriteLine(test.Name);
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as ModuleDialogViewModel).False();
+            (DataContext as ModuleViewModel).False();
         }
 
         public bool Test()
         {
-            return (DataContext as ModuleDialogViewModel).IsCont;
+            return (DataContext as ModuleViewModel).IsCont;
         }
         public bool TestValid()
         {
-            return (DataContext as ModuleDialogViewModel).IsValid;
+            return (DataContext as ModuleViewModel).IsValid;
         }
     }
 }

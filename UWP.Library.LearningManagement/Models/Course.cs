@@ -54,6 +54,11 @@ namespace UWP.Library.LearningManagement.Models
             Assignments.Add(assignment);
         }
 
+        public void Add(Module module)
+        {
+            Modules.Add(module);
+        }
+
         public void Remove(Person person)
         {
             Roster.Remove(person);
@@ -81,6 +86,15 @@ namespace UWP.Library.LearningManagement.Models
             if (removedAnnouncement != null)
             {
                 Announcements.Remove(removedAnnouncement);
+            }
+        }
+
+        public void Remove(Module module)
+        {
+            var removedModule = Modules.FirstOrDefault(x => x.Id == module.Id);
+            if (removedModule != null)
+            {
+                Modules.Remove(removedModule);
             }
         }
 

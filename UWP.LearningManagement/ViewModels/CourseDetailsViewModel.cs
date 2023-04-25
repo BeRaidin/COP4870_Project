@@ -19,14 +19,9 @@ namespace UWP.LearningManagement.ViewModels
         private readonly CourseService courseService;
         private readonly PersonService personService;
         private readonly ModuleService moduleService;
-        private readonly List<Module> allModules;
         private readonly List<Assignment> allAssignments;
 
-        public Module SelectedModule
-        {
-            get { return moduleService.CurrentModule; }
-            set { moduleService.CurrentModule = value; }
-        }
+
         public Person SelectedPerson
         {
             get { return personService.CurrentPerson; }
@@ -44,18 +39,6 @@ namespace UWP.LearningManagement.ViewModels
         }
         public AnnouncementViewModel SelectedAnnouncement { get; set; }
 
-        private ObservableCollection<Module> _modules;
-        public ObservableCollection<Module> Modules
-        {
-            get
-            {
-                return _modules;
-            }
-            set
-            {
-                _modules = value;
-            }
-        }
         public ObservableCollection<Assignment> Assignments { get; set; }
         public string Query { get; set; }
         public string Code
@@ -79,7 +62,7 @@ namespace UWP.LearningManagement.ViewModels
         public string Message { get; set; }
 
 
-
+        public ModuleViewModel SelectedModule { get; set; }
 
 
 
@@ -87,6 +70,7 @@ namespace UWP.LearningManagement.ViewModels
         public ObservableCollection<StudentViewModel> Roster { get; set; }
         public ObservableCollection<AdminViewModel> Admin { get; set; }
         public ObservableCollection<AnnouncementViewModel> Announcements { get; set; }
+        public ObservableCollection<ModuleViewModel> Modules { get; set; }
 
 
 
@@ -96,12 +80,12 @@ namespace UWP.LearningManagement.ViewModels
             personService = PersonService.Current;
             moduleService = ModuleService.Current;
             SelectedCourse = course;
-            allModules = SelectedCourse.Modules;
             allAssignments = SelectedCourse.Assignments;
             Roster = new ObservableCollection<StudentViewModel>();
             Admin = new ObservableCollection<AdminViewModel>();
             Announcements = new ObservableCollection<AnnouncementViewModel>();
-            foreach (var person in SelectedCourse.Roster) 
+            Modules = new ObservableCollection<ModuleViewModel>();
+            foreach (var person in SelectedCourse.Roster)
             {
                 AdminViewModel admin = new AdminViewModel(person.Id);
                 if (admin.Person == null)
@@ -115,34 +99,23 @@ namespace UWP.LearningManagement.ViewModels
                     Admin.Add(admin);
                 }
             }
-            foreach (var announcement in SelectedCourse.Announcements) 
+            foreach (var announcement in SelectedCourse.Announcements)
             {
                 Announcements.Add(new AnnouncementViewModel(announcement.Id));
+            }
+            foreach (var module in SelectedCourse.Modules)
+            {
+                Modules.Add(new ModuleViewModel(module.Id));
             }
 
 
 
-            Modules = new ObservableCollection<Module>(allModules);
             Assignments = new ObservableCollection<Assignment>(allAssignments);
         }
 
 
 
-        public async void AddModule()
-        {
-            SelectedModule = new Module();
-            var dialog = new ModuleDialog();
-            if (dialog != null)
-            {
-                await dialog.ShowAsync();
-            }
-            if (!dialog.TestValid())
-            {
-                GetError();
-            }
-            Refresh();
-            SelectedModule = null;
-        }
+        
 
         public async void EditRoster()
         {
@@ -195,17 +168,17 @@ namespace UWP.LearningManagement.ViewModels
                 {
                     if (SelectedModule.Name.Equals("Make new Module"))
                     {
-                        SelectedModule = new Module();
-                        var Moduledialog = new ModuleDialog();
-                        if (Moduledialog != null)
-                        {
-                            await Moduledialog.ShowAsync();
-                        }
-                        cont = Moduledialog.Test();
-                        if (cont)
-                        {
-                            moduleService.Add();
-                        }
+                        //SelectedModule = new Module();
+                        //var Moduledialog = new ModuleDialog();
+                        //if (Moduledialog != null)
+                        //{
+                        //    await Moduledialog.ShowAsync();
+                        //}
+                        //cont = Moduledialog.Test();
+                        //if (cont)
+                        //{
+                        //    moduleService.Add();
+                        //}
                     }
                 }
                 if (!cont)
@@ -225,54 +198,40 @@ namespace UWP.LearningManagement.ViewModels
         public void Refresh()
         {
             Modules.Clear();
-            foreach (var module in allModules)
+            foreach (var module in SelectedCourse.Modules)
             {
-                Modules.Add(module);
+                Modules.Add(new ModuleViewModel(module.Id));
             }
             Assignments.Clear();
             foreach (var assignment in allAssignments)
             {
                 Assignments.Add(assignment);
             }
-            
-            
+
+
         }
 
 
 
         public void DeleteAssignment()
         {
-            foreach(var module in Modules)
-            {
-                foreach(var item in module.Content.ToList())
-                {
-                    if(item as AssignmentItem != null)
-                    {
-                        if((item as AssignmentItem).Assignment.Equals(SelectedAssignment))
-                        {
-                            module.Remove(item);
-                        }    
-                    }
-                }
-            }
-            Remove(SelectedAssignment);
-            Refresh();
+            //foreach (var module in Modules)
+            //{
+            //    foreach (var item in module.Content.ToList())
+            //    {
+            //        if (item as AssignmentItem != null)
+            //        {
+            //            if ((item as AssignmentItem).Assignment.Equals(SelectedAssignment))
+            //            {
+            //                module.Remove(item);
+            //            }
+            //        }
+            //    }
+            //}
+            //Remove(SelectedAssignment);
+            //Refresh();
         }
 
-        public void DeleteModule()
-        {
-            foreach(var item in SelectedModule.Content.ToList())
-            {
-                if(item as AssignmentItem != null)
-                {
-                    Remove((item as AssignmentItem).Assignment);
-                }
-                SelectedModule.Remove(item);
-            }
-            SelectedCourse.Modules.Remove(SelectedModule);
-            Refresh();
-
-        }
 
         public void Remove(Assignment assignment)
         {
@@ -313,7 +272,7 @@ namespace UWP.LearningManagement.ViewModels
             }
             Refresh();
         }
-        
+
         public async void UpdateAnnouncement()
         {
             if (SelectedAnnouncement != null)
@@ -346,13 +305,24 @@ namespace UWP.LearningManagement.ViewModels
 
 
 
-        public async Task DeleteAnnouncement()
+        public async Task RemoveAnnouncement()
         {
             if (SelectedAnnouncement != null)
             {
                 SelectedCourse.Remove(SelectedAnnouncement.Announcement);
                 await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAnnouncements", SelectedCourse);
                 await new WebRequestHandler().Post("http://localhost:5159/Announcement/Delete", SelectedAnnouncement.Announcement);
+            }
+            Refresh();
+        }
+
+        public async Task RemoveModule()
+        {
+            if (SelectedModule != null)
+            {
+                SelectedCourse.Remove(SelectedModule.Module);
+                await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAnnouncements", SelectedCourse);
+                await new WebRequestHandler().Post("http://localhost:5159/Announcement/Delete", SelectedModule.Module);
             }
             Refresh();
         }

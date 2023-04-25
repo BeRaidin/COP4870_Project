@@ -23,6 +23,7 @@
     <RootPropertyPathName Name="Score" />
     <RootPropertyPathName Name="AvailableCourses" />
     <RootPropertyPathName Name="SelectedCourse" />
+    <RootPropertyPathName Name="Module" />
     <RootPropertyPathName Name="ContentTypes" />
     <RootPropertyPathName Name="Modules" />
     <RootPropertyPathName Name="SelectedModuleName" />
