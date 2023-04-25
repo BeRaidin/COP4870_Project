@@ -36,7 +36,7 @@ namespace LearningManagement.API.EC
                 if (editedAnnouncement != null)
                 {
                     editedAnnouncement.Title = a.Title;
-                    editedAnnouncement.Title = a.Title;
+                    editedAnnouncement.Message = a.Message;
                     return editedAnnouncement;
                 }
             }

@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using UWP.LearningManagement.API.Util;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.Devices.SmartCards;
 
 namespace UWP.LearningManagement.ViewModels
 {

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UWP.Library.LearningManagement.Models
 {
@@ -41,6 +38,11 @@ namespace UWP.Library.LearningManagement.Models
 
         public void Add(Announcement announcement)
         {
+            var previousAnnouncements = Announcements.FirstOrDefault(x => x.Id == announcement.Id);
+            if (previousAnnouncements != null)
+            {
+                Announcements.Remove(previousAnnouncements);
+            }
             Announcements.Add(announcement);
         }
 
@@ -51,11 +53,21 @@ namespace UWP.Library.LearningManagement.Models
 
         public void Add(Assignment assignment)
         {
+            var previousAssignment = Assignments.FirstOrDefault(x => x.Id == assignment.Id);
+            if (previousAssignment != null)
+            {
+                Assignments.Remove(previousAssignment);
+            }
             Assignments.Add(assignment);
         }
 
         public void Add(Module module)
         {
+            var previousModule = Modules.FirstOrDefault(x => x.Id == module.Id);
+            if (previousModule != null)
+            {
+                Modules.Remove(previousModule);
+            }
             Modules.Add(module);
         }
 

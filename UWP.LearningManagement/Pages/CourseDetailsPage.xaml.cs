@@ -64,19 +64,39 @@ namespace UWP.LearningManagement
         {
             (DataContext as CourseDetailsViewModel).UpdateRoster();
         }
-        private void UpdateModule_Click(object sender, RoutedEventArgs e)
+        private async void UpdateModule_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as CourseDetailsViewModel).UpdateModule();
+            if ((DataContext as CourseDetailsViewModel).SelectedModule != null)
+            {
+                int courseId = (DataContext as CourseDetailsViewModel).Course.Id;
+                int moduleId = (DataContext as CourseDetailsViewModel).SelectedModule.Module.Id;
+                var editDialog = new ModuleDialog(moduleId, courseId);
+                await editDialog.ShowAsync();
+                (DataContext as CourseDetailsViewModel).Refresh();
+            }
         }
-        private void UpdateAnnouncement_Click(object sender, RoutedEventArgs e)
+        private async void UpdateAnnouncement_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as CourseDetailsViewModel).UpdateAnnouncement();
+            if ((DataContext as CourseDetailsViewModel).SelectedAnnouncement != null)
+            {
+                int courseId = (DataContext as CourseDetailsViewModel).Course.Id;
+                int announcementId = (DataContext as CourseDetailsViewModel).SelectedAnnouncement.Announcement.Id;
+                var editDialog = new AnnouncementDialog(announcementId, courseId);
+                await editDialog.ShowAsync();
+                (DataContext as CourseDetailsViewModel).Refresh();
+            }
         }
-        private void UpdateAssignment_Click(object sender, RoutedEventArgs e)
+        private async void UpdateAssignment_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as CourseDetailsViewModel).UpdateAssignment();
+            if ((DataContext as CourseDetailsViewModel).SelectedAssignment != null)
+            {
+                int courseId = (DataContext as CourseDetailsViewModel).Course.Id;
+                int assignmentId = (DataContext as CourseDetailsViewModel).SelectedAssignment.Assignment.Id;
+                var editDialog = new AssignmentDialog(assignmentId, courseId);
+                await editDialog.ShowAsync();
+                (DataContext as CourseDetailsViewModel).Refresh();
+            }
         }
-
         private async void RemoveModule_Click(object sender, RoutedEventArgs e)
         {
             await (DataContext as CourseDetailsViewModel).RemoveModule();

@@ -22,7 +22,6 @@ namespace UWP.LearningManagement.ViewModels
         private readonly ModuleService moduleService;
         private readonly int Id;
         private List<Course> CourseList
-
         {
             get
             {
