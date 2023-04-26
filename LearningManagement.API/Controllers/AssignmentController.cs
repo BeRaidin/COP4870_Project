@@ -27,6 +27,17 @@ namespace LearningManagement.API.Controllers
             return new AssignmentEC().AddOrUpdateAssignment(assignment);
         }
 
+        [HttpPost("UpdateIsSelected")]
+        public Assignment UpdateIsSelected([FromBody] Assignment assignment)
+        {
+            return new AssignmentEC().UpdateIsSelected(assignment);
+        }
+        [HttpPost("UpdateIsGraded")]
+        public Assignment UpdateIsGraded([FromBody] Assignment assignment)
+        {
+            return new AssignmentEC().UpdateIsGraded(assignment);
+        }
+
         [HttpPost("Delete")]
         public void DeleteAssignment([FromBody] Assignment assignment)
         {

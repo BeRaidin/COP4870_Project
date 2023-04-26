@@ -132,7 +132,7 @@ namespace UWP.LearningManagement.ViewModels
                 await dialog.ShowAsync();
             }
             //SelectedPerson = Instructor;
-            SelectedGrade.IsGraded = true;
+            SelectedGrade.Assignment.IsGraded = true;
             Refresh();
         }
 
@@ -141,19 +141,21 @@ namespace UWP.LearningManagement.ViewModels
             SubmittedAssignments.Clear();
             foreach (var course in Instructor.Courses)
             {
-                foreach (var person in course.Roster)
+                CourseViewModel selectedCourse = new CourseViewModel(-1,course.Id);
+                foreach (var person in selectedCourse.Roster)
                 {
-                    if (person is Student student)
+                    StudentViewModel studentView = new StudentViewModel(person.Id);
+                    if(studentView.Student != null)
                     {
-                        foreach (var assignment in student.Grades)
+                        foreach (var assignment in studentView.Student.Grades)
                         {
-                            if (assignment.CourseCode == course.Code && assignment.IsGraded == false
-                                && assignment.IsSubmitted == true)
+                            if (assignment.CourseCode == selectedCourse.Course.Code && assignment.Assignment.IsGraded == false
+                                && assignment.Assignment.IsSubmitted == true)
                             {
                                 SubmittedAssignments.Add(assignment);
                             }
                         }
-                    }
+                    }    
                 }
             }
         }

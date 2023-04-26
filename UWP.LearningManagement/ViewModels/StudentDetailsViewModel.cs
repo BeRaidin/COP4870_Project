@@ -93,11 +93,13 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
 
-        public void SubmitAssignment()
+        public async void SubmitAssignment()
         {
             if(SelectedGrade != null) 
             { 
-                SelectedGrade.IsSubmitted = true;
+                SelectedGrade.Assignment.IsSubmitted = true;
+                await new WebRequestHandler().Post("http://localhost:5159/Assignment/UpdateIsSelected", SelectedGrade.Assignment);
+               await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateStudentCourses", Student);
             }
             Refresh();
         }
@@ -118,11 +120,11 @@ namespace UWP.LearningManagement.ViewModels
             GradedGrades.Clear();
             foreach (var grade in Student.Grades)
             {
-                if (grade.IsGraded == false && grade.IsSubmitted == false)
+                if (grade.Assignment.IsSubmitted == false && grade.Assignment.IsSubmitted == false)
                 {
                     UnsubmittedGrades.Add(grade);
                 }
-                else if (grade.IsGraded == true)
+                else if (grade.Assignment.IsGraded == true)
                 {
                     GradedGrades.Add(grade);
                 }

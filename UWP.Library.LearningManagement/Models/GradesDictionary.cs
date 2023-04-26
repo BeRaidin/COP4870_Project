@@ -27,14 +27,10 @@ namespace UWP.Library.LearningManagement.Models
 
         public string CourseCode { get; set; }
         public string PersonName { get; set; }
-        public bool IsGraded { get; set; }
-        public bool IsSubmitted { get; set; }
 
         public GradesDictionary()
         {
             Assignment = new Assignment();
-            IsGraded = false;
-            IsSubmitted = false;
             Grade = 0;
         }
 
