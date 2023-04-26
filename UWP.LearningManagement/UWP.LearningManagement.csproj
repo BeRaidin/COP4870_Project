@@ -173,6 +173,9 @@
     <Compile Include="Pages\CurrentSemesterPage.xaml.cs">
       <DependentUpon>CurrentSemesterPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EditCoursesPage.xaml.cs">
+      <DependentUpon>EditCoursesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EditStudentsPage.xaml.cs">
       <DependentUpon>EditStudentsPage.xaml</DependentUpon>
     </Compile>
@@ -203,6 +206,7 @@
     <Compile Include="ViewModels\CurrentSemesterViewModel.cs" />
     <Compile Include="ViewModels\CourseDetailsViewModel.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
+    <Compile Include="ViewModels\EditCoursesViewModel.cs" />
     <Compile Include="ViewModels\StudentViewModel.cs" />
     <Compile Include="ViewModels\StudentDetailsViewModel.cs" />
     <Compile Include="ViewModels\DropClassViewModel.cs" />
@@ -308,6 +312,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\CurrentSemesterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EditCoursesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

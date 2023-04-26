@@ -124,6 +124,23 @@ namespace UWP.LearningManagement.ViewModels
 
         public async Task<Course> AddCourse()
         {
+            if(Course.Id != -1)
+            {
+                foreach(var person in  Course.Roster)
+                {
+                    if(person is Student student)
+                    {
+                        FinalGradesDictionary courseGrade = student.FinalGrades.FirstOrDefault(x => x.Key.Id == Course.Id);
+                        if (courseGrade != null)
+                        {
+                            double grade = courseGrade.Value;
+                            student.FinalGrades.Remove(courseGrade);
+                            student.FinalGrades.Add(new FinalGradesDictionary(Course, grade));
+                        }
+                    }
+                }
+            }
+
             Course.Add(Person);
             var returnVal = await new WebRequestHandler().Post("http://localhost:5159/Course/AddOrUpdate", Course);
             Course deserializedReturn = JsonConvert.DeserializeObject<Course>(returnVal);

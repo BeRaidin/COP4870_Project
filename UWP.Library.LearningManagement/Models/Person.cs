@@ -28,7 +28,6 @@ namespace UWP.Library.LearningManagement.Models
             Courses.Add(course);
             if (this is Student student)
             {
-                
                 foreach (var assignment in course.Assignments)
                 {
                     var grade = new GradesDictionary { Assignment = assignment, Grade = 0, Course = course, Person = this };
