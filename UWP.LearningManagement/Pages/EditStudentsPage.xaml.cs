@@ -37,11 +37,8 @@ namespace UWP.LearningManagement
 
         private async void Remove_Click(object sender, RoutedEventArgs e)
         {
-            if ((DataContext as EditStudentsViewModel).SelectedStudent != null)
-            {
-                await (DataContext as EditStudentsViewModel).Delete();
-                Frame.Navigate(typeof(InstructorViewPage));
-            }
+            await (DataContext as EditStudentsViewModel).Delete();
+            Frame.Navigate(typeof(InstructorViewPage));
         }
 
         private async void Edit_Click(object sender, RoutedEventArgs e)

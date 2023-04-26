@@ -16,7 +16,7 @@ namespace UWP.LearningManagement.ViewModels
     public class InstructorViewViewModel
     {
         private readonly SemesterService semesterService;
-        private IEnumerable<AdminViewModel> AllInstructors
+        private IEnumerable<AdminViewModel> InstructorList
         {
             get
             {
@@ -39,6 +39,15 @@ namespace UWP.LearningManagement.ViewModels
                 return returnVal;
             }
         }
+        private IEnumerable<Course> CourseList
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Course").Result;
+                return JsonConvert.DeserializeObject<List<Course>>(payload);
+            }
+        }
+
 
         public ObservableCollection<AdminViewModel> Instructors { get; set; }
         public AdminViewModel SelectedInstructor { get; set; }
@@ -60,7 +69,7 @@ namespace UWP.LearningManagement.ViewModels
         public InstructorViewViewModel()
         {
             semesterService = SemesterService.Current;
-            Instructors = new ObservableCollection<AdminViewModel>(AllInstructors);
+            Instructors = new ObservableCollection<AdminViewModel>(InstructorList);
         }
 
         public void Search()
@@ -70,11 +79,11 @@ namespace UWP.LearningManagement.ViewModels
                 IEnumerable<AdminViewModel> searchResults;
                 if (int.TryParse(Query, out int id))
                 {
-                    searchResults = AllInstructors.Where(i => i.Person.Id == id).ToList();
+                    searchResults = InstructorList.Where(i => i.Person.Id == id).ToList();
                 }
                 else
                 {
-                    searchResults = AllInstructors.Where(i => i.Person.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                    searchResults = InstructorList.Where(i => i.Person.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 }
 
 
@@ -90,17 +99,25 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
 
-        public async Task<Person> Delete()
+        public async Task Delete()
         {
-            string returnVal = await new WebRequestHandler().Post("http://localhost:5159/Person/Delete", SelectedInstructor.Person);
-            var deserializedReturn = JsonConvert.DeserializeObject<Person>(returnVal);
-            return deserializedReturn;
+            if (SelectedInstructor != null)
+            {
+                foreach (var course in SelectedInstructor.Person.Courses)
+                {
+                    Course editedCourse = CourseList.FirstOrDefault(x => x.Id == course.Id);
+                    editedCourse.Remove(SelectedInstructor.Person);
+                    await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateRoster", editedCourse);
+                }
+                await new WebRequestHandler().Post("http://localhost:5159/Person/Delete", SelectedInstructor.Person);
+                Refresh();
+            }
         }
 
         public void Refresh()
         {
             Instructors.Clear();
-            foreach (var person in AllInstructors)
+            foreach (var person in InstructorList)
             {
                 Instructors.Add(person);
             }

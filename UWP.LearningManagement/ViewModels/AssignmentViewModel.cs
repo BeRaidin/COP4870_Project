@@ -36,7 +36,6 @@ namespace UWP.LearningManagement.ViewModels
         }
         private readonly ModuleService moduleService;
         private readonly CourseService courseService;
-        private readonly PersonService personService;
 
         public Course SelectedCourse
         {

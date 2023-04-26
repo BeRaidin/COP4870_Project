@@ -77,11 +77,7 @@ namespace UWP.LearningManagement
 
         private async void RemoveAdmin_Click(object sender, RoutedEventArgs e)
         {
-            if ((DataContext as InstructorViewViewModel).SelectedInstructor != null)
-            {
-                await (DataContext as InstructorViewViewModel).Delete();
-                (DataContext as InstructorViewViewModel).Refresh();
-            }
+            await (DataContext as InstructorViewViewModel).Delete();
         }
     }
 }
