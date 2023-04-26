@@ -38,6 +38,7 @@ namespace LearningManagement.API.EC
                     editedAssignment.Name = a.Name;
                     editedAssignment.Description = a.Description;
                     editedAssignment.TotalAvailablePoints = a.TotalAvailablePoints;
+                    editedAssignment.DueDate = a.DueDate;
                     return editedAssignment;
                 }
             }
@@ -46,7 +47,6 @@ namespace LearningManagement.API.EC
 
         public void Delete(Assignment a)
         {
-
             var deletedAssignment = FakeDataBase.Assignments.FirstOrDefault(d => d.Id == a.Id);
             if (deletedAssignment != null)
             {

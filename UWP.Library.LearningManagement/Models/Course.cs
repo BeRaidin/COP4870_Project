@@ -58,6 +58,27 @@ namespace UWP.Library.LearningManagement.Models
             {
                 Assignments.Remove(previousAssignment);
             }
+            foreach (var person in Roster)
+            {
+                if (person is Student student)
+                {
+                    if (previousAssignment == null)
+                    {
+                        var grade = new GradesDictionary
+                        { Assignment = assignment, Grade = 0, CourseCode = Code, PersonName = student.FirstName + " " + student.LastName };
+                        student.Grades.Add(grade);
+                    }
+                    else
+                    {
+                        var oldGrade = student.Grades.FirstOrDefault(x => x.Assignment == previousAssignment);
+                        double score = oldGrade.Grade;
+                        student.Grades.Remove(oldGrade);
+                        student.Grades.Add(new GradesDictionary
+                        { Assignment = assignment, Grade = score, CourseCode = Code, PersonName = student.FirstName + " " + student.LastName });
+                    }
+                }
+            }
+
             Assignments.Add(assignment);
         }
 
@@ -84,14 +105,6 @@ namespace UWP.Library.LearningManagement.Models
             {
                 Assignments.Remove(removedAssignment);
             }
-
-            //foreach (var person in Roster)
-            //{
-            //    if (person is Student student)
-            //    {
-            //        student.Remove(assignment);
-            //    }
-            //}
         }
 
         public void Remove(Announcement announcement)

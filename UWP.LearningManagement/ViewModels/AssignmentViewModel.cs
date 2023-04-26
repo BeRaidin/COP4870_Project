@@ -1,24 +1,19 @@
-﻿using UWP.Library.LearningManagement.Models;
-using Library.LearningManagement.Services;
+﻿using Library.LearningManagement.Services;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using UWP.LearningManagement.Dialogs;
-using Windows.ApplicationModel.VoiceCommands;
-using Windows.Foundation.Collections;
-using Windows.Services.Maps;
-using Newtonsoft.Json;
 using UWP.LearningManagement.API.Util;
+using UWP.Library.LearningManagement.Models;
 
 namespace UWP.LearningManagement.ViewModels
 {
     public class AssignmentViewModel
     {
 
-        public IEnumerable<Assignment> Assignments
+        public IEnumerable<Assignment> AssignmentList
         {
             get
             {
@@ -26,12 +21,20 @@ namespace UWP.LearningManagement.ViewModels
                 return JsonConvert.DeserializeObject<List<Assignment>>(payload);
             }
         }
-        public IEnumerable<Course> Courses
+        public IEnumerable<Course> CourseList
         {
             get
             {
                 var payload = new WebRequestHandler().Get("http://localhost:5159/Course").Result;
                 return JsonConvert.DeserializeObject<List<Course>>(payload);
+            }
+        }
+        public IEnumerable<Student> StudentList
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Person/GetStudents").Result;
+                return JsonConvert.DeserializeObject<List<Student>>(payload);
             }
         }
         private readonly ModuleService moduleService;
@@ -58,9 +61,6 @@ namespace UWP.LearningManagement.ViewModels
 
 
         public AssignmentItem AssignmentItem { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Group { get; set; }
         public DateTimeOffset DueDate { get; set; }
         private readonly List<AssignmentGroup> assignmentGroups;
         public ObservableCollection<string> AssignmentGroups
@@ -83,14 +83,20 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (id != -1)
             {
-                Assignment = Assignments.FirstOrDefault(x => x.Id == id);
+                Assignment = AssignmentList.FirstOrDefault(x => x.Id == id);
+                DueDate = Assignment.DueDate;
+                TotalPoints = Assignment.TotalAvailablePoints.ToString();
+
             }
-            else Assignment = new Assignment { Id = -1 };
+            else
+            {
+                Assignment = new Assignment { Id = -1 };
+                DueDate = DateTimeOffset.Now;
+            }
             if (courseId != -1)
             {
-                Course = Courses.FirstOrDefault(x => x.Id == courseId);
+                Course = CourseList.FirstOrDefault(x => x.Id == courseId);
             }
-
 
 
 
@@ -151,17 +157,11 @@ namespace UWP.LearningManagement.ViewModels
             IsValid = true;
         }
 
-        public void Set()
-        {
-            Assignment.Name = Name;
-            Assignment.Description = Description;
-            Assignment.DueDate = DueDate;
-        }
-
         public async Task<Assignment> Add()
         {
             if (!Course.Assignments.Any(x => x.Name == Assignment.Name))
             {
+                Assignment.DueDate = DueDate;
                 if (int.TryParse(TotalPoints, out var totalPoints))
                 {
                     Assignment.TotalAvailablePoints = totalPoints;
@@ -173,7 +173,27 @@ namespace UWP.LearningManagement.ViewModels
                 var handler = new WebRequestHandler();
                 var returnVal = await handler.Post("http://localhost:5159/Assignment/AddOrUpdate", Assignment);
                 var deserializedReturn = JsonConvert.DeserializeObject<Assignment>(returnVal);
+                Assignment editedAssignment = AssignmentList.FirstOrDefault(x => x.Id == deserializedReturn.Id);
                 Course.Add(deserializedReturn);
+                foreach (var person in Course.Roster)
+                {
+                    Student student = StudentList.FirstOrDefault(x => x.Id == person.Id);
+                    if (student != null)
+                    {
+                        double score = 0;
+                        var oldGrade = student.Grades.FirstOrDefault(x => x.Assignment.Id == Assignment.Id);
+                        if (oldGrade != null)
+                        {
+                            score = oldGrade.Grade;
+                            student.Grades.Remove(oldGrade);
+                        }
+                        student.Grades.Add(new GradesDictionary
+                        { Assignment = editedAssignment, Grade = score, CourseCode = Course.Code, PersonName = student.FirstName + " " + student.LastName });
+                        
+                        await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateStudentCourses", student);
+                    }
+                }
+
                 await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAssignments", Course);
                 return deserializedReturn;
             }

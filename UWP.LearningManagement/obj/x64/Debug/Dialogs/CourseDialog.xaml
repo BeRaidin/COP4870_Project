@@ -30,7 +30,7 @@
         <TextBlock Margin="10,10,10,10"  Grid.Row="1" Text="Name"></TextBlock>
         <TextBox Margin="10,10,10,10" Grid.Row="1" Grid.Column="1" Text="{Binding Path=Course.Name, Mode=TwoWay}"></TextBox>
         <TextBlock Margin="10,10,10,10" Grid.Row="2" Text="Credit Hours"></TextBlock>
-        <TextBox Margin="10,10,10,10" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Course.Hours, Mode=TwoWay}"></TextBox>
+        <TextBox Margin="10,10,10,10" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Hours, Mode=TwoWay}"></TextBox>
         <TextBlock Margin="10,10,10,10" Grid.Row="3" Text="Room Number"></TextBlock>
         <TextBox Margin="10,10,10,10" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Course.Room, Mode=TwoWay}"></TextBox>
     </Grid>
