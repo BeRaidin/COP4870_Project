@@ -18,15 +18,16 @@ namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class ContentItemDialog : ContentDialog
     {
-        public ContentItemDialog()
+        public ContentItemDialog(int id, int moduleId)
         {
             this.InitializeComponent();
-            DataContext = new ContentItemViewModel();
+            DataContext = new ContentItemViewModel(id, moduleId);
         }
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as ContentItemViewModel).Add();
+            var test = await (DataContext as ContentItemViewModel).AddItem();
+            Console.WriteLine(test.Name);
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

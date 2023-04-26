@@ -15,22 +15,52 @@ namespace LearningManagement.API.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public List<Instructor> Get()
+        [HttpGet("GetItems")]
+        public List<ContentItem> GetItems()
         {
-            return new PersonEC().GetInstructors();
+            return new ContentItemEC().GetItems();
         }
 
-        [HttpPost("AddOrUpdate")]
-        public Person AddorUpdate([FromBody] Instructor instructor)
+        [HttpGet("GetAssignmentItems")]
+        public List<AssignmentItem> GetAssignmentItems()
         {
-            return new PersonEC().AddorUpdateAdmin(instructor);
+            return new ContentItemEC().GetAssignmentItems();
+        }
+
+        [HttpGet("GetFileItems")]
+        public List<FileItem> GetFileItems()
+        {
+            return new ContentItemEC().GetFileItems();
+        }
+
+        [HttpGet("GetPageItems")]
+        public List<PageItem> GetPageItems()
+        {
+            return new ContentItemEC().GetPageItems();
+        }
+
+        [HttpPost("AddOrUpdateAssignmentItem")]
+        public AssignmentItem AddOrUpdateAssignmentItem([FromBody] AssignmentItem assignmentItem)
+        {
+            return new ContentItemEC().AddOrUpdateAssignmentItem(assignmentItem);
+        }
+
+        [HttpPost("AddOrUpdateFileItem")]
+        public FileItem AddOrUpdateFileItem([FromBody] FileItem fileItem)
+        {
+            return new ContentItemEC().AddOrUpdateFileItem(fileItem);
+        }
+
+        [HttpPost("AddOrUpdatePageItem")]
+        public PageItem AddOrUpdatePageItem([FromBody] PageItem pageItem)
+        {
+            return new ContentItemEC().AddOrUpdatePageItem(pageItem);
         }
 
         [HttpPost("Delete")]
-        public void DeleteInstructor([FromBody] Instructor instructor)
+        public void DeleteItem([FromBody] ContentItem contentItem)
         {
-            new PersonEC().Delete(instructor);
+            new ContentItemEC().Delete(contentItem);
         }
     }
 }

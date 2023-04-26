@@ -1,6 +1,9 @@
-﻿using UWP.LearningManagement.ViewModels;
+﻿using System;
+using UWP.LearningManagement.Dialogs;
+using UWP.LearningManagement.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace UWP.LearningManagement
 {
@@ -9,27 +12,45 @@ namespace UWP.LearningManagement
         public ModuleContentPage()
         {
             this.InitializeComponent();
-            DataContext = new ModuleContentViewModel();
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (e.Parameter is int moduleId)
+            {
+                DataContext = new ModuleDetailsViewModel(moduleId);
+            }
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
+        private async void Add_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as ModuleContentViewModel).Add();
+            int moduleId = (DataContext as ModuleDetailsViewModel).Module.Id;
+            var addDialog = new ContentItemDialog(-1, moduleId);
+            await addDialog.ShowAsync();
+            (DataContext as ModuleDetailsViewModel).Refresh();
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        private async void Delete_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as ModuleContentViewModel).Remove();
+            await (DataContext as ModuleDetailsViewModel).Remove();
         }
 
-        private void Edit_Click(object sender, RoutedEventArgs e)
+        private async void Edit_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as ModuleContentViewModel).Edit();
+            if ((DataContext as ModuleDetailsViewModel).Module != null)
+            {
+                int moduleId = (DataContext as ModuleDetailsViewModel).Module.Id;
+                int itemId = (DataContext as ModuleDetailsViewModel).Item.ContentItem.Id;
+                var editDialog = new ContentItemDialog(itemId, moduleId);
+                await editDialog.ShowAsync();
+                (DataContext as ModuleDetailsViewModel).Refresh();
+            }
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as ModuleContentViewModel).Search();
+            (DataContext as ModuleDetailsViewModel).Search();
         }
     }
 }

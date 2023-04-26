@@ -11,7 +11,6 @@ namespace UWP.Library.LearningManagement.Database
             new Instructor {Id = 1, FirstName="Chris", LastName="Millls"},
             new TeachingAssistant {Id = 2, FirstName="Joe", LastName="Joey"}
         };
-
         public static List<Course> courses = new List<Course>{
             new Course {Id = 0, Code="COP4530", Name="C#", CreditHours=4, Room="HCB"}
         };
@@ -19,23 +18,10 @@ namespace UWP.Library.LearningManagement.Database
         public static List<Assignment> assignments = new List<Assignment>();
         public static List<Announcement> announcements = new List<Announcement>();
         public static List<Module> modules = new List<Module>();
+        public static List<ContentItem> contentItems = new List<ContentItem>();
 
 
-        public static List<Student> Students
-        {
-            get
-            {
-                var returnList = new List<Student>();
-                foreach (var person in people)
-                {
-                    if (person is Student student)
-                    {
-                        returnList.Add(student);
-                    }
-                }
-                return returnList;
-            }
-        }
+        
         public static List<Course> Courses
         {
             get { return courses; }
@@ -61,6 +47,21 @@ namespace UWP.Library.LearningManagement.Database
         {
             get { return people; }
 
+        }
+        public static List<Student> Students
+        {
+            get
+            {
+                var returnList = new List<Student>();
+                foreach (var person in people)
+                {
+                    if (person is Student student)
+                    {
+                        returnList.Add(student);
+                    }
+                }
+                return returnList;
+            }
         }
         public static List<Instructor> Instructors
         {
@@ -92,5 +93,58 @@ namespace UWP.Library.LearningManagement.Database
                 return returnList;
             }
         }
+        public static List<ContentItem> ContentItems
+        {
+            get
+            {
+                return contentItems;
+            }
+        }
+        public static List<AssignmentItem> AssignmentItems
+        {
+            get
+            {
+                var returnList = new List<AssignmentItem>();
+                foreach (var item in contentItems)
+                {
+                    if (item is AssignmentItem assignment)
+                    {
+                        returnList.Add(assignment);
+                    }
+                }
+                return returnList;
+            }
+        }
+        public static List<FileItem> FileItems
+        {
+            get
+            {
+                var returnList = new List<FileItem>();
+                foreach (var item in contentItems)
+                {
+                    if (item is FileItem file)
+                    {
+                        returnList.Add(file);
+                    }
+                }
+                return returnList;
+            }
+        }
+        public static List<PageItem> PageItems
+        {
+            get
+            {
+                var returnList = new List<PageItem>();
+                foreach (var item in contentItems)
+                {
+                    if (item is PageItem page)
+                    {
+                        returnList.Add(page);
+                    }
+                }
+                return returnList;
+            }
+        }
+
     }
 }

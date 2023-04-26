@@ -12,7 +12,6 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class ModuleViewModel
     {
-        private readonly CourseService courseService;
         private readonly ModuleService moduleService;
         public IEnumerable<Module> Modules
         {
@@ -57,7 +56,6 @@ namespace UWP.LearningManagement.ViewModels
 
         public ModuleViewModel()
         {
-            courseService = CourseService.Current;
             moduleService = ModuleService.Current;
             Module = new Module();
             IsCont = true;
@@ -65,7 +63,6 @@ namespace UWP.LearningManagement.ViewModels
         }
         public ModuleViewModel(int id, int courseId = -1)
         {
-            courseService = CourseService.Current;
             moduleService = ModuleService.Current;
 
             if (id != -1)

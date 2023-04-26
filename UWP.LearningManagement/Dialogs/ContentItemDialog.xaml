@@ -25,11 +25,12 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Content Type"></TextBlock>
+        <TextBlock Text="Content Type" ></TextBlock>
         <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding ContentTypes}" SelectedItem="{Binding SelectedType, Mode=TwoWay}" />
         <TextBlock Grid.Row="2" Text="Name"></TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=Name, Mode=TwoWay}"></TextBox>
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=ContentItem.Name, Mode=TwoWay}"></TextBox>
         <TextBlock Grid.Row="4" Text="Description"></TextBlock>
-        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=Description, Mode=TwoWay}"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=ContentItem.Description, Mode=TwoWay}"></TextBox>
     </Grid>
 </ContentDialog>
+

@@ -27,6 +27,13 @@ namespace LearningManagement.API.Controllers
             return new ModuleEC().AddOrUpdateModule(module);
         }
 
+        [HttpPost("UpdateItems")]
+        public Module UpdateItems([FromBody] Module module)
+        {
+            return new ModuleEC().UpdateItems(module);
+        }
+
+
         [HttpPost("Delete")]
         public void DeleteModule([FromBody] Module module)
         {

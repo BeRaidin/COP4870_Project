@@ -47,13 +47,13 @@ namespace LearningManagement.API.Controllers
         }
 
         [HttpPost("AddOrUpdateInstructor")]
-        public Person AddorUpdate([FromBody] Instructor instructor)
+        public Person AddOrUpdateInstructor([FromBody] Instructor instructor)
         {
             return new PersonEC().AddorUpdateAdmin(instructor);
         }
 
         [HttpPost("AddOrUpdateAssistant")]
-        public Person AddorUpdate([FromBody] TeachingAssistant assistant)
+        public Person AddOrUpdateAssistant([FromBody] TeachingAssistant assistant)
         {
             return new PersonEC().AddorUpdateAdmin(assistant);
         }
@@ -70,9 +70,8 @@ namespace LearningManagement.API.Controllers
             return new PersonEC().UpdateStudentCourses(student);
         }
 
-
         [HttpPost("Delete")]
-        public Person Delete([FromBody] Person person)
+        public Person DeletePerson([FromBody] Person person)
         {
             return new PersonEC().Delete(person);
         }
