@@ -45,6 +45,28 @@ namespace LearningManagement.API.EC
             return a;
         }
 
+        public Assignment UpdateIsSelected(Assignment a)
+        {
+            var editedAssignment = FakeDataBase.Assignments.FirstOrDefault(x => x.Id == a.Id);
+            if(editedAssignment != null)
+            {
+                editedAssignment.IsSubmitted = a.IsSubmitted;
+                return editedAssignment;
+            }
+            return a;
+        }
+
+        public Assignment UpdateIsGraded(Assignment a)
+        {
+            var editedAssignment = FakeDataBase.Assignments.FirstOrDefault(x => x.Id == a.Id);
+            if (editedAssignment != null)
+            {
+                editedAssignment.IsGraded = a.IsGraded;
+                return editedAssignment;
+            }
+            return a;
+        }
+
         public void Delete(Assignment a)
         {
             var deletedAssignment = FakeDataBase.Assignments.FirstOrDefault(d => d.Id == a.Id);
