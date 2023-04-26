@@ -12,7 +12,6 @@ namespace UWP.LearningManagement.ViewModels
     public class InstructorJoinCourseDialogViewModel
     {
         private readonly CourseService courseService;
-        private readonly PersonService personService;
         private readonly SemesterService semesterService;
         private readonly int Id;
 
@@ -36,12 +35,8 @@ namespace UWP.LearningManagement.ViewModels
         }
 
 
-        public Course SelectedCourse
-        {
-            get { return courseService.CurrentCourse; }
-            set { courseService.CurrentCourse = value; }
-        }
-        public Person SelectedPerson { get; set; }
+        public Course SelectedCourse { get; set; }
+        public Person Person { get; set; }
         public Semester SelectedSemester
         {
             get { return semesterService.CurrentSemester; }
@@ -53,13 +48,12 @@ namespace UWP.LearningManagement.ViewModels
         {
             Id = id;
             courseService = CourseService.Current;
-            personService = PersonService.Current;
             semesterService = SemesterService.Current;
-            SelectedPerson = AllPeople.FirstOrDefault(p => p.Id == Id);
+            Person = AllPeople.FirstOrDefault(p => p.Id == Id);
             AvailableCourses = new ObservableCollection<Course>();
             foreach (var course in AllCourses)
             {
-                bool hasSameId = SelectedPerson.Courses.Any(c => c.Id == course.Id);
+                bool hasSameId = Person.Courses.Any(c => c.Id == course.Id);
                 if(!hasSameId)
                 {
                     AvailableCourses.Add(course);
@@ -72,14 +66,14 @@ namespace UWP.LearningManagement.ViewModels
         {
             if (SelectedCourse != null)
             {
-                SelectedCourse.Add(SelectedPerson);
+                SelectedCourse.Add(Person);
                 var returnVal = await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateRoster", SelectedCourse);
                 Course deserializedReturn = JsonConvert.DeserializeObject<Course>(returnVal);
 
-                SelectedPerson.Add(deserializedReturn);
-                await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateCourses", SelectedPerson);
+                Person.Add(deserializedReturn);
+                await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateCourses", Person);
 
-                SelectedPerson = AllPeople.FirstOrDefault(p => p.Id == Id);
+                Person = AllPeople.FirstOrDefault(p => p.Id == Id);
             }
         }
     }

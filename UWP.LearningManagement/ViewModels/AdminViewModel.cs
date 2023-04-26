@@ -14,7 +14,7 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class AdminViewModel
     {
-        public IEnumerable<Instructor> Instructors
+        private IEnumerable<Instructor> InstructorList
         {
             get
             {
@@ -22,8 +22,7 @@ namespace UWP.LearningManagement.ViewModels
                 return JsonConvert.DeserializeObject<List<Instructor>>(payload);
             }
         }
-
-        public IEnumerable<TeachingAssistant> Assistants
+        private IEnumerable<TeachingAssistant> AssistantList
         {
             get
             {
@@ -55,10 +54,10 @@ namespace UWP.LearningManagement.ViewModels
             if (id != -1)
             {
 
-                Person = Instructors.FirstOrDefault(x => x.Id == id);
+                Person = InstructorList.FirstOrDefault(x => x.Id == id);
                 if (Person == null)
                 {
-                    Person = Assistants.FirstOrDefault(x => x.Id == id);
+                    Person = AssistantList.FirstOrDefault(x => x.Id == id);
                     SelectedType = "Teaching Assistant";
                 }
                 else SelectedType = "Instructor";
@@ -71,19 +70,16 @@ namespace UWP.LearningManagement.ViewModels
 
         public async Task<Person> AddAdmin()
         {
-            var handler = new WebRequestHandler();
             string returnVal;
-
-
             Person deserializedReturn;
             if (SelectedType == "Instructor")
             {
-                returnVal = await handler.Post("http://localhost:5159/Person/AddOrUpdateInstructor", Person);
+                returnVal = await new WebRequestHandler().Post("http://localhost:5159/Person/AddOrUpdateInstructor", Person);
                 deserializedReturn = JsonConvert.DeserializeObject<Instructor>(returnVal);
             }
             else
             {
-                returnVal = await handler.Post("http://localhost:5159/Person/AddOrUpdateAssistant", Person);
+                returnVal = await new WebRequestHandler().Post("http://localhost:5159/Person/AddOrUpdateAssistant", Person);
                 deserializedReturn = JsonConvert.DeserializeObject<TeachingAssistant>(returnVal);
             }
 

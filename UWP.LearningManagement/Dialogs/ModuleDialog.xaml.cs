@@ -26,22 +26,12 @@ namespace UWP.LearningManagement.Dialogs
 
         private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            var test = await(DataContext as ModuleViewModel).Add();
+            var test = await (DataContext as ModuleViewModel).Add();
             Console.WriteLine(test.Name);
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as ModuleViewModel).False();
-        }
-
-        public bool Test()
-        {
-            return (DataContext as ModuleViewModel).IsCont;
-        }
-        public bool TestValid()
-        {
-            return (DataContext as ModuleViewModel).IsValid;
         }
     }
 }

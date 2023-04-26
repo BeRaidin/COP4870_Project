@@ -56,15 +56,12 @@ namespace UWP.LearningManagement.ViewModels
 
         public ModuleViewModel()
         {
-            moduleService = ModuleService.Current;
             Module = new Module();
             IsCont = true;
             IsValid = true;
         }
         public ModuleViewModel(int id, int courseId = -1)
         {
-            moduleService = ModuleService.Current;
-
             if (id != -1)
             {
                 Module = Modules.FirstOrDefault(x => x.Id == id);
@@ -82,39 +79,15 @@ namespace UWP.LearningManagement.ViewModels
 
         public async Task<Module> Add()
         {
-            var handler = new WebRequestHandler();
-            var returnVal = await handler.Post("http://localhost:5159/Module/AddOrUpdate", Module);
-            var deserializedReturn = JsonConvert.DeserializeObject<Module>(returnVal);
-            Course.Add(deserializedReturn);
-            await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateModules", Course);
-            return deserializedReturn;
-        }
-
-        public void Edit()
-        {
-            if (Name == null || Name == "" || Description == null || Description == "")
+            if (!Course.Modules.Any(x => x.Name == Module.Name))
             {
-                GetTemp();
-                IsValid = false;
+                var returnVal = await new WebRequestHandler().Post("http://localhost:5159/Module/AddOrUpdate", Module);
+                var deserializedReturn = JsonConvert.DeserializeObject<Module>(returnVal);
+                Course.Add(deserializedReturn);
+                await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateModules", Course);
+                return deserializedReturn;
             }
-        }
-
-        public void False()
-        {
-            IsCont = false;
-        }
-
-        public void SetTemp()
-        {
-            TempName = Name.ToString();
-            TempDescription = Description.ToString();
-
-        }
-
-        public void GetTemp()
-        {
-            Name = TempName;
-            Description = TempDescription;
+            return new Module { Name = "Invaliid Name" };
         }
     }
 }

@@ -40,16 +40,17 @@ namespace UWP.Library.LearningManagement.Models
 
         public void Remove(Course course)
         {
-            Courses.Remove(course);
+            Course removedCourse = Courses.FirstOrDefault(c => c.Id == course.Id);
             if (this is Student student)
             {
-                foreach (var assignment in course.Assignments)
+                foreach (var assignment in removedCourse.Assignments)
                 {
                     student.Remove(assignment);
                 }
                 var grade = student.FinalGrades.FirstOrDefault(x => x.Key.Id == course.Id);
                 student.FinalGrades.Remove(grade);
             }
+            Courses.Remove(removedCourse);
         }
     }
 }

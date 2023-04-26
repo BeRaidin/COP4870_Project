@@ -14,11 +14,6 @@ Dialogs\AssignmentDialog.xbf
 Dialogs\ContentItemDialog.xbf
 Dialogs\CourseDialog.xbf
 Dialogs\DropCoursesDialog.xbf
-Dialogs\EditAssignmentDialog.xbf
-Dialogs\EditContentItemDialog.xbf
-Dialogs\EditCourseDialog.xbf
-Dialogs\EditModuleDialog.xbf
-Dialogs\EditPersonDialog.xbf
 Dialogs\ErrorDialog.xbf
 Dialogs\GradeDialog.xbf
 Dialogs\InstructorJoinCourseDialog.xbf
@@ -27,7 +22,6 @@ Dialogs\NewAssignmentDialog.xbf
 Dialogs\PreviousSemesterDialog.xbf
 Dialogs\RosterDialog.xbf
 Dialogs\StudentDialog.xbf
-Dialogs\UpdateAnnouncementDialog.xbf
 MainPage.xbf
 Pages\CourseDetailsPage.xbf
 Pages\CurrentSemesterPage.xbf

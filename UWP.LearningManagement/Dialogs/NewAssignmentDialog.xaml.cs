@@ -31,12 +31,6 @@ namespace UWP.LearningManagement.Dialogs
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as AssignmentViewModel).False();
-        }
-
-        public bool TestValid()
-        {
-            return (DataContext as AssignmentViewModel).IsValid;
         }
     }
 }

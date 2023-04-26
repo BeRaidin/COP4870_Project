@@ -73,11 +73,8 @@ namespace UWP.Library.LearningManagement.Models
 
         public void Remove(Person person)
         {
-            Roster.Remove(person);
-            if (person as Student != null)
-            {
-                (person as Student).Remove(this);
-            }
+            Person deletedPerson = Roster.FirstOrDefault(x => x.Id == person.Id);
+            Roster.Remove(deletedPerson);
         }
 
         public void Remove(Assignment assignment)

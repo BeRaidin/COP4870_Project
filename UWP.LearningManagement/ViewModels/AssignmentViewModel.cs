@@ -41,7 +41,7 @@ namespace UWP.LearningManagement.ViewModels
         public Course SelectedCourse
         {
             get { return courseService.CurrentCourse; }
-            set { courseService.CurrentCourse = value;}
+            set { courseService.CurrentCourse = value; }
         }
         public ContentItem SelectedItem
         {
@@ -56,8 +56,8 @@ namespace UWP.LearningManagement.ViewModels
 
         public Assignment Assignment { get; set; }
         public Course Course { get; set; }
-        
-        
+
+
         public AssignmentItem AssignmentItem { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -161,21 +161,24 @@ namespace UWP.LearningManagement.ViewModels
 
         public async Task<Assignment> Add()
         {
-            if (int.TryParse(TotalPoints, out var totalPoints))
+            if (!Course.Assignments.Any(x => x.Name == Assignment.Name))
             {
-                Assignment.TotalAvailablePoints = totalPoints;
+                if (int.TryParse(TotalPoints, out var totalPoints))
+                {
+                    Assignment.TotalAvailablePoints = totalPoints;
+                }
+                else
+                {
+                    Assignment.TotalAvailablePoints = 100;
+                }
+                var handler = new WebRequestHandler();
+                var returnVal = await handler.Post("http://localhost:5159/Assignment/AddOrUpdate", Assignment);
+                var deserializedReturn = JsonConvert.DeserializeObject<Assignment>(returnVal);
+                Course.Add(deserializedReturn);
+                await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAssignments", Course);
+                return deserializedReturn;
             }
-            else
-            {
-                Assignment.TotalAvailablePoints = 100;
-            }
-            var handler = new WebRequestHandler();
-            var returnVal = await handler.Post("http://localhost:5159/Assignment/AddOrUpdate", Assignment);
-            var deserializedReturn = JsonConvert.DeserializeObject<Assignment>(returnVal);
-            Course.Add(deserializedReturn);
-            await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAssignments", Course);
-            return deserializedReturn;
-
+            return new Assignment { Name = "Invalid Name" };
 
 
 
@@ -259,35 +262,6 @@ namespace UWP.LearningManagement.ViewModels
                 SelectedCourse.AssignmentGroups.Add(assignmentGroup);
             }
             else IsValid = false;
-        }
-
-        public void Edit()
-        {
-            if (Name == null || Name == "" || Description == null || Description == "")
-            {
-                IsValid = false;
-            }
-            if (IsValid)
-            {
-                foreach (var assignment in SelectedCourse.Assignments)
-                {
-                    if (Name == assignment.Name)
-                    {
-                        IsValid = false;
-                        break;
-                    }
-                }
-            }
-            if (IsValid)
-            {
-                personService.CurrentAssignment.Name = Name;
-                personService.CurrentAssignment.Description = Description;
-                personService.CurrentAssignment.DueDate = DueDate;
-                if (int.TryParse(TotalPoints, out var points))
-                {
-                    personService.CurrentAssignment.TotalAvailablePoints = points;
-                }
-            }
         }
 
         public void False()

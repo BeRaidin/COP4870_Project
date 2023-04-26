@@ -51,6 +51,7 @@
         <StackPanel Grid.Row="1" Margin="5">
             <Button Margin="5" Content="Add a new course" HorizontalAlignment="Stretch" Click="AddCourse_Click"></Button>
             <Button Margin="5" Content="Join an existing course" HorizontalAlignment="Stretch" Click="JoinCourse_Click"></Button>
+            <Button Margin="5" Content="Unenroll from a course" HorizontalAlignment="Stretch" Click="DropClasses_Click"></Button>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">

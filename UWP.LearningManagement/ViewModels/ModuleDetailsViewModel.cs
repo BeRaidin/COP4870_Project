@@ -100,18 +100,7 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
 
-        public async void Edit()
-        {
-            if (Item != null)
-            {
-                var dialog = new EditContentItemDialog();
-                if (dialog != null)
-                {
-                    await dialog.ShowAsync();
-                }
-            }
-            Refresh();
-        }
+ 
 
         public void Search()
         {

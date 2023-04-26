@@ -48,7 +48,7 @@ namespace UWP.LearningManagement
 
         private async void AddCourse_Click(object sender, RoutedEventArgs e)
         {
-            var addDialog = new CourseDialog((DataContext as InstructorDetailsViewModel).SelectedPerson.Id);
+            var addDialog = new CourseDialog((DataContext as InstructorDetailsViewModel).Instructor.Id);
             await addDialog.ShowAsync();
             (DataContext as InstructorDetailsViewModel).Refresh();
         }
@@ -61,6 +61,17 @@ namespace UWP.LearningManagement
         private void Grade_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             (DataContext as InstructorDetailsViewModel).GradeAssignment();
+
+        }
+
+        private async void DropClasses_Click(object sender, RoutedEventArgs e)
+        {
+            await(DataContext as InstructorDetailsViewModel).DropClasses();
+
+        }
+
+        private void RemovedCourse_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

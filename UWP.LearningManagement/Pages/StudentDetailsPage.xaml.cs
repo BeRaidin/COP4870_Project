@@ -1,4 +1,5 @@
 ﻿using UWP.LearningManagement.ViewModels;
+using UWP.Library.LearningManagement.Models;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -12,7 +13,6 @@ namespace UWP.LearningManagement
         {
             this.InitializeComponent();
         }
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -20,22 +20,19 @@ namespace UWP.LearningManagement
             if (e.Parameter is int id)
             {
                 DataContext = new StudentDetailsViewModel(id);
-                gradesFrame.Navigate(typeof(CurrentSemesterPage));
+                NavToCurrentSemester();
             }
         }
 
         private async void DropClasses_Click(object sender, RoutedEventArgs e)
         {
-            if ((DataContext as StudentDetailsViewModel).CanDrop())
-            {
-                await (DataContext as StudentDetailsViewModel).DropClasses();
-                CurrentSemester();
-            }
+            await (DataContext as StudentDetailsViewModel).DropClasses();
+            NavToCurrentSemester();
         }
 
         private void Current_Click(object sender, RoutedEventArgs e)
         {
-            gradesFrame.Navigate(typeof(CurrentSemesterPage));
+            NavToCurrentSemester();
         }
 
         private void Previous_Click(object sender, RoutedEventArgs e)
@@ -48,9 +45,10 @@ namespace UWP.LearningManagement
             (DataContext as StudentDetailsViewModel).SubmitAssignment();
         }
 
-        private void CurrentSemester()
+        private void NavToCurrentSemester()
         {
-            gradesFrame.Navigate(typeof(CurrentSemesterPage));
+            int studentId = (DataContext as StudentDetailsViewModel).Student.Id;
+            gradesFrame.Navigate(typeof(CurrentSemesterPage), studentId);
         }
     }
 }

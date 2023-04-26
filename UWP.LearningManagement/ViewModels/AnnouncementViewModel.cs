@@ -31,28 +31,15 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
 
-        public virtual string Display => $"{Title}";
+        public virtual string Display => $"{Announcement.Title}";
 
 
         public Course Course { get; set; }
         public Announcement Announcement { get; set; }
-        public string Title
-        {
-            get { return Announcement.Title; }
-            set { Announcement.Title = value; }
-        }
-        public string Message
-        {
-            get { return Announcement.Message; }
-            set { Announcement.Message = value; }
-        }
+
         public bool IsValid;
 
-        public AnnouncementViewModel()
-        {
-            Announcement = new Announcement();
-            IsValid = true;
-        }
+        public AnnouncementViewModel(){}
 
         public AnnouncementViewModel(int id, int courseId = -1)
         {
@@ -69,32 +56,16 @@ namespace UWP.LearningManagement.ViewModels
 
         public async Task<Announcement> Add()
         {
-            var handler = new WebRequestHandler();
-            var returnVal = await handler.Post("http://localhost:5159/Announcement/AddOrUpdate", Announcement);
-            var deserializedReturn = JsonConvert.DeserializeObject<Announcement>(returnVal);
-            Course.Add(deserializedReturn);
-            await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAnnouncements", Course);
-            return deserializedReturn;
-        }
-
-        public void Edit()
-        {
-            foreach (var announcement in Course.Announcements)
+            if (!Course.Announcements.Any(x => x.Title == Announcement.Title))
             {
-                if (Title == announcement.Title)
-                {
-                    IsValid = false;
-                }
+                var handler = new WebRequestHandler();
+                var returnVal = await handler.Post("http://localhost:5159/Announcement/AddOrUpdate", Announcement);
+                var deserializedReturn = JsonConvert.DeserializeObject<Announcement>(returnVal);
+                Course.Add(deserializedReturn);
+                await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAnnouncements", Course);
+                return deserializedReturn;
             }
-            if (Message == null || Message == "")
-            {
-                IsValid = false;
-            }
-            //if (IsValid)
-            //{
-            //    courseService.CurrentAnnouncement.Title = Title;
-            //    courseService.CurrentAnnouncement.Message = Message;
-            //}
+            return new Announcement() { Title = "Invalid Name" };
         }
     }
 }
