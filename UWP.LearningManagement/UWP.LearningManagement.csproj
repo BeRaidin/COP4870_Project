@@ -131,15 +131,6 @@
     <Compile Include="Dialogs\DropCoursesDialog.xaml.cs">
       <DependentUpon>DropCoursesDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\EditAssignmentDialog.xaml.cs">
-      <DependentUpon>EditAssignmentDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\EditContentItemDialog.xaml.cs">
-      <DependentUpon>EditContentItemDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\EditModuleDialog.xaml.cs">
-      <DependentUpon>EditModuleDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\ErrorDialog.xaml.cs">
       <DependentUpon>ErrorDialog.xaml</DependentUpon>
     </Compile>
@@ -170,20 +161,11 @@
     <Compile Include="Dialogs\StudentDialog.xaml.cs">
       <DependentUpon>StudentDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\UpdateAnnouncementDialog.xaml.cs">
-      <DependentUpon>UpdateAnnouncementDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\CourseDetailsPage.xaml.cs">
       <DependentUpon>CourseDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\CourseDialog.xaml.cs">
       <DependentUpon>CourseDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\EditCourseDialog.xaml.cs">
-      <DependentUpon>EditCourseDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\EditPersonDialog.xaml.cs">
-      <DependentUpon>EditPersonDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -273,18 +255,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialogs\EditAssignmentDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\EditContentItemDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\EditModuleDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Dialogs\ErrorDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -325,23 +295,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialogs\UpdateAnnouncementDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\CourseDetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\CourseDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\EditCourseDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\EditPersonDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

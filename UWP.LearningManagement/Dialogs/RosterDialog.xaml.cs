@@ -18,10 +18,10 @@ namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class RosterDialog : ContentDialog
     {
-        public RosterDialog()
+        public RosterDialog(int id)
         {
             this.InitializeComponent();
-            DataContext = new RosterViewModel();
+            DataContext = new RosterViewModel(id);
         }
 
         private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

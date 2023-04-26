@@ -22,7 +22,15 @@ namespace UWP.LearningManagement
         public CurrentSemesterPage()
         {
             this.InitializeComponent();
-            DataContext = new CurrentSemesterViewModel();
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (e.Parameter is int id)
+            {
+                DataContext = new CurrentSemesterViewModel(id);
+            }
         }
     }
 }

@@ -9,12 +9,12 @@ using System.Linq;
 using Newtonsoft.Json;
 using UWP.LearningManagement.API.Util;
 using System.Collections;
+using System.Threading.Tasks;
 
 namespace UWP.LearningManagement.ViewModels
 {
     public class InstructorDetailsViewModel
     {
-        private readonly PersonService personService;
         private readonly int Id;
         private List<Instructor> InstructorList
         {
@@ -35,13 +35,6 @@ namespace UWP.LearningManagement.ViewModels
         }
         
         public ObservableCollection<CourseViewModel> Courses { get; set; }
-
-
-        public Person SelectedPerson
-        {
-            get { return personService.CurrentPerson; }
-            set { personService.CurrentPerson = value; }
-        }
         public Person Instructor { get; set; }
 
         public CourseViewModel SelectedCourse { get; set; }
@@ -58,18 +51,16 @@ namespace UWP.LearningManagement.ViewModels
         public InstructorDetailsViewModel(int id)
         {
             Id = id;
-            personService = PersonService.Current;
-            SelectedPerson = InstructorList.FirstOrDefault(i => i.Id == Id);
-            if (SelectedPerson == null)
+            Instructor = InstructorList.FirstOrDefault(i => i.Id == Id);
+            if (Instructor == null)
             {
-                SelectedPerson = AssistantList.FirstOrDefault(i => i.Id == Id);
+                Instructor = AssistantList.FirstOrDefault(i => i.Id == Id);
                 Type = "Teaching Assistant";
             }
             else
             {
                 Type = "Instructor";
             }
-            Instructor = SelectedPerson;
             Courses = new ObservableCollection<CourseViewModel>();
             foreach(var course in Instructor.Courses)
             {
@@ -109,18 +100,38 @@ namespace UWP.LearningManagement.ViewModels
             }
             Refresh();
         }
+        public async Task DropClasses()
+        {
+            if (CanDrop())
+            {
+                var dialog = new DropCoursesDialog(Id);
+                if (dialog != null)
+                {
+                    await dialog.ShowAsync();
+                }
+                Refresh();
+            }
+        }
+        public bool CanDrop()
+        {
+            if (Instructor.Courses.Count == 0)
+            {
+                return false;
+            }
+            else return true;
+        }
 
         public async void GradeAssignment()
         {
-            personService.CurrentAssignment = SelectedGrade.Assignment;
-            SelectedPerson = SelectedGrade.Person;
+            //personService.CurrentAssignment = SelectedGrade.Assignment;
+            Instructor = SelectedGrade.Person;
             //SelectedCourse = SelectedGrade.Course;
             var dialog = new GradeDialog();
             if (dialog != null)
             {
                 await dialog.ShowAsync();
             }
-            SelectedPerson = Instructor;
+            //SelectedPerson = Instructor;
             SelectedGrade.IsGraded = true;
             Refresh();
         }
@@ -128,7 +139,7 @@ namespace UWP.LearningManagement.ViewModels
         public void GetAssignments()
         {
             SubmittedAssignments.Clear();
-            foreach (var course in SelectedPerson.Courses)
+            foreach (var course in Instructor.Courses)
             {
                 foreach (var person in course.Roster)
                 {
@@ -151,13 +162,13 @@ namespace UWP.LearningManagement.ViewModels
         {
             if(Type == "Teaching Assistant")
             {
-                SelectedPerson = AssistantList.FirstOrDefault(x => x.Id == Id);
+                Instructor = AssistantList.FirstOrDefault(x => x.Id == Id);
             }
-            else SelectedPerson = InstructorList.FirstOrDefault(x => x.Id == Id);
+            else Instructor = InstructorList.FirstOrDefault(x => x.Id == Id);
 
 
             Courses.Clear();
-            foreach (var course in SelectedPerson.Courses)
+            foreach (var course in Instructor.Courses)
             {
                 Courses.Add(new CourseViewModel(Instructor.Id, course.Id));
             }

@@ -14,7 +14,6 @@ namespace UWP.LearningManagement
         {
             this.InitializeComponent();
         }
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -24,6 +23,7 @@ namespace UWP.LearningManagement
                 DataContext = new CourseDetailsViewModel(courseId);
             }
         }
+        
 
         private async void AddModule_Click(object sender, RoutedEventArgs e)
         {
@@ -47,6 +47,7 @@ namespace UWP.LearningManagement
             await addDialog.ShowAsync();
             (DataContext as CourseDetailsViewModel).Refresh();
         }
+
 
         private void UpdateRoster_Click(object sender, RoutedEventArgs e)
         {

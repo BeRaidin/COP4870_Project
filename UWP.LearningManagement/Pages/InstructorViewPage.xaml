@@ -52,6 +52,7 @@
                 <Button Margin="10,10,0,10" Content="Remove admin" Click="RemoveAdmin_Click"></Button>
                 <Button Margin="10,10,0,10" Content="Edit admin" Click="EditAdmin_Click"></Button>
                 <Button Margin="10,10,0,10" Content="Edit Students" Click="GoToEditStudents_Click"></Button>
+                <Button Margin="10,10,0,10" Content="Edit Courses"></Button>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">

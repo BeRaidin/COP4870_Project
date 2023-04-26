@@ -19,15 +19,15 @@ namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class DropCoursesDialog : ContentDialog
     {
-        public DropCoursesDialog()
+        public DropCoursesDialog(int id)
         {
             this.InitializeComponent();
-            DataContext = new DropClassViewModel();
+            DataContext = new DropClassViewModel(id);
         }
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as DropClassViewModel).Drop();
+            await (DataContext as DropClassViewModel).Drop();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

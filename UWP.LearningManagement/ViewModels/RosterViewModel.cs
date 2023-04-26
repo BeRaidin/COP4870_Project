@@ -12,9 +12,8 @@ namespace UWP.LearningManagement.ViewModels
 {
     internal class RosterViewModel
     {
-        private readonly CourseService courseService;
         private readonly SemesterService semesterService;
-        private IEnumerable<StudentViewModel> AllStudents
+        private IEnumerable<StudentViewModel> StudentList
         {
             get
             {
@@ -23,20 +22,26 @@ namespace UWP.LearningManagement.ViewModels
                 return returnVal;
             }
         }
+        private IEnumerable<Course> CourseList
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Course").Result;
+                var returnVal = JsonConvert.DeserializeObject<List<Course>>(payload);
+                return returnVal;
+            }
+        }
         public ObservableCollection<Student> Students { get; set; }
         public Semester SelectedSemester { get { return semesterService.CurrentSemester; } }
-        public Course Course 
-        {
-            get { return courseService.CurrentCourse; }
-        }
+        public Course Course { get; set; }
 
-        public RosterViewModel()
+        public RosterViewModel(int id)
         {
-            courseService = CourseService.Current;
+            Course = CourseList.FirstOrDefault(c => c.Id == id);
             semesterService = SemesterService.Current;
 
             Students = new ObservableCollection<Student>();
-            foreach(var student in  AllStudents)
+            foreach(var student in  StudentList)
             {
                 Students.Add(student.Student);
             }

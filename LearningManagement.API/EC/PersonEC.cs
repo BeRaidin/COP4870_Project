@@ -120,6 +120,27 @@ namespace LearningManagement.API.EC
             return s;
         }
 
+        public Student SetTrue(Student s)
+        {
+            var editedStudent = FakeDataBase.Students.FirstOrDefault(i => i.Id == s.Id);
+            if (editedStudent != null)
+            {
+                editedStudent.IsSelected = true;
+                return editedStudent;
+            }
+            return s;
+        }
+        public Student SetFalse(Student s)
+        {
+            var editedStudent = FakeDataBase.Students.FirstOrDefault(i => i.Id == s.Id);
+            if (editedStudent != null)
+            {
+                editedStudent.IsSelected = false;
+                return editedStudent;
+            }
+            return s;
+        }
+
         public Person Delete(Person p)
         {
 

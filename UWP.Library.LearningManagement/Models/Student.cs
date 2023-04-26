@@ -31,13 +31,8 @@ namespace UWP.Library.LearningManagement.Models
 
         public void Remove(Assignment assignment)
         {
-            foreach (var grade in Grades.ToList())
-            {
-                if (grade.Assignment.Equals(assignment))
-                {
-                    Grades.Remove(grade);
-                }
-            }
+            GradesDictionary removedGrade = Grades.FirstOrDefault(x  => x.Assignment.Id == assignment.Id);
+            Grades.Remove(removedGrade);
         }
 
         public GradesDictionary GetGradeDict(Assignment assignment)

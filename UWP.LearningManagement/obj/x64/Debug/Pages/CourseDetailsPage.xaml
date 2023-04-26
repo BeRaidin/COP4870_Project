@@ -34,13 +34,13 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Margin="10,0,10,0" FontWeight="ExtraBold" FontSize="20" HorizontalAlignment="Center" 
-                      Text="{Binding Code}" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                      Text="{Binding Path=Course.Code}" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
             <TextBlock Margin="10,0,10,0" FontSize="14" Grid.Row="1" Text="Name:" FontWeight="Bold"/>
-            <TextBlock Margin="10,0,10,0" FontSize="14" Grid.Row="1" Grid.Column="1" Text="{Binding Name}"/>
+            <TextBlock Margin="10,0,10,0" FontSize="14" Grid.Row="1" Grid.Column="1" Text="{Binding Path=Course.Name}"/>
             <TextBlock Margin="10,0,10,0" Grid.Row="2" Text="Room:" FontWeight="Bold"/>
-            <TextBlock Margin="10,0,10,0" Grid.Row="2" Grid.Column="1" Text="{Binding Room}"/>
+            <TextBlock Margin="10,0,10,0" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Course.Room}"/>
             <TextBlock Margin="10,0,10,0" Grid.Row="3" Text="Credit Hours:" FontWeight="Bold"/>
-            <TextBlock Margin="10,0,10,0" Grid.Row="3" Grid.Column="1" Text="{Binding Hours}"/>
+            <TextBlock Margin="10,0,10,0" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Course.Hours}"/>
         </Grid>
 
         <Button x:ConnectionId='2' Margin="5" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top"
@@ -84,7 +84,7 @@
         <StackPanel Grid.Row="2" Grid.Column="2">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Announcements"></TextBlock>
             <ListBox x:ConnectionId='12' ItemsSource="{Binding Announcements}" Margin="10,0,10,0"
-                    SelectedItem="{Binding Path=SelectedAnnouncement, Mode=TwoWay}"                                         >
+                    SelectedItem="{Binding SelectedAnnouncement, Mode=TwoWay}"                                         >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -103,7 +103,7 @@
         <StackPanel Grid.Row="2" Grid.Column="1">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Modules"></TextBlock>
             <ListBox x:ConnectionId='7' ItemsSource="{Binding Modules}" Margin="10,0,10,0"
-                    SelectedItem="{Binding Path=SelectedModule, Mode=TwoWay}"                                   >
+                    SelectedItem="{Binding SelectedModule, Mode=TwoWay}"                                   >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -122,7 +122,7 @@
         <StackPanel Grid.Row="3" Grid.Column="1">
             <TextBlock Margin="10,0,10,0" FontSize="20" Text="Assignments"></TextBlock>
             <ListBox ItemsSource="{Binding Assignments}" Margin="10,0,10,0"
-                     SelectedItem="{Binding Path=SelectedAssignment, Mode=TwoWay}">
+                     SelectedItem="{Binding SelectedAssignment, Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

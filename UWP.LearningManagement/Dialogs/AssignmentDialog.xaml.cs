@@ -26,7 +26,8 @@ namespace UWP.LearningManagement.Dialogs
 
         private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            await (DataContext as AssignmentViewModel).Add();
+            var test = await (DataContext as AssignmentViewModel).Add();
+            Console.WriteLine(test.Name);
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
