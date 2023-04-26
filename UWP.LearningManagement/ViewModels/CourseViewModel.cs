@@ -34,7 +34,6 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
         private List<Student> StudentList
-
         {
             get
             {
@@ -43,7 +42,6 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
         private List<Course> CourseList
-
         {
             get
             {
@@ -54,39 +52,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public Course Course { get; set; }
         public Person Person { get; set; }
-
-
-
-        public string Name
-        {
-            get
-            {
-                return Course.Name;
-            }
-            set
-            {
-                Course.Name = value;
-            }
-        }
-        public string Code
-        {
-            get
-            {
-                return Course.Code;
-            }
-            set
-            {
-                Course.Code = value;
-            }
-        }
-        public string Room
-        {
-            get { return Course.Room; }
-            set { Course.Room = value; }
-        }
-        public string TempName { get; set; }
-        public string TempCode { get; set; }
-        public string TempRoom { get; set; }
+        
         public List<Person> Roster
         {
             get
@@ -133,7 +99,16 @@ namespace UWP.LearningManagement.ViewModels
 
         public async Task<Course> AddCourse()
         {
-            if(Course.Id != -1)
+            if (int.TryParse(Hours, out var totalHours))
+            {
+                Course.CreditHours = totalHours;
+            }
+            else
+            {
+                Course.CreditHours = 3;
+            }
+
+            if (Course.Id != -1)
             {
                 foreach(var person in Course.Roster)
                 {
@@ -203,18 +178,6 @@ namespace UWP.LearningManagement.ViewModels
             //                GetTemp();
             //            }
             //            SelectedCourse = null;
-        }
-        public void SetTemp()
-        {
-            TempName = Name.ToString();
-            TempCode = Code.ToString();
-            TempRoom = Room.ToString();
-        }
-        public void GetTemp()
-        {
-            Name = TempName;
-            Code = TempCode;
-            Room = TempRoom;
         }
     }
 }

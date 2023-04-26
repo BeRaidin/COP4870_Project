@@ -31,6 +31,15 @@ namespace UWP.LearningManagement.ViewModels
                 return returnVal;
             }
         }
+        private IEnumerable<Assignment> AssignmentList
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Assignment").Result;
+                var returnVal = JsonConvert.DeserializeObject<List<Assignment>>(payload);
+                return returnVal;
+            }
+        }
         public ObservableCollection<Student> Students { get; set; }
         public Semester SelectedSemester { get { return semesterService.CurrentSemester; } }
         public Course Course { get; set; }
@@ -41,14 +50,14 @@ namespace UWP.LearningManagement.ViewModels
             semesterService = SemesterService.Current;
 
             Students = new ObservableCollection<Student>();
-            foreach(var student in  StudentList)
+            foreach (var student in StudentList)
             {
                 Students.Add(student.Student);
             }
 
             foreach (var student in Students)
             {
-                if(Course.Roster.Contains(student))
+                if (Course.Roster.Any(x => x.Id == student.Id))
                 {
                     student.IsSelected = true;
                 }
@@ -61,23 +70,27 @@ namespace UWP.LearningManagement.ViewModels
 
         public async Task AddRoster()
         {
-            foreach(var student in Students)
+            foreach (var student in Students)
             {
-                if (student.IsSelected == false && Course.Roster.Contains(student))
+                Student editedStudent = StudentList.FirstOrDefault(x => x.Student.Id == student.Id).Student;
+
+                if (student.IsSelected == false && Course.Roster.Any(x => x.Id == student.Id))
                 {
-                    Course.Remove(student);
+                    Course.Remove(editedStudent);
                     var payload = await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateRoster", Course);
                     var returnVal = JsonConvert.DeserializeObject<Course>(payload);
-                    student.Remove(returnVal);
-                    await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateStudentCourses", student);
+                    editedStudent.Remove(returnVal);
+                    await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateStudentCourses", editedStudent);
                 }
-                else if (student.IsSelected == true && !Course.Roster.Contains(student)) 
-                { 
-                    Course.Add(student);
-                    var payload = await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateRoster", Course);
+                else if (student.IsSelected == true && !Course.Roster.Any(x => x.Id == student.Id))
+                {
+                    editedStudent.Add(Course);
+                    await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateStudentCourses", editedStudent);
+
+                    var editedCourse = CourseList.FirstOrDefault(x => x.Id == Course.Id);
+                    editedCourse.Add(student);
+                    var payload = await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateRoster", editedCourse);
                     var returnVal = JsonConvert.DeserializeObject<Course>(payload);
-                    student.Add(returnVal);
-                    await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateStudentCourses", student);
                 }
             }
         }

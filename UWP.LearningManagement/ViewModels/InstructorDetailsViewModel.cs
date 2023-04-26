@@ -124,7 +124,7 @@ namespace UWP.LearningManagement.ViewModels
         public async void GradeAssignment()
         {
             //personService.CurrentAssignment = SelectedGrade.Assignment;
-            Instructor = SelectedGrade.Person;
+            //Instructor = SelectedGrade.Person;
             //SelectedCourse = SelectedGrade.Course;
             var dialog = new GradeDialog();
             if (dialog != null)
@@ -147,7 +147,7 @@ namespace UWP.LearningManagement.ViewModels
                     {
                         foreach (var assignment in student.Grades)
                         {
-                            if (assignment.Course == course && assignment.IsGraded == false
+                            if (assignment.CourseCode == course.Code && assignment.IsGraded == false
                                 && assignment.IsSubmitted == true)
                             {
                                 SubmittedAssignments.Add(assignment);

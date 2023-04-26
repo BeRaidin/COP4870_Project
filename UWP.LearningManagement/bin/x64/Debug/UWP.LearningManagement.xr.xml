@@ -23,9 +23,9 @@
     <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="ContentItem" />
     <RootPropertyPathName Name="ContentTypes" />
+    <RootPropertyPathName Name="DueDate" />
     <RootPropertyPathName Name="TotalPoints" />
     <RootPropertyPathName Name="Assignment" />
-    <RootPropertyPathName Name="DueDate" />
     <RootPropertyPathName Name="Modules" />
     <RootPropertyPathName Name="SelectedModuleName" />
     <RootPropertyPathName Name="AssignmentGroups" />
@@ -46,8 +46,9 @@
     <RootPropertyPathName Name="Roster" />
     <RootPropertyPathName Name="Admin" />
     <RootPropertyPathName Name="Course" />
-    <RootPropertyPathName Name="Hours" />
+    <RootPropertyPathName Name="CreditHours" />
     <RootPropertyPathName Name="Room" />
+    <RootPropertyPathName Name="Hours" />
     <RootPropertyPathName Name="Year" />
     <RootPropertyPathName Name="Period" />
     <RootPropertyPathName Name="FinalGrades" />
@@ -57,7 +58,7 @@
     <RootPropertyPathName Name="SelectedGrade" />
     <RootPropertyPathName Name="PersonDisplay" />
     <RootPropertyPathName Name="Type" />
-    <RootPropertyPathName Name="SelectedPerson" />
+    <RootPropertyPathName Name="Instructor" />
     <RootPropertyPathName Name="Id" />
     <RootPropertyPathName Name="Semester" />
     <RootPropertyPathName Name="Instructors" />
@@ -152,11 +153,11 @@
     <RootType FullName="UWP.LearningManagement.Dialogs.InstructorJoinCourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.ModuleDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.ContentItemDialog" />
-    <RootType FullName="UWP.LearningManagement.Dialogs.AssignmentDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.DatePicker">
       <RootProperty Name="Margin" />
       <RootProperty Name="SelectedDate" />
     </RootType>
+    <RootType FullName="UWP.LearningManagement.Dialogs.AssignmentDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.NewAssignmentDialog" />
     <RootType FullName="Windows.UI.Xaml.Documents.Run">
       <RootProperty Name="Text" />

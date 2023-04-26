@@ -40,7 +40,7 @@
             <TextBlock Margin="10,0,10,0" Grid.Row="2" Text="Room:" FontWeight="Bold"/>
             <TextBlock Margin="10,0,10,0" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Course.Room}"/>
             <TextBlock Margin="10,0,10,0" Grid.Row="3" Text="Credit Hours:" FontWeight="Bold"/>
-            <TextBlock Margin="10,0,10,0" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Course.Hours}"/>
+            <TextBlock Margin="10,0,10,0" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Course.CreditHours}"/>
         </Grid>
 
         <Button x:ConnectionId='2' Margin="5" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top"

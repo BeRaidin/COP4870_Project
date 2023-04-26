@@ -115,6 +115,7 @@ namespace LearningManagement.API.EC
             {
                 editedStudent.Courses = s.Courses;
                 editedStudent.FinalGrades = s.FinalGrades;
+                editedStudent.Grades = s.Grades;
                 return editedStudent;
             }
             return s;

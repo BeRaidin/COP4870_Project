@@ -35,15 +35,15 @@
             </Grid.ColumnDefinitions>
             <TextBlock Margin="10,0,10,0" FontWeight="ExtraBold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2">
                 <Run Text="Welcome, "/>
-                <Run Text="{Binding Path=SelectedPerson.FirstName}"/>
+                <Run Text="{Binding Path=Instructor.FirstName}"/>
             </TextBlock>
             <TextBlock Margin="10,0,10,0" FontSize="14" Grid.Row="1" Text="Name:" FontWeight="Bold"/>
             <TextBlock Margin="10,0,10,0" FontSize="14" Grid.Row="1" Grid.Column="1">
-                <Run Text="{Binding Path=SelectedPerson.FirstName}"/>
-                <Run Text="{Binding Path=SelectedPerson.LastName}"/>
+                <Run Text="{Binding Path=Instructor.FirstName}"/>
+                <Run Text="{Binding Path=Instructor.LastName}"/>
             </TextBlock>
             <TextBlock Margin="10,0,10,0" Grid.Row="2" Text="Id:" FontWeight="Bold"/>
-            <TextBlock Margin="10,0,10,0" Grid.Row="2" Grid.Column="1" Text="{Binding Path=SelectedPerson.Id}"/>
+            <TextBlock Margin="10,0,10,0" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Instructor.Id}"/>
             <TextBlock Margin="10,0,10,0" Grid.Row="3" Text="Classification:" FontWeight="Bold"/>
             <TextBlock Margin="10,0,10,0" Grid.Row="3" Grid.Column="1" Text="{Binding Type}"/>
         </Grid>
