@@ -25,6 +25,7 @@ Dialogs\StudentDialog.xbf
 MainPage.xbf
 Pages\CourseDetailsPage.xbf
 Pages\CurrentSemesterPage.xbf
+Pages\EditCoursesPage.xbf
 Pages\EditStudentsPage.xbf
 Pages\InstructorDetailsPage.xbf
 Pages\InstructorViewPage.xbf

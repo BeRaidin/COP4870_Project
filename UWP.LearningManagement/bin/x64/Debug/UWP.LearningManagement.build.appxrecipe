@@ -130,6 +130,9 @@
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\CurrentSemesterPage.xbf">
       <PackagePath>Pages\CurrentSemesterPage.xbf</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\EditCoursesPage.xbf">
+      <PackagePath>Pages\EditCoursesPage.xbf</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brayden\source\repos\COP4870_Project\UWP.LearningManagement\bin\x64\Debug\Pages\EditStudentsPage.xbf">
       <PackagePath>Pages\EditStudentsPage.xbf</PackagePath>
     </AppxPackagedFile>

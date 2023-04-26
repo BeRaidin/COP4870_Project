@@ -6,10 +6,10 @@ namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class CourseDialog : ContentDialog
     {
-        public CourseDialog(int id)
+        public CourseDialog(int personId, int courseId = -1)
         {
             InitializeComponent();
-                DataContext = new CourseViewModel(id);
+                DataContext = new CourseViewModel(personId, courseId);
         }
 
         private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

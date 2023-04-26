@@ -72,8 +72,6 @@ namespace UWP.LearningManagement.ViewModels
 
         public async Task Delete()
         {
-            string returnVal = await new WebRequestHandler().Post("http://localhost:5159/Person/Delete", SelectedStudent.Student);
-            var deserializedReturn = JsonConvert.DeserializeObject<Student>(returnVal);
 
             if (SelectedStudent != null)
             {
