@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace UWP.Library.LearningManagement.Models
 {
@@ -25,16 +26,24 @@ namespace UWP.Library.LearningManagement.Models
 
         public void Add(Course course)
         {
-            Courses.Add(course);
-            if (this is Student student)
+            var previousCourse = Courses.FirstOrDefault(x => x.Id == course.Id);
+            if (previousCourse != null)
             {
-                foreach (var assignment in course.Assignments)
-                {
-                    var grade = new GradesDictionary { Assignment = assignment, Grade = 0, Course = course, Person = this };
-                    student.Grades.Add(grade);
-                }
-                student.FinalGrades.Add(new FinalGradesDictionary(course, 0));
+                Courses.Remove(previousCourse);
             }
+            else
+            {
+                if (this is Student student)
+                {
+                    foreach (var assignment in course.Assignments)
+                    {
+                        var grade = new GradesDictionary { Assignment = assignment, Grade = 0, Course = course, Person = this };
+                        student.Grades.Add(grade);
+                    }
+                    student.FinalGrades.Add(new FinalGradesDictionary(course, 0));
+                }
+            }
+            Courses.Add(course);
         }
 
         public void Remove(Course course)

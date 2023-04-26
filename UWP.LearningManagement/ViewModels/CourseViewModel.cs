@@ -33,6 +33,15 @@ namespace UWP.LearningManagement.ViewModels
                 return JsonConvert.DeserializeObject<List<TeachingAssistant>>(payload).ToList();
             }
         }
+        private List<Student> StudentList
+
+        {
+            get
+            {
+                var payload = new WebRequestHandler().Get("http://localhost:5159/Person/GetStudents").Result;
+                return JsonConvert.DeserializeObject<List<Student>>(payload).ToList();
+            }
+        }
         private List<Course> CourseList
 
         {
@@ -126,9 +135,18 @@ namespace UWP.LearningManagement.ViewModels
         {
             if(Course.Id != -1)
             {
-                foreach(var person in  Course.Roster)
+                foreach(var person in Course.Roster)
                 {
-                    if(person is Student student)
+                    Person editedPerson = InstructorList.FirstOrDefault(x =>x.Id == person.Id);
+                    if(editedPerson == null)
+                    {
+                        editedPerson = AssistantList.FirstOrDefault(x => x.Id == person.Id);
+                        if(editedPerson == null)
+                        {
+                            editedPerson = StudentList.FirstOrDefault(x => x.Id == person.Id);
+                        }
+                    }
+                    if(editedPerson is Student student)
                     {
                         FinalGradesDictionary courseGrade = student.FinalGrades.FirstOrDefault(x => x.Key.Id == Course.Id);
                         if (courseGrade != null)
@@ -136,19 +154,28 @@ namespace UWP.LearningManagement.ViewModels
                             double grade = courseGrade.Value;
                             student.FinalGrades.Remove(courseGrade);
                             student.FinalGrades.Add(new FinalGradesDictionary(Course, grade));
+                            await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateStudentCourses", student);
                         }
                     }
+                    else
+                    {
+                        editedPerson.Add(Course);
+                        await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateCourses", editedPerson);
+                    }
                 }
+                var returnVal = await new WebRequestHandler().Post("http://localhost:5159/Course/AddOrUpdate", Course);
+                return JsonConvert.DeserializeObject<Course>(returnVal);
+
             }
-
-            Course.Add(Person);
-            var returnVal = await new WebRequestHandler().Post("http://localhost:5159/Course/AddOrUpdate", Course);
-            Course deserializedReturn = JsonConvert.DeserializeObject<Course>(returnVal);
-
-            Person.Add(deserializedReturn);
-            await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateCourses", Person);
-
-            return deserializedReturn;
+            else
+            {
+                Course.Add(Person);
+                var returnVal = await new WebRequestHandler().Post("http://localhost:5159/Course/AddOrUpdate", Course);
+                Course deserializedReturn = JsonConvert.DeserializeObject<Course>(returnVal);
+                Person.Add(deserializedReturn);
+                await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateCourses", Person);
+                return deserializedReturn;
+            }
         }
 
         public void Edit()
