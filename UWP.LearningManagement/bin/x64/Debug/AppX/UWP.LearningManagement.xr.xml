@@ -24,6 +24,7 @@
     <RootPropertyPathName Name="AvailableCourses" />
     <RootPropertyPathName Name="SelectedCourse" />
     <RootPropertyPathName Name="Module" />
+    <RootPropertyPathName Name="ContentItem" />
     <RootPropertyPathName Name="ContentTypes" />
     <RootPropertyPathName Name="Assignment" />
     <RootPropertyPathName Name="Modules" />
@@ -61,7 +62,7 @@
     <RootPropertyPathName Name="Semester" />
     <RootPropertyPathName Name="SelectedInstructor" />
     <RootPropertyPathName Name="ContentItems" />
-    <RootPropertyPathName Name="SelectedItem" />
+    <RootPropertyPathName Name="Item" />
     <RootPropertyPathName Name="PreviousSemesters" />
     <RootPropertyPathName Name="GradedGrades" />
     <RootPropertyPathName Name="UnsubmittedGrades" />
@@ -83,15 +84,12 @@
       <RootProperty Name="RowDefinitions" />
       <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="Children" />
-      <RootProperty Name="Margin" />
       <RootMethod Name="GetColumn" />
       <RootMethod Name="SetColumn" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
       <RootMethod Name="GetColumnSpan" />
       <RootMethod Name="SetColumnSpan" />
-      <RootMethod Name="GetRowSpan" />
-      <RootMethod Name="SetRowSpan" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
       <RootProperty Name="Height" />

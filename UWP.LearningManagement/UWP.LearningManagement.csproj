@@ -228,7 +228,7 @@
     <Compile Include="ViewModels\InstructorDetailsViewModel.cs" />
     <Compile Include="ViewModels\InstructorJoinCourseDialogViewModel.cs" />
     <Compile Include="ViewModels\InstructorViewViewModel.cs" />
-    <Compile Include="ViewModels\ModuleContentViewModel.cs" />
+    <Compile Include="ViewModels\ModuleDetailsViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\ModuleViewModel.cs" />
     <Compile Include="ViewModels\PersonDialogViewModel.cs" />

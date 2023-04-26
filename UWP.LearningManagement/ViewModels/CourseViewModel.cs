@@ -120,19 +120,7 @@ namespace UWP.LearningManagement.ViewModels
 
         public CourseViewModel() { }
 
-        public void Set()
-        {
-            if (int.TryParse(Hours, out int hours))
-            {
-                Course.CreditHours = hours;
-            }
-            else
-            {
-                Course.CreditHours = 3;
-            }
-
-            //Course.Roster.Add(SelectedPerson);
-        }
+        
 
         public async Task<Course> AddCourse()
         {

@@ -30,11 +30,7 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
 
-        public Person SelectedPerson
-        {
-            get { return personService.CurrentPerson; }
-            set { personService.CurrentPerson = value; }
-        }
+        
         public Course Course
         {
             get { return courseService.CurrentCourse; }
@@ -241,58 +237,7 @@ namespace UWP.LearningManagement.ViewModels
 
 
         
-
-        public async void UpdateModule()
-        {
-            if (SelectedModule != null)
-            {
-                var dialog = new EditModuleDialog();
-                if (dialog != null)
-                {
-                    await dialog.ShowAsync();
-                }
-                if (!dialog.TestValid())
-                {
-                    GetError();
-                }
-                Refresh();
-            }
-        }
-
-        public async void UpdateAssignment()
-        {
-            if (SelectedAssignment != null)
-            {
-                var dialog = new EditAssignmentDialog();
-                if (dialog != null)
-                {
-                    await dialog.ShowAsync();
-                }
-                if (!dialog.TestValid())
-                {
-                    GetError();
-                }
-                Refresh();
-            }
-        }
-
-        public async void UpdateAnnouncement()
-        {
-            if (SelectedAnnouncement != null)
-            {
-                courseService.CurrentAnnouncement = SelectedAnnouncement.Announcement;
-                var dialog = new UpdateAnnouncementDialog();
-                if (dialog != null)
-                {
-                    await dialog.ShowAsync();
-                }
-                if (!dialog.TestValid())
-                {
-                    GetError();
-                }
-                Refresh();
-            }
-        }
+   
 
         public async void GetError()
         {

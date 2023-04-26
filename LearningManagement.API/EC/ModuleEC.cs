@@ -45,6 +45,17 @@ namespace LearningManagement.API.EC
             return m;
         }
 
+        public Module UpdateItems(Module m)
+        {
+            var editedModule = FakeDataBase.Modules.FirstOrDefault(i => i.Id == m.Id);
+            if (editedModule != null)
+            {
+                editedModule.Content = m.Content;
+                return editedModule;
+            }
+            return m;
+        }
+
         public void Delete(Module m)
         {
 

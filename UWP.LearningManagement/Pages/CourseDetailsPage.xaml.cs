@@ -1,23 +1,11 @@
 ﻿using UWP.LearningManagement.Dialogs;
 using UWP.LearningManagement.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using System.Xml.Linq;
-using UWP.Library.LearningManagement.Models;
+
 namespace UWP.LearningManagement
 {
     public sealed partial class CourseDetailsPage : Page
@@ -114,7 +102,8 @@ namespace UWP.LearningManagement
         {
             if ((DataContext as CourseDetailsViewModel).SelectedModule != null)
             {
-                Frame.Navigate(typeof(ModuleContentPage));
+                int moduleId = (DataContext as CourseDetailsViewModel).SelectedModule.Module.Id;
+                Frame.Navigate(typeof(ModuleContentPage), moduleId);
             }
         }
         private void Announcement_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)

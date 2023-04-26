@@ -8,7 +8,7 @@ namespace UWP.Library.LearningManagement.Models
 {
     public class ContentItem
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 
@@ -16,9 +16,8 @@ namespace UWP.Library.LearningManagement.Models
         {
             Name = string.Empty;
             Description = string.Empty;
-            Id = "0";
         }
 
-        public virtual string Display => $"[{Id}] - {Name}";
+        public virtual string Display => $"{Name}";
     }
 }

@@ -13,27 +13,32 @@ namespace UWP.Library.LearningManagement.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public List<ContentItem> Content { get; set; }
-        public int TotalItems;
         public Module()
         {
             Name = string.Empty;
             Description = string.Empty;
             Content = new List<ContentItem>();
-            TotalItems = 0;
         }
 
         public virtual string Display => $"{Name} - {Description}";
 
         public void Add(ContentItem item)
         {
+            ContentItem previousItem = Content.FirstOrDefault(x => x.Id == item.Id);
+            if(previousItem != null)
+            {
+                Content.Remove(previousItem);
+            }
             Content.Add(item);
-            item.Id = TotalItems.ToString();
-            TotalItems++;
         }
 
         public void Remove(ContentItem item)
         {
-            Content.Remove(item);
+            ContentItem removedItem = Content.FirstOrDefault(x => x.Id == item.Id);
+            if (removedItem != null) { }
+            {
+                Content.Remove(removedItem);
+            }
         }
     }
 }
