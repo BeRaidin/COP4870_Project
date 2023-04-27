@@ -67,6 +67,17 @@ namespace LearningManagement.API.EC
             return a;
         }
 
+        public Assignment UpdateAssignGroup(Assignment a)
+        {
+            var editedAssignment = FakeDataBase.Assignments.FirstOrDefault(x => x.Id == a.Id);
+            if (editedAssignment != null)
+            {
+                editedAssignment.AssignmentGroup = a.AssignmentGroup;
+                return editedAssignment;
+            }
+            return a;
+        }
+
         public void Delete(Assignment a)
         {
             var deletedAssignment = FakeDataBase.Assignments.FirstOrDefault(d => d.Id == a.Id);

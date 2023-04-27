@@ -19,25 +19,15 @@ namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class AssignGroupDialog : ContentDialog
     {
-        public AssignGroupDialog(int id)
+        public AssignGroupDialog(int id, int courseId)
         {
             this.InitializeComponent();
-            DataContext = new AssignmentViewModel(id);
+            DataContext = new AssignmentViewModel(id, courseId);
         }
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as AssignmentViewModel).MakeNewAssignGroup();
-        }
-
-        private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-            (DataContext as AssignmentViewModel).False();
-        }
-
-        public bool TestValid()
-        {
-            return (DataContext as AssignmentViewModel).IsValid;
+            await (DataContext as AssignmentViewModel).MakeNewAssignGroup();
         }
     }
 }

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UWP.LearningManagement.ViewModels;
+using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -33,6 +34,16 @@ namespace UWP.LearningManagement.Dialogs
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
 
+        }
+
+        public bool NeedsGroup()
+        {
+            return (DataContext as AssignmentViewModel).NeedsGroup();
+        }
+
+        public int AssignmentId()
+        {
+            return (DataContext as AssignmentViewModel).Assignment.Id;
         }
     }
 }

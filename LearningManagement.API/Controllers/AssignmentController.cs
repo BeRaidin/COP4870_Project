@@ -37,6 +37,11 @@ namespace LearningManagement.API.Controllers
         {
             return new AssignmentEC().UpdateIsGraded(assignment);
         }
+        [HttpPost("UpdateAssignGroup")]
+        public Assignment UpdateAssignGroup([FromBody] Assignment assignment)
+        {
+            return new AssignmentEC().UpdateAssignGroup(assignment);
+        }
 
         [HttpPost("Delete")]
         public void DeleteAssignment([FromBody] Assignment assignment)

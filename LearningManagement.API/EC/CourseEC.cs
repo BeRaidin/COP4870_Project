@@ -85,7 +85,16 @@ namespace LearningManagement.API.EC
             }
             return c;
         }
-
+        public Course UpdateAssignGroups(Course c)
+        {
+            var editedCourse = FakeDataBase.Courses.FirstOrDefault(i => i.Id == c.Id);
+            if (editedCourse != null)
+            {
+                editedCourse.AssignmentGroups = c.AssignmentGroups;
+                return editedCourse;
+            }
+            return c;
+        }
         public void Delete(Course c)
         {
 
