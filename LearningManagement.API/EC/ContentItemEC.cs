@@ -48,6 +48,7 @@ namespace LearningManagement.API.EC
             {
                 if (FakeDataBase.ContentItems.FirstOrDefault(p => p.Id == aI.Id) is AssignmentItem editedAssignmentItem)
                 {
+                    editedAssignmentItem.Assignment = aI.Assignment;
                     editedAssignmentItem.Name = aI.Name;
                     editedAssignmentItem.Description = aI.Description;
                     return editedAssignmentItem;
