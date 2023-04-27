@@ -15,6 +15,14 @@ namespace UWP.Library.LearningManagement.Models
             Assignment = new Assignment();
         }
 
-        public override string Display => $"[{Id}] - {Name} - Assignment";
+        public AssignmentItem(Assignment assignment)
+        {
+            Assignment = assignment;
+            Name = assignment.Name;
+            Description = assignment.Description;
+            Id = -1;
+        }
+
+        public override string Display => $"[{Name} - Assignment";
     }
 }

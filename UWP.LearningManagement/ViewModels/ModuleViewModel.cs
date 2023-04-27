@@ -48,18 +48,11 @@ namespace UWP.LearningManagement.ViewModels
         }
         public string TempName { get; set; }
         public string TempDescription { get; set; }
-        public bool IsCont;
-        public bool IsValid;
 
 
         public Course Course { get; set; }
 
-        public ModuleViewModel()
-        {
-            Module = new Module();
-            IsCont = true;
-            IsValid = true;
-        }
+        public ModuleViewModel() { }
         public ModuleViewModel(int id, int courseId = -1)
         {
             if (id != -1)
@@ -71,11 +64,14 @@ namespace UWP.LearningManagement.ViewModels
             {
                 Course = Courses.FirstOrDefault(x => x.Id == courseId);
             }
-            IsCont = true;
-            IsValid = true;
+        }
+        public ModuleViewModel(string name)
+        {
+            Module = new Module { Name = name };
         }
 
         public virtual string Display => $"{Module.Name} - {Module.Description}";
+        public virtual string AssignDisplay => $"{Module.Name}";
 
         public async Task<Module> Add()
         {
@@ -88,6 +84,15 @@ namespace UWP.LearningManagement.ViewModels
                 return deserializedReturn;
             }
             return new Module { Name = "Invaliid Name" };
+        }
+
+        public async Task Add(Assignment assignment)
+        {
+            AssignmentItem newAssignment = new AssignmentItem(assignment);
+            var returnVal = await new WebRequestHandler().Post("http://localhost:5159/ContentItem/AddOrUpdateAssignmentItem", newAssignment);
+            var deserializedReturn = JsonConvert.DeserializeObject<AssignmentItem>(returnVal);
+            Module.Add(deserializedReturn);
+            await new WebRequestHandler().Post("http://localhost:5159/Module/UpdateItems", Module);
         }
     }
 }

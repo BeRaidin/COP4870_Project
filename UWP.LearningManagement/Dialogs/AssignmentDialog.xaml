@@ -14,17 +14,18 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Margin="10,10,10,10" Grid.Column="0" Text="Name"></TextBlock> <!-- need to change mode to OneWay for name and description-->
+        <TextBlock Margin="10,10,10,10" Grid.Column="0" Text="Name"></TextBlock>
         <TextBox Margin="10,10,10,10" Grid.Column="1" Text="{Binding Path=Assignment.Name, Mode=TwoWay}"></TextBox>
         <TextBlock Margin="10,10,10,10"  Grid.Row="1" Text="Description"></TextBlock>
         <TextBox Margin="10,10,10,10" Grid.Row="1" Grid.Column="1" Text="{Binding Path=Assignment.Description, Mode=TwoWay}"></TextBox>
@@ -32,9 +33,23 @@
         <TextBox Margin="10,10,10,10" Grid.Row="2" Grid.Column="1" Text="{Binding Path=TotalPoints, Mode=TwoWay}"></TextBox>
 
 
-        <!--<TextBlock Margin="10,10,10,10" Grid.Row="3" Grid.Column="0" Text="Assignment&#x0a;Group"></TextBlock> -->
-        <!-- <ComboBox Margin="10,10,10,10" Grid.Row="3" Grid.Column="1" ItemsSource="{Binding AssignmentGroups}" SelectedItem="{Binding SelectedGroup, Mode=TwoWay}"></ComboBox>-->
-        <TextBlock Margin="10,10,10,10" Grid.Row="3" Grid.Column="0" Text="Due Date"></TextBlock>
-        <DatePicker Margin="10,10,10,10" Grid.Column="1" Grid.Row="3" SelectedDate="{Binding Path=DueDate, Mode=TwoWay}"/>
+        <TextBlock Margin="10,10,10,10" Grid.Row="3" Grid.Column="0" Text="Assignment&#x0a;Group"></TextBlock>
+        <ComboBox Margin="10,10,10,10" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch" ItemsSource="{Binding AssignmentGroups}" SelectedItem="{Binding SelectedGroup, Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Display, Mode=OneWay}"></TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock Margin="10,10,10,10" Grid.Row="4" Grid.Column="0" Text="Module"></TextBlock>
+        <ComboBox Margin="10,10,10,10" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" ItemsSource="{Binding Modules}" SelectedItem="{Binding SelectedModule, Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding AssignDisplay, Mode=OneWay}"></TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+            <TextBlock Margin="10,10,10,10" Grid.Row="5" Grid.Column="0" Text="Due Date"></TextBlock>
+        <DatePicker Margin="10,10,10,10" Grid.Row="5" Grid.Column="1" SelectedDate="{Binding Path=DueDate, Mode=TwoWay}"/>
     </Grid>
 </ContentDialog>

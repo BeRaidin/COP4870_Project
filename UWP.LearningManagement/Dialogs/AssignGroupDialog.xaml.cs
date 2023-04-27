@@ -19,10 +19,10 @@ namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class AssignGroupDialog : ContentDialog
     {
-        public AssignGroupDialog(Assignment assignment)
+        public AssignGroupDialog(int id)
         {
             this.InitializeComponent();
-            DataContext = new AssignmentViewModel(assignment);
+            DataContext = new AssignmentViewModel(id);
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
