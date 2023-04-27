@@ -65,10 +65,6 @@ namespace UWP.LearningManagement.ViewModels
                 Course = Courses.FirstOrDefault(x => x.Id == courseId);
             }
         }
-        public ModuleViewModel(string name)
-        {
-            Module = new Module { Name = name };
-        }
 
         public virtual string Display => $"{Module.Name} - {Module.Description}";
         public virtual string AssignDisplay => $"{Module.Name}";

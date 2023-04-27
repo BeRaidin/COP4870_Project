@@ -149,9 +149,6 @@
     <Compile Include="Dialogs\AssignmentDialog.xaml.cs">
       <DependentUpon>AssignmentDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\NewAssignmentDialog.xaml.cs">
-      <DependentUpon>NewAssignmentDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\PreviousSemesterDialog.xaml.cs">
       <DependentUpon>PreviousSemesterDialog.xaml</DependentUpon>
     </Compile>
@@ -280,10 +277,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\AssignmentDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\NewAssignmentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

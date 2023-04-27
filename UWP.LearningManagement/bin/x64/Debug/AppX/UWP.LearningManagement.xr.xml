@@ -31,7 +31,6 @@
     <RootPropertyPathName Name="SelectedGroup" />
     <RootPropertyPathName Name="TotalPoints" />
     <RootPropertyPathName Name="Assignment" />
-    <RootPropertyPathName Name="SelectedModuleName" />
     <RootPropertyPathName Name="SemesterTitle" />
     <RootPropertyPathName Name="Value" />
     <RootPropertyPathName Name="Key" />
@@ -160,7 +159,6 @@
       <RootProperty Name="SelectedDate" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.AssignmentDialog" />
-    <RootType FullName="UWP.LearningManagement.Dialogs.NewAssignmentDialog" />
     <RootType FullName="Windows.UI.Xaml.Documents.Run">
       <RootProperty Name="Text" />
     </RootType>

@@ -45,6 +45,12 @@ namespace UWP.LearningManagement
             int courseId = (DataContext as CourseDetailsViewModel).Course.Id;
             var addDialog = new AssignmentDialog(-1, courseId);
             await addDialog.ShowAsync();
+            if(addDialog.NeedsGroup())
+            {
+                var id = addDialog.AssignmentId();
+                var groupDialog = new AssignGroupDialog(id, courseId);
+                await groupDialog.ShowAsync();
+            }
             (DataContext as CourseDetailsViewModel).Refresh();
         }
 
