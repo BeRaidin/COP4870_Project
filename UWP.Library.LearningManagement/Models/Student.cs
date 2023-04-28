@@ -52,5 +52,15 @@ namespace UWP.Library.LearningManagement.Models
             var oldCourseGrade = FinalGrades.FirstOrDefault(x => x.Key.Id == courseId);
             oldCourseGrade.Value = grade;
         }
+
+        public void Add(GradesDictionary grade)
+        {
+            GradesDictionary oldGrade = Grades.FirstOrDefault(x => x.Assignment.Id == grade.Assignment.Id);
+            if(oldGrade != null)
+            {
+                Grades.Remove(oldGrade);
+                Grades.Add(grade);
+            }
+        }
     }
 }

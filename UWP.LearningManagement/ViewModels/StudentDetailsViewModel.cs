@@ -28,8 +28,8 @@ namespace UWP.LearningManagement.ViewModels
 
 
         private List<Semester> SemesterList
-        { 
-            get { return semesterService.SemesterList; } 
+        {
+            get { return semesterService.SemesterList; }
         }
         public ObservableCollection<Semester> Semesters { get; set; }
         public Assignment SelectedAssignment
@@ -44,14 +44,14 @@ namespace UWP.LearningManagement.ViewModels
         public ObservableCollection<GradesDictionary> UnsubmittedGrades { get; set; }
         public ObservableCollection<GradesDictionary> GradedGrades { get; set; }
 
-        public StudentDetailsViewModel(){}
+        public StudentDetailsViewModel() { }
 
         public StudentDetailsViewModel(int id)
         {
             Id = id;
             personService = PersonService.Current;
             semesterService = SemesterService.Current;
-            Student = StudentList.FirstOrDefault(i =>i.Id == Id);
+            Student = StudentList.FirstOrDefault(i => i.Id == Id);
             Semesters = new ObservableCollection<Semester>(SemesterList);
             UnsubmittedGrades = new ObservableCollection<GradesDictionary>();
             GradedGrades = new ObservableCollection<GradesDictionary>();
@@ -95,11 +95,11 @@ namespace UWP.LearningManagement.ViewModels
 
         public async void SubmitAssignment()
         {
-            if(SelectedGrade != null) 
-            { 
+            if (SelectedGrade != null)
+            {
                 SelectedGrade.Assignment.IsSubmitted = true;
                 await new WebRequestHandler().Post("http://localhost:5159/Assignment/UpdateIsSelected", SelectedGrade.Assignment);
-               await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateStudentCourses", Student);
+                await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateStudentCourses", Student);
             }
             Refresh();
         }

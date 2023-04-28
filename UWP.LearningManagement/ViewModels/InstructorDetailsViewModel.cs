@@ -110,6 +110,14 @@ namespace UWP.LearningManagement.ViewModels
                 {
                     await gradeDialog.ShowAsync();
                 }
+                StudentViewModel studentView = new StudentViewModel(SelectedGrade.PersonId);
+                Student student = studentView.Student;
+                SelectedGrade.Grade = gradeDialog.GetScore();
+
+                SelectedGrade.Assignment.IsGraded = true;
+                student.Add(SelectedGrade);
+                await new WebRequestHandler().Post("http://localhost:5159/Assignment/UpdateIsGraded", SelectedGrade.Assignment);
+                await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateStudentCourses", student);
                 Refresh();
             }
         }

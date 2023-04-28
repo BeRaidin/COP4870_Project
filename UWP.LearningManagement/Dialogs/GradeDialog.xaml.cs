@@ -33,5 +33,10 @@ namespace UWP.LearningManagement.Dialogs
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
         }
+
+        public double GetScore()
+        {
+            return (DataContext as GradesDialogViewModel).GetScore();
+    }
     }
 }

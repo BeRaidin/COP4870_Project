@@ -39,12 +39,15 @@ namespace UWP.LearningManagement.ViewModels
                     grade.Grade = 0;
                 }
                 else grade.Grade = value;
-                await GetFinalGrade();
-                await UpdateGPA();
+                GetFinalGrade();
+                UpdateGPA();
+                await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateFinalGrades", Student);
+                await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateGPA", Student);
+                await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateStudentCourses", Student);
             }
         }
 
-        public async Task GetFinalGrade()
+        public void GetFinalGrade()
         {
             double rawGrade = 0;
             Course.GetMaxGrade();
@@ -59,10 +62,9 @@ namespace UWP.LearningManagement.ViewModels
             }
             double totalGrade = (double)(rawGrade / Course.MaxGrade) * 100;
             Student.UpdateFinalGrade(totalGrade, Course.Id);
-            await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateFinalGrades", Student);
         }
 
-        public async Task UpdateGPA()
+        public void UpdateGPA()
         {
             var totalHours = 0;
             double totalHonorPoints = 0;
@@ -90,7 +92,13 @@ namespace UWP.LearningManagement.ViewModels
             }
             double GPA = (double)totalHonorPoints / totalHours;
             Student.GradePointAverage = GPA;
-            await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateGPA", Student);
+        }
+
+        public double GetScore()
+        {
+            var grade = Student.GetGradeDict(Assignment);
+
+            return grade.Grade;
         }
 
     }
