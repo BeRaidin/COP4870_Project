@@ -34,7 +34,7 @@ namespace LearningManagement.API.EC
             }
             else if (aI.Id < 0)
             {
-                var lastId = FakeDataBase.ContentItems.Select(p => p.Id).Max();
+                var lastId = FakeDataBase.ContentItems.Select(x => x.Id).Max();
                 lastId++;
                 aI.Id = lastId;
                 isNew = true;
@@ -43,14 +43,22 @@ namespace LearningManagement.API.EC
             if (isNew)
             {
                 FakeDataBase.ContentItems.Add(aI);
+                FakeDataBase.CurrentSemester[0].ContentItems.Add(aI);
             }
             else
             {
-                if (FakeDataBase.ContentItems.FirstOrDefault(p => p.Id == aI.Id) is AssignmentItem editedAssignmentItem)
+                if (FakeDataBase.ContentItems.FirstOrDefault(x => x.Id == aI.Id) is AssignmentItem editedAssignmentItem)
                 {
                     editedAssignmentItem.Assignment = aI.Assignment;
                     editedAssignmentItem.Name = aI.Name;
                     editedAssignmentItem.Description = aI.Description;
+
+                    if (FakeDataBase.CurrentSemester[0].ContentItems.FirstOrDefault(x => x.Id == aI.Id) is AssignmentItem semesterEditedAssignmentItem)
+                    {
+                        semesterEditedAssignmentItem.Assignment = aI.Assignment;
+                        semesterEditedAssignmentItem.Name = aI.Name;
+                        semesterEditedAssignmentItem.Description = aI.Description;
+                    }
                     return editedAssignmentItem;
                 }
             }
@@ -67,7 +75,7 @@ namespace LearningManagement.API.EC
             }
             else if (fI.Id < 0)
             {
-                var lastId = FakeDataBase.ContentItems.Select(p => p.Id).Max();
+                var lastId = FakeDataBase.ContentItems.Select(x => x.Id).Max();
                 lastId++;
                 fI.Id = lastId;
                 isNew = true;
@@ -76,13 +84,19 @@ namespace LearningManagement.API.EC
             if (isNew)
             {
                 FakeDataBase.ContentItems.Add(fI);
+                FakeDataBase.CurrentSemester[0].ContentItems.Add(fI);
             }
             else
             {
-                if (FakeDataBase.ContentItems.FirstOrDefault(p => p.Id == fI.Id) is FileItem editedFileItem)
+                if (FakeDataBase.ContentItems.FirstOrDefault(x => x.Id == fI.Id) is FileItem editedFileItem)
                 {
                     editedFileItem.Name = fI.Name;
                     editedFileItem.Description = fI.Description;
+                    if (FakeDataBase.CurrentSemester[0].ContentItems.FirstOrDefault(x => x.Id == fI.Id) is FileItem semesterEditedFileItem)
+                    {
+                        semesterEditedFileItem.Name = fI.Name;
+                        semesterEditedFileItem.Description = fI.Description;
+                    }
                     return editedFileItem;
                 }
             }
@@ -98,7 +112,7 @@ namespace LearningManagement.API.EC
             }
             else if (pI.Id < 0)
             {
-                var lastId = FakeDataBase.ContentItems.Select(p => p.Id).Max();
+                var lastId = FakeDataBase.ContentItems.Select(x => x.Id).Max();
                 lastId++;
                 pI.Id = lastId;
                 isNew = true;
@@ -107,30 +121,38 @@ namespace LearningManagement.API.EC
             if (isNew)
             {
                 FakeDataBase.ContentItems.Add(pI);
+                FakeDataBase.CurrentSemester[0].ContentItems.Add(pI);
             }
             else
             {
-                if (FakeDataBase.ContentItems.FirstOrDefault(p => p.Id == pI.Id) is PageItem editedPageItem)
+                if (FakeDataBase.ContentItems.FirstOrDefault(x => x.Id == pI.Id) is PageItem editedPageItem)
                 {
                     editedPageItem.Name = pI.Name;
                     editedPageItem.Description = pI.Description;
+                    if (FakeDataBase.CurrentSemester[0].ContentItems.FirstOrDefault(x => x.Id == pI.Id) is PageItem semesterEditedPageItem)
+                    {
+                        semesterEditedPageItem.Name = pI.Name;
+                        semesterEditedPageItem.Description = pI.Description;
+                    }
                     return editedPageItem;
                 }
             }
             return pI;
         }
 
-
-
-        public ContentItem Delete(ContentItem i)
+        public void Delete(ContentItem i)
         {
 
-            var deletedItem = FakeDataBase.ContentItems.FirstOrDefault(d => d.Id == i.Id);
+            var deletedItem = FakeDataBase.ContentItems.FirstOrDefault(x => x.Id == i.Id);
             if (deletedItem != null)
             {
                 FakeDataBase.ContentItems.Remove(deletedItem);
             }
-            return i;
+            var semesterDeletedItem = FakeDataBase.CurrentSemester[0].ContentItems.FirstOrDefault(x => x.Id == i.Id);
+            if (semesterDeletedItem != null)
+            {
+                FakeDataBase.CurrentSemester[0].ContentItems.Remove(semesterDeletedItem);
+            }
         }
     }
 }

@@ -5,23 +5,27 @@ namespace UWP.Library.LearningManagement.Database
 {
     public static class FakeDataBase
     {
-        public static List<Person> people = new List<Person>
+        private static List<Person> people = new List<Person>
         {
             new Student {Id = 0, FirstName="Brayden", LastName="Lewis", Classification=Student.Classes.Sophmore},
             new Instructor {Id = 1, FirstName="Chris", LastName="Millls"},
             new TeachingAssistant {Id = 2, FirstName="Joe", LastName="Joey"}
         };
-        public static List<Course> courses = new List<Course>{
+        private static List<Course> courses = new List<Course>{
             new Course {Id = 0, Code="COP4530", Name="C#", CreditHours=4, Room="HCB"}
         };
-        public static List<Semester> semesters = new List<Semester>();
-        public static List<Assignment> assignments = new List<Assignment>();
-        public static List<Announcement> announcements = new List<Announcement>();
-        public static List<Module> modules = new List<Module>();
-        public static List<ContentItem> contentItems = new List<ContentItem>();
+        private static List<Semester> semesters = new List<Semester>();
+        private static List<Assignment> assignments = new List<Assignment>();
+        private static List<Announcement> announcements = new List<Announcement>();
+        private static List<Module> modules = new List<Module>();
+        private static List<ContentItem> contentItems = new List<ContentItem>();
+
+        public static List<Semester> currentSemester = new List<Semester>{
+            new Semester{Period = "Spring", Year = 2023, Id = 0 } 
+        };
 
 
-        
+
         public static List<Course> Courses
         {
             get { return courses; }
@@ -146,5 +150,9 @@ namespace UWP.Library.LearningManagement.Database
             }
         }
 
+        public static List<Semester> CurrentSemester
+        {
+            get { return currentSemester; }
+        }
     }
 }

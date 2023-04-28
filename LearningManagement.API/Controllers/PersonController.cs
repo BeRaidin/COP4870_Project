@@ -95,9 +95,9 @@ namespace LearningManagement.API.Controllers
 
 
         [HttpPost("Delete")]
-        public Person DeletePerson([FromBody] Person person)
+        public void DeletePerson([FromBody] Person person)
         {
-            return new PersonEC().Delete(person);
+            new PersonEC().Delete(person);
         }
     }
 }

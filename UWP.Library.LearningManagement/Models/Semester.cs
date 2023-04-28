@@ -11,16 +11,25 @@ namespace UWP.Library.LearningManagement.Models
 {
     public class Semester
     {
-        public List<Course> Courses;
         public List<Person> People;
+        public List<Course> Courses;
+        public List<Assignment> Assignments;
+        public List<Announcement> Announcements;
+        public List<Module> Modules;
+        public List<ContentItem> ContentItems;
 
         public string Period { get; set; }
         public int Year { get; set; }
+        public int Id { get; set; }
 
         public Semester()
         {
-            Courses = new List<Course>();
             People = new List<Person>();
+            Courses = new List<Course>();
+            Assignments = new List<Assignment>();
+            Announcements = new List<Announcement>();
+            Modules = new List<Module>();
+            ContentItems = new List<ContentItem>();
         }
 
         public virtual string Display => $"{Period} {Year}";

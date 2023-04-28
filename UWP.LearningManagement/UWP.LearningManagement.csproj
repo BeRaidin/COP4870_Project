@@ -204,6 +204,7 @@
     <Compile Include="ViewModels\CourseDetailsViewModel.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\EditCoursesViewModel.cs" />
+    <Compile Include="ViewModels\SemesterViewModel.cs" />
     <Compile Include="ViewModels\StudentViewModel.cs" />
     <Compile Include="ViewModels\StudentDetailsViewModel.cs" />
     <Compile Include="ViewModels\DropClassViewModel.cs" />
