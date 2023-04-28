@@ -15,7 +15,8 @@
     <RootPropertyPathName Name="SelectedCourse" />
     <RootPropertyPathName Name="Display" />
     <RootPropertyPathName Name="IsSelected" />
-    <RootPropertyPathName Name="Total" />
+    <RootPropertyPathName Name="Assignment" />
+    <RootPropertyPathName Name="TotalAvailablePoints" />
     <RootPropertyPathName Name="Score" />
     <RootPropertyPathName Name="AvailableCourses" />
     <RootPropertyPathName Name="Module" />
@@ -30,7 +31,6 @@
     <RootPropertyPathName Name="AssignmentGroups" />
     <RootPropertyPathName Name="SelectedGroup" />
     <RootPropertyPathName Name="TotalPoints" />
-    <RootPropertyPathName Name="Assignment" />
     <RootPropertyPathName Name="SemesterTitle" />
     <RootPropertyPathName Name="Value" />
     <RootPropertyPathName Name="Key" />
@@ -102,11 +102,11 @@
     <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
       <RootProperty Name="Text" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Inlines" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="FontWeight" />
       <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Width" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
@@ -144,12 +144,15 @@
     <RootType FullName="UWP.LearningManagement.Dialogs.DropCoursesDialog" />
     <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
       <RootProperty Name="Children" />
-      <RootProperty Name="Orientation" />
       <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Orientation" />
       <RootProperty Name="Margin" />
       <RootProperty Name="HorizontalAlignment" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.ErrorDialog" />
+    <RootType FullName="Windows.UI.Xaml.Documents.Run">
+      <RootProperty Name="Text" />
+    </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.GradeDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.InstructorJoinCourseDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.ModuleDialog" />
@@ -159,9 +162,6 @@
       <RootProperty Name="SelectedDate" />
     </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.AssignmentDialog" />
-    <RootType FullName="Windows.UI.Xaml.Documents.Run">
-      <RootProperty Name="Text" />
-    </RootType>
     <RootType FullName="UWP.LearningManagement.Dialogs.PreviousSemesterDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.RosterDialog" />
     <RootType FullName="UWP.LearningManagement.Dialogs.StudentDialog" />

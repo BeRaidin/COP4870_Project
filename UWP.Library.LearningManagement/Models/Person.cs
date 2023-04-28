@@ -37,8 +37,7 @@ namespace UWP.Library.LearningManagement.Models
                 {
                     foreach (var assignment in course.Assignments)
                     {
-                        var grade = new GradesDictionary 
-                        { Assignment = assignment, Grade = 0, CourseCode = course.Code, PersonName = student.FirstName + " " + student.LastName };
+                        var grade = new GradesDictionary(assignment, course, student);
                         student.Grades.Add(grade);
                     }
                     student.FinalGrades.Add(new FinalGradesDictionary(course, 0));

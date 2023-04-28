@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using UWP.LearningManagement.API.Util;
@@ -122,17 +123,19 @@ namespace UWP.LearningManagement.ViewModels
                             score = oldGrade.Grade;
                             student.Grades.Remove(oldGrade);
                         }
-                        student.Grades.Add(new GradesDictionary
-                        { Assignment = editedAssignment, Grade = score, CourseCode = Course.Code, PersonName = student.FirstName + " " + student.LastName });
+                        student.Grades.Add(new GradesDictionary(editedAssignment, Course, student, score));
 
                         await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateStudentCourses", student);
                     }
                 }
 
                 await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAssignments", Course);
-                return deserializedReturn;
+                Assignment = deserializedReturn;
             }
-            Assignment = new Assignment { Name = "Invalid" };
+            else
+            {
+                Assignment = new Assignment { Name = "Invalid" };
+            }
             return Assignment;
         }
 
@@ -160,6 +163,8 @@ namespace UWP.LearningManagement.ViewModels
             await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAssignGroups", Course);
             Assignment.AssignmentGroup = newGroup;
             await new WebRequestHandler().Post("http://localhost:5159/Assignment/UpdateAssignGroup", Assignment);
+            Course.Add(Assignment);
+            await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAssignments", Course);
         }
     }
 }

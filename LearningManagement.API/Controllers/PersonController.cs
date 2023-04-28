@@ -69,7 +69,16 @@ namespace LearningManagement.API.Controllers
         {
             return new PersonEC().UpdateStudentCourses(student);
         }
-
+        [HttpPost("UpdateFinalGrades")]
+        public Student UpdateFinalGrades([FromBody] Student student)
+        {
+            return new PersonEC().UpdateFinalGrades(student);
+        }
+        [HttpPost("UpdateGPA")]
+        public Student UpdateGPA([FromBody] Student student)
+        {
+            return new PersonEC().UpdateGPA(student);
+        }
 
         [HttpPost("SetTrue")]
         public Student SetTrue([FromBody] Student student)

@@ -2,82 +2,71 @@
 using UWP.Library.LearningManagement.Models;
 using System.Collections.Generic;
 using System.Linq;
+using UWP.LearningManagement.API.Util;
+using System.Threading.Tasks;
 
 namespace UWP.LearningManagement.ViewModels
 {
     public class GradesDialogViewModel
     {
-        private readonly PersonService personService;
-        private readonly CourseService courseService;
-
-        public Assignment SelectedAssignment
-        {
-            get { return personService.CurrentAssignment; }
-            set { personService.CurrentAssignment = value; }
-        }
-        public Student SelectedStudent
-        {
-            get { return personService.CurrentPerson as Student; }
-            set { personService.CurrentPerson = value; }
-        }
-        public Course SelectedCourse
-        {
-            get { return courseService.CurrentCourse; }
-        }
-
+        public Assignment Assignment { get; set; }
+        public Student Student { get; set; }
+        public Course Course { get; set; }
         public string Score { get; set; }
-        public int Total
+        public GradesDialogViewModel() { }
+        public GradesDialogViewModel(int assignmentId, int personId, int courseId)
         {
-            get { return SelectedAssignment.TotalAvailablePoints; }            
-        }
-        public GradesDialogViewModel() 
-        {
-            personService = PersonService.Current;
-            courseService = CourseService.Current;
+            AssignmentViewModel assignmentView = new AssignmentViewModel(assignmentId);
+            StudentViewModel studentView = new StudentViewModel(personId);
+            CourseViewModel courseView = new CourseViewModel(-1, courseId);
+            Assignment = assignmentView.Assignment;
+            Student = studentView.Student;
+            Course = courseView.Course;
         }
 
-        public void AddGrade()
+        public async Task AddGrade()
         {
             if (double.TryParse(Score, out var value))
             {
-                var grade = SelectedStudent.GetGradeDict(SelectedAssignment);
-                    
-                if (value > Total)
+                var grade = Student.GetGradeDict(Assignment);
+
+                if (value > Assignment.TotalAvailablePoints)
                 {
-                    grade.Grade = Total;
+                    grade.Grade = Assignment.TotalAvailablePoints;
                 }
                 else if (value < 0)
                 {
                     grade.Grade = 0;
                 }
                 else grade.Grade = value;
-                GetFinalGrade();
-                UpdateGPA();
+                await GetFinalGrade();
+                await UpdateGPA();
             }
         }
 
-        public void GetFinalGrade()
+        public async Task GetFinalGrade()
         {
             double rawGrade = 0;
-            SelectedCourse.GetMaxGrade();
-            foreach(GradesDictionary grade in SelectedStudent.Grades)
+            Course.GetMaxGrade();
+            foreach (GradesDictionary grade in Student.Grades)
             {
-                if (SelectedCourse.Assignments.Contains(grade.Assignment))
+                if (Course.Assignments.Any(x => x.Id == grade.Assignment.Id))
                 {
-                    rawGrade += ((double)grade.Grade * (grade.Assignment.AssignmentGroup.Weight / (double)100));
+                    double percentage = grade.Assignment.AssignmentGroup.Weight / (double)100;
+
+                    rawGrade += ((double)grade.Grade * percentage);
                 }
             }
-
-            double totalGrade = (double)(rawGrade / SelectedCourse.MaxGrade) * 100;
-            var courseGrade = SelectedStudent.FinalGrades.FirstOrDefault(x => x.Key.Id == SelectedCourse.Id);
-            courseGrade.Value = totalGrade;
+            double totalGrade = (double)(rawGrade / Course.MaxGrade) * 100;
+            Student.UpdateFinalGrade(totalGrade, Course.Id);
+            await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateFinalGrades", Student);
         }
 
-        public void UpdateGPA()
+        public async Task UpdateGPA()
         {
             var totalHours = 0;
             double totalHonorPoints = 0;
-            foreach (var grade in SelectedStudent.FinalGrades)
+            foreach (var grade in Student.FinalGrades)
             {
                 var courseHonorPoints = (double)0.0;
                 totalHours += grade.Key.CreditHours;
@@ -100,7 +89,8 @@ namespace UWP.LearningManagement.ViewModels
                 totalHonorPoints += (double)courseHonorPoints * grade.Key.CreditHours;
             }
             double GPA = (double)totalHonorPoints / totalHours;
-            SelectedStudent.GradePointAverage = GPA;
+            Student.GradePointAverage = GPA;
+            await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateGPA", Student);
         }
 
     }

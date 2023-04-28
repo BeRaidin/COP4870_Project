@@ -53,25 +53,20 @@ namespace UWP.LearningManagement
             (DataContext as InstructorDetailsViewModel).Refresh();
         }
 
-        private void JoinCourse_Click(object sender, RoutedEventArgs e)
+        private async void JoinCourse_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as InstructorDetailsViewModel).JoinCourse();
+            await (DataContext as InstructorDetailsViewModel).JoinCourse();
         }
 
-        private void Grade_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        private async void Grade_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            (DataContext as InstructorDetailsViewModel).GradeAssignment();
+            await (DataContext as InstructorDetailsViewModel).GradeAssignment();
 
         }
 
         private async void DropClasses_Click(object sender, RoutedEventArgs e)
         {
-            await(DataContext as InstructorDetailsViewModel).DropClasses();
-
-        }
-
-        private void RemovedCourse_Click(object sender, RoutedEventArgs e)
-        {
+            await (DataContext as InstructorDetailsViewModel).DropClasses();
 
         }
     }

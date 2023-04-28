@@ -33,7 +33,7 @@ namespace UWP.LearningManagement.ViewModels
                 return JsonConvert.DeserializeObject<List<TeachingAssistant>>(payload).ToList();
             }
         }
-        
+
         public ObservableCollection<CourseViewModel> Courses { get; set; }
         public Person Instructor { get; set; }
 
@@ -62,7 +62,7 @@ namespace UWP.LearningManagement.ViewModels
                 Type = "Instructor";
             }
             Courses = new ObservableCollection<CourseViewModel>();
-            foreach(var course in Instructor.Courses)
+            foreach (var course in Instructor.Courses)
             {
                 Courses.Add(new CourseViewModel(Instructor.Id, course.Id));
             }
@@ -71,28 +71,8 @@ namespace UWP.LearningManagement.ViewModels
             GetAssignments();
         }
 
-        //public async void AddCourse()
-        //{
-        //    SelectedCourse = new Course();
-        //    var dialog = new CourseDialog();
-        //    if (dialog != null)
-        //    {
-        //        await dialog.ShowAsync();
-        //    }
-        //    if (!dialog.TestValid())
-        //    {
-        //        var errorDialog = new ErrorDialog();
-        //        if (errorDialog != null)
-        //        {
-        //            await errorDialog.ShowAsync();
-        //        }
-        //    }
-        //    Refresh();
-        //}
-
-        public async void JoinCourse()
+        public async Task JoinCourse()
         {
-
             var dialog = new InstructorJoinCourseDialog(Id);
             if (dialog != null)
             {
@@ -121,19 +101,17 @@ namespace UWP.LearningManagement.ViewModels
             else return true;
         }
 
-        public async void GradeAssignment()
+        public async Task GradeAssignment()
         {
-            //personService.CurrentAssignment = SelectedGrade.Assignment;
-            //Instructor = SelectedGrade.Person;
-            //SelectedCourse = SelectedGrade.Course;
-            var dialog = new GradeDialog();
-            if (dialog != null)
+            if (SelectedGrade != null)
             {
-                await dialog.ShowAsync();
+                var gradeDialog = new GradeDialog(SelectedGrade.Assignment.Id, SelectedGrade.PersonId, SelectedGrade.CourseId);
+                if (gradeDialog != null)
+                {
+                    await gradeDialog.ShowAsync();
+                }
+                Refresh();
             }
-            //SelectedPerson = Instructor;
-            SelectedGrade.Assignment.IsGraded = true;
-            Refresh();
         }
 
         public void GetAssignments()
@@ -141,11 +119,11 @@ namespace UWP.LearningManagement.ViewModels
             SubmittedAssignments.Clear();
             foreach (var course in Instructor.Courses)
             {
-                CourseViewModel selectedCourse = new CourseViewModel(-1,course.Id);
+                CourseViewModel selectedCourse = new CourseViewModel(-1, course.Id);
                 foreach (var person in selectedCourse.Roster)
                 {
                     StudentViewModel studentView = new StudentViewModel(person.Id);
-                    if(studentView.Student != null)
+                    if (studentView.Student != null)
                     {
                         foreach (var assignment in studentView.Student.Grades)
                         {
@@ -155,14 +133,14 @@ namespace UWP.LearningManagement.ViewModels
                                 SubmittedAssignments.Add(assignment);
                             }
                         }
-                    }    
+                    }
                 }
             }
         }
 
         public void Refresh()
         {
-            if(Type == "Teaching Assistant")
+            if (Type == "Teaching Assistant")
             {
                 Instructor = AssistantList.FirstOrDefault(x => x.Id == Id);
             }

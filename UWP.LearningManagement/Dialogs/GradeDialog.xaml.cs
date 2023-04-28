@@ -19,15 +19,15 @@ namespace UWP.LearningManagement.Dialogs
 {
     public sealed partial class GradeDialog : ContentDialog
     {
-        public GradeDialog()
+        public GradeDialog(int assignmentId, int personId, int courseId)
         {
             this.InitializeComponent();
-            DataContext = new GradesDialogViewModel();
+            DataContext = new GradesDialogViewModel(assignmentId, personId, courseId);
         }
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            (DataContext as GradesDialogViewModel).AddGrade();
+            await (DataContext as GradesDialogViewModel).AddGrade();
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

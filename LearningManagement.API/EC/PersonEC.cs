@@ -121,6 +121,28 @@ namespace LearningManagement.API.EC
             return s;
         }
 
+        public Student UpdateFinalGrades(Student s)
+        {
+            var editedStudent = FakeDataBase.Students.FirstOrDefault(i => i.Id == s.Id);
+            if (editedStudent != null)
+            {
+                editedStudent.FinalGrades = s.FinalGrades;
+                return editedStudent;
+            }
+            return s;
+        }
+
+        public Student UpdateGPA(Student s)
+        {
+            var editedStudent = FakeDataBase.Students.FirstOrDefault(i => i.Id == s.Id);
+            if (editedStudent != null)
+            {
+                editedStudent.GradePointAverage = s.GradePointAverage;
+                return editedStudent;
+            }
+            return s;
+        }
+
         public Student SetTrue(Student s)
         {
             var editedStudent = FakeDataBase.Students.FirstOrDefault(i => i.Id == s.Id);
