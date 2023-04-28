@@ -39,12 +39,18 @@ namespace UWP.Library.LearningManagement.Models
         {
             foreach (var grade in Grades)
             {
-                if (grade.Assignment.Equals(assignment))
+                if (grade.Assignment.Id == assignment.Id)
                 {
                     return grade;
                 }
             }
             return null;
+        }
+
+        public void UpdateFinalGrade(double grade, int courseId)
+        {
+            var oldCourseGrade = FinalGrades.FirstOrDefault(x => x.Key.Id == courseId);
+            oldCourseGrade.Value = grade;
         }
     }
 }

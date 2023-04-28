@@ -64,8 +64,7 @@ namespace UWP.Library.LearningManagement.Models
                 {
                     if (previousAssignment == null)
                     {
-                        var grade = new GradesDictionary
-                        { Assignment = assignment, Grade = 0, CourseCode = Code, PersonName = student.FirstName + " " + student.LastName };
+                        var grade = new GradesDictionary(assignment, this, student);
                         student.Grades.Add(grade);
                     }
                     else
@@ -73,8 +72,7 @@ namespace UWP.Library.LearningManagement.Models
                         var oldGrade = student.Grades.FirstOrDefault(x => x.Assignment == previousAssignment);
                         double score = oldGrade.Grade;
                         student.Grades.Remove(oldGrade);
-                        student.Grades.Add(new GradesDictionary
-                        { Assignment = assignment, Grade = score, CourseCode = Code, PersonName = student.FirstName + " " + student.LastName });
+                        student.Grades.Add(new GradesDictionary(assignment, this, student));
                     }
                 }
             }

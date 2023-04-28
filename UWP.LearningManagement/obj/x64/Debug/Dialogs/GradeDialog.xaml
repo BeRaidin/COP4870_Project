@@ -14,19 +14,17 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="7*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <TextBox Grid.Column="1" Text="{Binding Path=Score, Mode=TwoWay}"></TextBox>
-        <StackPanel Orientation="Horizontal" Grid.Column="2" >
-            <TextBlock Text=" Out of"></TextBlock>
-            <TextBlock Margin="5,0,0,0" Text="{Binding Total}"></TextBlock>
-        </StackPanel>
+        <TextBox Text="{Binding Path=Score, Mode=TwoWay}"></TextBox>
+        <TextBlock Grid.Column="1" VerticalAlignment="Center">
+        <Run Text=" Out of"/>
+        <Run Text="{Binding Path=Assignment.TotalAvailablePoints}"/>
+        </TextBlock>
     </Grid>
 </ContentDialog>
 
