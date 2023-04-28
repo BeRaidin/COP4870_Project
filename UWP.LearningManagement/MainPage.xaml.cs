@@ -27,23 +27,21 @@ namespace UWP.LearningManagement
 
         private void StudentView_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as MainPageViewModel).Clear();
             Frame.Navigate(typeof(StudentViewPage));
         }
 
         private void InstructorView_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as MainPageViewModel).Clear();
             Frame.Navigate(typeof(InstructorViewPage));
         }
-        private void Left_Click(object sender, RoutedEventArgs e)
+        private async void Left_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as MainPageViewModel).LeftClick();
+            await (DataContext as MainPageViewModel).LeftClick();
         }
 
-        private void Right_Click(object sender, RoutedEventArgs e)
+        private async void Right_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as MainPageViewModel).RightClick();
+            await (DataContext as MainPageViewModel).RightClick();
         }
     }
 }

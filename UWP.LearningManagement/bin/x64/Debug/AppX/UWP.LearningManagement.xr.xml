@@ -49,8 +49,7 @@
     <RootPropertyPathName Name="CreditHours" />
     <RootPropertyPathName Name="Room" />
     <RootPropertyPathName Name="Hours" />
-    <RootPropertyPathName Name="Year" />
-    <RootPropertyPathName Name="Period" />
+    <RootPropertyPathName Name="Semester" />
     <RootPropertyPathName Name="FinalGrades" />
     <RootPropertyPathName Name="Query" />
     <RootPropertyPathName Name="SelectedStudent" />
@@ -60,7 +59,7 @@
     <RootPropertyPathName Name="Type" />
     <RootPropertyPathName Name="Instructor" />
     <RootPropertyPathName Name="Id" />
-    <RootPropertyPathName Name="Semester" />
+    <RootPropertyPathName Name="Year" />
     <RootPropertyPathName Name="Instructors" />
     <RootPropertyPathName Name="SelectedInstructor" />
     <RootPropertyPathName Name="ContentItems" />
@@ -71,6 +70,7 @@
     <RootPropertyPathName Name="DueDateDisplay" />
     <RootPropertyPathName Name="GradePointAverage" />
     <RootPropertyPathName Name="GradeLevel" />
+    <RootPropertyPathName Name="Period" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application" />

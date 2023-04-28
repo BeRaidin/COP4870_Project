@@ -20,7 +20,7 @@ namespace LearningManagement.API.EC
             }
             else if (a.Id < 0)
             {
-                var lastId = FakeDataBase.Announcements.Select(p => p.Id).Max();
+                var lastId = FakeDataBase.Announcements.Select(x => x.Id).Max();
                 lastId++;
                 a.Id = lastId;
                 isNew = true;
@@ -29,14 +29,22 @@ namespace LearningManagement.API.EC
             if (isNew)
             {
                 FakeDataBase.Announcements.Add(a);
+                FakeDataBase.CurrentSemester[0].Announcements.Add(a);
             }
             else
             {
-                var editedAnnouncement = FakeDataBase.Announcements.FirstOrDefault(i => i.Id == a.Id);
+                var editedAnnouncement = FakeDataBase.Announcements.FirstOrDefault(x => x.Id == a.Id);
                 if (editedAnnouncement != null)
                 {
                     editedAnnouncement.Title = a.Title;
                     editedAnnouncement.Message = a.Message;
+
+                    var semesterEditedAnnouncement = FakeDataBase.CurrentSemester[0].Announcements.FirstOrDefault(x => x.Id == a.Id);
+                    if(semesterEditedAnnouncement != null)
+                    {
+                        semesterEditedAnnouncement.Title = a.Title;
+                        semesterEditedAnnouncement.Message = a.Message;
+                    }
                     return editedAnnouncement;
                 }
             }
@@ -45,10 +53,15 @@ namespace LearningManagement.API.EC
         public void Delete(Announcement a)
         {
 
-            var deletedAnnouncement = FakeDataBase.Announcements.FirstOrDefault(d => d.Id == a.Id);
+            var deletedAnnouncement = FakeDataBase.Announcements.FirstOrDefault(x => x.Id == a.Id);
             if (deletedAnnouncement != null)
             {
                 FakeDataBase.Announcements.Remove(deletedAnnouncement);
+                var semesterDeletedAnnouncement = FakeDataBase.CurrentSemester[0].Announcements.FirstOrDefault(x => x.Id == a.Id);
+                if (semesterDeletedAnnouncement != null)
+                {
+                    FakeDataBase.CurrentSemester[0].Announcements.Remove(semesterDeletedAnnouncement);
+                }
             }
         }
     }

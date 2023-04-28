@@ -3,62 +3,40 @@ using Library.LearningManagement.Services;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
+using UWP.LearningManagement.API.Util;
+using UWP.LearningManagement.ViewModels;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Activation;
+using System.Linq;
 
 namespace LearningManagement.ViewModels
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private void RaisePropertyChanged([CallerMemberName] string propertyName = "")
+        protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        private readonly PersonService personService;
-        private readonly ModuleService moduleService;
-        private readonly CourseService courseService;
-        private readonly SemesterService semesterService;
-
-        public Semester SelectedSemester 
-        {
-            get { return semesterService.CurrentSemester; }
-            set { semesterService.CurrentSemester = value; } 
-        }
-        public List<Semester> SemesterList
-        {
-            get { return semesterService.SemesterList; }
-        }
+        public Semester Semester { get; set; }
         public string Period { get; set; }
         public int Year { get; set; }
+        public int Id { get; set; }
+        public int PreviousId { get; set; }
 
-        public MainPageViewModel() 
-        { 
-            personService = PersonService.Current;
-            moduleService = ModuleService.Current;
-            courseService = CourseService.Current;
-            semesterService = SemesterService.Current;
-
-            if (SemesterList.Count == 0)
-            {
-                SelectedSemester = new Semester { Period = "Spring", Year = 2023 };
-                SelectedSemester.SetSemester(courseService.Courses, personService.People);
-                semesterService.Add(SelectedSemester);
-            }
-            Period = SelectedSemester.Period;
-            Year = SelectedSemester.Year;
+        public MainPageViewModel()
+        {
+            var payload = new WebRequestHandler().Get("http://localhost:5159/Semester/GetCurrentSemester").Result;
+            Semester = JsonConvert.DeserializeObject<List<Semester>>(payload)[0];
+            Period = Semester.Period;
+            Year = Semester.Year;
         }
 
-        public void Clear()
+        public async Task LeftClick()
         {
-            personService.CurrentPerson = null;
-            personService.CurrentAssignment = null;
-            moduleService.CurrentModule = null;
-            moduleService.CurrentItem = null;
-            courseService.CurrentCourse = null;
-        }
-
-        public void LeftClick()
-        {
+            PreviousId = Id;
+            Id--;
             if (Period.Equals("Spring"))
             {
                 Period = "Fall";
@@ -72,11 +50,13 @@ namespace LearningManagement.ViewModels
             {
                 Period = "Summer";
             }
-            SetSelectedSemester();
+            await SetSelectedSemester();
         }
 
-        public void RightClick()
+        public async Task RightClick()
         {
+            PreviousId = Id;
+            Id++;
             if (Period.Equals("Fall"))
             {
                 Period = "Spring";
@@ -90,31 +70,39 @@ namespace LearningManagement.ViewModels
             {
                 Period = "Summer";
             }
-            SetSelectedSemester();
+            await SetSelectedSemester();
         }
 
-        public void SetSelectedSemester()
+        public async Task SetSelectedSemester()
         {
-            bool isNewSemester = true;
-            foreach (var semester in SemesterList)
+            SemesterViewModel semesterView = new SemesterViewModel(Id);
+            if (semesterView.Semester == null)
             {
-                if (semester.Year == Year && semester.Period == Period)
-                {
-                    SelectedSemester = semester;
-                    isNewSemester = false;
-                    break;
-                }
+                Semester = new Semester { Period = Period, Year = Year, Id = Id };
+                Semester previousSemester = new SemesterViewModel(PreviousId).Semester;
+                Semester.People = previousSemester.People;
+                Semester.Courses = previousSemester.Courses;
+                Semester.Assignments = previousSemester.Assignments;
+                Semester.Announcements = previousSemester.Announcements;
+                Semester.Modules = previousSemester.Modules;
+                Semester.ContentItems = previousSemester.ContentItems;
             }
-
-            if (isNewSemester)
+            else
             {
-                SelectedSemester = new Semester { Period = Period, Year = Year };
-                SelectedSemester.SetSemester(courseService.Courses, personService.People);
-                semesterService.Add(SelectedSemester);
+                Semester = semesterView.Semester;
             }
+            await SetSemester();
+            OnPropertyChanged(nameof(Semester));
+        }
 
-            RaisePropertyChanged("Period");
-            RaisePropertyChanged("Year");
+        public async Task SetSemester()
+        {
+            SemesterViewModel semesterView = new SemesterViewModel(Semester.Id);
+            if (semesterView.Semester == null)
+            {
+                await new WebRequestHandler().Post("http://localhost:5159/Semester/Add", Semester);
+            }
+            await new WebRequestHandler().Post("http://localhost:5159/Semester/SetCurrent", Semester);
         }
     }
 }

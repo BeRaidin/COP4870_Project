@@ -17,12 +17,7 @@ namespace Library.LearningManagement.Services
                 return FakeDataBase.Semesters;
             }
         }
-        private Semester _currentSemester;
-        public Semester CurrentSemester
-        {
-            get { return _currentSemester; }
-            set { _currentSemester = value; }
-        }
+        public Semester CurrentSemester { get; set; }
         public static SemesterService Current
         {
             get
@@ -57,7 +52,7 @@ namespace Library.LearningManagement.Services
 
         public void Remove(Course removedCourse)
         {
-            foreach(var semester in SemesterList)
+            foreach (var semester in SemesterList)
             {
                 semester.Remove(removedCourse);
             }

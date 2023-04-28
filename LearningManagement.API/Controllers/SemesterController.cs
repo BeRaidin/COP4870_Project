@@ -14,16 +14,26 @@ namespace LearningManagement.API.Controllers
         {
             _logger = logger;
         }
-        [HttpGet]
-        public List<Instructor> Get()
+        [HttpGet("GetList")]
+        public List<Semester> GetList()
         {
-            return new PersonEC().GetInstructors();
+            return new SemesterEC().GetSemesters();
+        }
+        [HttpGet("GetCurrentSemester")]
+        public List<Semester> GetCurrentSemester()
+        {
+            return new SemesterEC().GetCurrentSemester();
         }
 
-        [HttpPost("AddOrUpdate")]
-        public Person AddorUpdate([FromBody] Instructor instructor)
+        [HttpPost("Add")]
+        public Semester Add([FromBody] Semester semester)
         {
-            return new PersonEC().AddorUpdateAdmin(instructor);
+            return new SemesterEC().AddSemester(semester);
+        }
+        [HttpPost("SetCurrent")]
+        public Semester SetCurrent([FromBody] Semester semester)
+        {
+            return new SemesterEC().SetCurrent(semester);
         }
     }
 }

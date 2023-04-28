@@ -20,7 +20,7 @@ namespace LearningManagement.API.EC
             }
             else if (a.Id < 0)
             {
-                var lastId = FakeDataBase.Assignments.Select(p => p.Id).Max();
+                var lastId = FakeDataBase.Assignments.Select(x => x.Id).Max();
                 lastId++;
                 a.Id = lastId;
                 isNew = true;
@@ -29,16 +29,26 @@ namespace LearningManagement.API.EC
             if (isNew)
             {
                 FakeDataBase.Assignments.Add(a);
+                FakeDataBase.CurrentSemester[0].Assignments.Add(a);
             }
             else
             {
-                var editedAssignment = FakeDataBase.Assignments.FirstOrDefault(i => i.Id == a.Id);
+                var editedAssignment = FakeDataBase.Assignments.FirstOrDefault(x => x.Id == a.Id);
                 if (editedAssignment != null)
                 {
                     editedAssignment.Name = a.Name;
                     editedAssignment.Description = a.Description;
                     editedAssignment.TotalAvailablePoints = a.TotalAvailablePoints;
                     editedAssignment.DueDate = a.DueDate;
+
+                    var semesterEditedAssignment = FakeDataBase.Assignments.FirstOrDefault(x => x.Id == a.Id);
+                    if(semesterEditedAssignment != null)
+                    {
+                        semesterEditedAssignment.Name = a.Name;
+                        semesterEditedAssignment.Description = a.Description;
+                        semesterEditedAssignment.TotalAvailablePoints = a.TotalAvailablePoints;
+                        semesterEditedAssignment.DueDate = a.DueDate;
+                    }
                     return editedAssignment;
                 }
             }
@@ -51,6 +61,11 @@ namespace LearningManagement.API.EC
             if(editedAssignment != null)
             {
                 editedAssignment.IsSubmitted = a.IsSubmitted;
+                var semesterEditedAssignment = FakeDataBase.Assignments.FirstOrDefault(x => x.Id == a.Id);
+                if (semesterEditedAssignment != null)
+                {
+                    semesterEditedAssignment.IsSubmitted = a.IsSubmitted;
+                }
                 return editedAssignment;
             }
             return a;
@@ -62,6 +77,11 @@ namespace LearningManagement.API.EC
             if (editedAssignment != null)
             {
                 editedAssignment.IsGraded = a.IsGraded;
+                var semesterEditedAssignment = FakeDataBase.Assignments.FirstOrDefault(x => x.Id == a.Id);
+                if (semesterEditedAssignment != null)
+                {
+                    semesterEditedAssignment.IsGraded = a.IsGraded;
+                }
                 return editedAssignment;
             }
             return a;
@@ -73,6 +93,11 @@ namespace LearningManagement.API.EC
             if (editedAssignment != null)
             {
                 editedAssignment.AssignmentGroup = a.AssignmentGroup;
+                var semesterEditedAssignment = FakeDataBase.Assignments.FirstOrDefault(x => x.Id == a.Id);
+                if (semesterEditedAssignment != null)
+                {
+                    semesterEditedAssignment.AssignmentGroup = a.AssignmentGroup;
+                }
                 return editedAssignment;
             }
             return a;
@@ -80,10 +105,15 @@ namespace LearningManagement.API.EC
 
         public void Delete(Assignment a)
         {
-            var deletedAssignment = FakeDataBase.Assignments.FirstOrDefault(d => d.Id == a.Id);
+            var deletedAssignment = FakeDataBase.Assignments.FirstOrDefault(x => x.Id == a.Id);
             if (deletedAssignment != null)
             {
                 FakeDataBase.Assignments.Remove(deletedAssignment);
+                var semesterDeletedAssignment = FakeDataBase.CurrentSemester[0].Assignments.FirstOrDefault(x => x.Id == a.Id);
+                if (semesterDeletedAssignment != null)
+                {
+                    FakeDataBase.CurrentSemester[0].Assignments.Remove(semesterDeletedAssignment);
+                }
             }
         }
     }
