@@ -32,6 +32,7 @@ namespace LearningManagement.API.EC
             {
                 FakeDataBase.Modules.Add(m);
                 FakeDataBase.CurrentSemester[0].Modules.Add(m);
+                UpdateSemester();
             }
             else
             {
@@ -46,7 +47,7 @@ namespace LearningManagement.API.EC
                         semesterEditedModule.Name = m.Name;
                         semesterEditedModule.Description = m.Description;
                     }
-
+                    UpdateSemester();
                     return editedModule;
                 }
             }
@@ -64,6 +65,7 @@ namespace LearningManagement.API.EC
                 {
                     semesterEditedModule.Content = m.Content;
                 }
+                UpdateSemester();
                 return editedModule;
             }
             return m;
@@ -81,6 +83,17 @@ namespace LearningManagement.API.EC
                 {
                     FakeDataBase.CurrentSemester[0].Modules.Remove(semesterDeletedModule);
                 }
+                UpdateSemester();
+            }
+        }
+
+        public void UpdateSemester()
+        {
+            var semester = FakeDataBase.Semesters.FirstOrDefault(x => x.Id == FakeDataBase.CurrentSemester[0].Id);
+            if (semester != null)
+            {
+                FakeDataBase.Semesters.Remove(semester);
+                FakeDataBase.Semesters.Add(FakeDataBase.CurrentSemester[0]);
             }
         }
     }

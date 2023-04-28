@@ -44,6 +44,7 @@ namespace LearningManagement.API.EC
             {
                 FakeDataBase.ContentItems.Add(aI);
                 FakeDataBase.CurrentSemester[0].ContentItems.Add(aI);
+                UpdateSemester();
             }
             else
             {
@@ -58,6 +59,7 @@ namespace LearningManagement.API.EC
                         semesterEditedAssignmentItem.Assignment = aI.Assignment;
                         semesterEditedAssignmentItem.Name = aI.Name;
                         semesterEditedAssignmentItem.Description = aI.Description;
+                        UpdateSemester();
                     }
                     return editedAssignmentItem;
                 }
@@ -85,6 +87,7 @@ namespace LearningManagement.API.EC
             {
                 FakeDataBase.ContentItems.Add(fI);
                 FakeDataBase.CurrentSemester[0].ContentItems.Add(fI);
+                UpdateSemester();
             }
             else
             {
@@ -97,6 +100,7 @@ namespace LearningManagement.API.EC
                         semesterEditedFileItem.Name = fI.Name;
                         semesterEditedFileItem.Description = fI.Description;
                     }
+                    UpdateSemester();
                     return editedFileItem;
                 }
             }
@@ -122,6 +126,7 @@ namespace LearningManagement.API.EC
             {
                 FakeDataBase.ContentItems.Add(pI);
                 FakeDataBase.CurrentSemester[0].ContentItems.Add(pI);
+                UpdateSemester();
             }
             else
             {
@@ -134,6 +139,7 @@ namespace LearningManagement.API.EC
                         semesterEditedPageItem.Name = pI.Name;
                         semesterEditedPageItem.Description = pI.Description;
                     }
+                    UpdateSemester();
                     return editedPageItem;
                 }
             }
@@ -152,6 +158,17 @@ namespace LearningManagement.API.EC
             if (semesterDeletedItem != null)
             {
                 FakeDataBase.CurrentSemester[0].ContentItems.Remove(semesterDeletedItem);
+            }
+            UpdateSemester();
+        }
+
+        public void UpdateSemester()
+        {
+            var semester = FakeDataBase.Semesters.FirstOrDefault(x => x.Id == FakeDataBase.CurrentSemester[0].Id);
+            if (semester != null)
+            {
+                FakeDataBase.Semesters.Remove(semester);
+                FakeDataBase.Semesters.Add(FakeDataBase.CurrentSemester[0]);
             }
         }
     }

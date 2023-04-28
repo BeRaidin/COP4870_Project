@@ -30,6 +30,7 @@ namespace LearningManagement.API.EC
             {
                 FakeDataBase.Courses.Add(c);
                 FakeDataBase.CurrentSemester[0].Courses.Add(c);
+                UpdateSemester();
             }
             else
             {
@@ -48,7 +49,8 @@ namespace LearningManagement.API.EC
                         semesterEditedCourse.Room = c.Room;
                         semesterEditedCourse.CreditHours = c.CreditHours;
                     }
-                        return editedCourse;
+                    UpdateSemester();
+                    return editedCourse;
                 }
             }
             return c;
@@ -64,8 +66,8 @@ namespace LearningManagement.API.EC
                 if (semesterEditedCourse != null)
                 {
                     semesterEditedCourse.Roster = c.Roster;
-
                 }
+                UpdateSemester();
                 return editedCourse;
             }
             return c;
@@ -81,6 +83,7 @@ namespace LearningManagement.API.EC
                 {
                     semesterEditedCourse.Announcements = c.Announcements;
                 }
+                UpdateSemester();
                 return editedCourse;
             }
             return c;
@@ -96,6 +99,7 @@ namespace LearningManagement.API.EC
                 {
                     semesterEditedCourse.Modules = c.Modules;
                 }
+                UpdateSemester();
                 return editedCourse;
             }
             return c;
@@ -111,6 +115,7 @@ namespace LearningManagement.API.EC
                 {
                     semesterEditedCourse.Assignments = c.Assignments;
                 }
+                UpdateSemester();
                 return editedCourse;
             }
             return c;
@@ -126,6 +131,7 @@ namespace LearningManagement.API.EC
                 {
                     semesterEditedCourse.AssignmentGroups = c.AssignmentGroups;
                 }
+                UpdateSemester();
                 return editedCourse;
             }
             return c;
@@ -141,6 +147,17 @@ namespace LearningManagement.API.EC
                 {
                     FakeDataBase.CurrentSemester[0].Courses.Remove(semesterDeletedCourse);
                 }
+                UpdateSemester();
+            }
+        }
+
+        public void UpdateSemester()
+        {
+            var semester = FakeDataBase.Semesters.FirstOrDefault(x => x.Id == FakeDataBase.CurrentSemester[0].Id);
+            if (semester != null)
+            {
+                FakeDataBase.Semesters.Remove(semester);
+                FakeDataBase.Semesters.Add(FakeDataBase.CurrentSemester[0]);
             }
         }
     }

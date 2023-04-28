@@ -43,7 +43,8 @@ namespace LearningManagement.API.EC
             if (isNew)
             {
                 FakeDataBase.People.Add(s);
-                FakeDataBase.CurrentSemester[0].People.Add(s);
+                FakeDataBase.CurrentSemester[0].Students.Add(s);
+                UpdateSemester();
             }
             else
             {
@@ -53,12 +54,13 @@ namespace LearningManagement.API.EC
                     editedStudent.LastName = s.LastName;
                     editedStudent.Classification = s.Classification;
 
-                    if (FakeDataBase.CurrentSemester[0].People.FirstOrDefault(x => x.Id == s.Id) is Student semesterEditedStudent)
+                    if (FakeDataBase.CurrentSemester[0].Students.FirstOrDefault(x => x.Id == s.Id) is Student semesterEditedStudent)
                     {
                         semesterEditedStudent.FirstName = s.FirstName;
                         semesterEditedStudent.LastName = s.LastName;
                         semesterEditedStudent.Classification = s.Classification;
                     }
+                    UpdateSemester();
                     return editedStudent;
                 }
             }
@@ -86,12 +88,14 @@ namespace LearningManagement.API.EC
                 if (i is Instructor instructor)
                 {
                     FakeDataBase.People.Add(instructor);
-                    FakeDataBase.CurrentSemester[0].People.Add(instructor);
+                    FakeDataBase.CurrentSemester[0].Instructors.Add(instructor);
+                    UpdateSemester();
                 }
                 else if (i is TeachingAssistant assistant)
                 {
                     FakeDataBase.People.Add(assistant);
-                    FakeDataBase.CurrentSemester[0].People.Add(assistant);
+                    FakeDataBase.CurrentSemester[0].Assistants.Add(assistant);
+                    UpdateSemester();
                 }
             }
             else
@@ -108,6 +112,7 @@ namespace LearningManagement.API.EC
                         semesterEditedInstructor.FirstName = i.FirstName;
                         semesterEditedInstructor.LastName = i.LastName;
                     }
+                    UpdateSemester();
                     return editedInstructor;
                 }
             }
@@ -121,11 +126,12 @@ namespace LearningManagement.API.EC
             {
                 editedPerson.Courses = p.Courses;
 
-                var semesterEditedPerson = FakeDataBase.CurrentSemester[0].People.FirstOrDefault(x => x.Id == p.Id);
+                var semesterEditedPerson = FakeDataBase.CurrentSemester[0].Students.FirstOrDefault(x => x.Id == p.Id);
                 if (semesterEditedPerson != null)
                 {
                     semesterEditedPerson.Courses = p.Courses;
                 }
+                UpdateSemester();
                 return editedPerson;
             }
             return p;
@@ -140,12 +146,13 @@ namespace LearningManagement.API.EC
                 editedStudent.FinalGrades = s.FinalGrades;
                 editedStudent.Grades = s.Grades;
 
-                if (FakeDataBase.CurrentSemester[0].People.FirstOrDefault(x => x.Id == s.Id) is Student semesterEditedStudent)
+                if (FakeDataBase.CurrentSemester[0].Students.FirstOrDefault(x => x.Id == s.Id) is Student semesterEditedStudent)
                 {
                     semesterEditedStudent.Courses = s.Courses;
                     semesterEditedStudent.FinalGrades = s.FinalGrades;
                     semesterEditedStudent.Grades = s.Grades;
                 }
+                UpdateSemester();
                 return editedStudent;
             }
             return s;
@@ -158,10 +165,11 @@ namespace LearningManagement.API.EC
             {
                 editedStudent.FinalGrades = s.FinalGrades;
 
-                if (FakeDataBase.CurrentSemester[0].People.FirstOrDefault(x => x.Id == s.Id) is Student semesterEditedStudent)
+                if (FakeDataBase.CurrentSemester[0].Students.FirstOrDefault(x => x.Id == s.Id) is Student semesterEditedStudent)
                 {
                     semesterEditedStudent.FinalGrades = s.FinalGrades;
                 }
+                UpdateSemester();
                 return editedStudent;
             }
             return s;
@@ -174,10 +182,11 @@ namespace LearningManagement.API.EC
             {
                 editedStudent.GradePointAverage = s.GradePointAverage;
 
-                if (FakeDataBase.CurrentSemester[0].People.FirstOrDefault(x => x.Id == s.Id) is Student semesterEditedStudent)
+                if (FakeDataBase.CurrentSemester[0].Students.FirstOrDefault(x => x.Id == s.Id) is Student semesterEditedStudent)
                 {
                     semesterEditedStudent.GradePointAverage = s.GradePointAverage;
                 }
+                UpdateSemester();
                 return editedStudent;
             }
             return s;
@@ -190,10 +199,11 @@ namespace LearningManagement.API.EC
             {
                 editedStudent.IsSelected = true;
 
-                if (FakeDataBase.CurrentSemester[0].People.FirstOrDefault(x => x.Id == s.Id) is Student semesterEditedStudent)
+                if (FakeDataBase.CurrentSemester[0].Students.FirstOrDefault(x => x.Id == s.Id) is Student semesterEditedStudent)
                 {
                     semesterEditedStudent.IsSelected = true;
                 }
+                UpdateSemester();
                 return editedStudent;
             }
             return s;
@@ -205,10 +215,11 @@ namespace LearningManagement.API.EC
             {
                 editedStudent.IsSelected = false;
 
-                if (FakeDataBase.CurrentSemester[0].People.FirstOrDefault(x => x.Id == s.Id) is Student semesterEditedStudent)
+                if (FakeDataBase.CurrentSemester[0].Students.FirstOrDefault(x => x.Id == s.Id) is Student semesterEditedStudent)
                 {
                     semesterEditedStudent.IsSelected = false;
                 }
+                UpdateSemester();
                 return editedStudent;
             }
             return s;
@@ -223,10 +234,33 @@ namespace LearningManagement.API.EC
                 FakeDataBase.People.Remove(deletedPerson);
 
                 var semesterDeletedPerson = FakeDataBase.CurrentSemester[0].People.FirstOrDefault(x => x.Id == p.Id);
-                if(semesterDeletedPerson != null) 
+                if (semesterDeletedPerson != null)
                 {
-                    FakeDataBase.CurrentSemester[0].People.Remove(semesterDeletedPerson);
+                    if(semesterDeletedPerson is Student deletedStudent)
+                    {
+                        FakeDataBase.CurrentSemester[0].People.Remove(semesterDeletedPerson);
+                    }
+                    else if (semesterDeletedPerson is Instructor deletedInstructor)
+                    {
+                        FakeDataBase.CurrentSemester[0].Instructors.Remove(deletedInstructor);
+                    }
+                    else if (semesterDeletedPerson is TeachingAssistant deletedAssistant)
+                    {
+                        FakeDataBase.CurrentSemester[0].Assistants.Remove(deletedAssistant);
+                    }
+
                 }
+                UpdateSemester();
+            }
+        }
+
+        public void UpdateSemester()
+        {
+            var semester = FakeDataBase.Semesters.FirstOrDefault(x => x.Id == FakeDataBase.CurrentSemester[0].Id);
+            if (semester != null)
+            {
+                FakeDataBase.Semesters.Remove(semester);
+                FakeDataBase.Semesters.Add(FakeDataBase.CurrentSemester[0]);
             }
         }
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,12 +12,35 @@ namespace UWP.Library.LearningManagement.Models
 {
     public class Semester
     {
-        public List<Person> People;
-        public List<Course> Courses;
-        public List<Assignment> Assignments;
-        public List<Announcement> Announcements;
-        public List<Module> Modules;
-        public List<ContentItem> ContentItems;
+        public List<Student> Students { get; set; }
+        public List<Instructor> Instructors { get; set; }
+        public List<TeachingAssistant> Assistants { get; set; }
+        public List<Course> Courses { get; set; }
+        public List<Assignment> Assignments { get; set; }
+        public List<Announcement> Announcements { get; set; }
+        public List<Module> Modules { get; set; }
+        public List<ContentItem> ContentItems { get; set; }
+
+        public List<Person> People
+        {
+            get
+            {
+                List<Person> list = new List<Person>();
+                foreach (var person in Students) 
+                {
+                    list.Add(person);
+                }
+                foreach (var person in Instructors)
+                {
+                    list.Add(person);
+                }
+                foreach (var person in Assistants)
+                {
+                    list.Add(person);
+                }
+                return list;
+            }
+        }
 
         public string Period { get; set; }
         public int Year { get; set; }
@@ -24,7 +48,9 @@ namespace UWP.Library.LearningManagement.Models
 
         public Semester()
         {
-            People = new List<Person>();
+            Students = new List<Student>();
+            Instructors = new List<Instructor>();
+            Assistants = new List<TeachingAssistant>();
             Courses = new List<Course>();
             Assignments = new List<Assignment>();
             Announcements = new List<Announcement>();
@@ -50,58 +76,48 @@ namespace UWP.Library.LearningManagement.Models
             }
             foreach (Person person in people)
             {
-                var newPerson = new Person();
-                if (person as Student != null)
+                if (person is Student student)
                 {
-                    newPerson = new Student();
+                    Students.Add(student);
                 }
-                else if (person as Instructor != null)
+                else if (person is Instructor instructor)
                 {
-                    newPerson = new Instructor();
+                    Instructors.Add(instructor);
                 }
-                else if (person as TeachingAssistant != null)
+                else if (person is TeachingAssistant assistant)
                 {
-                    newPerson = new TeachingAssistant();
+                    Assistants.Add(assistant);
                 }
-
-                newPerson.Id = person.Id;
-                newPerson.FirstName = person.FirstName;
-                newPerson.LastName = person.LastName;
-                People.Add(newPerson);
             }
         }
 
         public void Remove(Person removedPerson)
         {
-            foreach (var person in People)
+            if (removedPerson is Student removedStudent)
             {
-                if (person.Id == removedPerson.Id)
+                var student = Students.FirstOrDefault(x => x.Id == removedStudent.Id);
+                foreach (var course in student.Courses)
                 {
-                    foreach (var course in person.Courses)
-                    {
-                        course.Roster.Remove(person);
-                    }
-                    People.Remove(person);
-                    break;
+                    course.Roster.Remove(student);
                 }
+                Students.Remove(student);
+            }
+            else if (removedPerson is Instructor removedInstructor)
+            {
+                var instructor = Instructors.FirstOrDefault(x => x.Id == removedInstructor.Id);
+                Instructors.Remove(instructor);
+            }
+            else if(removedPerson is TeachingAssistant removedAssistant)
+            {
+                var assistant = Assistants.FirstOrDefault(x => x.Id == removedAssistant.Id);
+                Assistants.Remove(assistant);
             }
         }
 
         public void Remove(Course removedCourse)
         {
-            foreach (var course in Courses)
-            {
-                if (course.Code == removedCourse.Code)
-                {
-                    foreach (var person in course.Roster)
-                    {
-                        person.Courses.Remove(course);
-                    }
-                    Courses.Remove(course);
-                    break;
-                }
-            }
-
+            var course = Courses.FirstOrDefault(x => x.Id ==removedCourse.Id);
+            Courses.Remove(course);
         }
     }
 }

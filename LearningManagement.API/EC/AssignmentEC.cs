@@ -30,6 +30,7 @@ namespace LearningManagement.API.EC
             {
                 FakeDataBase.Assignments.Add(a);
                 FakeDataBase.CurrentSemester[0].Assignments.Add(a);
+                UpdateSemester();
             }
             else
             {
@@ -49,6 +50,7 @@ namespace LearningManagement.API.EC
                         semesterEditedAssignment.TotalAvailablePoints = a.TotalAvailablePoints;
                         semesterEditedAssignment.DueDate = a.DueDate;
                     }
+                    UpdateSemester();
                     return editedAssignment;
                 }
             }
@@ -66,6 +68,7 @@ namespace LearningManagement.API.EC
                 {
                     semesterEditedAssignment.IsSubmitted = a.IsSubmitted;
                 }
+                UpdateSemester();
                 return editedAssignment;
             }
             return a;
@@ -82,6 +85,7 @@ namespace LearningManagement.API.EC
                 {
                     semesterEditedAssignment.IsGraded = a.IsGraded;
                 }
+                UpdateSemester();
                 return editedAssignment;
             }
             return a;
@@ -98,6 +102,7 @@ namespace LearningManagement.API.EC
                 {
                     semesterEditedAssignment.AssignmentGroup = a.AssignmentGroup;
                 }
+                UpdateSemester();
                 return editedAssignment;
             }
             return a;
@@ -114,6 +119,17 @@ namespace LearningManagement.API.EC
                 {
                     FakeDataBase.CurrentSemester[0].Assignments.Remove(semesterDeletedAssignment);
                 }
+                UpdateSemester();
+            }
+        }
+
+        public void UpdateSemester()
+        {
+            var semester = FakeDataBase.Semesters.FirstOrDefault(x => x.Id == FakeDataBase.CurrentSemester[0].Id);
+            if (semester != null)
+            {
+                FakeDataBase.Semesters.Remove(semester);
+                FakeDataBase.Semesters.Add(FakeDataBase.CurrentSemester[0]);
             }
         }
     }

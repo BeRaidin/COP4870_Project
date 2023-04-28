@@ -35,6 +35,7 @@ namespace LearningManagement.ViewModels
 
         public async Task LeftClick()
         {
+            await SetSemester();
             PreviousId = Id;
             Id--;
             if (Period.Equals("Spring"))
@@ -55,6 +56,7 @@ namespace LearningManagement.ViewModels
 
         public async Task RightClick()
         {
+            await SetSemester();
             PreviousId = Id;
             Id++;
             if (Period.Equals("Fall"))
@@ -80,12 +82,7 @@ namespace LearningManagement.ViewModels
             {
                 Semester = new Semester { Period = Period, Year = Year, Id = Id };
                 Semester previousSemester = new SemesterViewModel(PreviousId).Semester;
-                Semester.People = previousSemester.People;
-                Semester.Courses = previousSemester.Courses;
-                Semester.Assignments = previousSemester.Assignments;
-                Semester.Announcements = previousSemester.Announcements;
-                Semester.Modules = previousSemester.Modules;
-                Semester.ContentItems = previousSemester.ContentItems;
+                Semester.SetSemester(previousSemester.Courses, previousSemester.People);
             }
             else
             {
