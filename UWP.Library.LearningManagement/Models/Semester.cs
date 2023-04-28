@@ -78,15 +78,33 @@ namespace UWP.Library.LearningManagement.Models
             {
                 if (person is Student student)
                 {
-                    Students.Add(student);
+                    Student newStudent = new Student
+                    {
+                        FirstName = student.FirstName,
+                        LastName = student.LastName,
+                        Id = student.Id, Classification = student.Classification
+                    };
+                    Students.Add(newStudent);
                 }
                 else if (person is Instructor instructor)
                 {
-                    Instructors.Add(instructor);
+                    Instructor newInstructor = new Instructor
+                    {
+                        FirstName = instructor.FirstName,
+                        LastName = instructor.LastName,
+                        Id = instructor.Id
+                    };
+                    Instructors.Add(newInstructor);
                 }
                 else if (person is TeachingAssistant assistant)
                 {
-                    Assistants.Add(assistant);
+                    TeachingAssistant newAssistant = new TeachingAssistant
+                    {
+                        FirstName = assistant.FirstName,
+                        LastName = assistant.LastName,
+                        Id = assistant.Id
+                    };
+                    Assistants.Add(newAssistant);
                 }
             }
         }

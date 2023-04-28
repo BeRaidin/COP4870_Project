@@ -61,7 +61,7 @@ namespace UWP.LearningManagement.ViewModels
             get
             {
                 return new ObservableCollection<string>
-                { "Assignment", "Page", "File" };
+                { "Page", "File" };
             }
         }
         public string Name { get; set; }
