@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using UWP.Library.LearningManagement.Models;
 
 namespace UWP.Library.LearningManagement.Database
@@ -14,14 +15,15 @@ namespace UWP.Library.LearningManagement.Database
         private static List<Course> courses = new List<Course>{
             new Course {Id = 0, Code="COP4530", Name="C#", CreditHours=4, Room="HCB"}
         };
-        private static List<Semester> semesters = new List<Semester>();
+        private static List<Semester> semesters = new List<Semester>{};
         private static List<Assignment> assignments = new List<Assignment>();
         private static List<Announcement> announcements = new List<Announcement>();
         private static List<Module> modules = new List<Module>();
         private static List<ContentItem> contentItems = new List<ContentItem>();
 
-        public static List<Semester> currentSemester = new List<Semester>{
-            new Semester{Period = "Spring", Year = 2023, Id = 0 } 
+        public static List<Semester> currentSemester = new List<Semester>
+        {
+            new Semester{Period = "Spring", Year = 2023, Id = 0 }
         };
 
 

@@ -25,13 +25,15 @@ namespace UWP.LearningManagement
             DataContext = new MainPageViewModel();
         }
 
-        private void StudentView_Click(object sender, RoutedEventArgs e)
+        private async void StudentView_Click(object sender, RoutedEventArgs e)
         {
+            await (DataContext as MainPageViewModel).SetSemester();
             Frame.Navigate(typeof(StudentViewPage));
         }
 
-        private void InstructorView_Click(object sender, RoutedEventArgs e)
+        private async void InstructorView_Click(object sender, RoutedEventArgs e)
         {
+            await(DataContext as MainPageViewModel).SetSemester();
             Frame.Navigate(typeof(InstructorViewPage));
         }
         private async void Left_Click(object sender, RoutedEventArgs e)
