@@ -31,6 +31,7 @@ namespace LearningManagement.ViewModels
             Semester = JsonConvert.DeserializeObject<List<Semester>>(payload)[0];
             Period = Semester.Period;
             Year = Semester.Year;
+            Id = Semester.Id;
         }
 
         public async Task LeftClick()

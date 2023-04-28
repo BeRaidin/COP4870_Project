@@ -15,7 +15,6 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class InstructorViewViewModel
     {
-        private readonly SemesterService semesterService;
         private IEnumerable<AdminViewModel> InstructorList
         {
             get
@@ -48,28 +47,17 @@ namespace UWP.LearningManagement.ViewModels
             }
         }
 
-
         public ObservableCollection<AdminViewModel> Instructors { get; set; }
         public AdminViewModel SelectedInstructor { get; set; }
 
-        public Semester SelectedSemester
-        {
-            get { return semesterService.CurrentSemester; }
-        }
-        public string Semester
-        {
-            get { return semesterService.CurrentSemester.Period; }
-        }
-        public int Year
-        {
-            get { return semesterService.CurrentSemester.Year; }
-        }
+        public Semester Semester { get; }
         public string Query { get; set; }
 
         public InstructorViewViewModel()
         {
-            semesterService = SemesterService.Current;
             Instructors = new ObservableCollection<AdminViewModel>(InstructorList);
+            var payload = new WebRequestHandler().Get("http://localhost:5159/Semester/GetCurrentSemester").Result;
+            Semester = JsonConvert.DeserializeObject<List<Semester>>(payload)[0];
         }
 
         public void Search()

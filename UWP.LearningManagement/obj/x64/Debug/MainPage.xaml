@@ -20,7 +20,6 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:ConnectionId='4' Margin="10,10,0,10" Content="&lt;" FontSize="12" HorizontalAlignment="Stretch"                   />
                 <TextBlock Margin="10,10,0,10"  FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Text="{Binding Path=Semester.Display}"/>
-
                 <Button x:ConnectionId='5' Margin="10,10,0,10" Content=">" FontSize="12" HorizontalAlignment="Stretch"                    />
             </StackPanel>
         </StackPanel>

@@ -70,7 +70,6 @@
     <RootPropertyPathName Name="DueDateDisplay" />
     <RootPropertyPathName Name="GradePointAverage" />
     <RootPropertyPathName Name="GradeLevel" />
-    <RootPropertyPathName Name="Period" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application" />
