@@ -46,6 +46,7 @@ namespace UWP.LearningManagement.ViewModels
                 return JsonConvert.DeserializeObject<List<Course>>(payload);
             }
         }
+        private ListNavigator<AdminViewModel> InstructorListNav { get; set; }
 
         public ObservableCollection<AdminViewModel> Instructors { get; set; }
         public AdminViewModel SelectedInstructor { get; set; }
@@ -55,7 +56,9 @@ namespace UWP.LearningManagement.ViewModels
 
         public InstructorViewViewModel()
         {
-            Instructors = new ObservableCollection<AdminViewModel>(InstructorList);
+            InstructorListNav = new ListNavigator<AdminViewModel>(InstructorList.ToList());
+            Instructors = new ObservableCollection<AdminViewModel>();
+            Refresh();
             var payload = new WebRequestHandler().Get("http://localhost:5159/Semester/GetCurrentSemester").Result;
             Semester = JsonConvert.DeserializeObject<List<Semester>>(payload)[0];
         }
@@ -73,12 +76,14 @@ namespace UWP.LearningManagement.ViewModels
                 {
                     searchResults = InstructorList.Where(i => i.Person.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 }
-
-
+                InstructorListNav = new ListNavigator<AdminViewModel>(searchResults.ToList());
                 Instructors.Clear();
-                foreach (var person in searchResults)
+                if (InstructorListNav.State.Count > 0)
                 {
-                    Instructors.Add(person);
+                    foreach (var item in InstructorListNav.GetCurrentPage())
+                    {
+                        Instructors.Add(item.Value);
+                    }
                 }
             }
             else
@@ -104,10 +109,46 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Refresh()
         {
+            InstructorListNav = new ListNavigator<AdminViewModel>(InstructorList.ToList());
             Instructors.Clear();
-            foreach (var person in InstructorList)
+            if (InstructorListNav.State.Count > 0)
             {
-                Instructors.Add(person);
+                foreach (var item in InstructorListNav.GetCurrentPage())
+                {
+                    Instructors.Add(item.Value);
+                }
+            }
+        }
+
+        public void NextPage()
+        {
+            if(InstructorListNav.HasNextPage)
+            {
+                InstructorListNav.GoForward();
+                Instructors.Clear();
+                if (InstructorListNav.State.Count > 0)
+                {
+                    foreach (var item in InstructorListNav.GetCurrentPage())
+                    {
+                        Instructors.Add(item.Value);
+                    }
+                }
+            }
+        }
+
+        public void PreviousPage()
+        {
+            if (InstructorListNav.HasPreviousPage)
+            {
+                InstructorListNav.GoBackward();
+                Instructors.Clear();
+                if (InstructorListNav.State.Count > 0)
+                {
+                    foreach (var item in InstructorListNav.GetCurrentPage())
+                    {
+                        Instructors.Add(item.Value);
+                    }
+                }
             }
         }
     }

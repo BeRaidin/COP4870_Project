@@ -21,13 +21,16 @@
                     <RowDefinition Height="12*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="11*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Column="0" Text="{Binding Query, Mode=TwoWay}"></TextBox>
-                <Button x:ConnectionId='4'                      Grid.Column="1" Content="Search" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
-
-                <ListBox x:ConnectionId='5' Grid.Row="1" Grid.ColumnSpan="2"
+                <StackPanel Orientation="Horizontal" Grid.Column="1">
+                    <Button x:ConnectionId='6'                      Content="Search" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+                    <Button x:ConnectionId='7'                                Content="	&lt;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+                    <Button x:ConnectionId='8'                           Content=">" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+                </StackPanel>
+                <ListBox x:ConnectionId='4' Grid.Row="1" Grid.ColumnSpan="2"
                 ItemsSource="{Binding Students, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedStudent, Mode=TwoWay}"                                    >
                     <ListBox.ItemTemplate>
                         <DataTemplate>

@@ -20,11 +20,15 @@
 
         <Grid Grid.Row="0" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="11*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0" Text="{Binding Query, Mode=TwoWay}"></TextBox>
-            <Button Click="Search_Click" Grid.Column="1" Content="Search" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Button Click="Search_Click" Content="Search" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+                <Button Click="GoToPreviousPage_Click" Content="&lt;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+                <Button Click="GoToNexPage_Click" Content=">" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+            </StackPanel>
         </Grid>
 
         <ListBox Grid.Column="1" Grid.Row="1"

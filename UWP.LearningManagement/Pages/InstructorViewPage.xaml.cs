@@ -56,7 +56,6 @@ namespace UWP.LearningManagement
         {
             var addDialog = new AdminDialog();
             await addDialog.ShowAsync();
-
             (DataContext as InstructorViewViewModel).Refresh();
         }
 
@@ -80,9 +79,19 @@ namespace UWP.LearningManagement
             Frame.Navigate(typeof(EditStudentsPage));
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void GoToEditCourses_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(EditCoursesPage));
+        }
+
+        private void GoToNexPage_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as InstructorViewViewModel).NextPage();
+        }
+
+        private void GoToPreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as InstructorViewViewModel).PreviousPage();
         }
     }
 }

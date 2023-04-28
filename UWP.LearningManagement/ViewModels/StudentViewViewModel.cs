@@ -11,7 +11,7 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class StudentViewViewModel
     {
-        private IEnumerable<StudentViewModel> AllStudents
+        private IEnumerable<StudentViewModel> StudentList
         {
             get
             {
@@ -19,16 +19,18 @@ namespace UWP.LearningManagement.ViewModels
                 return JsonConvert.DeserializeObject<List<Student>>(payload).Select(d => new StudentViewModel(d.Id));
             }
         }
-        
+        private ListNavigator<StudentViewModel> StudentListNav { get; set; }
         public ObservableCollection<StudentViewModel> Students { get; set; }
         public StudentViewModel SelectedStudent { get; set; }
         public Semester Semester { get; }
         public string Query { get; set; }
-        
 
-        public StudentViewViewModel() 
+
+        public StudentViewViewModel()
         {
-            Students = new ObservableCollection<StudentViewModel>(AllStudents);
+            StudentListNav = new ListNavigator<StudentViewModel>(StudentList.ToList());
+            Students = new ObservableCollection<StudentViewModel>();
+            Refresh();
             var payload = new WebRequestHandler().Get("http://localhost:5159/Semester/GetCurrentSemester").Result;
             Semester = JsonConvert.DeserializeObject<List<Semester>>(payload)[0];
         }
@@ -40,18 +42,21 @@ namespace UWP.LearningManagement.ViewModels
                 IEnumerable<StudentViewModel> searchResults;
                 if (int.TryParse(Query, out int id))
                 {
-                    searchResults = AllStudents.Where(i => i.Student.Id == id).ToList();
+                    searchResults = StudentList.Where(i => i.Student.Id == id).ToList();
                 }
                 else
                 {
-                    searchResults = AllStudents.Where(i => i.Student.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
+                    searchResults = StudentList.Where(i => i.Student.FirstName.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
                 }
 
-
+                StudentListNav = new ListNavigator<StudentViewModel>(searchResults.ToList());
                 Students.Clear();
-                foreach (var person in searchResults)
+                if (StudentListNav.State.Count > 0)
                 {
-                    Students.Add(person);
+                    foreach (var item in StudentListNav.GetCurrentPage())
+                    {
+                        Students.Add(item.Value);
+                    }
                 }
             }
             else
@@ -62,10 +67,46 @@ namespace UWP.LearningManagement.ViewModels
 
         public void Refresh()
         {
+            StudentListNav = new ListNavigator<StudentViewModel>(StudentList.ToList());
             Students.Clear();
-            foreach (var person in AllStudents)
+            if (StudentListNav.State.Count > 0)
             {
-                Students.Add(person);
+                foreach (var item in StudentListNav.GetCurrentPage())
+                {
+                    Students.Add(item.Value);
+                }
+            }
+        }
+
+        public void NextPage()
+        {
+            if (StudentListNav.HasNextPage)
+            {
+                StudentListNav.GoForward();
+                Students.Clear();
+                if (StudentListNav.State.Count > 0)
+                {
+                    foreach (var item in StudentListNav.GetCurrentPage())
+                    {
+                        Students.Add(item.Value);
+                    }
+                }
+            }
+        }
+
+        public void PreviousPage()
+        {
+            if (StudentListNav.HasPreviousPage)
+            {
+                StudentListNav.GoBackward();
+                Students.Clear();
+                if (StudentListNav.State.Count > 0)
+                {
+                    foreach (var item in StudentListNav.GetCurrentPage())
+                    {
+                        Students.Add(item.Value);
+                    }
+                }
             }
         }
     }

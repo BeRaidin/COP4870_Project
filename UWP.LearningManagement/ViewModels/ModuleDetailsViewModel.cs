@@ -13,8 +13,6 @@ namespace UWP.LearningManagement.ViewModels
 {
     public class ModuleDetailsViewModel
     {
-        private readonly ModuleService moduleService;
-        private readonly CourseService courseService;
         public IEnumerable<Module> Modules
         {
             get
@@ -23,17 +21,11 @@ namespace UWP.LearningManagement.ViewModels
                 return JsonConvert.DeserializeObject<List<Module>>(payload);
             }
         }
+        private ListNavigator<ContentItemViewModel> ItemListNav { get; set; }
+        private List<ContentItemViewModel> ModuleItems { get; set; }
 
-        public Module Module
-        {
-            get { return moduleService.CurrentModule; }
-            set { moduleService.CurrentModule = value; }
-        }
-        public Course SelectedCourse
-        {
-            get { return courseService.CurrentCourse; }
-            set { courseService.CurrentCourse = value; }
-        }
+        public Module Module { get; set; }
+        public Course SelectedCourse { get; set; }
         public ContentItemViewModel Item { get; set; }
 
         public ObservableCollection<ContentItemViewModel> ContentItems { get; set; }
@@ -49,44 +41,16 @@ namespace UWP.LearningManagement.ViewModels
         public ModuleDetailsViewModel(int id)
         {
             Id = id;
-            moduleService = ModuleService.Current;
-            courseService = CourseService.Current;
             Module = Modules.FirstOrDefault(x => x.Id == Id);
+
             ContentItems = new ObservableCollection<ContentItemViewModel>();
+            ModuleItems = new List<ContentItemViewModel>();
             foreach (var item in Module.Content)
             {
-                ContentItems.Add(new ContentItemViewModel(item.Id, Module.Id));
+                ModuleItems.Add(new ContentItemViewModel(item.Id, Module.Id));
             }
-        }
-
-        public void Add()
-        {
-            //SelectedItem = new ContentItem();
-            //var dialog = new ContentItemDialog();
-            //if (dialog != null)
-            //{
-            //    await dialog.ShowAsync();
-            //}
-            //
-            //if(SelectedItem as AssignmentItem != null)
-            //{
-            //var assignDialog = new AssignmentDialog();
-            //if (assignDialog != null)
-            //{
-            //    await assignDialog.ShowAsync();
-            //}
-            //
-            //var assignment = (SelectedItem as AssignmentItem).Assignment;
-            //if (assignment.AssignmentGroup == null)
-            //{
-            //    var Groupdialog = new AssignGroupDialog(assignment);
-            //    if (Groupdialog != null)
-            //    {
-            //        await Groupdialog.ShowAsync();
-            //    }
-            //}
-            // }
-            // Refresh();
+            ItemListNav = new ListNavigator<ContentItemViewModel>(ModuleItems);
+            Refresh();
         }
 
         public async Task Remove()
@@ -109,6 +73,18 @@ namespace UWP.LearningManagement.ViewModels
 
                 var searchResults = ContentItems.Where(i => i.ContentItem.Name.Contains(Query, StringComparison.InvariantCultureIgnoreCase));
 
+                ItemListNav = new ListNavigator<ContentItemViewModel>(searchResults.ToList());
+                ContentItems.Clear();
+                if (ItemListNav.State.Count > 0)
+                {
+                    foreach (var item in ItemListNav.GetCurrentPage())
+                    {
+                        ContentItems.Add(item.Value);
+                    }
+                }
+
+
+
                 ContentItems.Clear();
                 foreach (var item in searchResults)
                 {
@@ -124,10 +100,51 @@ namespace UWP.LearningManagement.ViewModels
         public void Refresh()
         {
             Module = Modules.FirstOrDefault(x => x.Id == Id);
-            ContentItems.Clear();
+            ModuleItems.Clear();
             foreach (var item in Module.Content)
             {
-                ContentItems.Add(new ContentItemViewModel(item.Id, Module.Id));
+                ModuleItems.Add(new ContentItemViewModel(item.Id, Module.Id));
+            }
+            ItemListNav = new ListNavigator<ContentItemViewModel>(ModuleItems);
+            ContentItems.Clear();
+            if (ItemListNav.State.Count > 0)
+            {
+                foreach (var item in ItemListNav.GetCurrentPage())
+                {
+                    ContentItems.Add(item.Value);
+                }
+            }
+        }
+
+        public void NextPage()
+        {
+            if (ItemListNav.HasNextPage)
+            {
+                ItemListNav.GoForward();
+                ContentItems.Clear();
+                if (ItemListNav.State.Count > 0)
+                {
+                    foreach (var item in ItemListNav.GetCurrentPage())
+                    {
+                        ContentItems.Add(item.Value);
+                    }
+                }
+            }
+        }
+
+        public void PreviousPage()
+        {
+            if (ItemListNav.HasPreviousPage)
+            {
+                ItemListNav.GoBackward();
+                ContentItems.Clear();
+                if (ItemListNav.State.Count > 0)
+                {
+                    foreach (var item in ItemListNav.GetCurrentPage())
+                    {
+                        ContentItems.Add(item.Value);
+                    }
+                }
             }
         }
     }

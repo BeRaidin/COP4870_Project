@@ -21,12 +21,15 @@
                     <RowDefinition Height="12*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="11*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Column="0" Text="{Binding Query, Mode=TwoWay}"></TextBox>
-                <Button Click="Search_Click" Grid.Column="1" Content="Search" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
-
+                <StackPanel Orientation="Horizontal" Grid.Column="1">
+                    <Button Click="Search_Click" Content="Search" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+                    <Button Click="GoToPreviousPage_Click" Content="	&lt;" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+                    <Button Click="GoToNexPage_Click" Content=">" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></Button>
+                </StackPanel>
                 <ListBox Grid.Row="1" Grid.ColumnSpan="2"
                 ItemsSource="{Binding Instructors, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedInstructor, Mode=TwoWay}" DoubleTapped="AdminList_DoubleTapped">
                     <ListBox.ItemTemplate>
@@ -52,7 +55,7 @@
                 <Button Margin="10,10,0,10" Content="Remove admin" Click="RemoveAdmin_Click"></Button>
                 <Button Margin="10,10,0,10" Content="Edit admin" Click="EditAdmin_Click"></Button>
                 <Button Margin="10,10,0,10" Content="Edit Students" Click="GoToEditStudents_Click"></Button>
-                <Button Margin="10,10,0,10" Content="Edit Courses" Click="Button_Click"></Button>
+                <Button Margin="10,10,0,10" Content="Edit Courses" Click="GoToEditCourses_Click"></Button>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
