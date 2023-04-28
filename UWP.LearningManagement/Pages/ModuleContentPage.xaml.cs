@@ -52,5 +52,15 @@ namespace UWP.LearningManagement
         {
             (DataContext as ModuleDetailsViewModel).Search();
         }
+
+        private void GoToNexPage_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as ModuleDetailsViewModel).NextPage();
+        }
+
+        private void GoToPreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as ModuleDetailsViewModel).PreviousPage();
+        }
     }
 }

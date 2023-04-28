@@ -45,5 +45,15 @@ namespace UWP.LearningManagement
         {
             Frame.Navigate(typeof(MainPage));
         }
+
+        private void GoToNexPage_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as StudentViewViewModel).NextPage();
+        }
+
+        private void GoToPreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as StudentViewViewModel).PreviousPage();
+        }
     }
 }
