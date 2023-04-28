@@ -165,6 +165,23 @@ namespace UWP.LearningManagement.ViewModels
             await new WebRequestHandler().Post("http://localhost:5159/Assignment/UpdateAssignGroup", Assignment);
             Course.Add(Assignment);
             await new WebRequestHandler().Post("http://localhost:5159/Course/UpdateAssignments", Course);
+            foreach (var person in Course.Roster)
+            {
+                Student student = StudentList.FirstOrDefault(x => x.Id == person.Id);
+                if (student != null)
+                {
+                    double score = 0;
+                    var oldGrade = student.Grades.FirstOrDefault(x => x.Assignment.Id == Assignment.Id);
+                    if (oldGrade != null)
+                    {
+                        score = oldGrade.Grade;
+                        student.Grades.Remove(oldGrade);
+                    }
+                    student.Grades.Add(new GradesDictionary(Assignment, Course, student, score));
+
+                    await new WebRequestHandler().Post("http://localhost:5159/Person/UpdateStudentCourses", student);
+                }
+            }
         }
     }
 }

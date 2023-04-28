@@ -35,6 +35,9 @@ namespace UWP.Library.LearningManagement.Models
             Grade = score;
         }
 
+
+
+
         public virtual string Display => $"[{CourseCode}] {Assignment.Name} - {Grade}/{Assignment.TotalAvailablePoints}";
         public virtual string DueDateDisplay => $"[{CourseCode}] {Assignment.Name}" +
                                                 $"\nDue: {Assignment.DueDate}";
